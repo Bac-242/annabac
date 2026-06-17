@@ -12,10 +12,17 @@ et la consultation hors-ligne.
 - **[Astro](https://astro.build)** — site statique, HTML rapide, JS minimal.
 - **Content Collections** — base de données en fichiers Markdown versionnables.
 - **Tailwind CSS v4** — interface épurée, mobile-first.
-- **KaTeX** (`remark-math` + `rehype-katex`) — formules mathématiques en LaTeX
-  dans tous les corrigés : `$...$` (en ligne) et `$$...$$` (bloc).
 - **Pagefind** — moteur de recherche statique (index généré au build).
 - **PWA** (`@vite-pwa/astro`) — installation et consultation hors-ligne.
+- **Web3Forms** — formulaire de soumission de PDF par e-mail, sans backend.
+
+## Concept (POC)
+
+Une bibliothèque de sujets : chaque fiche = **métadonnées** (année, série,
+matière, session) + un **PDF du sujet** et/ou un **PDF du corrigé**. Pas de
+corrigé rédigé en ligne pour l'instant — seuls les documents PDF font foi.
+La soumission se fait via un formulaire (PDF → e-mail de l'équipe), avec
+**validation manuelle** avant publication.
 
 ## Démarrage
 
@@ -34,26 +41,29 @@ npm run preview      # prévisualise le site généré (recherche active)
 src/
   content/
     config.ts          # schémas (Zod) des collections
-    series/*.md         # métadonnées des séries (A, B, C, D, E, G1, G2, F)
-    sujets/*.md         # un sujet par fichier (corrigé = corps Markdown)
+    series/*.md         # métadonnées des séries (A1–A4, C, D)
+    sujets/*.md         # une fiche par sujet (métadonnées + PDF)
   components/           # SujetCarte, Filtres, BadgeStatut, Fil…
   layouts/Layout.astro  # gabarit mobile-first + PWA
-  pages/                # accueil, /series, /sujets, /recherche…
-  lib/data.ts           # helpers (tri, regroupements, slugify)
-scripts/seed.mjs        # génère des sujets d'exemple (placeholders)
-public/pdfs/            # PDF des sujets
+  pages/                # accueil, /series, /sujets, /recherche, /contribuer…
+  lib/data.ts           # helpers (tri, regroupements, statut, slugify)
+scripts/seed.mjs               # génère des fiches d'exemple
+scripts/make-placeholder-pdfs.mjs  # génère des PDF d'exemple
+public/pdfs/            # PDF des sujets et corrigés
 ```
 
 ## Contenus
 
-La base est amorcée avec ~140 sujets d'exemple (statut `placeholder`) couvrant
-5 années et toutes les séries, plus quelques corrigés rédigés en démonstration.
-Pour ajouter du contenu réel, voir [CONTRIBUTING.md](CONTRIBUTING.md).
+La base est amorcée avec ~140 fiches d'exemple (séries générales A1–A4, C, D, sur
+5 années). Trois fiches de démonstration pointent vers des PDF d'exemple pour
+illustrer les états (sujet seul, corrigé seul, sujet + corrigé). Pour ajouter du
+contenu réel, voir [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Régénérer les placeholders manquants (n'écrase jamais l'existant) :
+Régénérer les fiches/PDF d'exemple manquants (n'écrase jamais l'existant) :
 
 ```bash
 node scripts/seed.mjs
+node scripts/make-placeholder-pdfs.mjs
 ```
 
 ## Déploiement

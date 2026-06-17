@@ -3,8 +3,6 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
 
 // Adresse publique du site (à adapter lors du déploiement)
 const SITE = 'https://annales-bac-congo.example';
@@ -12,11 +10,6 @@ const SITE = 'https://annales-bac-congo.example';
 // https://astro.build/config
 export default defineConfig({
   site: SITE,
-  markdown: {
-    // Rendu LaTeX dans tous les corrigés : $...$ (en ligne) et $$...$$ (bloc)
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
-  },
   integrations: [
     sitemap(),
     AstroPWA({

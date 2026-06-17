@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SujetCarte from '../components/SujetCarte.astro';
-import { toutesLesSeries, tousLesSujets } from '../lib/data';
+import { toutesLesSeries, tousLesSujets, statutSujet } from '../lib/data';
 
 const series = await toutesLesSeries();
 const sujets = await tousLesSujets();
-const corriges = sujets.filter((s) => s.data.statut === 'corrige-disponible');
-const derniers = corriges.slice(0, 4);
+const disponibles = sujets.filter((s) => statutSujet(s.data) !== 'a-venir');
+const derniers = disponibles.slice(0, 4);
 ---
 
 <Layout titre="Accueil">
@@ -64,10 +64,10 @@ const derniers = corriges.slice(0, 4);
     <section class="mt-14">
       <div class="flex items-baseline justify-between">
         <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
-          Corrigés récents
+          Derniers documents
         </h2>
         <span class="text-xs text-[color:var(--color-muted)]">
-          {corriges.length} disponible(s)
+          {disponibles.length} disponible(s)
         </span>
       </div>
       <div class="mt-4 grid gap-4 sm:grid-cols-2">

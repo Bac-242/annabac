@@ -13,6 +13,30 @@ export function slugify(valeur: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
+/** Titre lisible dérivé des métadonnées. */
+export function titreSujet(data: Sujet['data']): string {
+  return `Baccalauréat ${data.annee} — Série ${data.serie} — ${data.matiere}`;
+}
+
+/** Statut d'un sujet, déduit des PDF disponibles. */
+export function statutSujet(
+  data: Sujet['data']
+): 'complet' | 'sujet' | 'corrige' | 'a-venir' {
+  const s = Boolean(data.sujetPdf);
+  const c = Boolean(data.corrigePdf);
+  if (s && c) return 'complet';
+  if (s) return 'sujet';
+  if (c) return 'corrige';
+  return 'a-venir';
+}
+
+export const libelleStatut: Record<string, string> = {
+  complet: 'Sujet + corrigé',
+  sujet: 'Sujet seul',
+  corrige: 'Corrigé seul',
+  'a-venir': 'À venir',
+};
+
 /** Tous les sujets, triés du plus récent au plus ancien. */
 export async function tousLesSujets(): Promise<Sujet[]> {
   const sujets = await getCollection('sujets');
@@ -53,10 +77,3 @@ export async function sujetsParSerieMatiere(
     (s) => s.data.serie === codeSerie && slugify(s.data.matiere) === slugMatiere
   );
 }
-
-/** Libellés lisibles pour les statuts. */
-export const libelleStatut: Record<string, string> = {
-  'corrige-disponible': 'Corrigé disponible',
-  'sujet-seul': 'Sujet seul',
-  placeholder: 'À venir',
-};

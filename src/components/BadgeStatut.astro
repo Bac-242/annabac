@@ -7,16 +7,17 @@ interface Props {
 const { statut } = Astro.props;
 
 const styles: Record<string, string> = {
-  'corrige-disponible': 'bg-emerald-50 text-emerald-700',
-  'sujet-seul': 'bg-amber-50 text-amber-700',
-  placeholder: 'bg-[color:var(--color-canvas)] text-[color:var(--color-muted)]',
+  complet: 'bg-emerald-50 text-emerald-700',
+  sujet: 'bg-sky-50 text-sky-700',
+  corrige: 'bg-violet-50 text-violet-700',
+  'a-venir': 'bg-[color:var(--color-canvas)] text-[color:var(--color-muted)]',
 };
 ---
 
 <span
   class:list={[
     'inline-block whitespace-nowrap rounded-full px-2.5 py-0.5 text-[11px] font-medium',
-    styles[statut] ?? styles.placeholder,
+    styles[statut] ?? styles['a-venir'],
   ]}
 >
   {libelleStatut[statut] ?? statut}

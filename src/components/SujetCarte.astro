@@ -1,5 +1,6 @@
 ---
 import type { Sujet } from '../lib/data';
+import { statutSujet } from '../lib/data';
 import BadgeStatut from './BadgeStatut.astro';
 
 interface Props {
@@ -9,12 +10,7 @@ interface Props {
 const { sujet, montrerSerie = false } = Astro.props;
 const { data } = sujet;
 const href = `/sujets/${sujet.slug}`;
-
-const couleurDifficulte: Record<string, string> = {
-  Facile: 'text-emerald-600',
-  Moyenne: 'text-amber-600',
-  Difficile: 'text-rose-600',
-};
+const statut = statutSujet(data);
 ---
 
 <a href={href} class="card card-hover group flex flex-col p-5">
@@ -30,21 +26,14 @@ const couleurDifficulte: Record<string, string> = {
         <p class="text-xs text-[color:var(--color-muted)]">Série {data.serie}</p>
       )}
     </div>
-    <BadgeStatut statut={data.statut} />
+    <BadgeStatut statut={statut} />
   </div>
 
-  {data.chapitres.length > 0 && (
-    <ul class="mt-3 flex flex-wrap gap-1.5">
-      {data.chapitres.slice(0, 4).map((ch) => (
-        <li class="rounded-full bg-[color:var(--color-canvas)] px-2.5 py-0.5 text-[11px] text-[color:var(--color-muted)]">
-          {ch}
-        </li>
-      ))}
-    </ul>
-  )}
-
   <p class="mt-auto pt-4 text-xs text-[color:var(--color-muted)]">
-    <span class={couleurDifficulte[data.difficulte]}>{data.difficulte}</span>
-    {data.duree && <> · {data.duree}</>}
+    {statut === 'a-venir'
+      ? 'Document non encore disponible'
+      : [data.sujetPdf && 'Sujet', data.corrigePdf && 'Corrigé']
+          .filter(Boolean)
+          .join(' · ') + ' · PDF'}
   </p>
 </a>

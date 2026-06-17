@@ -62,13 +62,6 @@ h4 {
   @apply -translate-y-0.5 shadow-[0_8px_30px_rgba(0,0,0,0.06)];
 }
 
-/* Formules KaTeX : éviter le débordement horizontal sur mobile */
-.katex-display {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-block: 0.25rem;
-}
-
 /* Version imprimable : masquer l'habillage */
 @media print {
   .no-print {

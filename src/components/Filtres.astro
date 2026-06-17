@@ -1,5 +1,6 @@
 ---
 import type { Sujet } from '../lib/data';
+import { statutSujet } from '../lib/data';
 import SujetCarte from './SujetCarte.astro';
 
 interface Props {
@@ -13,7 +14,6 @@ const annees = [...new Set(sujets.map((s) => s.data.annee))].sort((a, b) => b - 
 const matieres = montrerMatiere
   ? [...new Set(sujets.map((s) => s.data.matiere))].sort((a, b) => a.localeCompare(b, 'fr'))
   : [];
-const difficultes = ['Facile', 'Moyenne', 'Difficile'];
 ---
 
 <div data-filtres>
@@ -41,13 +41,14 @@ const difficultes = ['Facile', 'Moyenne', 'Difficile'];
       </label>
     )}
     <label class="flex flex-col gap-1.5">
-      <span class="font-medium text-[color:var(--color-muted)]">Difficulté</span>
+      <span class="font-medium text-[color:var(--color-muted)]">Disponibilité</span>
       <select
-        data-filtre="difficulte"
+        data-filtre="dispo"
         class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]"
       >
-        <option value="">Toutes</option>
-        {difficultes.map((d) => <option value={d}>{d}</option>)}
+        <option value="">Tous</option>
+        <option value="disponible">Disponible</option>
+        <option value="a-venir">À venir</option>
       </select>
     </label>
   </div>
@@ -62,7 +63,7 @@ const difficultes = ['Facile', 'Moyenne', 'Difficile'];
         data-carte
         data-annee={sujet.data.annee}
         data-matiere={sujet.data.matiere}
-        data-difficulte={sujet.data.difficulte}
+        data-dispo={statutSujet(sujet.data) === 'a-venir' ? 'a-venir' : 'disponible'}
       >
         <SujetCarte sujet={sujet} montrerSerie={montrerSerie} />
       </div>

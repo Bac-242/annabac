@@ -1,52 +1,53 @@
 # Contribuer à Annales Bac Congo
 
-Merci de votre aide ! Le projet est collaboratif : enseignants, anciens élèves,
-développeurs et établissements peuvent contribuer.
+Merci de votre aide ! Il y a deux façons de contribuer.
 
-## Façons de contribuer
+## 1. Envoyer un sujet ou un corrigé (sans connaissances techniques)
 
-- **Collecter / numériser** d'anciens sujets (PDF lisibles).
-- **Vérifier** l'exactitude des contenus existants.
-- **Rédiger** des corrigés pédagogiques.
-- **Améliorer** le code et le design.
+Le plus simple : utilisez le **formulaire de soumission** sur la page
+[`/contribuer`](https://annales-bac-congo.example/contribuer).
 
-## Ajouter un sujet
+1. Renseignez l'année, la série, la matière et la session.
+2. Joignez le **PDF du sujet et/ou du corrigé** (PDF uniquement, 5 Mo max par fichier).
+3. Envoyez. Le document arrive dans la boîte e-mail de l'équipe.
+4. Après **vérification**, il est publié sur le site.
 
-1. Créez un fichier dans `src/content/sujets/`, nommé
-   `<annee>-serie-<serie>-<matiere>.md` (sans accents), par ex.
-   `2022-serie-c-mathematiques.md`.
-2. Renseignez les métadonnées (frontmatter) :
+Aucun compte ni connaissance de Git n'est nécessaire.
+
+## 2. Publier un document validé (mainteneurs)
+
+Une fois un document vérifié, on l'ajoute à la bibliothèque :
+
+1. Déposez le(s) PDF dans `public/pdfs/`, par ex.
+   `2022-serie-c-mathematiques-sujet.pdf` et
+   `2022-serie-c-mathematiques-corrige.pdf`.
+2. Créez la fiche dans `src/content/sujets/`, nommée
+   `<annee>-serie-<serie>-<matiere>.md` (sans accents) :
 
    ```yaml
    ---
-   titre: 'Baccalauréat 2022 — Série C — Mathématiques'
    annee: 2022
-   serie: 'C' # A, B, C, D, E, G1, G2, F
-   matiere: 'Mathématiques'
-   session: 'Normale' # Normale | Remplacement | Spéciale
-   duree: '4h'
-   coefficient: 5
-   difficulte: 'Difficile' # Facile | Moyenne | Difficile
-   chapitres: ['Nombres complexes', 'Suites']
-   sujetPdf: '/pdfs/2022-serie-c-mathematiques-sujet.pdf' # optionnel
-   statut: 'corrige-disponible' # corrige-disponible | sujet-seul | placeholder
+   serie: "C"            # A1, A2, A3, A4, C, D
+   matiere: "Mathématiques"
+   session: "Normale"     # Normale | Remplacement | Spéciale
+   sujetPdf: "/pdfs/2022-serie-c-mathematiques-sujet.pdf"     # optionnel
+   corrigePdf: "/pdfs/2022-serie-c-mathematiques-corrige.pdf" # optionnel
    ---
    ```
 
-3. Rédigez le **corrigé** dans le corps du fichier (Markdown). Structure
-   recommandée : démarche, notions mobilisées, pièges classiques, conseils.
-4. Déposez le PDF du sujet (si disponible) dans `public/pdfs/` et référencez-le
-   via `sujetPdf`.
+   Les deux champs PDF sont optionnels : une fiche peut n'avoir que le sujet,
+   que le corrigé, ou les deux.
+3. Vérifiez en local puis redéployez.
 
-## Qualité des corrigés
+## Configurer le formulaire de soumission
 
-Un bon corrigé ne donne pas seulement la réponse : il explique **la démarche**,
-les **notions du programme** mobilisées, les **pièges fréquents** et des
-**conseils méthodologiques**.
+Le formulaire utilise [Web3Forms](https://web3forms.com) (gratuit, sans
+backend). Obtenez une clé d'accès en indiquant l'adresse e-mail dédiée, puis
+renseignez-la dans `.env` :
 
-**Formules mathématiques** : utilisez la syntaxe LaTeX, rendue automatiquement
-par KaTeX. En ligne avec `$...$` (ex. `$f'(x) = 2x$`) ou en bloc centré avec
-`$$...$$` (ex. `$$\int_0^1 x^2\,dx = \frac{1}{3}.$$`).
+```
+PUBLIC_WEB3FORMS_KEY=votre-cle
+```
 
 ## Vérifier localement
 
@@ -57,4 +58,4 @@ npm run build    # vérifier que tout compile (schémas Zod validés)
 ```
 
 Les métadonnées sont validées par des schémas (`src/content/config.ts`) : une
-valeur invalide (mauvais `statut`, `difficulte`…) fera échouer le build.
+valeur invalide (mauvaise `session`, etc.) fait échouer le build.

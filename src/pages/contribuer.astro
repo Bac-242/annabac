@@ -1,57 +1,179 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Fil from '../components/Fil.astro';
+import { toutesLesSeries } from '../lib/data';
+
+const series = await toutesLesSeries();
+const cle = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+const configure = cle.length > 0;
+const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
 ---
 
-<Layout titre="Contribuer" description="Comment contribuer au projet Annales Bac Congo.">
+<Layout titre="Contribuer" description="Soumettre un sujet ou un corrigé du baccalauréat congolais.">
   <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Contribuer' }]} />
-  <article class="prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-[color:var(--color-accent)]">
-    <h1>Contribuer au projet</h1>
-    <p>
-      Annales Bac Congo est une initiative collective. Chacun peut contribuer
-      selon son expertise.
+  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Soumettre un document</h1>
+  <p class="mt-2 max-w-2xl text-[color:var(--color-muted)]">
+    Aidez à enrichir la bibliothèque en envoyant un sujet et/ou son corrigé au
+    format <strong>PDF</strong>. Chaque document est <strong>vérifié par
+    l'équipe</strong> avant d'être publié sur le site.
+  </p>
+
+  {!configure && (
+    <p class="mt-6 rounded-2xl bg-amber-50 p-4 text-sm text-amber-800">
+      Le formulaire n'est pas encore configuré. Renseignez
+      <code>PUBLIC_WEB3FORMS_KEY</code> dans le fichier <code>.env</code>
+      (voir <code>.env.example</code>) pour activer l'envoi.
+    </p>
+  )}
+
+  <form
+    id="form-soumission"
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    enctype="multipart/form-data"
+    class="mt-8 grid max-w-2xl gap-5"
+  >
+    {configure && <input type="hidden" name="access_key" value={cle} />}
+    <input type="hidden" name="subject" value="Nouvelle soumission — Annales Bac Congo" />
+    <input type="hidden" name="from_name" value="Annales Bac Congo" />
+    <!-- Anti-spam (honeypot) : doit rester vide -->
+    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="font-medium">Année</span>
+        <select name="Annee" required class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+          {annees.map((a) => <option value={a}>{a}</option>)}
+        </select>
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="font-medium">Série</span>
+        <select name="Serie" required class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+          {series.map((s) => (
+            <option value={s.data.code}>{s.data.code} — {s.data.intitule}</option>
+          ))}
+        </select>
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="font-medium">Matière</span>
+        <input
+          type="text"
+          name="Matiere"
+          required
+          placeholder="ex. Mathématiques"
+          class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2"
+        />
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="font-medium">Session</span>
+        <select name="Session" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+          <option>Normale</option>
+          <option>Remplacement</option>
+          <option>Spéciale</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="font-medium">PDF du sujet <span class="text-[color:var(--color-muted)]">(optionnel)</span></span>
+        <input type="file" name="Sujet" accept="application/pdf,.pdf" class="text-sm file:mr-3 file:rounded-full file:border-0 file:bg-[color:var(--color-canvas)] file:px-4 file:py-2 file:text-sm" />
+      </label>
+      <label class="flex flex-col gap-1.5 text-sm">
+        <span class="font-medium">PDF du corrigé <span class="text-[color:var(--color-muted)]">(optionnel)</span></span>
+        <input type="file" name="Corrige" accept="application/pdf,.pdf" class="text-sm file:mr-3 file:rounded-full file:border-0 file:bg-[color:var(--color-canvas)] file:px-4 file:py-2 file:text-sm" />
+      </label>
+    </div>
+    <p class="-mt-2 text-xs text-[color:var(--color-muted)]">
+      Au moins un des deux fichiers est requis. PDF uniquement, 5 Mo maximum par fichier.
     </p>
 
-    <h2>Comment aider ?</h2>
-    <ul>
-      <li><strong>Collecter</strong> et numériser d'anciens sujets.</li>
-      <li><strong>Vérifier</strong> l'exactitude des contenus publiés.</li>
-      <li><strong>Rédiger</strong> des corrigés pédagogiques détaillés.</li>
-      <li><strong>Améliorer</strong> l'expérience numérique (design, code).</li>
-    </ul>
+    <label class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium">Votre e-mail <span class="text-[color:var(--color-muted)]">(optionnel, pour vous recontacter)</span></span>
+      <input
+        type="email"
+        name="Email du contributeur"
+        placeholder="vous@exemple.com"
+        class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2"
+      />
+    </label>
 
-    <h2>Ajouter un sujet</h2>
-    <p>
-      Chaque sujet est un fichier Markdown dans
-      <code>src/content/sujets/</code>. Il contient des métadonnées (année,
-      série, matière, difficulté…) et un corrigé rédigé. Exemple :
-    </p>
-    <pre><code>---
-titre: "Baccalauréat 2022 — Série C — Mathématiques"
-annee: 2022
-serie: "C"
-matiere: "Mathématiques"
-session: "Normale"
-difficulte: "Difficile"
-chapitres: ["Nombres complexes", "Suites"]
-statut: "corrige-disponible"
----
+    <div class="flex items-center gap-4">
+      <button type="submit" class="btn btn-primary" disabled={!configure}>
+        Envoyer pour vérification
+      </button>
+      <span id="etat" role="status" aria-live="polite" class="text-sm"></span>
+    </div>
+  </form>
 
-## Corrigé détaillé
-… démarche, notions mobilisées, pièges, conseils …
-</code></pre>
-    <p>
-      Les <code>statut</code> possibles sont&nbsp;:
-      <code>corrige-disponible</code>, <code>sujet-seul</code> et
-      <code>placeholder</code> (à venir).
-    </p>
-
-    <h2>Proposer une contribution</h2>
-    <p>
-      Le projet est ouvert : les contributions se font par dépôt de fichiers
-      (via une <em>pull request</em> sur le dépôt du projet) ou en transmettant
-      vos documents à l'équipe. Le guide complet figure dans le fichier
-      <code>CONTRIBUTING.md</code>.
-    </p>
-  </article>
+  <section class="prose prose-neutral mt-12 max-w-2xl prose-headings:tracking-tight prose-a:text-[color:var(--color-accent)]">
+    <h2>Que deviennent les documents ?</h2>
+    <ol>
+      <li>Vous envoyez le(s) PDF via le formulaire ci-dessus.</li>
+      <li>L'équipe reçoit la soumission et <strong>vérifie</strong> la qualité et l'exactitude.</li>
+      <li>Une fois validé, le document est <strong>publié</strong> sur le site, gratuitement et pour tous.</li>
+    </ol>
+  </section>
 </Layout>
+
+<script>
+  const form = document.getElementById('form-soumission') as HTMLFormElement | null;
+  const etat = document.getElementById('etat');
+  const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
+
+  function message(texte: string, type: 'ok' | 'err' | 'info') {
+    if (!etat) return;
+    etat.textContent = texte;
+    etat.className =
+      'text-sm ' +
+      (type === 'ok' ? 'text-emerald-700' : type === 'err' ? 'text-rose-600' : 'text-[color:var(--color-muted)]');
+  }
+
+  function validerPdf(f: File | null): string | null {
+    if (!f || f.size === 0) return null;
+    const estPdf = f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf');
+    if (!estPdf) return `« ${f.name} » n'est pas un PDF.`;
+    if (f.size > MAX) return `« ${f.name} » dépasse 5 Mo.`;
+    return null;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const sujet = fd.get('Sujet') as File | null;
+    const corrige = fd.get('Corrige') as File | null;
+
+    const aSujet = sujet && sujet.size > 0;
+    const aCorrige = corrige && corrige.size > 0;
+    if (!aSujet && !aCorrige) {
+      message('Joignez au moins un PDF (sujet ou corrigé).', 'err');
+      return;
+    }
+    for (const erreur of [validerPdf(sujet), validerPdf(corrige)]) {
+      if (erreur) {
+        message(erreur, 'err');
+        return;
+      }
+    }
+    if (!aSujet) fd.delete('Sujet');
+    if (!aCorrige) fd.delete('Corrige');
+
+    const bouton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    bouton.disabled = true;
+    message('Envoi en cours…', 'info');
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (data.success) {
+        form.reset();
+        message('Merci ! Votre document a été envoyé et sera vérifié avant publication.', 'ok');
+      } else {
+        message(data.message || "L'envoi a échoué. Réessayez plus tard.", 'err');
+      }
+    } catch {
+      message("Impossible d'envoyer pour le moment. Vérifiez votre connexion.", 'err');
+    } finally {
+      bouton.disabled = false;
+    }
+  });
+</script>
