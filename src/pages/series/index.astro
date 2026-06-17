@@ -16,7 +16,7 @@ const techniques = series.filter((s) => s.data.filiere === 'Technique');
 const groupes = [
   { titre: 'Enseignement général', liste: generales },
   { titre: 'Enseignement technique', liste: techniques },
-];
+].filter((g) => g.liste.length > 0);
 ---
 
 <Layout titre="Séries" description="Toutes les séries du baccalauréat congolais.">

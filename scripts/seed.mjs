@@ -11,16 +11,15 @@ mkdirSync(outDir, { recursive: true });
 
 const ANNEES = [2020, 2021, 2022, 2023, 2024];
 
-// Matières par série (enseignement général + technique)
+// Matières par série — enseignement général uniquement (séries A1–A4, C, D).
+// Les séries A sont littéraires (dominantes : maths, langues, arts, philosophie).
 const MATIERES = {
-  A: ['Philosophie', 'Français', 'Histoire-Géographie', 'Anglais'],
-  B: ['Mathématiques', 'Économie', 'Philosophie', 'Histoire-Géographie'],
-  C: ['Mathématiques', 'Physique-Chimie', 'Philosophie', 'Anglais'],
-  D: ['Mathématiques', 'Physique-Chimie', 'SVT', 'Philosophie'],
-  E: ['Mathématiques', 'Physique-Chimie', 'Technologie'],
-  G1: ['Économie & Droit', 'Techniques administratives', 'Français'],
-  G2: ['Comptabilité', 'Mathématiques financières', 'Économie & Droit'],
-  F: ['Mathématiques', 'Sciences physiques', 'Technologie industrielle'],
+  A1: ['Philosophie', 'Français', 'Mathématiques', 'Histoire-Géographie', 'Anglais'],
+  A2: ['Philosophie', 'Français', 'Anglais', 'Espagnol', 'Histoire-Géographie'],
+  A3: ['Philosophie', 'Français', 'Arts plastiques', 'Histoire-Géographie'],
+  A4: ['Philosophie', 'Français', 'Histoire-Géographie', 'Anglais'],
+  C: ['Mathématiques', 'Physique-Chimie', 'SVT', 'Philosophie', 'Anglais'],
+  D: ['Mathématiques', 'Physique-Chimie', 'SVT', 'Philosophie', 'Anglais'],
 };
 
 // Chapitres indicatifs par matière (pour les filtres et le format pédagogique)
