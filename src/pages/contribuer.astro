@@ -176,17 +176,27 @@ const clesAvecSujet = sujets
       }
     }
 
-    // Règle : un corrigé seul exige qu'un sujet existe déjà pour la même
-    // combinaison année·série·matière·session.
-    if (aCorrige && !aSujet) {
-      const cle = `${fd.get('Annee')}|${fd.get('Serie')}|${fd.get('Matiere')}|${fd.get('Session')}`;
-      if (!clesAvecSujet.has(cle)) {
-        message(
-          "Aucun sujet n'existe encore pour cette année/série/matière/session : joignez aussi le PDF du sujet.",
-          'err'
-        );
-        return;
-      }
+    // Règles liées à l'existant pour la combinaison année·série·matière·session.
+    const cle = `${fd.get('Annee')}|${fd.get('Serie')}|${fd.get('Matiere')}|${fd.get('Session')}`;
+    const sujetExiste = clesAvecSujet.has(cle);
+
+    // 1) Pas de doublon : si un sujet existe déjà, on ne peut pas en soumettre un.
+    if (aSujet && sujetExiste) {
+      message(
+        'Un sujet existe déjà pour cette année/série/matière/session. Pour le compléter, soumettez uniquement le corrigé.',
+        'err'
+      );
+      return;
+    }
+
+    // 2) Corrigé seul : autorisé seulement si un sujet existe déjà
+    //    (un envoi sujet + corrigé ensemble passe ici, car aSujet est vrai).
+    if (aCorrige && !aSujet && !sujetExiste) {
+      message(
+        "Aucun sujet n'existe encore pour cette année/série/matière/session : joignez aussi le PDF du sujet.",
+        'err'
+      );
+      return;
     }
     if (!aSujet) fd.delete('Sujet');
     if (!aCorrige) fd.delete('Corrige');
