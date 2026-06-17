@@ -16,9 +16,10 @@ const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
 // Combinaisons (année·série·matière·session) pour lesquelles un sujet existe
 // déjà : un corrigé seul n'est autorisé que si l'une d'elles correspond.
 const sujets = await tousLesSujets();
-const clesAvecSujet = sujets
-  .filter((s) => s.data.sujetPdf)
-  .map((s) => cleSujet(s.data));
+const clesExistantes = {
+  sujet: sujets.filter((s) => s.data.sujetPdf).map((s) => cleSujet(s.data)),
+  corrige: sujets.filter((s) => s.data.corrigePdf).map((s) => cleSujet(s.data)),
+};
 ---
 
 <Layout titre="Contribuer" description="Soumettre un sujet ou un corrigé du baccalauréat congolais.">
@@ -124,7 +125,7 @@ const clesAvecSujet = sujets
     </ol>
   </section>
 
-  <script type="application/json" id="cles-avec-sujet" set:html={JSON.stringify(clesAvecSujet)} />
+  <script type="application/json" id="cles-existantes" set:html={JSON.stringify(clesExistantes)} />
 </Layout>
 
 <script>
@@ -132,11 +133,16 @@ const clesAvecSujet = sujets
   const etat = document.getElementById('etat');
   const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
 
-  // Combinaisons année·série·matière·session ayant déjà un sujet publié.
-  let clesAvecSujet = new Set<string>();
+  // Combinaisons année·série·matière·session ayant déjà un sujet / un corrigé.
+  let clesSujet = new Set<string>();
+  let clesCorrige = new Set<string>();
   try {
-    const brut = document.getElementById('cles-avec-sujet')?.textContent;
-    if (brut) clesAvecSujet = new Set(JSON.parse(brut) as string[]);
+    const brut = document.getElementById('cles-existantes')?.textContent;
+    if (brut) {
+      const o = JSON.parse(brut) as { sujet: string[]; corrige: string[] };
+      clesSujet = new Set(o.sujet);
+      clesCorrige = new Set(o.corrige);
+    }
   } catch {
     /* ignore */
   }
@@ -178,18 +184,28 @@ const clesAvecSujet = sujets
 
     // Règles liées à l'existant pour la combinaison année·série·matière·session.
     const cle = `${fd.get('Annee')}|${fd.get('Serie')}|${fd.get('Matiere')}|${fd.get('Session')}`;
-    const sujetExiste = clesAvecSujet.has(cle);
+    const sujetExiste = clesSujet.has(cle);
+    const corrigeExiste = clesCorrige.has(cle);
 
-    // 1) Pas de doublon : si un sujet existe déjà, on ne peut pas en soumettre un.
+    // 1) Pas de doublon de sujet : on ne remplace pas un sujet existant.
     if (aSujet && sujetExiste) {
       message(
-        'Un sujet existe déjà pour cette année/série/matière/session. Pour le compléter, soumettez uniquement le corrigé.',
+        'Un sujet existe déjà pour cette année/série/matière/session ; il ne peut pas être remplacé.',
         'err'
       );
       return;
     }
 
-    // 2) Corrigé seul : autorisé seulement si un sujet existe déjà
+    // 2) Pas de doublon de corrigé : on ne remplace pas un corrigé existant.
+    if (aCorrige && corrigeExiste) {
+      message(
+        'Un corrigé existe déjà pour cette année/série/matière/session ; il ne peut pas être remplacé.',
+        'err'
+      );
+      return;
+    }
+
+    // 3) Corrigé seul : autorisé seulement si un sujet existe déjà
     //    (un envoi sujet + corrigé ensemble passe ici, car aSujet est vrai).
     if (aCorrige && !aSujet && !sujetExiste) {
       message(
