@@ -10,7 +10,7 @@ pages_build_output_dir = "dist"
 [[d1_databases]]
 binding = "DB"
 database_name = "annabac"
-database_id = "À_REMPLACER_APRES_wrangler_d1_create"
+database_id = "8fc356b1-4a9c-4179-a4e6-966d9a0ca1c0"
 
 # Stockage R2 : PDF soumis en attente de validation.
 # Créez-le avec : wrangler r2 bucket create annabac-soumissions
