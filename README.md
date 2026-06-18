@@ -14,8 +14,11 @@ et la consultation hors-ligne.
 - **Tailwind CSS v4** — interface épurée, mobile-first.
 - **Pagefind** — moteur de recherche statique (index généré au build).
 - **PWA** (`@vite-pwa/astro`) — installation et consultation hors-ligne.
+- **SEO / partage** — Open Graph + Twitter Card (aperçus WhatsApp), données
+  structurées schema.org, image de partage générée (`public/og.png`).
 - **Cloudflare** (Pages Functions + R2 + D1) — API de soumission et file de
-  modération ; **Turnstile** pour l'anti-spam. Voir [DEPLOY.md](DEPLOY.md).
+  modération ; **Turnstile** (anti-spam) et **Web Analytics** (sans cookie).
+  Voir [DEPLOY.md](DEPLOY.md).
 
 ## Concept (POC)
 
@@ -43,21 +46,19 @@ npm run preview      # prévisualise le site généré (recherche active)
 
 ```
 src/
-  content/
-    config.ts          # schémas (Zod) des collections
-    series/*.md         # métadonnées des séries (A1–A4, C, D)
-    sujets/*.md         # une fiche par sujet (métadonnées + PDF)
-  components/           # SujetCarte, Filtres, BadgeStatut, Fil…
-  layouts/Layout.astro  # gabarit mobile-first + PWA
-  pages/                # accueil + axes /series, /annees, /matieres, /sujets, /recherche, /contribuer…
-  lib/data.ts           # helpers (tri, regroupements, statut, slugify)
-  pages/admin/          # espace de modération (protégé par Cloudflare Access)
-functions/              # Pages Functions : /api/submit, /api/admin/* + _lib
-scripts/seed.mjs               # génère des fiches d'exemple
-scripts/make-placeholder-pdfs.mjs  # génère des PDF d'exemple
-public/pdfs/            # PDF des sujets et corrigés
-wrangler.toml           # bindings Cloudflare (D1, R2, vars)
-schema.sql              # schéma D1 (file de modération)
+  content/config.ts     # schémas (Zod) des collections
+  content/series/*.md    # séries (A1–A4, C, D)
+  content/sujets/*.md    # fiches : métadonnées + chemins des PDF
+  components/            # SujetCarte, Filtres, BadgeStatut, Fil…
+  layouts/Layout.astro   # gabarit + SEO/Open Graph + PWA
+  pages/                 # accueil, /series, /annees, /matieres, /sujets, /recherche, /contribuer, 404
+  pages/admin/           # modération (protégé par Cloudflare Access)
+  lib/data.ts            # helpers (tri, regroupements, statut, slugify)
+functions/               # Pages Functions : /api/submit, /api/admin/* (+ _lib)
+scripts/                 # seed, make-placeholder-pdfs, make-og-image
+public/pdfs/             # PDF des sujets et corrigés
+public/og.png            # image de partage (Open Graph)
+wrangler.toml, schema.sql # config Cloudflare (D1/R2) + schéma de modération
 ```
 
 ## Contenus
@@ -74,8 +75,24 @@ node scripts/seed.mjs
 node scripts/make-placeholder-pdfs.mjs
 ```
 
+## Configuration
+
+Variables publiques (injectées au build) — copier `.env.example` en `.env` :
+
+- `PUBLIC_TURNSTILE_SITEKEY` — widget anti-spam du formulaire (optionnel)
+- `PUBLIC_CF_BEACON_TOKEN` — analytics Cloudflare sans cookie (optionnel)
+
+Sans ces clés, le site fonctionne (juste sans captcha ni statistiques). Les
+secrets serveur (jeton GitHub, secret Turnstile) et la mise en place complète
+sont décrits dans [DEPLOY.md](DEPLOY.md).
+
 ## Déploiement
 
-Sortie 100 % statique (`dist/`) : déployable gratuitement sur Cloudflare Pages,
-Netlify ou GitHub Pages. Commande de build : `npm run build`, dossier publié :
-`dist`. Penser à ajuster `site` dans `astro.config.mjs`.
+Hébergé sur **Cloudflare Pages** : site statique (`dist/`) + Pages Functions
+(soumission/modération) + R2 (PDF en attente) + D1 (file de modération). Build :
+`npm run build`, sortie `dist`. Procédure pas à pas (ressources, secrets,
+Cloudflare Access) : [DEPLOY.md](DEPLOY.md).
+
+La bibliothèque est du HTML statique (déployable n'importe où) ; seule la chaîne
+de soumission/modération dépend de Cloudflare. Adresse publique configurée dans
+`astro.config.mjs` (`site`).
