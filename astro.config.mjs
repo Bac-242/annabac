@@ -4,8 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 
-// Adresse publique du site (à adapter lors du déploiement)
-const SITE = 'https://annales-bac-congo.example';
+// Adresse publique du site (URL Cloudflare Pages ; adapter si domaine custom)
+const SITE = 'https://annabac.pages.dev';
 
 // https://astro.build/config
 export default defineConfig({

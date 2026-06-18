@@ -1,5 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import { statSync } from 'node:fs';
+import { join } from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 import Fil from '../../components/Fil.astro';
 import BadgeStatut from '../../components/BadgeStatut.astro';
@@ -10,6 +12,17 @@ import {
   titreSujet,
   statutSujet,
 } from '../../lib/data';
+
+/** Taille lisible d'un PDF de public/, ou null s'il est absent. */
+function taillePdf(chemin?: string): string | null {
+  if (!chemin) return null;
+  try {
+    const ko = statSync(join(process.cwd(), 'public', chemin)).size / 1024;
+    return ko < 1024 ? `${Math.round(ko)} Ko` : `${(ko / 1024).toFixed(1)} Mo`;
+  } catch {
+    return null;
+  }
+}
 
 export const getStaticPaths = (async () => {
   const sujets = await tousLesSujets();
@@ -27,9 +40,24 @@ const statut = statutSujet(data);
 const series = await toutesLesSeries();
 const serie = series.find((s) => s.data.code === data.serie);
 const intituleSerie = serie?.data.intitule ?? '';
+
+const tailleSujet = taillePdf(data.sujetPdf);
+const tailleCorrige = taillePdf(data.corrigePdf);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LearningResource',
+  name: titre,
+  inLanguage: 'fr',
+  educationalLevel: 'Baccalauréat',
+  learningResourceType: 'Sujet d’examen',
+  about: data.matiere,
+  datePublished: String(data.annee),
+  isAccessibleForFree: true,
+};
 ---
 
-<Layout titre={titre} description={`Sujet et corrigé : ${titre}.`}>
+<Layout titre={titre} description={`Sujet et corrigé : ${titre}.`} jsonLd={jsonLd}>
   <Fil
     items={[
       { href: '/', label: 'Accueil' },
@@ -74,7 +102,9 @@ const intituleSerie = serie?.data.intitule ?? '';
       <h2 class="font-semibold tracking-tight">Sujet</h2>
       {data.sujetPdf ? (
         <>
-          <p class="mt-1 text-sm text-[color:var(--color-muted)]">PDF de l'épreuve.</p>
+          <p class="mt-1 text-sm text-[color:var(--color-muted)]">
+            PDF de l'épreuve{tailleSujet && ` · ${tailleSujet}`}.
+          </p>
           <a href={data.sujetPdf} download class="btn btn-primary mt-4 self-start">
             Télécharger le sujet
           </a>
@@ -90,7 +120,9 @@ const intituleSerie = serie?.data.intitule ?? '';
       <h2 class="font-semibold tracking-tight">Corrigé</h2>
       {data.corrigePdf ? (
         <>
-          <p class="mt-1 text-sm text-[color:var(--color-muted)]">PDF du corrigé.</p>
+          <p class="mt-1 text-sm text-[color:var(--color-muted)]">
+            PDF du corrigé{tailleCorrige && ` · ${tailleCorrige}`}.
+          </p>
           <a href={data.corrigePdf} download class="btn btn-primary mt-4 self-start">
             Télécharger le corrigé
           </a>

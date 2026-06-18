@@ -4,14 +4,31 @@ import '../styles/global.css';
 interface Props {
   titre: string;
   description?: string;
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
   titre,
   description = 'Sujets et corrigés du baccalauréat congolais, gratuits pour tous les élèves.',
+  jsonLd,
 } = Astro.props;
 const titreComplet =
   titre === 'Accueil' ? 'Annales Bac Congo' : `${titre} — Annales Bac Congo`;
+
+const site = Astro.site ?? new URL('https://annabac.pages.dev');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL('/og.png', site).href;
+const beacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN ?? '';
+
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Annales Bac Congo',
+  description:
+    'Bibliothèque numérique gratuite des sujets et corrigés du baccalauréat congolais.',
+  url: site.href,
+  inLanguage: 'fr',
+};
 
 const liens = [
   { href: '/series', label: 'Séries' },
@@ -33,7 +50,27 @@ const estActif = (href: string) =>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#fbfbfd" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
     <title>{titreComplet}</title>
+
+    <!-- Open Graph (aperçus WhatsApp, Facebook, LinkedIn…) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Annales Bac Congo" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titreComplet} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body class="flex min-h-screen flex-col">
     <header
@@ -138,5 +175,14 @@ const estActif = (href: string) =>
         </p>
       </div>
     </footer>
+
+    {beacon && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${beacon}"}`}
+      />
+    )}
   </body>
 </html>

@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout titre="Page introuvable" description="Cette page n'existe pas.">
+  <section class="py-16 text-center sm:py-24">
+    <p class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Erreur 404</p>
+    <h1 class="mx-auto mt-2 max-w-xl text-3xl font-semibold tracking-tight sm:text-4xl">
+      Cette page n'existe pas.
+    </h1>
+    <p class="mx-auto mt-3 max-w-md text-[color:var(--color-muted)]">
+      Le lien est peut-être erroné, ou le document n'a pas encore été publié.
+    </p>
+    <div class="mt-8 flex items-center justify-center gap-5">
+      <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+      <a href="/recherche" class="text-sm font-medium text-[color:var(--color-accent)] hover:underline">
+        Rechercher un sujet ›
+      </a>
+    </div>
+  </section>
+</Layout>
