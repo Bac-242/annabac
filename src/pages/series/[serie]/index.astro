@@ -22,7 +22,7 @@ const matieres = await matieresParSerie(serie.data.code);
 
 <Layout
   titre={`Série ${serie.data.code}`}
-  description={`Sujets et corrigés du baccalauréat — Série ${serie.data.code} (${serie.data.intitule}).`}
+  description={`Sujets et corrigés du baccalauréat — Série ${serie.data.code}.`}
 >
   <Fil
     items={[
@@ -32,7 +32,6 @@ const matieres = await matieresParSerie(serie.data.code);
     ]}
   />
   <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Série {serie.data.code}</h1>
-  <p class="mt-2 text-[color:var(--color-muted)]">{serie.data.intitule}</p>
 
   <h2 class="mt-10 text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Matières</h2>
   {matieres.length === 0 ? (

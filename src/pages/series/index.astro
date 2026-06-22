@@ -1,13 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Fil from '../../components/Fil.astro';
-import { toutesLesSeries, tousLesSujets } from '../../lib/data';
+import { toutesLesSeries, tousLesSujets, statutSujet } from '../../lib/data';
 
 const series = await toutesLesSeries();
 const sujets = await tousLesSujets();
 
 const compteParSerie = new Map<string, number>();
 for (const s of sujets) {
+  if (statutSujet(s.data) === 'a-venir') continue; // seulement le disponible
   compteParSerie.set(s.data.serie, (compteParSerie.get(s.data.serie) ?? 0) + 1);
 }
 
@@ -43,7 +44,6 @@ const groupes = [
               <p class="text-2xl font-semibold tracking-tight text-[color:var(--color-ink)]">
                 Série {s.data.code}
               </p>
-              <p class="mt-0.5 text-sm text-[color:var(--color-muted)]">{s.data.intitule}</p>
             </div>
             <span class="text-[13px] text-[color:var(--color-muted)]">
               {compteParSerie.get(s.data.code) ?? 0} sujet(s)

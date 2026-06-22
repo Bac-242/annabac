@@ -1,23 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SujetCarte from '../components/SujetCarte.astro';
-import {
-  toutesLesSeries,
-  toutesLesAnnees,
-  tousLesSujets,
-  statutSujet,
-} from '../lib/data';
+import { toutesLesAnnees, tousLesSujets, statutSujet } from '../lib/data';
 
-const series = await toutesLesSeries();
 const annees = await toutesLesAnnees();
 const sujets = await tousLesSujets();
 const disponibles = sujets.filter((s) => statutSujet(s.data) !== 'a-venir');
 const derniers = disponibles.slice(0, 4);
 
 const axes = [
-  { href: '/series', titre: 'Par série', desc: 'A1 à A4, C, D' },
-  { href: '/annees', titre: 'Par année', desc: `${annees.length} sessions` },
-  { href: '/matieres', titre: 'Par matière', desc: 'Toutes matières' },
+  { href: '/series', titre: 'Par série', desc: 'A · C · D' },
+  { href: '/annees', titre: 'Par année', desc: 'par session' },
+  { href: '/matieres', titre: 'Par matière', desc: 'par discipline' },
 ];
 ---
 
@@ -48,9 +42,7 @@ const axes = [
 
   <!-- Parcourir par axe -->
   <section class="mt-6">
-    <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
-      Parcourir
-    </h2>
+    <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Parcourir</h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-3">
       {axes.map((a) => (
         <a href={a.href} class="card card-hover flex items-center justify-between p-6">
@@ -61,58 +53,27 @@ const axes = [
     </div>
   </section>
 
-  <!-- Séries -->
-  <section class="mt-12">
-    <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
-      Séries
-    </h2>
-    <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {series.map((s) => (
-        <a
-          href={`/series/${s.data.code.toLowerCase()}`}
-          class="card card-hover group p-6"
-        >
-          <div class="flex items-baseline justify-between">
-            <p class="text-3xl font-semibold tracking-tight text-[color:var(--color-ink)]">
-              {s.data.code}
-            </p>
-            <span class="text-xs text-[color:var(--color-muted)]">{s.data.filiere}</span>
-          </div>
-          <p class="mt-2 text-sm leading-snug text-[color:var(--color-muted)]">
-            {s.data.intitule}
-          </p>
-        </a>
-      ))}
-    </div>
-  </section>
+  {annees.length > 0 && (
+    <section class="mt-12">
+      <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Années</h2>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {annees.map((a) => (
+          <a
+            href={`/annees/${a.annee}`}
+            class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-1.5 text-sm font-medium text-[color:var(--color-ink)] transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]"
+          >
+            {a.annee}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
-  <!-- Années -->
-  <section class="mt-12">
-    <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
-      Années
-    </h2>
-    <div class="mt-4 flex flex-wrap gap-2">
-      {annees.map((a) => (
-        <a
-          href={`/annees/${a.annee}`}
-          class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-1.5 text-sm font-medium text-[color:var(--color-ink)] transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]"
-        >
-          {a.annee}
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Derniers documents -->
   {derniers.length > 0 && (
     <section class="mt-14">
       <div class="flex items-baseline justify-between">
-        <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
-          Derniers documents
-        </h2>
-        <span class="text-xs text-[color:var(--color-muted)]">
-          {disponibles.length} disponible(s)
-        </span>
+        <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Derniers documents</h2>
+        <span class="text-xs text-[color:var(--color-muted)]">{disponibles.length} disponible(s)</span>
       </div>
       <div class="mt-4 grid gap-4 sm:grid-cols-2">
         {derniers.map((sujet) => <SujetCarte sujet={sujet} montrerSerie />)}

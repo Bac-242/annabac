@@ -89,6 +89,7 @@ export async function matieresParSerie(
   const compte = new Map<string, number>();
   for (const s of sujets) {
     if (s.data.serie !== codeSerie) continue;
+    if (statutSujet(s.data) === 'a-venir') continue; // seulement le disponible
     compte.set(s.data.matiere, (compte.get(s.data.matiere) ?? 0) + 1);
   }
   return [...compte.entries()]
@@ -114,6 +115,7 @@ export async function toutesLesAnnees(): Promise<
   const sujets = await tousLesSujets();
   const compte = new Map<number, number>();
   for (const s of sujets) {
+    if (statutSujet(s.data) === 'a-venir') continue; // seulement le disponible
     compte.set(s.data.annee, (compte.get(s.data.annee) ?? 0) + 1);
   }
   return [...compte.entries()]
@@ -128,6 +130,7 @@ export async function toutesLesMatieres(): Promise<
   const sujets = await tousLesSujets();
   const compte = new Map<string, number>();
   for (const s of sujets) {
+    if (statutSujet(s.data) === 'a-venir') continue; // seulement le disponible
     compte.set(s.data.matiere, (compte.get(s.data.matiere) ?? 0) + 1);
   }
   return [...compte.entries()]

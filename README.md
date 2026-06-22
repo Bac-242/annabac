@@ -55,7 +55,7 @@ src/
   pages/admin/           # modération (protégé par Cloudflare Access)
   lib/data.ts            # helpers (tri, regroupements, statut, slugify)
 functions/               # Pages Functions : /api/submit, /api/admin/* (+ _lib)
-scripts/                 # seed, make-placeholder-pdfs, make-og-image
+scripts/make-og-image.mjs # génère l'image de partage Open Graph
 public/pdfs/             # PDF des sujets et corrigés
 public/og.png            # image de partage (Open Graph)
 wrangler.toml, schema.sql # config Cloudflare (D1/R2) + schéma de modération
@@ -63,17 +63,11 @@ wrangler.toml, schema.sql # config Cloudflare (D1/R2) + schéma de modération
 
 ## Contenus
 
-La base est amorcée avec ~140 fiches d'exemple (séries générales A1–A4, C, D, sur
-5 années). Trois fiches de démonstration pointent vers des PDF d'exemple pour
-illustrer les états (sujet seul, corrigé seul, sujet + corrigé). Pour ajouter du
-contenu réel, voir [CONTRIBUTING.md](CONTRIBUTING.md).
-
-Régénérer les fiches/PDF d'exemple manquants (n'écrase jamais l'existant) :
-
-```bash
-node scripts/seed.mjs
-node scripts/make-placeholder-pdfs.mjs
-```
+Séries couvertes : **A, C, D** (enseignement général). Une fiche par sujet dans
+`src/content/sujets/` (métadonnées + PDF). Le site n'affiche que les
+**ressources réellement disponibles** : une année ou une matière n'apparaît que
+si au moins un sujet existe. Pour ajouter du contenu, voir
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Configuration
 

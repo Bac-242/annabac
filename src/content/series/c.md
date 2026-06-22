@@ -1,9 +1,9 @@
 ---
 code: 'C'
-intitule: 'Sciences, dominante mathématiques'
+intitule: 'Série C'
 filiere: 'Générale'
 couleur: 'indigo'
-ordre: 5
+ordre: 2
 ---
 
-Série scientifique à dominante **mathématiques**.
+Série C.

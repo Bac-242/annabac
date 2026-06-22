@@ -7,7 +7,6 @@ import Fil from '../../components/Fil.astro';
 import BadgeStatut from '../../components/BadgeStatut.astro';
 import {
   tousLesSujets,
-  toutesLesSeries,
   slugify,
   titreSujet,
   statutSujet,
@@ -36,10 +35,6 @@ const { sujet } = Astro.props;
 const { data } = sujet;
 const titre = titreSujet(data);
 const statut = statutSujet(data);
-
-const series = await toutesLesSeries();
-const serie = series.find((s) => s.data.code === data.serie);
-const intituleSerie = serie?.data.intitule ?? '';
 
 const tailleSujet = taillePdf(data.sujetPdf);
 const tailleCorrige = taillePdf(data.corrigePdf);
@@ -79,7 +74,7 @@ const jsonLd = {
     <dl class="mt-6 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
       <div>
         <dt class="text-[color:var(--color-muted)]">Série</dt>
-        <dd class="mt-0.5 font-medium">{data.serie} — {intituleSerie}</dd>
+        <dd class="mt-0.5 font-medium">{data.serie}</dd>
       </div>
       <div>
         <dt class="text-[color:var(--color-muted)]">Matière</dt>
