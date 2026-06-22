@@ -14,52 +14,35 @@ const axes = [
   { href: '/annees', titre: 'Par année', desc: 'par session', icon: 'calendar', bg: '#E6ECF7', fg: '#14245C' },
   { href: '/matieres', titre: 'Par matière', desc: 'par discipline', icon: 'book', bg: '#FAEEDA', fg: '#854F0B' },
 ];
-
-const matieresHero = [
-  { nom: 'Maths', icon: 'calculator', bg: '#E6F1FB', fg: '#0C447C' },
-  { nom: 'Physique', icon: 'atom', bg: '#EEEDFE', fg: '#3C3489' },
-  { nom: 'SVT', icon: 'leaf', bg: '#EAF3DE', fg: '#27500A' },
-  { nom: 'Philo', icon: 'bulb', bg: '#FAEEDA', fg: '#633806' },
-];
 ---
 
 <Layout titre="Accueil">
   <!-- Hero -->
   <section class="overflow-hidden rounded-3xl" style="background:var(--color-navy)">
-    <div class="grid gap-8 px-6 py-12 sm:px-10 sm:py-14 lg:grid-cols-[1.5fr_1fr] lg:items-center">
+    <div class="grid gap-8 px-6 py-14 sm:px-10 sm:py-16 lg:grid-cols-[1.6fr_1fr] lg:items-center">
       <div>
         <h1 class="text-3xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
           Réviser et réussir le baccalauréat.
         </h1>
-        <p class="mt-4 max-w-md text-base leading-relaxed text-white/70 sm:text-lg">
-          Tous les sujets et corrigés, classés par série, matière et année.
-          Gratuit, sur mobile, et consultable hors-ligne.
+        <p class="mt-4 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg">
+          Tous les sujets et corrigés du bac congolais, classés par série,
+          matière et année. Gratuit, sur mobile, et consultable hors-ligne.
         </p>
-        <form action="/recherche" method="get" class="mt-7 flex max-w-md gap-2">
-          <input
-            type="search"
-            name="q"
-            placeholder="Rechercher un sujet…"
-            class="flex-1 rounded-full border-0 bg-white px-5 py-3 text-sm text-[color:var(--color-ink)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-teal)]"
-          />
-          <button type="submit" aria-label="Rechercher" class="btn btn-teal px-4">
-            <Icone nom="search" taille={20} />
-          </button>
-        </form>
+        <div class="mt-7 flex flex-wrap items-center gap-5">
+          <a href="/series" class="btn btn-teal">Parcourir les annales</a>
+          <a href="/contribuer" class="text-sm font-medium text-white/80 hover:text-white">
+            Contribuer ›
+          </a>
+        </div>
       </div>
 
-      <div class="hidden grid-cols-2 gap-3 lg:grid">
-        {matieresHero.map((m) => (
-          <div class="rounded-2xl bg-white p-4 text-center">
-            <span
-              class="inline-flex h-10 w-10 items-center justify-center rounded-xl"
-              style={`background:${m.bg};color:${m.fg}`}
-            >
-              <Icone nom={m.icon} taille={22} />
-            </span>
-            <p class="mt-2 text-sm font-medium text-[color:var(--color-navy)]">{m.nom}</p>
-          </div>
-        ))}
+      <div class="hidden justify-center lg:flex" aria-hidden="true">
+        <svg width="190" height="190" viewBox="0 0 46 46" class="opacity-95">
+          <path d="M5 22 L23 13 L41 22 L23 31 Z" fill="#ffffff" />
+          <path d="M33 25 V32 q0 5 -10 5 q-10 0 -10 -5 V25" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+          <line x1="41" y1="22" x2="41" y2="33" stroke="#ffffff" stroke-width="2" />
+          <circle cx="41" cy="35.5" r="2.6" fill="#34D7A6" />
+        </svg>
       </div>
     </div>
   </section>
