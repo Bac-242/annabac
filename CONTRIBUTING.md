@@ -5,12 +5,12 @@ Merci de votre aide ! Il y a deux façons de contribuer.
 ## 1. Envoyer un sujet ou un corrigé (sans connaissances techniques)
 
 Le plus simple : utilisez le **formulaire de soumission** sur la page
-[`/contribuer`](https://annales-bac-congo.example/contribuer).
+[`/contribuer`](/contribuer).
 
 1. Renseignez l'année, la série, la matière et la session.
 2. Joignez le **PDF du sujet et/ou du corrigé** (PDF uniquement, 5 Mo max par fichier).
-3. Envoyez. Le document arrive dans la boîte e-mail de l'équipe.
-4. Après **vérification**, il est publié sur le site.
+3. Envoyez. Le document est mis en **file de modération** (R2 + D1).
+4. Après **vérification** par un mainteneur depuis `/admin`, il est publié sur le site.
 
 Aucun compte ni connaissance de Git n'est nécessaire.
 
@@ -31,7 +31,7 @@ Pour ajouter un document **à la main** dans la bibliothèque :
    ```yaml
    ---
    annee: 2022
-   serie: "C"            # A1, A2, A3, A4, C, D
+   serie: "C"            # A, C, D
    matiere: "Mathématiques"
    session: "Normale"     # Normale | Remplacement | Spéciale
    sujetPdf: "/pdfs/2022-serie-c-mathematiques-sujet.pdf"     # optionnel

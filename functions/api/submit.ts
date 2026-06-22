@@ -2,7 +2,7 @@
 import { type Env, json, uuid } from '../_lib/util';
 
 const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
-const SERIES = ['A1', 'A2', 'A3', 'A4', 'C', 'D'];
+const SERIES = ['A', 'C', 'D'];
 const SESSIONS = ['Normale', 'Remplacement', 'Spéciale'];
 
 async function verifierTurnstile(env: Env, token: string | null, ip: string | null): Promise<boolean> {
