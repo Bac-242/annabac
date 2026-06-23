@@ -16,4 +16,5 @@ npm-debug.log*
 .claude/
 # macOS
 .DS_Store
-sujets/
+# Dossier source des recueils (à la racine uniquement, pas src/content/sujets)
+/sujets/
