@@ -1,0 +1,97 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2015 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+On considère l'ensemble $\Cb$ des nombres complexes et on rappelle que $i^2 = -1$.
+
+\begin{enumerate}
+  \item Déterminer les racines carrées du nombre complexe $u = 6 + 6i\sqrt{3}$.
+  \item Soit l'équation $(E)$ définie dans $\Cb$ telle que :
+  \[ (E) : 4Z^3 - 6i\sqrt{3}\,Z^2 - (9 + 3i\sqrt{3})Z - 4 = 0 \]
+  \begin{enumerate}[label=\alph*.]
+    \item Vérifier que $Z_0 = -\dfrac{1}{2}$ est solution de l'équation $(E)$.
+    \item Résoudre dans $\Cb$ l'équation $(E)$.
+  \end{enumerate}
+  \item Le plan complexe $\Cb$ est rapporté à un repère orthonormal direct $(O,\vec{u},\vec{v})$. On donne les trois points $A$, $B$, $C$ d'affixes respectives $Z_A = -\dfrac{1}{2}$, $Z_B = -\dfrac{1}{2} + \dfrac{\sqrt{3}}{2}i$ et $Z_C = 1 + i\sqrt{3}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'écriture complexe de la similitude plane directe $S$ qui transforme $A$ en $B$ et $B$ en $C$.
+    \item Déterminer les éléments caractéristiques de la similitude $S$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+Soit $\mathcal{E}$ le plan vectoriel rapporté à sa base canonique $(\vi,\vj)$. On donne les vecteurs $\vec{e_1} = \vi + \vj$ et $\vec{e_2} = 2\vi + 3\vj$. On considère l'endomorphisme $f$ de $\mathcal{E}$ telle que $f(\vec{e_1}) = \vec{e_1}$ et $f(\vec{e_2}) = \vec{0}$.
+
+\begin{enumerate}
+  \item Vérifier que $(\vec{e_1},\vec{e_2})$ est une base de $\mathcal{E}$.
+  \item Écrire la matrice de $f$ dans la base $(\vec{e_1},\vec{e_2})$.
+  \item Soit $\vec{u}\,' = x'\vi + y'\vj$ l'image de $\vec{u} = x\vi + y\vj$ par l'endomorphisme $f$ telle que $f(\vec{u}) = \vec{u}\,'$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que $f(\vi) = 3\vi + 3\vj$ et $f(\vj) = -2\vi - 2\vj$.
+    \item Exprimer les coordonnées $x'$ et $y'$ de $\vec{u}\,'$ en fonction des coordonnées $x$ et $y$ de $\vec{u}$.
+    \item Calculer $f \circ f(\vec{u})$.
+    \item En déduire la nature de $f$.
+    \item Déterminer les caractéristiques de $f$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{6 points}
+
+On considère la fonction numérique $f$ à variable réelle $x$, définie telle que
+\[ f(x) = \frac{1}{x\ln x} \]
+$(C)$ désigne la courbe représentative de $f$ dans le repère orthonormé $(O,\vi,\vj)$ du plan.
+
+\begin{enumerate}
+  \item Montrer que $f$ est définie sur $]0\,;1[\,\cup\,]1\,;+\infty[$.
+  \item Vérifier que la dérivée $f'$ de $f$ est $f'(x) = \dfrac{-1 - \ln x}{(x\ln x)^2}$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Étudier le signe de $f'$.
+    \item Dresser le tableau de variation de $f$.
+    \item Étudier les branches infinies à $(C)$.
+    \item Tracer $(C)$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que $f$ peut encore s'écrire $f(x) = \dfrac{\frac{1}{x}}{\ln x}$.
+    \item Calculer l'intégrale $I = \displaystyle\int_e^3 f(x)\,dx$.
+    \item En déduire l'aire $\mathcal{A}$ du domaine du plan limité par la courbe $(C)$ de $f$, l'axe $(Ox)$ des abscisses et les droites d'équations $x = e$ et $x = 3$. Unité graphique : 2 cm.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{4 points}
+
+On considère la série statistique $(x_i, y_j, n_{ij})$ représentée par le tableau à double entrée suivant :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|}
+\hline
+$X\,\backslash\,Y$ & -1 & 1 \\
+\hline
+$-1$ & 2 & 1 \\
+\hline
+$0$ & 3 & 2 \\
+\hline
+$2$ & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Déterminer les deux séries marginales.
+  \item Déterminer les coordonnées $\overline{X}$ et $\overline{Y}$ du point moyen du nuage statistique.
+  \item Calculer l'inertie du nuage par rapport au point moyen $G$.
+  \item Calculer le coefficient de corrélation linéaire entre $X$ et $Y$.
+\end{enumerate}
+
+\end{document}

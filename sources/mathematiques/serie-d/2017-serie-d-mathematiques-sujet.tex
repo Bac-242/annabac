@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2017 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+Le plan complexe est muni du repère orthonormé $(O,\vec{u},\vec{v})$ avec $\|\vec{u}\| = \|\vec{v}\| = 2$ cm. On considère le polynôme $P$ défini par : $P(Z) = Z^3 + Z^2 - 2$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que 1 est une racine de $P(Z)$.
+    \item Vérifier que $P(Z)$ peut s'écrire sous la forme : $P(Z) = (Z - 1)(Z^2 + 2Z + 2)$.
+    \item Résoudre dans $\Cb$ l'équation $P(Z) = 0$.
+  \end{enumerate}
+  \item On considère les points $A$, $B$ et $C$ d'affixes respectives :
+  \[ Z_A = 1 \;;\quad Z_B = -1 + i \;;\quad Z_C = -1 - i \]
+  \begin{enumerate}[label=\alph*.]
+    \item Construire le triangle $ABC$.
+    \item Déterminer l'affixe $Z_D$ du point $D$ telle que $ABCD$ soit un parallélogramme.
+  \end{enumerate}
+  \item Soit $R$ la rotation de centre $A$ et d'angle de mesure $\dfrac{\pi}{3}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que l'expression complexe de $R$ est telle que :
+    \[ Z' = \left(\frac{1}{2} + i\frac{\sqrt{3}}{2}\right)Z + \frac{1}{2} - i\frac{\sqrt{3}}{2} \]
+    \item Soit $M$ et $M'$ les points d'affixes respectives $Z = x + iy$ et $Z' = x' + iy'$. Exprimer les coordonnées $x'$ et $y'$ du point $M'$ en fonction de $x$ et $y$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+Soit $(\vi,\vj)$ une base du plan vectoriel $\mathcal{E}$, $f$ désigne l'endomorphisme de $\mathcal{E}$ tel que :
+\begin{equation}
+\begin{cases} 5f(\vi) = a\vi + 4\vj \\[0.5ex] f(\vj) = \dfrac{4}{5}\vi - \dfrac{3}{5}\vj \end{cases} \tag{1}
+\end{equation}
+
+\begin{enumerate}
+  \item Déterminer la matrice de $f$ dans la base $(\vi,\vj)$.
+  \item Déterminer l'expression analytique de $f$.
+  \item Déterminer le réel $a$ pour que $f$ soit une symétrie vectorielle.
+  \item On pose $a = 3$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer les éléments caractéristiques de $f$ (base et direction).
+    \item Déterminer un vecteur directeur $(\vec{e_1})$ de la base.
+    \item Déterminer un vecteur directeur $(\vec{e_2})$ de la direction.
+    \item Soit $\vec{e_1} = 2\vi + \vj$ et $\vec{e_2} = -\vi + 2\vj$ deux vecteurs. Démontrer que $(\vec{e_1},\vec{e_2})$ est une base de $\R^2$.
+    \item Donner la matrice de $f$ relativement à la base $(\vec{e_1},\vec{e_2})$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{7 points}
+
+\partie{A}
+On considère la fonction $g$ définie sur $]0\,;+\infty[$ par : $g(x) = -\dfrac{1}{x} + \ln(x)$.
+
+\begin{enumerate}
+  \item Calculer les limites de $g$ en $0^+$ et en $+\infty$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer la dérivée $g'$ de $g$ sur $]0\,;+\infty[$.
+    \item Dresser le tableau de variation de $g$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que l'équation $g(x) = 0$ admet une solution unique $\alpha \in \left]\dfrac{3}{2}\,;2\right[$.
+    \item En déduire le signe de $g(x)$ sur $]0\,;+\infty[$.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{B}
+On considère la fonction $f$ définie sur $]0\,;+\infty[$ par :
+\[ f(x) = x - (x - 1)\ln(x). \]
+On désigne par $(C)$ sa courbe représentative dans le plan muni d'un repère orthonormé $(O,\vi,\vj)$.
+
+\begin{enumerate}
+  \item Calculer les limites de $f$ en $0^+$ et en $+\infty$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que la dérivée $f'$ de $f$ est $f'(x) = -g(x)$.
+    \item Dresser le tableau de variation de $f$. On prendra $\alpha = 1{,}7$ et $f(\alpha) = 1{,}3$.
+  \end{enumerate}
+  \item On admet que l'équation $f(x) = 0$, admet deux solutions $x_0$ et $x_1$ avec $x_0 \in \left]\dfrac{1}{2}\,;1\right[$ et $x_1 \in \left]\dfrac{7}{2}\,;4\right[$.
+  \begin{enumerate}[label=\alph*.]
+    \item Étudier la branche infinie à $(C)$.
+    \note{Remplacer la question par : « Étudier les branches infinies à $(C)$. »}
+    \item Tracer la courbe $(C)$.
+  \end{enumerate}
+  \item Tracer la courbe $(C')$ de la fonction $h$ définie par $h(x) = -f(x)$ dans le même repère que $(C)$.
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+On rappelle que la fonction de répartition d'une variable aléatoire $X$ est donnée par le tableau :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$X$ & $]-\infty\,;x_1[$ & $[x_1\,;x_2[$ & $[x_2\,;x_3[$ & $\cdots$ & $[x_n\,;+\infty[$ \\
+\hline
+$F(X)$ & 0 & $P_1$ & $P_1 + P_2$ & $\cdots$ & $P_1 + P_2 + \cdots + P_n$ \\
+\hline
+\end{tabular}
+\end{center}
+
+où $P_i$ est la probabilité associée à la valeur $x_i$.
+
+Soit la fonction de répartition $F$ d'une variable aléatoire $X$, définie par le tableau ci-après :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$X$ & $]-\infty\,;2[$ & $[2\,;3[$ & $[3\,;4[$ & $[4\,;5[$ & $[5\,;6[$ & $[6\,;+\infty[$ \\
+\hline
+$F(X)$ & 0 & $\dfrac{1}{6}$ & $\dfrac{5}{24}$ & $\dfrac{7}{24}$ & $\dfrac{1}{3}$ & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Donner les valeurs exactes prises par $X$.
+  \item Établir la loi de probabilité de $X$.
+  \item Calculer l'espérance mathématique $E(X)$.
+\end{enumerate}
+
+\end{document}

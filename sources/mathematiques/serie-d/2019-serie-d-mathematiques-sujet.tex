@@ -1,0 +1,110 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2019 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+\begin{enumerate}
+  \item On considère, dans l'ensemble $\Cb$ des nombres complexes, l'équation :
+  \[ (E) : Z^2 - 4Z + 8 = 0 \]
+  \begin{enumerate}[label=\alph*.]
+    \item Résoudre l'équation $(E)$.
+    \item Écrire la solution dont la partie imaginaire est négative sous la forme trigonométrique.
+  \end{enumerate}
+  \item Dans le plan muni d'un repère orthonormé direct $(O,\vec{u},\vec{v})$, on considère les points $A$ et $B$ d'affixes respectives $2 - 2i$ et $2 + 2i$.
+  \begin{enumerate}[label=\alph*.]
+    \item Écrire sous forme algébrique, le complexe $U = \dfrac{Z_B}{Z_A}$.
+    \item En déduire la nature du triangle $OAB$.
+  \end{enumerate}
+  \item On considère l'application $f$ du plan $P$ dans lui-même qui à tout point $M$ d'affixe $Z$ associe le point $M'$ d'affixe $Z'$ tel que $Z' = e^{i\frac{\pi}{3}}Z$.
+  \begin{enumerate}[label=\alph*.]
+    \item Préciser la nature de $f$.
+    \item Écrire sous forme trigonométrique, puis sous forme algébrique, l'affixe $Z_{A'}$ du point $A'$ tel que $A' = f(A)$.
+    \item En déduire les valeurs exactes de $\cos\dfrac{\pi}{12}$ et $\sin\dfrac{\pi}{12}$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+L'espace vectoriel $\mathcal{E}$ est rapporté à sa base canonique $\mathcal{B}(\vi,\vj)$. Soit $f$ l'endomorphisme de $\mathcal{E}$ défini par son expression analytique : quel que soit le vecteur $\vec{u}(x, y)$ de $\mathcal{E}$, l'image de $\vec{u}$ par $f$ est le vecteur $\vec{u}\,'(x', y')$ tel que :
+\[ \begin{cases} x' = 2x + 3y \\ y' = -x - 2y \end{cases} \]
+
+\begin{enumerate}
+  \item Déterminer $f(\vi)$ et $f(\vj)$.
+  \item En déduire la matrice de $f$ dans la base $(\vi,\vj)$.
+  \item Soit $\vec{V}(3\,;-4)$ un vecteur de $\mathcal{E}$. Donner son image $\vec{V}'$ par l'endomorphisme $f$.
+  \item Montrer que $f$ est un endomorphisme bijectif.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer $f \circ f(\vi)$ et $f \circ f(\vj)$.
+    \item En déduire la nature de $f$.
+    \item Déterminer alors la base et la direction de $f$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{7 points}
+
+\partie{I}
+Soit $g$ la fonction numérique de la variable réelle $x$ définie sur $\R_+^*$ par $g(x) = \dfrac{1}{x}$ et $(C')$ sa courbe représentative dans le plan muni d'un repère orthonormé direct $(O,\vi,\vj)$, d'unité graphique : 2 cm.
+
+\begin{enumerate}
+  \item Calculer la dérivée $g'(x)$ et donner son signe sur $\R_+^*$.
+  \item Sachant que $\displaystyle\lim_{x\to 0^+} g(x) = +\infty$ et $\displaystyle\lim_{x\to+\infty} g(x) = 0$, dresser le tableau de variation de $g$.
+\end{enumerate}
+
+\partie{II}
+Dans le même repère défini dans la partie I, on considère la courbe $(C)$ représentative de la fonction $f$ définie sur $]0\,;+\infty[$ par : $f(x) = \dfrac{\ln x}{x} + \dfrac{1}{x}$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Résoudre dans $\R_+^*$ l'équation $f(x) = g(x)$.
+    \item En déduire la position relative des courbes $(C)$ et $(C')$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer $\displaystyle\lim_{x\to 0^+} f(x)$ et $\displaystyle\lim_{x\to+\infty} f(x)$.
+    \item Montrer que $f'(x) = -\dfrac{\ln x}{x^2}$ sur $\R_+^*$ et étudier son signe pour tout $x \in \R_+^*$.
+    \item Établir le tableau de variation de $f$.
+  \end{enumerate}
+  \item En remarquant que les axes de coordonnées sont asymptotes aux courbes $(C)$ et $(C')$, tracer soigneusement ces deux courbes dans le repère $(O,\vi,\vj)$ donné.
+\end{enumerate}
+
+\partie{III}
+On note $h$ et $k$ les fonctions définies sur $\R_+^*$ par $h(x) = \dfrac{1}{2}(\ln x)^2$ et $k(x) = f(x) - g(x)$.
+
+\begin{enumerate}
+  \item Démontrer que $h$ est une primitive de $k$ sur $\R_+^*$.
+  \item Calculer en cm$^2$, l'aire $\mathcal{A}$ de la portion du plan comprise entre les courbes $(C)$ et $(C')$ et les droites d'équations $x = 1$ et $x = e$.
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Soit $X$ une variable aléatoire dont la loi de probabilité est donnée par le tableau suivant :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$x_i$ & 0 & 1 & $a$ & 3 \\
+\hline
+$p(X = x_i)$ & $\dfrac{1}{8}$ & $\dfrac{3}{8}$ & $\dfrac{3}{8}$ & $b$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Calculer l'espérance mathématique de $X$ en fonction de $a$ et $b$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer les réels $a$ et $b$ tels que : $E(X) = \dfrac{3}{2}$.
+    \item Calculer la variance de $X$ et l'écart-type.
+  \end{enumerate}
+  \item Donner la fonction de répartition de $X$.
+\end{enumerate}
+
+\end{document}

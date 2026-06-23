@@ -1,0 +1,61 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2012 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{3 points}
+
+\begin{enumerate}
+  \item Résoudre dans $\Cb$, l'équation $Z^4 - \sqrt{2}\,Z^3 - 4\sqrt{2}\,Z - 16 = 0$ sachant qu'elle admet deux solutions imaginaires pures.
+  \item On considère dans le plan complexe muni d'un repère $(O,\vec{u},\vec{v})$, les points $A$, $B$, $C$ et $D$ d'affixes respectives : $z_A = 2i$ ; $z_B = -\sqrt{2}$ ; $z_C = -2i$ et $z_D = 2\sqrt{2}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Représenter les points $A$, $B$, $C$ et $D$ dans le repère $(O,\vec{u},\vec{v})$.
+    \item Montrer que les points $A$, $B$, $C$ et $D$ appartiennent à un même cercle $(C)$ dont on précisera le rayon et le centre.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+Pour tout entier naturel non nul $n$, on considère la suite $(I_n)$ définie par :
+\[ I_n = \int_0^1 x^n\, e^{-\frac{x^2}{2}}\,dx \]
+
+\begin{enumerate}
+  \item Calculer $I_1$.
+  \item Montrer que $\forall n \in \N^*,\ I_n \ge 0$.
+  \item Par une intégration par parties, montrer que $I_n = -e^{-\frac{1}{2}} + (n-1)I_{n-2}$ (On pourra écrire $x^n = x^{n-1}\cdot x$).
+  \item Étudier le sens de variation de la suite $(I_n)$. En déduire que la suite $(I_n)$ est convergente et converge vers une limite $l$.
+  \item Montrer que $\forall n \in \N^*,\ 0 \le I_n \le \dfrac{1}{n+1}$. Calculer $l$.
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{12 points}
+
+Le plan $P$ est orienté. $ABCD$ est un carré de sens direct, de centre $O$. $I$, $J$, $K$ et $L$ sont les milieux respectifs des segments $[AD]$, $[AB]$, $[BC]$ et $[CD]$.
+
+\begin{enumerate}
+  \item $E$ est le point du plan tel que le triangle $IDE$ soit rectangle isocèle en $D$ et de sens direct. Montrer que $IE = AO$.
+  \item En déduire qu'il existe une rotation $r$ transformant $I$ en $A$ et $E$ en $O$. Préciser une mesure $\theta$ de l'angle de la rotation $r$.
+  \item Construire $\Omega$ le centre de la rotation $r$.
+  \item On désigne par $\Omega_1$, le point d'intersection des droites $(IE)$ et $(OA)$. Montrer que les points $\Omega$, $E$, $O$, $\Omega_1$ sont situés sur un cercle $(C)$ que l'on tracera.
+  \item Montrer que $A\Omega_1 I\Omega$ est un carré.
+  \item Donner les caractéristiques de la similitude plane directe $S$ qui transforme le carré $ABCD$ en $A\Omega_1 I\Omega$.
+  \item Placer $K' = S(K)$ puis $L' = S(L)$.
+  \item Soit $\overline{S} = h_{(Q,\frac{1}{2})} \circ S_{OD}$, $Q$ étant un point de la droite $(OD)$. Caractériser $\overline{S}$.
+  \item On se propose de construire $Q$ sachant que $\overline{S}(C) = J$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que si $\overline{S}(C) = J$ alors $\vv{QJ} = \dfrac{1}{2}\vv{QA}$.
+    \item Construire alors le point $Q$.
+  \end{enumerate}
+  \item Soit $f$ l'application de $P$ dans $P$ qui à tout point $M$ associe $M'$ tel que $\vv{HM'} = \dfrac{1}{2}\vv{HM}$, $H$ étant le projeté orthogonal de $M$ sur la droite $(OE)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Caractériser $f$.
+    \item Tracer $(C')$ l'image de $(C)$ par $f$.
+    \item Donner la nature de la courbe $(C')$.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

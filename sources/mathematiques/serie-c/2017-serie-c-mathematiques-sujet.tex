@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2017 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+On considère l'équation $(E)$ dans $\Z \times \Z$ : $48x + 35y = 1$.
+
+\begin{enumerate}[label=\alph*]
+  \item Justifier à l'aide du théorème de Bézout que l'équation $(E)$ admet des solutions dans $\Z \times \Z$.
+  \item Justifier que les entiers $48$ et $-8$ sont inverses modulo $35$.
+  \item En remarquant que $(E)$ peut s'écrire $48x \equiv 1\ [35]$, déterminer une solution particulière $(x_0, y_0)$.
+  \item Achever la résolution de l'équation $(E)$.
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{8 points}
+
+Le plan est orienté. Soit $ABC$ un triangle équilatéral de sens direct, de centre de gravité $E$.
+
+\begin{enumerate}
+  \item Faire une figure. On prendra $AB = 4$ cm.
+  \item Construire le cercle $(C)$ de centre $A$ passant par $B$.
+  \item Construire le point $F$ symétrique de $A$ par rapport à $E$.
+  \item Montrer que les droites $(CF)$ et $(CA)$ sont perpendiculaires.
+\end{enumerate}
+
+Soit $(\Gamma)$ l'hyperbole de cercle principal $(C)$ et dont une directrice est la droite $(BC)$.
+
+\begin{enumerate}[start=5]
+  \item Montrer que $F$ est un foyer de $(\Gamma)$. Préciser son axe focal.
+  \item On désigne par $G$ le projeté orthogonal de $F$ sur la droite $(BC)$, et $H$ le point de l'axe focal tel que $\vv{AH} = 3\vv{AG}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Construire $H$.
+    \item On pose $AF = c$ et $AB = a$. Que représente le rapport $\dfrac{AF}{AB}$ pour $(\Gamma)$ ? Montrer que ce rapport est égal à $\dfrac{2\sqrt{3}}{3}$.
+  \end{enumerate}
+  \item Construire le point $I$ du plan tel que $\vv{GI} = \dfrac{c}{a}\vv{GH}$.
+  \item Soit $(d)$ la perpendiculaire à l'axe focal passant par $H$. Construire le point $J$ de $(\Gamma)$ situé sur $(d)$ et situé dans le demi-plan délimité par la droite $(AH)$ contenant le point $C$.
+  \item On note $S$ le sommet de $(\Gamma)$ associé au foyer $F$. Construire l'arc $(H)$ de $(\Gamma)$ d'extrémités $J$ et $S$.
+  \item On désigne par $s$ la similitude plane indirecte définie par : $s = h \circ S_{(BC)}$ où $h$ est l'homothétie de centre $A$ et de rapport $\dfrac{1}{2}$ et $S_{(BC)}$ la symétrie orthogonale d'axe $(BC)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'axe $(\Delta)$ et le centre $(\Omega)$ de $s$.
+    \item Construire l'arc $(H')$, image de $(H)$ par $s$.
+    \item Déterminer l'excentricité de $(\Gamma')$ image de $(\Gamma)$ par $s$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{5 points}
+
+Soit $f$ la fonction numérique définie sur l'intervalle $I = [0\,;+\infty[$ par : $f(x) = (x-1)\ln(x+1)$. On pose pour tout $x \ge 0$, $F(x) = \displaystyle\int_1^x f(t)\,dt$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Prouver que $F$ est dérivable sur $I$ et que pour tout $x \in I$ ; $F'(x) = f(x)$.
+    \item En déduire le sens de variation de $F$ sur $I$.
+  \end{enumerate}
+  \item On admet que pour tout $x \ge 2$, on a $f(x) \ge x - 1$.
+  \begin{enumerate}[label=\alph*.]
+    \item Prouver que pour tout $x \ge 2$, $F(x) \ge \dfrac{1}{2}(x-1)^2$.
+    \note{Erreur dans l'énoncé : L'inégalité $F(x) \ge \dfrac{1}{2}(x-1)^2$ pour tout $x \ge 2$ est fausse. Substituer cette question par : Prouver que pour tout $x \ge 2$, $F(x) \ge F(2) + \dfrac{x^2}{2} - x$.}
+    \item En déduire $\displaystyle\lim_{x\to+\infty} F(x)$ et $\displaystyle\lim_{x\to+\infty} \dfrac{F(x)}{x}$.
+    \item Dresser le tableau de variation de $F$.
+    \item Donner l'allure de la courbe $(C)$ représentant la fonction $F$ dans un repère orthonormal $(O,\vi,\vj)$ d'unité graphique 2 cm. On donne $F(0) = 0{,}13$ ; $F(2) = 0{,}5$.
+  \end{enumerate}
+  \item Soit la suite numérique $(u_n)$ définie pour tout entier naturel $n$ par : $u_n = \displaystyle\int_n^{n+1} f(t)\,dt$.
+  \begin{enumerate}[label=\alph*.]
+    \item Vérifier que $u_n = F(n+1) - F(n)$.
+    \item En utilisant le théorème des inégalités des accroissements finis sur l'intervalle $[n\,;n+1]$, montrer que pour tout $n \in \N$, on a $f(n) \le u_n \le f(n+1)$.
+    \note{Erreur dans l'énoncé : l'encadrement $f(n) \le u_n \le f(n+1)$ n'est pas vérifié pour tout $n \in \N$ mais pour tout $n \in \N^*$.}
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Jean s'amuse régulièrement sur un terrain de football avec le gardien de but. L'épreuve consiste à tirer au but et à observer le résultat obtenu. On admet que :
+\begin{itemize}
+  \item la probabilité que Jean réussisse le premier tir au but est de 0,7 ;
+  \item s'il réussit le premier tir, alors la probabilité de réussir le second est de 0,8 ;
+  \item s'il manque le premier tir, la probabilité de réussir le second est de 0,4.
+\end{itemize}
+On note $R_1$ l'événement « le premier tir au but est réussi » et $R_2$ l'événement « le second tir au but est réussi ».
+
+\begin{enumerate}
+  \item Construire l'arbre de probabilité correspondant à cette expérience.
+  \item Calculer la probabilité pour que les deux tirs au but soient réussis.
+  \item Calculer la probabilité pour que le second tir au but soit réussi.
+  \item On note $A$, l'événement « Jean a réussi exactement un tir au but ». Calculer $P(A)$.
+\end{enumerate}
+
+\end{document}

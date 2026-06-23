@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2014 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+\begin{enumerate}
+  \item Qu'appelle-t-on conjugué d'un nombre complexe ?
+  \item \begin{enumerate}[label=\alph*.]
+    \item Résoudre dans l'ensemble $\Cb$ des nombres complexes, l'équation $(E) : Z^3 = 1$. On donnera les résultats sous forme algébrique.
+    \item Justifier que les solutions sont deux à deux conjuguées.
+    \note{Modification : Il s'agit plutôt de montrer que les solutions non réelles sont conjuguées entre elles.}
+  \end{enumerate}
+  \item Montrer que $Z_1 = -1 - i\sqrt{3}$ est solution de l'équation $(E') : Z^3 = 8$.
+  \item Soit $z'_0$, $z'_1$, $z'_2$ les solutions de $(E')$ où $z'_1$ et $z'_2$ sont deux complexes conjugués.
+  \begin{enumerate}[label=\alph*]
+    \item Utiliser les solutions de $(E)$ pour déduire les solutions de l'équation $(E')$.
+    \item Montrer que $\dfrac{z'_1}{z'_2}$ est solution de $(E)$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+Soit $f$ l'endomorphisme de $\R^3$ de base $(\vi,\vj,\vec{k})$ qui associe à tout élément $(x, y, z)$ de $\R^3$, l'élément $(x', y', z')$ de $\R^3$ défini par :
+\[ \begin{cases} x' = y + z \\ y' = x + y + z \\ z' = x \end{cases} \]
+
+\begin{enumerate}
+  \item Déterminer $f(\vi)$, $f(\vj)$, $f(\vec{k})$ dans la base $(\vi,\vj,\vec{k})$ de $\R^3$.
+  \item Déduire la matrice de $f$ dans la base $(\vi,\vj,\vec{k})$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Quelles conditions faut-il remplir pour qu'un ensemble $\mathcal{E}$ soit un sous-espace vectoriel de $\R^3$ ?
+    \item Montrer alors que l'ensemble $\mathcal{H} = \{(x, y, z) \in \R^3 \,/\, x - y + z = 0\}$ est un sous-espace vectoriel de $\R^3$.
+  \end{enumerate}
+  \item Déterminer le noyau de $f$ et en donner une base $(\vec{e_1})$.
+  \item Déterminer l'image de $f$, puis une base $\mathcal{B} = (\vec{e_2}, \vec{e_3})$.
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{7 points}
+
+Dans un plan muni d'un repère orthonormé $\big(O,\vv{OI},\vv{OJ}\big)$, on considère la fonction $g$ de la variable réelle $x$, définie par :
+\[ g(x) = \frac{e^x}{e^x + 1} - x \]
+
+\begin{enumerate}
+  \item Préciser l'ensemble de définition de $g$.
+  \item Déterminer $g'(x)$, la fonction dérivée de $g$ puis en déduire son signe.
+  \item Dresser le tableau de variation de $g$.
+  \item Démontrer que l'équation $\dfrac{e^x}{e^x + 1} = x$ admet une solution unique $\alpha \in ]-\infty\,;+\infty[$.
+  \item Soit $h$ la fonction définie par $h(x) = \dfrac{e^x}{e^x + 1}$ et $(C)$ sa courbe représentative dans le plan muni du repère orthonormé $\big(O,\vv{OI},\vv{OJ}\big)$. Unité graphique 2 cm.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que pour tout $x$ élément de $\R$, $h'(x) > 0$.
+    \item Dresser le tableau de variation de $h$.
+    \item En déduire que pour tout $x \in \R$, $0 \le h(x) \le 1$.
+  \end{enumerate}
+  \item On définit la suite $(u_n)_{n\in\N}$ par :
+  \[ \begin{cases} u_0 = 0 \\ u_{n+1} = h(u_n) \end{cases} \]
+  \begin{enumerate}[label=\alph*.]
+    \item Démontrer en utilisant le raisonnement par récurrence que $(u_n)$ est majorée par 1.
+    \item Démontrer en utilisant le raisonnement par récurrence que $(u_n)$ est croissante.
+    \item En déduire la convergence de $(u_n)$, puis montrer que $\displaystyle\lim_{n\to+\infty} u_n = \alpha$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+On considère la série statistique $(x, y)$ définie par le tableau suivant :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|}
+\hline
+$x\,\backslash\,y$ & 1 & 3 \\
+\hline
+$-1$ & 1 & 2 \\
+\hline
+$0$ & 0 & $a$ \\
+\hline
+$2$ & 2 & 0 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Déterminer les séries marginales de $x$ et $y$.
+  \item Déterminer le réel $a$ pour que l'on ait $G\!\left(\dfrac{1}{6}, 2\right)$ où $G$ désigne le point moyen de la série $(x, y)$.
+  \item On donne $a = 1$. Calculer la variance de $x$, la variance de $y$ et la covariance de la série $(x, y)$.
+\end{enumerate}
+
+\end{document}

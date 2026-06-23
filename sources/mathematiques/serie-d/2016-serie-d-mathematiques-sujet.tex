@@ -1,0 +1,92 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2016 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+Dans le plan complexe $\Cb$ muni d'un repère orthonormal $(O,\vec{u},\vec{v})$, on considère l'application $S$ définie par :
+\[ z' = (1 + i)z \]
+
+\begin{enumerate}
+  \item Déterminer la nature, le rapport et l'angle de l'application $S$.
+  \item Soit le point $A$ d'affixe $z_A = 2i$. Déterminer les affixes des points $B$ et $C$ définis par $S(A) = B$ et $S(B) = C$.
+  \item Placer les points $A$, $B$, et $C$ dans un repère du plan.
+  \item Soit le point $I$ milieu du segment $[OC]$. Montrer que le triangle $ABI$ est rectangle et isocèle en $B$.
+  \item Écrire une équation de troisième degré dont les affixes $z_A$, $z_B$ et $z_C$ définies ci-dessus sont solutions.
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+L'espace vectoriel $\R^2$ est rapporté à sa base canonique $\mathcal{B} = (\vi,\vj)$. Soit $f$ l'endomorphisme de $\R^2$ défini dans la base $(\vi,\vj)$ par :
+\[ f(\vj) = 3\vi - 2\vj \quad \text{et} \quad f \circ f(\vj) = \vj \]
+
+\begin{enumerate}
+  \item Calculer $f(\vi)$ et $f \circ f(\vi)$.
+  \item En déduire la nature de l'application $f$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Qu'est-ce qu'un automorphisme ?
+    \item Prouver que $f$ est un automorphisme involutif.
+    \item Caractériser l'application $f$.
+  \end{enumerate}
+  \item Soit les vecteurs $\vec{u} = 2\vi - \vj$ et $\vec{v} = -3\vi + \vj$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que $\mathcal{B}' = (\vec{u},\vec{v})$ est une base de $\R^2$.
+    \item Écrire la matrice de $f$ dans la base $\mathcal{B}'$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{7 points}
+
+Dans le plan rapporté à un repère orthonormal $(O,\vi,\vj)$ d'unité graphique 1 cm, on considère la fonction $f$ de la variable réelle $x$ définie sur $\R_+^*$ par $f(x) = \dfrac{e^x}{e^x - 1}$. On note $(C)$, la courbe de $f$ dans le plan.
+
+\begin{enumerate}
+  \item Calculer les limites de $f$ en 0 à droite et en $+\infty$.
+  \item Déduire que la fonction $f$ admet deux asymptotes que l'on précisera.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que pour tout $x$ appartenant à $\R_+^*$, on a $f'(x) = -\dfrac{e^x}{(e^x - 1)^2}$.
+    \item Donner le sens de variation de $f$.
+    \item Dresser son tableau de variation.
+  \end{enumerate}
+  \item Tracer la courbe $(C)$ ainsi que ses asymptotes.
+  \item Soit $g$ la fonction définie sur $\R_+^*$ par $g(x) = -f(x)$. Construire la courbe $(C')$ de $g$ dans le même repère que $(C)$.
+  \item Calculer l'aire $\mathcal{A}$ de la portion du plan délimitée par les courbes $(C)$ et $(C')$, et les droites d'équations $x = 1$ et $x = 2$.
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Soit le tableau statistique à double entrée :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X\,\backslash\,Y$ & 0 & 1 & 2 \\
+\hline
+$-1$ & 1 & $m$ & 1 \\
+\hline
+$1$ & 1 & 0 & 2 \\
+\hline
+$2$ & 2 & 3 & $n$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Déterminer les lois marginales de $X$ et de $Y$ en fonction de $n$ et $m$.
+  \item Déterminer $m$ et $n$ sachant que le point moyen du nuage statistique est $G(1\,;1)$.
+  \item On pose $m = 1$ et $n = 1$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'équation de la droite de régression linéaire de $Y$ en $X$ sachant que la covariance de $X$ et $Y$ est égale à $-\dfrac{1}{12}$, la variance de $X$ est $\dfrac{1}{2}$ et celle de $Y$ est $\dfrac{1}{6}$.
+    \item Calculer le coefficient de corrélation linéaire entre $X$ et $Y$.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

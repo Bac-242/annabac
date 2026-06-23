@@ -1,0 +1,101 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2020 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+\begin{enumerate}
+  \item Trouver dans l'ensemble $\Cb$ des nombres complexes les nombres $z_1$, $z_2$ et $z_3$ tels que :
+  \[ \begin{cases} z_1 + z_2 = -3 + i \\ i\overline{z_2} = 1 - 2i \\ z_2 \times z_3 = -1 - 2i \end{cases} \]
+  \item On considère le polynôme complexe $P$ tel que : $P(z) = z^3 + (3 - 2i)z^2 + (1 - 4i)z - 1 - 2i$.
+  \begin{enumerate}[label=\alph*.]
+    \item Vérifier que $z = i$ est une racine de $P(z)$.
+    \item Trouver le nombre complexe $z_0$ tel que : $P(z) = (z - i)(z - z_0)(z + 2 - i)$.
+    \item Donner l'ensemble des solutions de l'équation $P(z) = 0$.
+  \end{enumerate}
+  \item Dans le plan complexe, on désigne par $A$, $B$ et $C$ les points d'affixes respectifs $z_A = -1$ ; $z_B = -2 + i$ et $z_C = i$.
+  \begin{enumerate}[label=\alph*.]
+    \item Donner l'écriture complexe de la rotation $R$ de centre $A$ et qui transforme $B$ en $C$.
+    \item En déduire l'angle de la rotation $R$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+Soit $\mathcal{B} = (\vi,\vj)$ la base canonique de $\R^2$. On considère les vecteurs $\vec{u} = \vi + \vj$ et $\vec{v} = -\vi + 2\vj$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Prouver que la famille $\mathcal{B}' = (\vec{u},\vec{v})$ est une base de $\R^2$.
+    \item Écrire les vecteurs $\vi$ et $\vj$ dans la base $\mathcal{B}'$.
+  \end{enumerate}
+  \item On considère l'endomorphisme $f$ de $\R^2$ défini par :
+  \[ \begin{cases} f(\vec{u}) = \vec{u} \\ f(\vec{v}) = -\vec{v} \end{cases} \]
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer $f(\vi)$ et $f(\vj)$ en fonction de $\vi$ et $\vj$.
+    \item Montrer que $f \circ f(\vi) = \vi$ et $f \circ f(\vj) = \vj$.
+    \item En déduire la nature de $f$.
+    \item Donner alors la base $\mathcal{E}$ et la direction $\mathcal{D}$ de $f$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{7 points}
+
+\partie{A}
+Soit $h$ la fonction dérivable sur $\R$ et définie par $h(x) = (1 - x)e^{2-x} + 1$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Pour tout réel $x$ de $\R$, calculer $h'(x)$.
+    \item En déduire le signe de $h'(x)$ sur $\R$.
+    \item On admet que $\displaystyle\lim_{x\to+\infty} h(x) = 1$ et $\displaystyle\lim_{x\to-\infty} h(x) = +\infty$. Dresser le tableau de variation de $h$ sur $\R$.
+  \end{enumerate}
+  \item En utilisant les questions précédentes, déduire le signe de $h(x)$ sur $\R$.
+\end{enumerate}
+
+\partie{B}
+On considère la fonction $f$ définie sur $\R$ par $f(x) = x(1 + e^{2-x})$. On note $(C)$ sa courbe représentative dans un repère orthonormé $(O,\vi,\vj)$ (unité graphique : 1 cm).
+
+\begin{enumerate}
+  \item Calculer $\displaystyle\lim_{x\to+\infty} f(x)$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que pour tout $x$ élément de $\R$, $f'(x) = h(x)$.
+    \item Dresser le tableau de variation de $f$ sur $\R$ sachant que $\displaystyle\lim_{x\to-\infty} f(x) = -\infty$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que $f$ admet une bijection réciproque notée $f^{-1}$ définie sur $\R$.
+    \item Dresser le tableau de variation de $f^{-1}$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Préciser la nature de la branche infinie de $f$ au voisinage de $-\infty$.
+    \item Montrer que la droite $(\Delta)$ d'équation $y = x$ est asymptote à $(C)$ au voisinage de $+\infty$.
+    \item Étudier la position de $(C)$ par rapport à $(\Delta)$.
+  \end{enumerate}
+  \item Construire $(\Delta)$, les courbes $(C)$ et $(C')$ où $(C')$ représente la courbe de $f^{-1}$ dans le repère $(O,\vi,\vj)$.
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Une entreprise fabrique des pièces pour un client. Le contrat stipule que le produit fabriqué doit être soumis à deux tests distincts de normes de qualité $A$ et $B$. La pièce est acceptée si elle a satisfait à ces deux tests qui sont indépendants l'un de l'autre.
+
+On note :
+\begin{itemize}
+  \item $A$ l'événement « le produit est conforme à la norme de qualité $A$ ».
+  \item $B$ l'événement « le produit est conforme à la norme de qualité $B$ ».
+\end{itemize}
+Une étude a démontré que la probabilité de l'événement $A$ est $P(A) = 0{,}9$ et celle de l'événement $B$ est $P(B) = 0{,}95$.
+
+\begin{enumerate}
+  \item Calculer $P(A \cap B)$ avec $A \cap B$ l'événement « le produit est conforme à la norme $A$ et à la norme $B$ ».
+  \item Soit $C$ l'événement « le produit n'est pas accepté par le client ; donc il est déclaré non conforme ». Montrer que $P(C) = 0{,}145$.
+  \item On suppose que le stock du client étant trop bas, il accepte de prendre le produit s'il satisfait soit au test $A$ ou au test $B$, donc il appartient à $A \cup B$. Calculer $P(A \cup B)$.
+\end{enumerate}
+
+\end{document}

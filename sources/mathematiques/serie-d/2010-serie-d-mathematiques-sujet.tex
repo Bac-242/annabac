@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2010 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+Une urne contient deux boules blanches et trois boules noires toutes indiscernables au toucher. On tire simultanément et au hasard deux boules de l'urne et on note leur couleur.
+
+On définit sur l'univers $\Omega$ de cette expérience aléatoire, la variable aléatoire réelle $X$ par :
+\begin{itemize}
+  \item $X = -1$, si les deux boules tirées sont blanches ;
+  \item $X = 0$, si l'une est blanche et l'autre est noire ;
+  \item $X = 1$, si les deux boules tirées sont noires.
+\end{itemize}
+
+\begin{enumerate}
+  \item Déterminer la loi de probabilité de $X$.
+  \item Calculer l'espérance mathématique de $X$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Définir la fonction de répartition $F$ de $X$.
+    \item Tracer la courbe représentative de $F$ dans un repère orthogonal (on prendra 1 cm en abscisse et 5 cm en ordonnée pour unités graphiques).
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{4 points}
+
+Dans le plan complexe muni d'un repère orthonormal direct $(O,\vec{u},\vec{v})$, on considère les nombres complexes $z_1 = \sqrt{3} + i$ ; $z_2 = -\sqrt{3} + i$ et $z_3 = -2i$.
+
+\begin{enumerate}
+  \item Écrire une équation de degré 3 dont $z_1$, $z_2$ et $z_3$ sont solutions.
+  \item Écrire les nombres complexes $z_1$, $z_2$ et $z_3$ sous la forme trigonométrique.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Placer les points $A$, $B$ et $C$ d'affixes respectives $z_1$, $z_2$ et $z_3$ dans le repère $(O,\vec{u},\vec{v})$.
+    \item Montrer qu'une mesure de chacun des angles du triangle $ABC$ est $\dfrac{\pi}{3}$ radians.
+    \item En déduire la nature du triangle $ABC$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{12 points}
+
+\partie{A}
+Soit $g$ la fonction de la variable réelle $x$ définie sur $]-\infty\,;0[$ par :
+\[ g(x) = 2\ln(-x) \]
+
+\begin{enumerate}
+  \item Étudier les variations de $g$, puis dresser son tableau de variation.
+  \item Calculer $g(-1)$ et en déduire le signe de $g(x)$ sur $]-\infty\,;0[$.
+\end{enumerate}
+
+\partie{B}
+On considère la fonction numérique $f$ de la variable réelle $x$ définie par :
+\[ f(x) = \begin{cases} -2x + 1 + 2x\ln|x| & \text{si } x < 0 \\[0.5ex] (x+2)e^{-x} - 1 & \text{si } x \ge 0 \end{cases} \]
+On désigne par $(C)$, la courbe représentative de $f$ dans un repère orthonormé $(O,\vi,\vj)$ d'unité graphique : 1 cm.
+
+\begin{enumerate}
+  \item Déterminer l'ensemble de définition de la fonction $f$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Étudier la continuité et la dérivabilité de $f$ au point $x = 0$.
+    \item Pour $x \in ]-\infty\,;0[$, exprimer $f'(x)$ en fonction de $g(x)$.
+  \end{enumerate}
+  \item Étudier les variations de $f$ et dresser son tableau de variation.
+  \item Montrer qu'il existe deux solutions et deux seulement $\alpha$ et $\beta$ de l'équation $f(x) = 0$ vérifiant les inégalités suivantes :
+  \[ 1 < \alpha < \dfrac{3}{2} \quad \text{et} \quad -4 < \beta < -3 \]
+  (on ne cherchera pas à calculer $\alpha$ et $\beta$).
+  \item Étudier les branches infinies à $(C)$.
+  \item Tracer la courbe $(C)$.
+  \item $\alpha$ désigne le réel tel que : $1 < \alpha < \dfrac{3}{2}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer l'aire $\mathcal{A}(\alpha)$ de l'ensemble des points $M$ de coordonnées $(x, y)$ tels que :
+    \[ \begin{cases} 0 \le x \le \alpha \\ 0 \le y \le f(x) \end{cases} \]
+    \item Calculer la limite de $\mathcal{A}(\alpha)$ lorsque $\alpha$ tend vers 0.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{C}
+Soit $h$ la restriction de $f$ à l'intervalle $I = ]-\infty\,;-1]$.
+
+\begin{enumerate}
+  \item Montrer que $h$ définit une bijection de $I$ vers un intervalle $J$ à déterminer. On note $h^{-1}$ la réciproque de $h$.
+  \item Dresser le tableau de variation de $h^{-1}$.
+  \item Tracer $(H)$ la courbe représentative de $h^{-1}$ dans le même repère que $(C)$.
+\end{enumerate}
+
+\end{document}

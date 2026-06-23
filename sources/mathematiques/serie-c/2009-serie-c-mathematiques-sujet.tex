@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2009 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+On considère la famille $(S)$ des suites $(V_n)$ de premiers termes $V_0$ et $V_1$ définie par :
+\[ \forall n \in \N,\qquad V_{n+2} + V_{n+1} - 6V_n = 0 \]
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer les suites géométriques $(a_n)$ et $(b_n)$ de $(S)$ de premier terme $1$.
+    \item Démontrer que la suite $(U_n)$ définie par $U_n = \alpha\,2^n + \beta(-3)^n$ où $\alpha$ et $\beta$ sont des réels, est dans $(S)$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer les entiers relatifs $\alpha$ et $\beta$ solutions de l'équation : $8\alpha - 27\beta = -11$.
+    \item Déterminer l'entier relatif $k$ pour que le couple $(\alpha\,;\beta)$ défini par $\alpha = 110 + 27k$ et $\beta = 33 + 8k$ soit solution de l'équation : $4\alpha + 9\beta = 17$.
+    \item En déduire les valeurs des entiers relatifs $\alpha$ et $\beta$ pour lesquelles $U_2 = 17$ et $U_3 = -11$.
+    \item Démontrer que $\forall n \in \N,\ U_n \equiv 3\cdot 2^n\ [5]$.
+    \item Déduire le reste de la division euclidienne du terme $U_n$ par $5$.
+  \end{enumerate}
+  \item Soit $W_n = 2^{n+1} + (-3)^n$ et $S_n = W_0 + \cdots + W_n$.
+  \begin{enumerate}[label=\alph*.]
+    \item Démontrer que $S_n \equiv 2 - 4(2)^n\ [5]$.
+    \item Déduire le reste de la division euclidienne de la somme $S_{1956}$ par $5$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{4 points}
+
+Le plan est rapporté à un repère orthonormé de sens direct $(O,\vi,\vj)$.
+
+\begin{enumerate}
+  \item Résoudre dans l'ensemble $\Cb$ des nombres complexes, l'équation :
+  \[ z^2 + (\sqrt{3} + i)z + 1 = 0 \tag{E} \]
+  \item Écrire les solutions $z'$ et $z''$ de $(E)$ sous leur forme trigonométrique.
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{11 points}
+
+Dans le plan $(P)$ orienté, on considère les points $A$, $O$, $B$, dans le sens tels que $AB = 6$ et $\vv{AO} = \vv{OB}$.
+
+\partie{A}
+\begin{enumerate}[label=\Roman*.]
+  \item \begin{enumerate}
+    \item Construire les points $I$ et $J$ tels que : $2\vv{IB} - \vv{IA} = \vv{0}$ et $2\vv{JB} + \vv{JA} = \vv{0}$.
+    \item Construire le cercle $(C_1)$ de diamètre $[IJ]$.
+  \end{enumerate}
+  \item \begin{enumerate}
+    \item Construire la droite $(T)$ passant par $A$ telle que $\big((T),(AB)\big) = 60°$.
+    \item Construire le cercle $(C_2)$ passant par $A$ et $B$ dont la tangente en $A$ est $(T)$.
+    \item Démontrer que les cercles $(C_1)$ et $(C_2)$ ont deux points communs $\Omega_1$ et $\Omega_2$ situés de part et d'autre de la droite $(AB)$. On notera $\Omega_1$ celui situé dans le plan de frontière $(AB)$ contenant le centre $E$ du cercle $(C_2)$.
+  \end{enumerate}
+  \item \begin{enumerate}
+    \item Démontrer que le centre de la similitude $S$ d'angle de mesure $60°$, de rapport $\tfrac{1}{2}$ et qui transforme $A$ en $B$ est le point $\Omega_1$.
+    \item Démontrer que les points $A$, $E$ et $\Omega_1$ sont alignés.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{B}
+\begin{enumerate}[label=\Roman*.]
+  \item \begin{enumerate}
+    \item Soit $F$ le symétrique de $E$ par rapport à la droite $(AB)$.
+    \begin{enumerate}[label=\alph*.]
+      \item Démontrer que $J$ est le centre de gravité du triangle $EFB$.
+      \item Démontrer que $EJ = BK$ et $(\vv{EJ},\vv{BK}) = 60°$, $K$ désignant le centre du cercle $(C_1)$.
+      \item En déduire qu'il existe une rotation $R$ qui transforme $E$ en $B$ et $J$ en $K$.
+    \end{enumerate}
+    \item Démontrer que les médiatrices des segments $[EB]$ et $[JK]$ se rencontrent en $\Omega_1$. En déduire le centre de $R$.
+  \end{enumerate}
+  \item Soit $g = T_{\vv{BA}} \circ R$, où $R$ est la rotation de I.c) et $T_{\vv{BA}}$ la translation du vecteur $\vv{BA}$.
+  \begin{enumerate}
+    \item Démontrer que les points $\Omega_1$, $J$ et $F$ sont alignés.
+    \item Démontrer que le centre de rotation de $g$ est $F$.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{C}
+Soit $(H)$ une hyperbole de centre $J$, dont un des foyers est $I$ et passant par $A$.
+\begin{enumerate}
+  \item Construire le point $M$ de $(H)$ situé sur le segment $[I\Omega_1]$ ainsi que ses deux sommets.
+  \item Démontrer que les droites $(JE)$ et $(F\Omega_1)$ sont les asymptotes de $(H)$. Tracer la branche de $(H)$ située dans le plan de frontière la droite $(B\Omega_1)$ contenant $K$.
+  \item On désigne par $(H')$ l'image de $(H)$ par $S$.
+  \begin{enumerate}[label=\alph*.]
+    \item Démontrer que l'excentricité $e$ de $(H')$ est $2$.
+    \item Déterminer les sommets et les asymptotes de $(H')$.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

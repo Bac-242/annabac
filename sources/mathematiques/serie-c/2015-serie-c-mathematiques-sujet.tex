@@ -1,0 +1,103 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2015 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+Le but de l'exercice est de résoudre l'équation $(E) : 21x - 17y = 4$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que cette équation admet au moins une solution.
+    \item Montrer que l'équation $(E)$ est équivalente à l'équation $(E') : 21x \equiv 4\ [17]$.
+  \end{enumerate}
+  \item On se propose de résoudre l'équation $(E')$. On rappelle qu'un entier relatif $a$ est l'inverse modulo $n$ ($n \in \N$) d'un entier relatif $b$ si $ab \equiv 1\ [n]$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'inverse modulo 17 de 21.
+    \item Montrer que les solutions de l'équation $(E')$ sont les entiers relatifs $x$ tels que $x = 1 + 17k$ ; $k \in \Z$.
+  \end{enumerate}
+  \item En déduire l'ensemble des solutions de $(E)$.
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{8 points}
+
+Dans le plan orienté, on considère le carré $ABCD$ de centre $O$ tel que $(\vv{AB},\vv{AD}) \equiv \dfrac{\pi}{2}\ [2\pi]$. Soit $I$ et $J$ les milieux respectifs des segments $[DC]$ et $[AD]$. On prendra $AB = 4$ cm.
+
+\begin{enumerate}
+  \item Faire une figure.
+  \item On considère l'ellipse $(E)$ de centre $\Omega$, d'excentricité $\dfrac{1}{2}$ dont un foyer est $B$ et une directrice $(AD)$. Quel est l'axe focal de $(E)$ ?
+  \item Soit $S_1$ et $S_2$ les points de $(E)$ situés sur la droite $(AB)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que $\vv{BS_1} = \dfrac{1}{3}\vv{BA}$ et $\vv{BS_2} = -\vv{BA}$.
+    \item Placer $S_1$ et $S_2$.
+  \end{enumerate}
+  \item Tracer le cercle principal $(C_p)$ de $(E)$.
+  \item Tracer le cercle secondaire $(C_s)$ de $(E)$.
+  \item Tracer le cercle directeur $(C_d)$ de $(E)$ ayant pour centre le foyer $B$.
+  \item Construire le point de $(E)$ situé sur la demi-droite $[BC)$.
+  \item Tracer l'arc de $(E)$ balayé par l'angle $(\vv{\Omega S_3},\vv{\Omega B})$ où $S_3$ est un sommet de $(E)$ situé sur l'axe non focal et du même côté que $C$.
+  \item Soit $f$ la transformation plane définie par : $f = S_{(AC)} \circ t_{\vv{DC}}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Qu'appelle-t-on symétrie glissée ?
+    \item Montrer que $f$ est une symétrie glissée. Déterminer son vecteur et son axe.
+    \item Tracer $(E')$ l'image de $(E)$ par $f$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{5 points}
+
+Soit $f$ la fonction définie sur $]0\,;+\infty[$ par :
+\[ f(x) = \frac{1 - x\ln x}{x} \]
+On admet que l'équation $f(x) = 0$ admet une solution unique $\alpha$ sur l'intervalle $I = \left[\dfrac{3}{2}\,;2\right]$. Le but de cet exercice est de donner une valeur approchée de $\alpha$.
+
+Soit $g$ la fonction définie sur $]0\,;+\infty[$ par :
+\[ g(x) = e^{\frac{1}{x}} \]
+On définit la suite numérique $(u_n)$ telle que :
+\[ \begin{cases} u_0 = 2 \\ \forall n \in \N,\ u_{n+1} = g(u_n) \end{cases} \]
+
+\begin{enumerate}
+  \item Sachant que $f(\alpha) = 0$, montrer que $\alpha$ est solution de l'équation $g(x) = x$.
+  \item Montrer par récurrence que pour tout entier $n$, $u_n \in I$.
+  \item On suppose que pour tout $x$ de $I$, $|g'(x)| \le \dfrac{1}{2}$. En appliquant le théorème de l'inégalité des accroissements finis, montrer que : $\forall x \in I,\ |g(x) - \alpha| \le \dfrac{1}{2}|x - \alpha|$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que : $\forall n \ge 0,\ |u_{n+1} - \alpha| \le \dfrac{1}{2}|u_n - \alpha|$.
+    \item En déduire que $\forall n \ge 0,\ |u_n - \alpha| \le \left(\dfrac{1}{2}\right)^n$.
+    \item Montrer que la suite $(u_n)$ converge vers $\alpha$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer un entier $n_0$ tel que $|u_{n_0} - \alpha| \le 10^{-1}$.
+    \item Déterminer la valeur approchée $u_{n_0}$ de $\alpha$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Une maladie atteint 3 \% d'une population. Un test de dépistage donne les résultats suivants :
+\begin{itemize}
+  \item Chez les individus malades, 95 \% des tests sont positifs et 5 \% sont négatifs.
+  \item Chez les individus non malades, 1 \% des tests sont positifs et 99 \% négatifs.
+\end{itemize}
+On note :
+\begin{itemize}
+  \item $M$ l'évènement : « être malade » et,
+  \item $T$ l'évènement : « le test est positif ».
+\end{itemize}
+
+\begin{enumerate}
+  \item Construire un arbre pondéré correspondant à cette expérience aléatoire.
+  \item Donner la probabilité de l'évènement « $M \cap T$ », puis celle de « $\overline{M} \cap \overline{T}$ ».
+  \item Déterminer $P(T)$ et $P(\overline{T})$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer la probabilité de ne pas être malade sachant que le test est positif.
+    \item Calculer la probabilité d'être malade sachant que le test est négatif.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

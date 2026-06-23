@@ -1,0 +1,73 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2011 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+L'espace vectoriel $\R^3$ étant rapporté à une base $(\vi,\vj,\vec{k})$, on considère l'application $f$ de $\R^3$ dans $\R^3$ qui, à tout vecteur $\vec{u}(x, y, z)$ associe le vecteur $\vec{u}\,' = f(\vec{u})$ dont les composantes $(x', y', z')$ dans la base $(\vi,\vj,\vec{k})$ sont définies par :
+\[ \begin{cases} x' = -x + ay + 2z \\ y' = x + 2y + z \\ z' = x + y \end{cases} \qquad a \in \R \]
+
+\begin{enumerate}
+  \item Écrire la matrice de l'application $f$ dans la base $(\vi,\vj,\vec{k})$.
+  \item Pour quelles valeurs de $a$, $f$ est-elle bijective ?
+  \item Dans la suite, on pose $a = 1$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'ensemble $\mathcal{B}$ des vecteurs de $\R^3$ invariants par $f$.
+    \item Déterminer le noyau $\mathrm{Ker}f$ de $f$ et l'image $\mathrm{Im}f$ de $f$. En déduire une base pour chacun des sous-espaces.
+  \end{enumerate}
+  \item Soit $\vec{u}$ un vecteur de $\R^3$ de composantes $(1, \alpha, \beta)$ dans la base $(\vi,\vj,\vec{k})$. Calculer $\alpha$ et $\beta$ pour que $\vec{u} \in \mathrm{Ker}f$.
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{4 points}
+
+On considère dans l'ensemble $\Cb$ des nombres complexes, l'équation :
+\[ (E) : Z^2 - (1 + 3i)Z + 4 + 4i = 0 \]
+
+\begin{enumerate}
+  \item Résoudre dans $\Cb$, l'équation $(E)$. On appellera $Z_1$ la solution imaginaire pure et $Z_2$ l'autre solution.
+  \item Dans le plan complexe $(P)$ rapporté au repère orthonormal direct $(O,\vec{u},\vec{v})$, on considère les quatre points $A$, $B$, $C$, $D$ d'affixes respectives $3$ ; $4i$ ; $-2 + 3i$ ; $1 - i$.
+  \begin{enumerate}[label=\alph*]
+    \item Placer les points $A$, $B$, $C$ et $D$ dans le plan.
+    \item Calculer les affixes des vecteurs $\vv{AB}$, $\vv{DC}$, $\vv{CB}$ ; $\vv{DA}$.
+    \item En déduire la nature du quadrilatère $ABCD$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{12 points}
+
+\partie{A}
+\begin{enumerate}
+  \item Montrer qu'il existe deux nombres réels $a$ et $b$ tels que :
+  \[ \forall t \in \R \setminus \{-1\},\quad \frac{1 - t}{1 + t} = a + \frac{b}{1 + t} \]
+  \item Calculer $\displaystyle\int_0^x \frac{1 - t}{1 + t}\,dt$.
+\end{enumerate}
+
+\partie{B}
+Soit $f$ la fonction numérique de la variable réelle $x$ définie par :
+\[ f(x) = -x + \ln(x + 1)^2 \qquad \text{où } \ln \text{ désigne le logarithme népérien} \]
+
+\begin{enumerate}
+  \item Donner l'ensemble de définition $E_f$ de $f$.
+  \item Déterminer les variations de $f$.
+  \item Dresser le tableau de variation de $f$.
+  \item Montrer que l'équation $f(x) = 0$ admet une solution unique $\alpha$ dans l'intervalle $]2\,;3[$.
+  \item Calculer $f(x)$ et $f'(x)$ pour les valeurs de $x$ suivantes : $-2$ ; $-\dfrac{3}{2}$ ; $0$ ; $5$.
+  \item Étudier les branches infinies à $(C)$, courbe représentative de $f$.
+  \item Tracer la courbe représentative $(C)$ de $f$ dans un plan $(P)$ muni d'un repère orthonormé $(O,\vi,\vj)$ d'unité graphique 1 cm, ainsi que les tangentes à cette courbe aux points d'abscisses $-2$ et $0$.
+\end{enumerate}
+
+\partie{C}
+Soit $h$, la fonction définie par $h(x) = -f(x)$ pour tout $x \in ]-1\,;+\infty[$.
+
+\begin{enumerate}
+  \item Dresser le tableau de variation de $h$.
+  \item Tracer $(C')$ la courbe de la fonction $h$ dans le même repère que $(C)$.
+\end{enumerate}
+
+\end{document}

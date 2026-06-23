@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2021 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{5 points}
+
+\begin{enumerate}
+  \item On considère dans l'ensemble $\Cb$ des nombres complexes, l'équation $(E) : z^3 + 8i = 0$ où $z$ désigne l'inconnue.
+  \begin{enumerate}[label=\alph*.]
+    \item Vérifier que le nombre $a = 2i$ est une solution de $(E)$.
+    \item Prouver que l'équation $(E)$ peut s'écrire : $(z - 2i)(z^2 + 2iz - 4) = 0$.
+    \item Achever la résolution de l'équation.
+  \end{enumerate}
+  \item Dans un plan complexe muni d'un repère orthonormal direct $(O,\vi,\vj)$, on considère les points $A$, $B$ et $C$ d'affixes respectives : $2i$, $-\sqrt{3} - i$ et $\sqrt{3} - i$.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer le module et un argument du complexe : $U = \dfrac{z_C - z_A}{z_B - z_A}$.
+    \item En déduire la nature du triangle $ABC$.
+  \end{enumerate}
+  \item On note $I$ le point d'affixe $-i$ et $S$ la similitude plane directe de centre $A$ qui transforme $C$ en $I$.
+  \begin{enumerate}[label=\alph*.]
+    \item Donner l'écriture complexe de $S$.
+    \item Déterminer l'angle et le rapport de $S$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+L'espace vectoriel étant rapporté à une base canonique $(\vi,\vj)$, on considère l'endomorphisme $f$ de $\R^2$ défini par $f(\vec{v_1}) = \vec{0}$ et $f(\vec{v_2}) = \vec{v_2}$, avec $\vec{v_1} = \vi + 5\vj$ et $\vec{v_2} = -2\vi + 5\vj$.
+
+\note{Attention ! Une erreur dans la définition du vecteur $\vec{v_1}$. Prendre plutôt $\vec{v_1} = -\vi + 5\vj$.}
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que $f(\vi) = 2\vi - 5\vj$ et $f(\vj) = \dfrac{2\vi}{5} - \vj$.
+    \item En déduire la matrice de $f$ dans la base $(\vi,\vj)$.
+  \end{enumerate}
+  \item Prouver que $f$ n'est pas bijective.
+  \item Soit $\vec{u}\,' = x'\vi + y'\vj$ image du vecteur $\vec{u} = x\vi + y\vj$ par $f$.
+  \begin{enumerate}[label=\alph*.]
+    \item Exprimer les coordonnées $x'$ et $y'$ du vecteur $\vec{u}\,'$ en fonction de $x$ et $y$ du vecteur $\vec{u}$.
+    \item Montrer que $f \circ f(\vi) = f(\vi)$ et $f \circ f(\vj) = f(\vj)$.
+    \item En déduire la nature de $f$.
+    \item Donner les éléments caractéristiques de $f$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{7 points}
+
+$f$ est une fonction définie sur $]0\,;+\infty[$ par $f(x) = (\ln x)^2$. $(C)$ est sa courbe représentative dans le plan rapporté à un repère orthonormé $(O,\vi,\vj)$. Unité graphique : 2 cm.
+
+\partie{A}
+\begin{enumerate}
+  \item $f'$ désignant la fonction dérivée de $f$, montrer que $f'(x) = \dfrac{2\ln x}{x}$.
+  \item Étudier le signe de $f'(x)$.
+  \item Montrer que $\displaystyle\lim_{\substack{x\to 0 \\ x>0}} f(x) = +\infty$ et $\displaystyle\lim_{x\to+\infty} f(x) = +\infty$.
+  \item Dresser le tableau de variation de $f$.
+  \item Montrer que $\displaystyle\lim_{x\to+\infty} \dfrac{f(x)}{x} = 0$, puis interpréter.
+  \item Construire $(C)$.
+\end{enumerate}
+
+\partie{B}
+Soit $g$ la fonction définie sur $]0\,;+\infty[$ par $g(x) = -f(x)$ et $(C')$ sa courbe représentative dans le repère $(O,\vi,\vj)$.
+
+\begin{enumerate}
+  \item Comment peut-on déduire $(C')$ de $(C)$ ?
+  \item Sans étudier $g$, dresser son tableau de variation.
+  \item Construire $(C')$ dans le même repère que $(C)$.
+\end{enumerate}
+
+\partie{C}
+On désigne par $H$ la fonction définie par $H(x) = x(\ln x)^2 - 2x\ln x + 2x$.
+
+\begin{enumerate}
+  \item Montrer que $H$ est une primitive de $f$ sur $]0\,;+\infty[$.
+  \item Calculer en cm$^2$, l'aire de la portion du plan délimitée par les courbes $(C)$ et $(C')$ et les droites d'équations respectives $x = 1$ et $x = e$.
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Une entreprise a mis au point un nouveau produit et cherche à fixer le prix de vente. Une enquête est réalisée auprès des clients potentiels. Les résultats sont donnés dans le tableau ci-dessous où $X$ représente le nombre d'exemplaires du produit et $Y$ représente le prix de vente du produit en milliers de francs CFA.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X\,\backslash\,Y$ & 1 & 2 & 3 \\
+\hline
+0 & 6 & 3 & 1 \\
+\hline
+1 & 4 & 11 & 3 \\
+\hline
+2 & 1 & 10 & 16 \\
+\hline
+3 & 0 & 5 & 13 \\
+\hline
+4 & 2 & 1 & 4 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Déterminer les séries marginales respectives de $X$ et de $Y$.
+  \item Déterminer les variances de $X$ et de $Y$ sachant que le point moyen $G$ est $G(1{,}93\,;2{,}3)$.
+  \item On donne $\mathrm{cov}(X, Y) = 0{,}44$. Déterminer, par la méthode des moindres carrés, l'équation de la droite de régression $(D)$ de $Y$ en fonction de $X$.
+  \item Calculer le coefficient de corrélation linéaire.
+\end{enumerate}
+
+\end{document}

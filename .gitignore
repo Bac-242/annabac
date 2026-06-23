@@ -18,3 +18,11 @@ npm-debug.log*
 .DS_Store
 # Dossier source des recueils (à la racine uniquement, pas src/content/sujets)
 /sujets/
+# Artefacts de compilation LaTeX (les sources .tex de sources/ sont versionnées)
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc

@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2011 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{3 points}
+
+On pose $\displaystyle A = \int_0^{\frac{\pi}{2}} x\cos^2 x\,dx$, \quad $\displaystyle B = \int_0^{\frac{\pi}{2}} x\sin^2 x\,dx$.
+
+\begin{enumerate}
+  \item Calculer $A + B$.
+  \item Calculer $A - B$ à l'aide d'une intégration par parties.
+  \item Déduire des questions 1. et 2. les valeurs de $A$ et $B$.
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+On donne en milliers de francs CFA le bénéfice d'une ferme avicole qui importe des poussins sur une période de 5 mois.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+$x_i$ (en mois) & 1 & 2 & 3 & 4 & 5 \\
+\hline
+$y_j$ (en milliers de francs) & 96,1 & 63,5 & 49,2 & 41,5 & 35,7 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Représenter graphiquement cette série statistique par un nuage de points dans un repère orthogonal d'unités : 2 cm pour 1 mois en abscisses et 2 cm pour 5 milliers de francs en ordonnées.
+  \item Donner une équation de la droite de régression de $y$ en $x$.
+  \item Tracer cette droite sur le graphique. Estimer le bénéfice de la ferme avicole au 6\textsuperscript{e} mois.
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{12 points}
+
+Le plan est orienté. Soit $ABC$ un triangle tel que $AC = 2\,AB$ et $(\vv{AB},\vv{AC}) \equiv \dfrac{\pi}{6}\ [2\pi]$. On prendra $AB = 3$ cm et $AC = 6$ cm. On construit à l'extérieur de ce triangle, les carrés $ACFG$ et $ABDE$ tels que $(\vv{AC},\vv{AG}) \equiv \dfrac{\pi}{2}\ [2\pi]$ et $(\vv{AE},\vv{AB}) \equiv \dfrac{\pi}{2}\ [2\pi]$.
+
+$K$ est le point tel que $\vv{GK} = \vv{AE}$. Les droites $(AK)$ et $(BC)$ se coupent en $I$. Les droites $(AB)$ et $(KG)$ se coupent en $J$.
+
+\partie{A}
+\begin{enumerate}
+  \item Faire une figure.
+  \item Démontrer qu'il existe une rotation $R_1$ qui transforme le triangle $ABC$ en le triangle $EAK$. On note $\Omega_1$ son centre. Construire $\Omega_1$. Donner l'angle de $R_1$.
+  \item Démontrer qu'il existe une rotation $R_2$ qui transforme le triangle $ABC$ en le triangle $GKA$. Donner l'angle de $R_2$. On note $\Omega_2$ son centre. Construire $\Omega_2$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item On considère l'application $f = R_1 \circ R_2$. Montrer que $f$ est une translation.
+    \item Calculer $f(C)$. En déduire le vecteur de translation de $f$.
+  \end{enumerate}
+  \item Démontrer que les points $A$, $B$, $I$ et $\Omega_1$ sont situés sur un même cercle $(C)$ de centre $O$, milieu du segment $[AB]$.
+  \item Démontrer que les points $A$, $G$, $J$ et $\Omega_2$ sont situés sur un même cercle $(C')$ de centre $O'$, milieu du segment $[AG]$.
+\end{enumerate}
+
+\partie{B}
+On rapporte maintenant le plan au repère orthonormal direct $(A,\vec{u},\vec{v})$ avec $\vec{u} = \vv{AB}$ et $\vec{v} = -\vv{AE}$.
+
+Soit $S$ la similitude plane directe de centre $A$ qui transforme $(C)$ en $(C')$.
+
+\begin{enumerate}[start=7]
+  \item Donner les éléments caractéristiques de $S$.
+  \item Donner l'écriture complexe de la similitude $S$.
+  \item Exprimer $x$ et $y$ en fonction de $x'$ et $y'$.
+\end{enumerate}
+
+\partie{C}
+Soit $(E)$ l'ellipse d'équation $4x^2 + y^2 = 4$.
+
+\begin{enumerate}[start=10]
+  \item Construire $(E)$ tout en précisant son centre, ses sommets et foyers.
+  \item Déterminer une équation de $(E')$ image de $(E)$ par $S$.
+\end{enumerate}
+
+\end{document}

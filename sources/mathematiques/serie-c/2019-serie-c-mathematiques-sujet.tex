@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2019 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+On considère l'équation $(E) : 109x - 226y = 1$ où $x$ et $y$ sont des entiers relatifs.
+
+\begin{enumerate}
+  \item Déterminer le PGCD de 109 et 226.
+  \item Que peut-on conclure pour l'équation $(E)$ ?
+  \item Vérifier que 141 est l'inverse de 109 modulo 226.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que l'équation $(E)$ est équivalente à l'équation $(E') : 109x \equiv 1\ [226]$.
+    \item Résoudre l'équation $(E')$.
+    \item En déduire la solution de $(E)$.
+    \note{Modifier la question : « En déduire les solutions de $(E)$. »}
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{8 points}
+
+Dans le plan orienté, on considère un carré $ABCE$ de sens direct, de centre $O$.
+
+$D$ est le symétrique orthogonal du point $O$ par rapport à la droite $(BC)$. $K$ et $O'$ sont les milieux respectifs des segments $[BD]$ et $[BC]$. On désigne par $G$ le symétrique du point $C$ par rapport à $B$.
+
+\begin{enumerate}
+  \item Faire une figure. On disposera $[BC]$ horizontalement, et on prendra $BC = 6$ cm.
+  \item Soit $f$ la rotation qui transforme $O$ en $D$ et $A$ en $C$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer le centre de la rotation $f$.
+    \item Déterminer une mesure $\theta$ de l'angle de $f$.
+    \item Prouver que $f^{-1} = S_{(BO)} \circ S_{(BA)}$ où $S_{(BO)}$ et $S_{(BA)}$ désignent respectivement les symétries orthogonales d'axes $(BO)$ et $(BA)$, est la réciproque de $f$.
+  \end{enumerate}
+  \item Soit $g = S_{(OD)} \circ R_{(B,\frac{\pi}{2})}$, $R_{(B,\frac{\pi}{2})}$ désigne la rotation de centre $B$ et d'angle de mesure $\dfrac{\pi}{2}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Justifier que $g$ est une symétrie glissée.
+    \item Déterminer $g(B)$ et $g(C)$.
+    \item En calculant $(g \circ g)(B)$, montrer que le vecteur de $g$ est $\vec{u} = \vv{BO}$.
+    \item En déduire que l'axe de $g$ est la droite $(KO')$.
+    \item Déterminer l'ensemble $(\Gamma)$ des points $M$ du plan tels que : $g(M) = f^{-1}(M)$.
+  \end{enumerate}
+  \item Soit $(H)$ l'hyperbole d'excentricité $e = 2$, de foyer $C$ et de directrice associée $(BA)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Soit $J$ le point du plan, tel que $\vv{BJ} = \dfrac{1}{3}\vv{BC}$. Montrer que $G$ et $J$ sont les sommets de $(H)$.
+    \item Placer le centre $\Omega$ de $(H)$.
+    \item Tracer les asymptotes $(\Delta_1)$ et $(\Delta_2)$ de $(H)$.
+    \item Tracer $(H_0)$, la branche de l'hyperbole dont le sommet est $J$.
+    \item Le plan est muni d'un repère orthonormé direct $(B,\vv{BC},\vv{BA})$. En utilisant la définition monofocale de $(H)$ appliquée au foyer $C$, montrer qu'une équation cartésienne de $(H)$ dans ce repère est : $3x^2 + 2x - y^2 - 1 = 0$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{5 points}
+
+\begin{enumerate}
+  \item Résoudre l'équation différentielle $(E) : y'' + 3y' + 2y = 0$.
+  \item Déterminer la solution particulière $h$ de $(E)$ qui admet en $x = 0$ un maximum égal à 1.
+  \note{Modifier la question : « Déterminer la solution particulière $h$ de $(E)$ qui admet en $x = 0$ un extremum égal à 1. »}
+  \item Soit $f$ la fonction numérique définie sur $\R$ par : $f(x) = -e^{-2x} + 2e^{-x}$. On désigne par $(C)$ sa courbe représentative dans le plan rapporté à un repère orthonormé $(O,\vi,\vj)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer $\displaystyle\lim_{x\to-\infty} f(x)$. On admet que $\displaystyle\lim_{x\to+\infty} f(x) = 0$.
+    \item Déterminer la dérivée $f'$ de $f$.
+    \item Étudier le sens de variation de $f$.
+    \item Dresser le tableau de variation de $f$.
+    \item Trouver le point d'intersection de la courbe $(C)$ avec l'axe des abscisses.
+    \item Calculer $\displaystyle\lim_{x\to-\infty} \dfrac{f(x)}{x}$.
+    \item Tracer $(C)$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+On dispose de deux urnes $U_1$ et $U_2$. L'urne $U_1$ contient deux boules blanches et trois boules noires. L'urne $U_2$ contient deux boules blanches et deux boules noires. Dans chacune des urnes, les boules sont indiscernables au toucher.
+
+On lance sur une table un dé cubique non truqué, dont les faces sont numérotées de 1 à 6.
+\begin{itemize}
+  \item Si le nombre apparu sur la face supérieure du dé est inférieur ou égal à 2, on tire une boule dans l'urne $U_1$ ;
+  \item Si le nombre apparu sur la face supérieure du dé est strictement supérieur à 2, on tire une boule dans l'urne $U_2$.
+\end{itemize}
+On note $\mathcal{U}_1$ et $\mathcal{U}_2$ les événements suivants :
+\begin{itemize}
+  \item $\mathcal{U}_1$ : « le tirage s'effectue dans l'urne $U_1$ »
+  \item $\mathcal{U}_2$ : « le tirage s'effectue dans l'urne $U_2$ »
+  \item $\mathcal{B}$ : « Obtenir une boule blanche »
+  \item $\mathcal{N}$ : « Obtenir une boule noire »
+\end{itemize}
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que la probabilité de l'événement $\mathcal{U}_1$ est $\dfrac{1}{3}$.
+    \item En déduire la probabilité de l'événement $\mathcal{U}_2$.
+  \end{enumerate}
+  \item Traduire par un arbre de probabilités, les données de l'énoncé.
+  \item Montrer que la probabilité de tirer une boule noire est égale à $\dfrac{8}{15}$.
+  \item On a tiré une boule noire. Calculer la probabilité qu'elle provienne de l'urne $\mathcal{U}_1$.
+\end{enumerate}
+
+\end{document}

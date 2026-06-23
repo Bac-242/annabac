@@ -1,0 +1,94 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2013 -- Série D}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+Les caractères $X$ et $Y$ sont distribués suivant le tableau à double entrée ci-après :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X\,\backslash\,Y$ & $-1$ & $0$ & $2$ \\
+\hline
+$-2$ & 4 & 0 & 2 \\
+\hline
+$-1$ & 3 & 5 & 0 \\
+\hline
+$0$ & 2 & 1 & 2 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Dresser la loi marginale de $X$ et celle de $Y$.
+  \item Trouver les coordonnées du point moyen $G(\overline{X},\overline{Y})$.
+  \item Déterminer l'équation de la droite de régression de $Y$ en $X$.
+  \item Calculer le coefficient de corrélation linéaire de la série statistique.
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{4 points}
+
+Le plan $(P)$ est rapporté à un repère orthonormé $(O,\vec{u},\vec{v})$.
+
+\begin{enumerate}
+  \item Résoudre dans l'ensemble des nombres complexes, l'équation $(E) : Z^3 + 8 = 0$. On donnera les solutions de $(E)$ sous la forme algébrique.
+\end{enumerate}
+
+Soit $A$, $B$, et $C$ les points d'affixes des complexes : $Z_A = 1 + i\sqrt{3}$ ; $Z_B = -2$ ; $Z_C = 1 - i\sqrt{3}$.
+
+\begin{enumerate}[start=2]
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer le module et un argument de $U$ tel que : $U = \dfrac{Z_C - Z_A}{Z_B - Z_A}$.
+    \item En déduire la nature du triangle $ABC$.
+  \end{enumerate}
+\end{enumerate}
+
+Soit $S$, la rotation définie dans $(P)$ telle que : $S(A) = C$ et $S(C) = B$.
+
+\begin{enumerate}[start=3]
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'expression complexe de $S$.
+    \item Déterminer les éléments caractéristiques de $S$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{12 points}
+
+\partie{A}
+Soit $g$ la fonction numérique de la variable réelle $x$ définie sur $]0\,;+\infty[$ par :
+\[ g(x) = 1 - x^2 - \ln x \]
+
+\begin{enumerate}
+  \item Étudier les variations de $g$, puis dresser son tableau de variation.
+  \item Calculer $g(1)$, puis en déduire le signe de $g$ sur $]0\,;+\infty[$.
+\end{enumerate}
+
+\partie{B}
+On considère la fonction numérique $f$ de la variable réelle $x$ définie par :
+\[ f(x) = \begin{cases} 1 + x - e^{1-x} & \text{si } x \le 1 \\[1ex] \dfrac{2x - x^2 + \ln x}{x} & \text{si } x > 1 \end{cases} \]
+On désigne par $(C)$, la courbe représentative de $f$ dans le repère orthonormé $(O,\vi,\vj)$ du plan d'unité graphique : 2 cm.
+
+\begin{enumerate}
+  \item Déterminer l'ensemble de définition de la fonction $f$.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Étudier la continuité et la dérivabilité de $f$ au point $x = 1$.
+    \item Pour $x \in ]1\,;+\infty[$, exprimer $f'(x)$ en fonction de $g(x)$.
+  \end{enumerate}
+  \item Étudier les variations de $f$ et dresser son tableau de variation.
+  \item Démontrer que la droite $(\Delta)$ d'équation $y = 2 - x$ est asymptote à la courbe $(C)$ de la fonction $f$ et étudier la position de la droite $(\Delta)$ par rapport à cette courbe.
+  \item Écrire l'équation de la tangente $(T)$ à la courbe $(C)$ de $f$ en $x = 0$.
+  \item Étudier les branches infinies de la courbe $(C)$ de la fonction $f$.
+  \item Construire dans le même repère, la courbe $(C)$ de $f$, la droite $(\Delta)$ et la tangente $(T)$.
+  \item Calculer l'aire $\mathcal{A}(D)$ du domaine du plan limité par la courbe $(C)$, la droite $(\Delta)$ et les axes $x = \dfrac{3}{2}$ et $x = e$. On prendra $\ln 2 \approx 0{,}7$ ; $e \approx 2{,}7$.
+\end{enumerate}
+
+\end{document}

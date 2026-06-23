@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2010 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Montrer que les équations $x^2 \equiv -1\ [25]$ et $x^2 = -1 + 25k$ où $k \in \Z$ sont équivalentes.
+    \item Pour $k = 2$, résoudre dans $\Z$ l'équation $x^2 \equiv -1\ [25]$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Trouver suivant les valeurs de l'entier naturel $n$, les restes de la division euclidienne de $2^n - 4$ par $5$.
+    \item En déduire le reste de la division euclidienne de $2^{2010} - 4$ par $5$. Que peut-on alors dire de la divisibilité de $2^{2010} - 4$ par $5$ ?
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{5 points}
+
+Dans le plan orienté $(P)$, on considère un carré $ABCD$ de sens direct, de centre $O$. $I$ et $J$ sont les milieux respectifs des segments $[CD]$ et $[AD]$.
+
+\begin{enumerate}
+  \item Construire l'ensemble $(\Gamma)$ des points $M$ du plan tels que $(\vv{MA}, \vv{MC}) = \dfrac{\pi}{3}\ [2\pi]$.
+  \item On note $(D)$ la droite passant par $A$ telle que $\big((AC),(D)\big) = \dfrac{\pi}{3}\ [\pi]$. $(D)$ coupe $(\Gamma)$ en $E$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que le triangle $EAC$ est équilatéral.
+    \item En déduire qu'il existe une rotation $r$ de centre $E$ qui transforme $A$ en $C$.
+  \end{enumerate}
+  \item On désigne par $H$ le centre de gravité du triangle $EAC$. La parallèle à la droite $(AC)$ passant par $H$ coupe $(EA)$ et $(EC)$ respectivement en $G$ et $F$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que $\dfrac{EG}{EA} = \dfrac{EF}{EC} = \dfrac{2}{3}$.
+    \item Montrer qu'il existe une homothétie de centre $E$ qui transforme $A$ en $G$ et $C$ en $F$.
+    \item En déduire qu'il existe une similitude plane directe $S$ de centre $E$ qui transforme $A$ en $F$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{11 points}
+
+\partie{A}
+\begin{enumerate}
+  \item Résoudre dans $\R$ l'équation différentielle $y'' + \pi^2 y = 0$.
+  \item Déterminer la solution particulière $g$ vérifiant $g(0) = 0$ et $g'(0) = 2\pi$.
+\end{enumerate}
+
+\partie{B}
+On considère la fonction numérique $f$ à variable réelle $x$ définie par :
+\[ f(x) = \begin{cases} 2\sin \pi x & \text{si } -4 \le x \le 0 \\[1ex] x^2\left(\dfrac{1}{2} - \ln x\right) & \text{si } x > 0 \end{cases} \]
+$(C)$ désigne la courbe représentative de $f$ dans un repère orthonormé $(O,\vi,\vj)$ d'unité graphique $2$ cm.
+
+\begin{enumerate}[start=3]
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'ensemble de définition $E_f$ de $f$.
+    \item Étudier la continuité et la dérivabilité de $f$ en $x = 0$.
+    \item Montrer que l'étude de $f$ peut être réduite sur l'intervalle $I = [-2;+\infty[$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Étudier les variations de $f$ sur $I$. On dressera un tableau résumant les variations de $f$.
+    \item Étudier la branche infinie de $(C)$ et tracer $(C)$ sur son ensemble de définition.
+  \end{enumerate}
+  \item Calculer l'aire $A_0$ du domaine plan $(D)$ limité par la courbe $(C)$, l'axe $(Ox)$ des abscisses et les droites d'équations $x = 1$, $x = \sqrt{e}$.
+\end{enumerate}
+
+\partie{C}
+\begin{enumerate}[start=6]
+  \item Soit $S$ la similitude plane directe de centre $O$, de rapport $\dfrac{\sqrt{2}}{2}$ et d'angle $-\dfrac{\pi}{2}$. Pour $x > 0$, construire l'image $(C')$ de $(C)$ par $S$.
+  \item On définit la suite $(D_n)_{n\in\N}$ par :
+  \[ \begin{cases} D_0 = D \\ D_{n+1} = S(D_n) \end{cases} \]
+  \begin{enumerate}[label=\alph*.]
+    \item Exprimer l'aire $A_n$ du domaine $(D_n)$ en fonction de $n$ et $A_0$.
+    \item Exprimer la somme $S_n = A_0 + A_1 + A_2 + \cdots + A_n$ en fonction de $n$ et $A_0$.
+    \item Calculer la limite de $S_n$ quand $n$ tend vers $+\infty$.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

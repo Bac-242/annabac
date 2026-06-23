@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2014 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+\begin{enumerate}
+  \item Soit $(E)$ l'équation d'inconnue $Z$ :
+  \[ Z^2 - (2i\,e^{i\theta}\cos\theta)Z - e^{i\,2\theta} = 0 \quad \text{où } \theta \in \R \]
+  Résoudre dans $\Cb$ l'équation $(E)$. On présentera les solutions sous forme exponentielle.
+  \item Dans le plan rapporté à un repère orthonormal direct $(O,\vec{u},\vec{v})$, $A$ et $B$ sont les points d'affixes respectives $Z_A = e^{i\frac{\pi}{2}}$ et $Z_B = e^{i\left(\frac{\pi}{2}+2\theta\right)}$. On note $Z_0$ l'affixe de $O$.
+  \begin{enumerate}[label=\alph*.]
+    \item Exprimer $\arg\left(\dfrac{Z_B - Z_0}{Z_A - Z_0}\right)$ en fonction de $\theta$.
+    \item En déduire l'ensemble des valeurs de $\theta$ pour lesquelles $(\vv{OA},\vv{OB}) = \dfrac{\pi}{2}\ [2\pi]$.
+    \item On suppose que $0 \le \theta < \dfrac{\pi}{2}$. Écrire le conjugué de $Z_A + Z_B$ sous forme exponentielle.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{8 points}
+
+On considère un triangle $ABC$ isocèle rectangle en $A$ de sens direct tel que $AC = 6$ cm. On désigne par $D$, $E$, $F$ les milieux respectifs des segments $[BC]$, $[AB]$ et $[BD]$.
+
+\begin{enumerate}
+  \item Faire la figure.
+\end{enumerate}
+
+Soit $(P)$ la parabole de foyer $B$ et de directrice la droite $(AC)$.
+
+\begin{enumerate}[start=2]
+  \item \begin{enumerate}[label=\alph*.]
+    \item Qu'appelle-t-on pas ou paramètre d'une parabole ?
+    \item Déterminer le pas $\alpha$ de $(P)$.
+  \end{enumerate}
+\end{enumerate}
+
+Soit $G$ le symétrique de $A$ par rapport à la droite $(BC)$.
+
+\begin{enumerate}[start=3]
+  \item \begin{enumerate}[label=\alph*.]
+    \item Démontrer que la droite $(AG)$ est une tangente à $(P)$ en un point à déterminer.
+    \item Construire le point $H$ de $(P)$ situé sur la médiatrice du segment $[EB]$.
+    \item Construire l'arc $(P_0)$ de $(P)$ de corde focale le segment $[GI]$ où $I$ est le symétrique de $G$ par rapport à la droite $(AB)$.
+  \end{enumerate}
+\end{enumerate}
+
+Soit $(P')$ la parabole de foyer $B$ et de directrice $(AG)$.
+
+\begin{enumerate}[start=4]
+  \item Déterminer le centre $\Omega$, le rapport $K$ et une mesure de l'angle de la similitude plane directe $S$ qui transforme $(P')$ en $(P)$.
+  \item Construire l'antécédent $J$ de $G$ par $S$.
+  \item Construire l'arc $(P_0')$ qui a pour image $(P_0)$ par $S$.
+\end{enumerate}
+
+On désigne par $A_0'$ l'aire de la portion $(E_0')$ du plan limitée par les droites $(JB)$, $(EF)$ et $(P_0')$, et par $A_0$ celle de la portion du plan $(E_0)$ image de $(E_0')$ par $S$.
+
+\begin{enumerate}[start=7]
+  \item Démontrer que $A_0 = 2A_0'$.
+  \item Déterminer l'aire $A$ de $S \circ S \circ S \circ S(E_0')$ en fonction de $A_0$.
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{4 points}
+
+Soit la fonction :
+\[ f_n : \begin{array}{rcl} \R & \longrightarrow & \R \\ x & \longmapsto & f_n(x) = e^{-x}\,x^{n+1} \end{array} \quad \text{où } n \in \N \]
+
+\begin{enumerate}
+  \item Déterminer l'ensemble de définition $E_{f_n}$ de $f_n$.
+  \item On suppose que $n$ est impair.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer la dérivée de $f_n$ et étudier le signe de cette dérivée.
+    \item Calculer les limites de $f_n$ aux bornes de $E_{f_n}$.
+    \item Dresser le tableau de variation de $f_n$.
+  \end{enumerate}
+  \item Pour $n \in \N$ et $p \in \N^*$, on pose $I_{n,p} = \displaystyle\int_0^p f_n(x)\,dx$ et $J_n = \lim\limits_{p\to+\infty} I_{n,p}$.
+  \begin{enumerate}[label=\alph*.]
+    \item En intégrant $I_{n,p}$ par parties, montrer que $J_{n+1} = (n+2)J_n$.
+    \item En déduire l'expression de $J_n$ en fonction de $n$ et $J_0$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{4 points}
+
+Dans une urne contenant quatre jetons numérotés 1, 2, 3 et 4 indiscernables au toucher, on extrait successivement sans remise deux jetons.
+
+La variable aléatoire $X$ est celle qui détermine « la valeur absolue de la différence des deux numéros sortis ».
+
+\begin{enumerate}
+  \item Déterminer la loi de probabilité de $X$.
+  \item Calculer l'espérance mathématique, la variance et l'écart-type de $X$.
+\end{enumerate}
+
+\end{document}

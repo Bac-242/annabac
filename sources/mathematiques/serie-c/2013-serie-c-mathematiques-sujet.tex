@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2013 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+On considère l'équation complexe $(E)$ telle que
+\[ (E) : z^3 - \left(\frac{1}{2} + \frac{1}{2}i\right)z^2 - \left(\frac{1}{2} + \frac{1}{2}i\right)z + 1 = 0 \]
+
+\begin{enumerate}
+  \item Montrer que $-1$ est solution de $(E)$.
+  \item Démontrer que si $z_0$ est solution de $(E)$ alors son inverse $\dfrac{1}{z_0}$ est aussi solution de $(E)$.
+  \item Résoudre dans $\Cb$, l'équation $(E')$ telle que $(E') : z^2 - \left(\dfrac{3}{2} + \dfrac{1}{2}i\right)z + 1 = 0$.
+  \item Déterminer toutes les solutions de l'équation $(E)$.
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{4 points}
+
+Les caractères $X$ et $Y$ sont distribués suivant le tableau ci-dessous.
+
+\begin{center}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|*{14}{c|}}
+\hline
+$X$ & -2 & -2 & -1 & -2 & -1 & 0 & -1 & -2 & -1 & -2 & 0 & -1 & -1 & -1 \\
+\hline
+$Y$ & -1 & 2 & 2 & -1 & 2 & 2 & 0 & -1 & 0 & 2 & -1 & -1 & 0 & -1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Transformer ce tableau en un tableau à double entrée d'effectifs $n_i$.
+  \item Déterminer le point moyen $G(\overline{X},\overline{Y})$.
+  \item Calculer les variances $V(X)$ et $V(Y)$ de $X$ et $Y$.
+  \item Calculer la covariance $\mathrm{Cov}(X,Y)$ et le coefficient de corrélation linéaire entre $X$ et $Y$.
+\end{enumerate}
+
+% ====================== PROBLÈME ======================
+\prob{12 points}
+
+On considère un carré $ABCD$ de centre $O$ tel que $(\vv{AB},\vv{AD}) = 90^\circ$ et $AD = 2$. On désigne par $(P_1)$ la parabole de directrice la droite $(AD)$ et tangente en $C$ à la droite $(AC)$.
+
+\begin{enumerate}
+  \item Démontrer que le foyer de $(P_1)$ est $B$.
+\end{enumerate}
+
+Soit $(P_2)$ la parabole de foyer $B$ et tangente à la droite $(AD)$ en $D$, $E$ le symétrique de $B$ par rapport à $A$, $F$ le symétrique de $D$ par rapport à la droite $(AB)$.
+
+\begin{enumerate}[start=2]
+  \item Démontrer que la droite $(EF)$ est la directrice de $(P_2)$.
+  \item Construire le deuxième point $H$ de $(P_2)$ appartenant à la droite $(DB)$.
+  \item Comment appelle-t-on le segment $[DH]$ pour la parabole $(P_2)$ ? Justifier la réponse.
+  \item Démontrer que le point $I$ symétrique de $C$ par rapport à $(BE)$ appartient à $(P_1)$.
+  \item Construire les arcs des paraboles $(P_1)$ et $(P_2)$ de cordes respectives $[CI]$ et $[DH]$.
+\end{enumerate}
+
+Soit $S$ la similitude plane directe qui transforme $(P_2)$ en $(P_1)$.
+
+\begin{enumerate}[start=7]
+  \item Déterminer une mesure $\theta$ de l'angle de $S$. Justifier la réponse.
+  \item Déterminer son rapport $k$. Justifier la réponse.
+  \item Déterminer son centre. Justifier la réponse.
+\end{enumerate}
+
+Le plan étant rapporté à un repère orthonormé $(J,\vv{JB},\vv{JO})$ où $J$ est le milieu de $[AB]$, on considère la fonction $f$ définie par : $f(x) = 2\sqrt{x} + \ln(x+1)$. $(C)$ désigne sa courbe représentative dans le repère $(J,\vv{JB},\vv{JO})$.
+
+\begin{enumerate}[start=10]
+  \item Dresser le tableau de variation de $f$.
+  \item Étudier la branche infinie de $(C)$.
+  \item Construire $(C)$ dans le repère $(J,\vv{JB},\vv{JO})$.
+  \item Calculer l'aire de la portion du plan $(E)$ limitée par les droites $(JO)$, $(BC)$ et les courbes $(C)$ et $(P_1)$. On montrera que l'équation cartésienne de $(P_1)$ dans le repère $(J,\vv{JB},\vv{JO})$ est $y^2 = 4x$.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,102 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+\usepackage{array}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2016 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+On donne dans $\Z$ l'équation :
+\[ (E) : 2688x + 3024y = -3360 \]
+
+\begin{enumerate}
+  \item Déterminer le PGCD$(2688, 3024)$, puis en déduire que l'équation $(E)$ admet des solutions dans $\Z^2$.
+  \item Montrer que l'équation $(E)$ est équivalente à l'équation $(E_1) : 8x + 9y = -10$.
+  \item \begin{enumerate}[label=\alph*]
+    \item Montrer que l'équation $(E_1)$ peut s'écrire $(E_2) : 8x \equiv -10\ [9]$.
+    \item Résoudre l'équation $(E_2)$.
+    \item En déduire les solutions de l'équation $(E)$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{8 points}
+
+Le plan est orienté. $ABCD$ est un rectangle tel que $(\vv{BD},\vv{BA}) = \dfrac{\pi}{3}\ [2\pi]$. On considère le losange $BDEG$ tel que $(\vv{BD},\vv{BA}) = (\vv{BD},\vv{BE})\ [2\pi]$.
+
+Dans cet exercice, $S_\Delta$ et $t_{\vec{u}}$ désignent respectivement la symétrie orthogonale d'axe la droite $(\Delta)$ et la translation de vecteur $\vec{u}$. On considère la transformation
+\[ f = S_{(AD)} \circ S_{(AB)} \circ S_{(BD)} \]
+
+\begin{enumerate}
+  \item Faire la figure. On prendra $AB = 4$ cm et on disposera $(AB)$ horizontalement.
+  \item Déterminer la nature et les éléments caractéristiques de la transformation $g = S_{(AB)} \circ S_{(BD)}$.
+  \item $R$ désigne la rotation de centre $B$ et d'angle de mesure $\dfrac{\pi}{3}$. Déterminer la nature exacte de la transformation $S_{(AD)} \circ R$.
+  \item On désigne par $F$ le milieu du segment $[BG]$.
+  \begin{enumerate}[label=\alph*.]
+    \item Démontrer que $f = t_{\vv{BF}} \circ S_{(AC)}$.
+    \note{Erreur dans l'énoncé : il s'agit plutôt de montrer $S_{(AD)} \circ R = t_{\vv{BF}} \circ S_{(AC)}$. En effet, la transformation $f$ n'est pas égale à $t_{\vv{BF}} \circ S_{(AC)}$.}
+    \item En déduire les éléments caractéristiques de $f$.
+    \note{Substituer cette question par : Déduire les éléments caractéristiques de $S_{(AD)} \circ R$.}
+  \end{enumerate}
+  \item Soit $(P)$ la parabole dont une tangente est la droite $(EF)$, la normale associée est la droite $(GB)$ et l'axe focal est la droite $(EB)$. Démontrer que $A$ est le foyer de la parabole $(P)$.
+  \item Soit $H$ le milieu du segment $[EG]$ et $L$ celui du segment $[ED]$. Déterminer la directrice $(d)$ de la parabole $(P)$.
+  \item Construire le point $I$ de $(P)$ tel que $[IF]$ soit une corde focale.
+  \item Construire la corde focale $[JK]$ de $(P)$ où $J$ appartient au segment $[AD]$.
+  \item Construire l'arc d'extrémités $J$ et $F$ de $(P)$.
+  \item Soit $(P')$ l'image de $(P)$ par la transformation $f$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer le foyer de la parabole $(P')$.
+    \item Déterminer l'axe focal de $(P')$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{5 points}
+
+\begin{enumerate}
+  \item Déterminer la solution particulière $f$ de l'équation différentielle :
+  \[ (E) : y'' + 2y' + 2y = 0 \]
+  vérifiant les conditions initiales suivantes : $f\!\left(\dfrac{\pi}{2}\right) = e^{-\frac{\pi}{2}}$ et $f'\!\left(\dfrac{\pi}{2}\right) = -e^{-\frac{\pi}{2}}$.
+  \item On pose $f(x) = e^{-x}\sin x$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer les réels $A$ et $B$ pour que $F(x) = e^{-x}(A\cos x + B\sin x)$ soit une primitive de $f$ sur $\R$.
+    \item Calculer l'intégrale $\displaystyle\int_{n\pi}^{(n+1)\pi} f(x)\,dx$.
+  \end{enumerate}
+  \item Soit $(v_n)$ la suite numérique définie pour tout entier naturel $n$ par :
+  \[ v_n = \frac{e^{-\pi} + 1}{2}(-e^{-\pi})^n\ ;\quad n \in \N \]
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que $(v_n)$ est une suite géométrique dont on précisera la raison et le premier terme.
+    \item Calculer la somme des termes $S_n = v_0 + v_1 + \cdots + v_n$ en fonction de $n$, puis en déduire la limite de $S_n$ en $+\infty$.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Soit le tableau statistique à double entrée suivant :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X\,\backslash\,Y$ & -1 & 2 & 3 \\
+\hline
+1 & 2 & 1 & 1 \\
+\hline
+2 & 2 & 3 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Convertir ce tableau en un tableau linéaire.
+  \item Déterminer le coefficient de corrélation $\rho_{X,Y}$ des caractères $X$ et $Y$. On donne $\overline{X} = 1{,}6$ et $\overline{Y} = 1$.
+  \item Donner une interprétation géométrique de cette corrélation.
+\end{enumerate}
+
+\end{document}

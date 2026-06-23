@@ -1,0 +1,103 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2020 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{4 points}
+
+On se propose de déterminer l'ensemble des couples $(x, y)$ d'entiers relatifs vérifiant l'équation $(E_0) : 2x - 7y = 3$.
+
+\begin{enumerate}
+  \item Montrer que l'équation $(E_0)$ est équivalente à l'équation $(E_1) : 2x \equiv 3\ [7]$.
+  \item Donner l'ensemble des solutions de l'équation $(E_1)$.
+  \item En déduire l'ensemble des solutions de l'équation $(E_0)$.
+  \item On désigne par $A$ l'ensemble des diviseurs positifs de 95.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer $A$.
+    \item Trouver le couple $(x, y)$ vérifiant le système : $\begin{cases} 2x - 7y = 3 \\ xy = 95 \end{cases}$
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{8 points}
+
+Dans le plan orienté, on considère un carré $ABCD$ de centre $O$, de sens direct.
+
+On désigne par $I$, $J$, $K$ et $L$ les milieux respectifs des segments $[AB]$, $[BC]$, $[CD]$ et $[DA]$. $(C)$ est le cercle de diamètre $[AJ]$, de centre $O'$. $P$ et $Q$ sont les milieux respectifs des segments $[BJ]$ et $[AL]$.
+
+\begin{enumerate}
+  \item Faire une figure avec $AB = 6$ cm.
+  \item Soit $f$ la symétrie glissée d'axe $(OL)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer le vecteur $\vec{u}$ de $f$, sachant que $f(D) = I$.
+    \item Déterminer $f(K)$.
+  \end{enumerate}
+  \item Soit $(H)$ l'hyperbole de rectangle fondamental $ABJL$ et d'axe focal $(PQ)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer les asymptotes de $(H)$.
+    \item Placer les foyers $F$ et $F'$ de $(H)$ (on notera $F$ le foyer le plus proche du point $P$).
+    \item Déterminer les sommets de $(H)$.
+    \item Construire les directrices $(D_1)$ et $(D_2)$ de $(H)$.
+    \item Construire le point $M_0$ de $(H)$ situé sur le segment $[FJ]$ (on justifiera la construction du point $M_0$).
+    \item Prouver que l'excentricité de $(H)$ est $e = \dfrac{\sqrt{5}}{2}$.
+    \item Achever la construction de l'hyperbole $(H)$.
+  \end{enumerate}
+  \item Le plan est rapporté au repère orthonormé $(O',\vi,\vj)$ avec $\vi = \vv{O'O}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que l'équation cartésienne de $(H)$ dans ce repère est : $x^2 - \dfrac{y^2}{4} = -1$.
+    \item Vérifier l'exactitude du résultat obtenu dans la question 3. f.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{5 points}
+
+On considère la fonction numérique $f$ sur $]0\,;+\infty[$ par : $f(x) = \dfrac{x^2 - 1}{4} - 2\ln x$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer la dérivée $f'$ de $f$.
+    \item Étudier le sens de variation de $f$.
+    \item Montrer que l'équation $f(x) = 0$ admet une solution unique $\alpha \in [3\,;4]$.
+  \end{enumerate}
+  \item Soit $g$ la fonction définie sur $]3\,;+\infty[$ par : $g(x) = \sqrt{1 + 8\ln x}$.
+  \note{Erreur dans l'énoncé : il convient de définir $g$ sur $[3\,;+\infty[$ et non sur $]3\,;+\infty[$. En effet, la question 2. b. suppose que $g(3)$ existe.}
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que les équations $f(x) = 0$ et $g(x) = x$ sont équivalentes sur l'intervalle $]3\,;+\infty[$.
+    \note{Remplacer cette question par : montrer que les équations $f(x) = 0$ et $g(x) = x$ sont équivalentes sur l'intervalle $[3\,;+\infty[$.}
+    \item On suppose que : $\forall x \in [3\,;4],\ g(x) \in [3\,;4]$ et $|g'(x)| \le \dfrac{4}{9}$. Montrer que $\forall x \in [3\,;4],\ |g(x) - \alpha| \le \dfrac{4}{9}|x - \alpha|$.
+  \end{enumerate}
+  \item On considère la suite numérique $(u_n)$ définie par $u_0 = 3$ et $\forall n \in \N,\ u_{n+1} = g(u_n)$.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que $\forall n \in [3\,;4],\ u_n \in [3\,;4]$.
+    \note{Erreur dans l'énoncé : il s'agit de montrer que $\forall n \in \N,\ u_n \in [3\,;4]$.}
+    \item Montrer que $\forall n \in \N,\ |u_{n+1} - \alpha| \le \dfrac{4}{9}|u_n - \alpha|$.
+    \item En déduire que $\forall n \in \N,\ |u_n - \alpha| \le \left(\dfrac{4}{9}\right)^n$.
+    \item Montrer que la suite $(u_n)$ converge vers le réel $\alpha$.
+    \item Déterminer le plus petit entier naturel $n_0$ tel que $u_{n_0}$ soit une valeur approchée de $\alpha$ à $10^{-2}$ près.
+  \end{enumerate}
+\end{enumerate}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{3 points}
+
+Une classe d'un lycée est constituée de 26 garçons et 14 filles. 13 garçons et $n$ filles de cette classe sont inscrits dans un centre d'apprentissage de langues. On choisit au hasard une personne parmi les élèves de cette classe. On note les événements suivants :
+\begin{itemize}
+  \item $G$ : « la personne choisie est un garçon »
+  \item $F$ : « la personne choisie est une fille »
+  \item $L$ : « la personne choisie est inscrite dans un centre d'apprentissage de langues »
+\end{itemize}
+
+\begin{enumerate}
+  \item Calculer les probabilités $P(G)$ et $P(F)$.
+  \item Construire un arbre de probabilités correspondant aux données de l'énoncé, sachant que $P_G(L) = \dfrac{1}{2}$ et $P_F(L) = \dfrac{n}{14}$.
+  \item Montrer que $P(L) = \dfrac{13 + n}{40}$.
+  \item Déterminer $n$ pour que les événements $L$ et $G$ soient indépendants.
+\end{enumerate}
+
+\end{document}
