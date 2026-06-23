@@ -20,7 +20,7 @@ bucket_name = "annabac-soumissions"
 
 # Variables publiques (non secrètes).
 [vars]
-GITHUB_OWNER = "wbambi"
+GITHUB_OWNER = "Bac-242"
 GITHUB_REPO = "annabac"
 GITHUB_BRANCH = "main"
 

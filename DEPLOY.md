@@ -28,7 +28,7 @@ wrangler d1 execute annabac --remote --file=schema.sql
 
 ## 2. Projet Pages
 
-Connectez le dépôt `wbambi/annabac` à Cloudflare Pages (Git) :
+Connectez le dépôt `Bac-242/annabac` à Cloudflare Pages (Git) :
 
 - **Build command** : `npm run build`
 - **Build output** : `dist`
@@ -99,7 +99,7 @@ tout repose sur des comptes personnels (GitHub, Cloudflare, carte bancaire).
 Le `GITHUB_TOKEN` sert à committer les documents validés. Utilisez un
 **fine-grained personal access token** plutôt qu'un token classique :
 
-- **Repository access** : *Only select repositories* → `wbambi/annabac` uniquement.
+- **Repository access** : *Only select repositories* → `Bac-242/annabac` uniquement.
 - **Permissions** : *Repository permissions* → **Contents : Read and write** (rien d'autre).
 - **Expiration** : 90 jours, avec rappel pour le **rotater** (puis
   `wrangler pages secret put GITHUB_TOKEN`).
@@ -133,9 +133,10 @@ illimité**, donc pas de facture surprise liée au trafic.
 
 Recommandé dès que le projet prend de l'ampleur :
 
-- **Organisation GitHub** dédiée (ex. `bac242`) : créer l'orga puis
-  *Settings → Transfer ownership* du dépôt. Mettre à jour `GITHUB_OWNER` dans
-  `wrangler.toml` et régénérer le `GITHUB_TOKEN` au nom de l'orga.
+- **Organisation GitHub** dédiée : le dépôt appartient à l'orga `Bac-242`
+  (`GITHUB_OWNER = "Bac-242"`). En cas de nouveau transfert, mettre à jour
+  `GITHUB_OWNER` dans `wrangler.toml` et régénérer le `GITHUB_TOKEN`, puis
+  vérifier la connexion Git du projet Cloudflare Pages.
 - **Adresse e-mail dédiée** au projet (alias) à utiliser partout : contact du
   site (`src/pages/a-propos.astro`), compte Cloudflare, compte/orga GitHub —
   afin de ne pas exposer l'e-mail personnel.
