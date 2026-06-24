@@ -5,6 +5,11 @@ import Icone from '../components/Icone.astro';
 import { toutesLesAnnees, tousLesSujets, statutSujet } from '../lib/data';
 
 const annees = await toutesLesAnnees();
+// On n'affiche que les années récentes en accès rapide ; la liste complète
+// (qui grandit chaque session) reste accessible via /annees.
+const NB_ANNEES_ACCUEIL = 8;
+const anneesRecentes = annees.slice(0, NB_ANNEES_ACCUEIL);
+const aPlusDAnnees = annees.length > anneesRecentes.length;
 const sujets = await tousLesSujets();
 const disponibles = sujets.filter((s) => statutSujet(s.data) !== 'a-venir');
 const derniers = disponibles.slice(0, 4);
@@ -81,11 +86,11 @@ const axes = [
     </div>
   </section>
 
-  {annees.length > 0 && (
+  {anneesRecentes.length > 0 && (
     <section class="mt-12">
-      <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Années</h2>
+      <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Années récentes</h2>
       <div class="mt-4 flex flex-wrap gap-2">
-        {annees.map((a) => (
+        {anneesRecentes.map((a) => (
           <a
             href={`/annees/${a.annee}`}
             class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-1.5 text-sm font-medium text-[color:var(--color-ink)] transition hover:border-[color:var(--color-teal)] hover:text-[color:var(--color-teal)]"
@@ -93,6 +98,14 @@ const axes = [
             {a.annee}
           </a>
         ))}
+        {aPlusDAnnees && (
+          <a
+            href="/annees"
+            class="inline-flex items-center gap-1 rounded-full border border-[color:var(--color-line)] px-4 py-1.5 text-sm font-medium text-[color:var(--color-teal)] transition hover:border-[color:var(--color-teal)]"
+          >
+            Toutes les années ›
+          </a>
+        )}
       </div>
     </section>
   )}

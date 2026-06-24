@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2016 -- Physique-Chimie -- Série C}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Question à alternative vrai ou faux.} Réponds par vrai ou faux aux affirmations suivantes. Exemple : 1.c = vrai.
+\begin{enumerate}[label=1.\alph*.]
+  \item La réaction de saponification d'un ester est totale.
+  \item La dilution d'une solution d'acide faible augmente sa force.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{2. Texte à trous.} Complète la phrase suivante par quatre des cinq mots suivants : \textit{réduction ; oxydation ; réaction ; transfert ; libération}.
+
+\textit{Une $\cdots\cdots$ d'oxydoréduction est une réaction de $\cdots\cdots$ d'électrons au cours de laquelle il y a simultanément $\cdots\cdots$ du réducteur et $\cdots\cdots$ de l'oxydant.}
+
+\medskip
+\noindent\textbf{3. Appariement.} Associe un élément-question de la colonne A à un élément-réponse de la colonne B. Exemple : $a_5 = b_6$.
+
+\begin{center}\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.47\linewidth}|p{0.44\linewidth}|}
+\hline
+\textbf{Colonne A} & \textbf{Colonne B} \\
+\hline
+$a_1$ : énergie d'ionisation de l'atome d'hydrogène & $b_1$ : $E^0 = 0{,}17$ V \\
+\hline
+$a_2$ : énergie au repos d'un noyau & $b_2$ : $E_0 = mc^2$ \\
+\hline
+$a_3$ : force électromotrice d'une pile & $b_3$ : $E = 13{,}6$ eV \\
+\hline
+$a_4$ : potentiel redox d'un couple & $b_4$ : $E^0(\ch{Cu^{2+}/Cu}) - E^0(\ch{Zn^{2+}/Zn})$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\partie{B : application des connaissances}
+On prépare une solution $S_1$ en dissolvant du gaz ammoniac ($\ch{NH_3}$) de volume $V_1$ dans 2 litres d'eau. La concentration de cette solution est de $2{,}08\cdot10^{-4}$ mol/L et son pH $= 9{,}7$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calcule la valeur de $V_1$ dans les C.N.T.P.
+    \item Écris l'équation de dissociation de l'ammoniac dans l'eau.
+    \item Calcule les concentrations de toutes les espèces chimiques présentes dans la solution $S_1$.
+    \item Déduis-en le pKa du couple acide-base correspondant.
+  \end{enumerate}
+  \item On prélève 20 mL de la solution $S_1$, on y verse une solution d'acide chlorhydrique de concentration $4{,}16\cdot10^{-4}$ mol/L et de volume $V$. On obtient une solution $S_2$ dont le pH est égal au pKa.
+  \begin{enumerate}[label=\alph*.]
+    \item Nomme la solution $S_2$.
+    \item Calcule la valeur de $V$.
+  \end{enumerate}
+\end{enumerate}
+\noindent Donnée : $V_m = 22{,}4$ L$\cdot$mol$^{-1}$.
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Question à réponse courte.} Donne la définition de l'interfrange.
+
+\medskip
+\noindent\textbf{2. Schéma à compléter.} Reproduis et complète le schéma suivant par les forces appliquées au solide (on néglige les frottements).
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  % base horizontale
+  \draw (0,0)--(5.2,0);
+  % incline
+  \coordinate (T) at ({4.6*cos(32)},{4.6*sin(32)});
+  \draw[thick] (0,0)--(T);
+  % support hachuré au sommet (perpendiculaire à l'incline)
+  \draw[thick] ($(T)+(-0.55,0.85)$)--($(T)+(0.55,-0.85)$);
+  \foreach \k in {0,...,7}{
+    \draw ($(T)+(-0.5,0.78)+\k*(0.14,-0.22)$)--($(T)+(-0.5,0.78)+\k*(0.14,-0.22)+(0.22,0.16)$);
+  }
+  % bloc sur l'incline
+  \begin{scope}[shift={({2.4*cos(32)},{2.4*sin(32)})},rotate=32]
+    \draw (0,0) rectangle (0.9,0.7);
+  \end{scope}
+  % angle alpha
+  \draw (0.9,0) arc[start angle=0,end angle=32,radius=0.9];
+  \node at (1.25,0.28){$\alpha$};
+\end{tikzpicture}
+\end{center}
+
+\medskip
+\noindent\textbf{3. Réarrangement.} Recopie et ordonne la phrase suivante :
+\begin{center}
+\fbox{Dans un circuit capacitif}\quad \fbox{est}\quad \fbox{l'impédance de la bobine}\quad \fbox{supérieure à}\quad \fbox{l'impédance du condensateur}
+\end{center}
+
+\partie{B : application des connaissances}
+Un dipôle $MN$ contient en série un conducteur ohmique de résistance $R = 50$ $\Omega$ et une bobine d'inductance $L = 0{,}25$ H et de résistance $r$. Ce dipôle est alimenté par une tension sinusoïdale $U(t) = 220\sqrt{2}\cos 100\pi t$ (V).
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \fill (0,0) circle (1.2pt) node[left]{$M$};
+  \fill (9,0) circle (1.2pt) node[right]{$N$};
+  \draw (0,0)--(2,0);
+  \draw (2,-0.22) rectangle (3.2,0.22);
+  \node[above] at (2.6,0.25){$R$};
+  \draw (3.2,0)--(4.6,0);
+  \draw[decorate,decoration={coil,aspect=0.6,segment length=5pt,amplitude=4pt}] (4.6,0)--(6.6,0);
+  \node[above] at (5.6,0.3){$(L,r)$};
+  \draw (6.6,0)--(9,0);
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item Sachant que l'intensité efficace du courant est égale à 2 A, détermine :
+  \begin{enumerate}[label=\alph*.]
+    \item L'impédance du dipôle $MN$.
+    \item La valeur de $r$.
+    \item La puissance moyenne consommée par ce dipôle.
+  \end{enumerate}
+  \item On ajoute aux éléments du dipôle précédent, entre $M$ et $N$, un condensateur de capacité $C$. Ce dipôle est alimenté par la tension sinusoïdale précédente. On constate que l'intensité efficace du courant devient maximale. Détermine :
+  \begin{enumerate}[label=\alph*.]
+    \item La valeur de $C$.
+    \item L'impédance du dipôle $MN$.
+    \item L'intensité instantanée $i(t)$ du courant qui traverse ce dipôle.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{C : résolution d'un problème}
+On veut comparer le mouvement d'un point de la surface de l'eau et celui de la source où débute le mouvement. Pour cela, on considère une lame vibrante animée d'un mouvement sinusoïdal de fréquence $N = 50$ Hz, qui est reliée à une pointe qui frappe verticalement la surface d'une nappe d'eau en un point $S$. La figure suivante représente la coupe transversale de la surface de l'eau à un instant $t_1$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  % axes
+  \draw[->] (-4.4,0)--(4.7,0) node[right]{$x$(cm)};
+  \draw[->] (0,-1.7)--(0,1.9) node[above]{$y$(mm)};
+  % niveaux ±3
+  \draw[dashed] (-4.3,1.3)--(4.3,1.3) node[right]{};
+  \draw[dashed] (-4.3,-1.3)--(4.3,-1.3);
+  \node[left] at (0,1.3){$3$};
+  \node[left] at (0,-1.3){$-3$};
+  % sinusoide amplitude 1.3 (=3mm), lambda = 2 cm
+  \draw[thick] plot[domain=-4:4,samples=160] (\x,{-1.3*sin(deg(pi*\x))});
+  % marques x
+  \foreach \x in {1,2,3,4}{ \draw (\x,0.05)--(\x,-0.05) node[above right]{\small$\x$}; }
+  \node[below right] at (0,0){$S$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item Détermine :
+  \begin{enumerate}[label=\alph*.]
+    \item L'amplitude du mouvement.
+    \item La longueur d'onde.
+    \item La célérité $c$ des ondes.
+  \end{enumerate}
+  \item Établis l'équation horaire du mouvement de $S$, sachant qu'à l'instant $t = 0$, $S$ passe par la position d'équilibre en allant dans le sens des élongations positives.
+  \item Soit un point $P$ de la surface de l'eau situé à $4{,}5$ cm de la source $S$.
+  \begin{enumerate}[label=\alph*.]
+    \item Établis l'équation horaire du mouvement de $P$.
+    \item Compare les mouvements de $P$ et $S$.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

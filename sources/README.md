@@ -9,19 +9,21 @@ site.
 
 ```
 sources/
-└─ mathematiques/
-   ├─ serie-c/   # sujets série C (2009–2020) + style-sujet.tex
-   └─ serie-d/   # sujets série D (2010–2021) + style-sujet.tex
+├─ mathematiques/
+│  ├─ serie-c/        # sujets série C (2009–2020) + style-sujet.tex
+│  └─ serie-d/        # sujets série D (2010–2021) + style-sujet.tex
+└─ physique-chimie/
+   └─ serie-c/        # sujets série C (2010–2020) + style-pc.tex
 ```
 
 Chaque sujet suit la convention de nommage du site :
 `<annee>-serie-<serie>-<matiere>-sujet.tex`, identique au PDF associé dans
-`public/pdfs/`.
+`public/pdfs/` (la matière est le *slug* du site, ex. `physique-chimie`).
 
-Le fichier `style-sujet.tex` est le préambule commun (mise en page sobre, macros
-mathématiques). Il est inclus par chaque sujet via `\input{style-sujet}` ; une
-copie est présente dans chaque dossier de série pour que tout sujet se compile
-de façon autonome.
+Chaque dossier embarque son préambule commun (mise en page sobre, macros) :
+`style-sujet.tex` pour les maths, `style-pc.tex` pour la physique-chimie. Il est
+inclus par chaque sujet via `\input{...}` ; une copie est présente dans chaque
+dossier de série pour que tout sujet se compile de façon autonome.
 
 ## Recompiler un sujet
 

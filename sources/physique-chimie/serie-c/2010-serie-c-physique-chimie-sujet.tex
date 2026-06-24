@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2010 -- Physique-Chimie -- Série C}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\exo{1}{}
+On fait réagir totalement de la limaille de fer de masse $m = 16{,}8$ g avec une solution d'acide sulfurique dilué de volume $V = 500$ mL. On obtient une solution $S$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Écrire les demi-équations redox et l'équation bilan de la réaction.
+    \item Quel est le volume de gaz dégagé dans les C.N.T.P. ?
+    \item Quelle est la concentration de la solution $S$ ?
+  \end{enumerate}
+  \item La solution $S$ est utilisée pour doser une solution de bichromate de potassium $(2\,\ch{K^+} + \ch{Cr_2O_7^{2-}})$ de volume égal à $10$ cm$^3$ en milieu acide. Pour atteindre l'équivalence, il a fallu utiliser un volume égal à $20$ mL de solution $S$.
+  \begin{enumerate}[label=\alph*.]
+    \item Écrire l'équation bilan de la réaction.
+    \item Déterminer la concentration molaire volumique de la solution de bichromate.
+  \end{enumerate}
+\end{enumerate}
+
+\noindent On donne, en g/mol, les masses molaires atomiques : H : 1 ; O : 16 ; Fe : 56. Le volume molaire $V_m = 22{,}4$ L/mol dans les C.N.T.P. Les couples redox : $\ch{Fe^{2+}/Fe}$ ; $\ch{H_3O^+/H_2}$ ; $\ch{Cr_2O_7^{2-}/Cr^{3+}}$.
+
+\exo{2}{}
+On prépare une solution d'ions fer II ($\ch{Fe^{2+}}$) par action d'une solution d'acide chlorhydrique $(\ch{H_3O^+} + \ch{Cl^-})$ avec du fer.
+
+\begin{enumerate}
+  \item Quels sont les couples redox en présence ?
+  \item Quelle masse de fer faut-il utiliser pour préparer un litre de solution d'ions fer II de concentration molaire volumique $0{,}1$ mol$\cdot$L$^{-1}$ ?
+  \item On oxyde tous les ions fer II formés en milieu acide par une solution de permanganate de potassium $(\ch{K^+} + \ch{MnO_4^-})$. Les couples intervenant dans cette réaction sont : $\ch{Fe^{3+}/Fe^{2+}}$ et $\ch{MnO_4^-/Mn^{2+}}$.
+  \begin{enumerate}[label=\alph*.]
+    \item Écrire l'équation bilan de la réaction d'oxydoréduction.
+    \item Quelle masse de permanganate de potassium ($\ch{KMnO_4}$) supposé anhydre faut-il utiliser ?
+  \end{enumerate}
+\end{enumerate}
+
+\noindent On donne les masses molaires atomiques en g/mol : Fe : 56 ; Cl : 35,5 ; K : 39 ; H : 1 ; O : 16 ; Mn : 55.
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\exo{1}{}
+\begin{enumerate}
+  \item Une bobine de résistance $R$ et d'inductance $L$ est alimentée par un générateur de tension continue $U_1 = 6$ V. Elle est alors traversée par un courant d'intensité efficace $I_1 = 0{,}3$ A. Déterminer la résistance $R$ de la bobine.
+  \item On alimente ensuite la bobine par une tension sinusoïdale de valeur efficace $24$ V et de fréquence $50$ Hz. L'intensité efficace du courant vaut alors $0{,}12$ A. Déterminer :
+  \begin{enumerate}[label=\alph*.]
+    \item l'impédance de la bobine.
+    \item l'inductance de la bobine.
+  \end{enumerate}
+  \item On monte en série avec la bobine un condensateur de capacité $C = 5$ µF. L'ensemble est soumis à la tension sinusoïdale précédente.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer l'impédance de l'association.
+    \item Quelle est l'intensité efficace du courant ?
+    \item Quelle est la phase de l'intensité par rapport à la tension aux bornes de l'association ?
+  \end{enumerate}
+\end{enumerate}
+
+\exo{2}{}
+On a réalisé l'expérience des interférences lumineuses avec le dispositif des fentes de Young. La distance entre la source $S$ monochromatique et le plan des fentes $S_1$ et $S_2$ est $d = 50$ cm. La distance entre les fentes est $a = 3$ mm. L'écran est placé à la distance $D = 2$ m du plan des fentes.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  % axe optique
+  \draw[dashed] (-0.3,0)--(7.6,0);
+  % source
+  \fill (0,0) circle (1.5pt) node[left]{$S$};
+  % plan des fentes
+  \draw[thick] (3,-1.6)--(3,-0.5);
+  \draw[thick] (3,0.5)--(3,1.6);
+  \node at (2.7,0.9){$S_1$};
+  \node at (2.7,-0.9){$S_2$};
+  % fente ouverture a
+  \draw[<->] (3.25,-0.45)--(3.25,0.45) node[midway,right]{$a$};
+  % ecran
+  \draw[thick] (7.4,-1.8)--(7.4,1.8);
+  % distances
+  \draw[<->] (0,-1.4)--(3,-1.4) node[midway,below]{$d$};
+  \draw[<->] (3,-1.4)--(7.4,-1.4) node[midway,below]{$D$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item La distance entre la 6\textsuperscript{e} frange brillante située d'un côté de la frange centrale et la 6\textsuperscript{e} frange brillante située de l'autre côté est $l = 4{,}8$ mm. Déterminer la longueur d'onde $\lambda_1$.
+  \item La source $S$ émet une lumière monochromatique de longueur d'onde $\lambda_2 = 0{,}60$ µm. On la déplace verticalement vers $S_1$ de $y = 2{,}5$ mm. On constate un déplacement vertical $x$ du système de franges sur l'écran.
+  \begin{enumerate}[label=\alph*.]
+    \item Établir l'expression de la différence de marche en fonction de $y$, $x$, $D$, $d$ et $a$.
+    \item Déterminer la nouvelle position de la frange centrale.
+    \item Dire de combien et dans quel sens se déplace le système de franges.
+  \end{enumerate}
+  \item Pour ramener le système de franges à sa position initiale, on se propose d'utiliser une lame de verre.
+  \begin{enumerate}[label=\alph*.]
+    \item Devant quelle frange doit-on placer la lame ?
+    \item Déterminer l'épaisseur $e$ de la lame.
+  \end{enumerate}
+\end{enumerate}
+\noindent Indice de réfraction de la lame $n = 1{,}5$.
+
+\exo{3}{}
+Un solide ponctuel de masse $m$ glisse sans frottement sur une piste circulaire dont le profil est représenté ci-après. Le solide part du point $A$ avec une vitesse nulle.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \def\r{1.8}   % rayon
+  \def\h{2}     % hauteur OB
+  % axes
+  \draw[dashed,->] (0,-0.3)--(0,\h+\r+0.6) node[left]{$y$};
+  % sol hachuré
+  \fill[pattern=north east lines] (-2.4,-0.18) rectangle (5.2,0);
+  \draw[->] (-2.4,0)--(5.2,0) node[right]{$x$};
+  % points
+  \coordinate (O) at (0,0);
+  \coordinate (C) at (0,\h+\r);
+  \coordinate (B) at (0,\h);
+  \coordinate (A) at (-\r,\h+\r);
+  \coordinate (D) at (4,0);
+  % quart de cercle de centre C, de A vers B
+  \draw[thick] (A) arc[start angle=180,end angle=270,radius=\r];
+  % reperes pointillés
+  \draw[dashed] (A)--(C);
+  \draw[dashed] (C)--(B);
+  \draw[dashed] (O)--(B);
+  % labels
+  \fill (A) circle (1.2pt) node[above left]{$A$};
+  \fill (C) circle (1.2pt) node[above right]{$C$};
+  \fill (B) circle (1.2pt) node[right]{$B$};
+  \fill (O) circle (1.2pt) node[below right]{$O$};
+  \fill (D) circle (1.2pt) node[below]{$D$};
+  % poids
+  \draw[->] (A)--($(A)+(0,-0.9)$) node[left]{$\vec{P}$};
+  % hauteur h
+  \draw[<->] (-0.18,0)--(-0.18,\h) node[midway,left]{$h$};
+  \node at (2.4,\h+\r){$CA = CB = r = 45$ cm};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item Déterminer la valeur de la vitesse au point $B$.
+  \item Après le point $B$, le solide quitte la piste. On considère qu'il part de $B$ avec une vitesse horizontale de valeur $V_0 = 3$ m/s. Il atteint le sol au point $D$.
+  \begin{enumerate}[label=\alph*.]
+    \item Établir dans le repère $(O, x, y)$ les équations horaires du mouvement du solide entre $B$ et $D$.
+    \item En déduire l'équation cartésienne de la trajectoire.
+    \item Calculer la durée du mouvement entre $O$ et $D$ sachant que $h = 0{,}8$ m.
+    \item Avec quelle vitesse le solide arrive-t-il au sol ?
+  \end{enumerate}
+\end{enumerate}
+\noindent On prendra $g \approx 10$ m$\cdot$s$^{-2}$.
+
+\end{document}

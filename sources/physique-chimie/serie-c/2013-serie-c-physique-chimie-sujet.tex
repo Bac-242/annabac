@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2013 -- Physique-Chimie -- Série C}
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\exo{1}{(Oscillateurs mécaniques)}
+\begin{minipage}{0.62\linewidth}
+Un solide $S$ supposé ponctuel, de masse $m$ est attaché à l'extrémité d'un fil fin, inextensible de masse négligeable, de longueur $l$. L'autre extrémité du fil est fixée au point $O$. On écarte $S$ d'un angle $\theta_m$ à partir de la verticale $OE$ et on l'abandonne sans vitesse initiale à l'instant $t = 0$.
+
+À une date $t$, l'abscisse et la vitesse angulaire du solide $S$ sont respectivement $\theta$ et $\dot{\theta}$.
+
+On considère nulle l'énergie potentielle de pesanteur du système « Solide + Terre » au plan horizontal passant par $E$.
+\end{minipage}\hfill
+\begin{minipage}{0.34\linewidth}
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \coordinate (O) at (0,0);
+  \coordinate (E) at (0,-3.2);
+  \coordinate (S) at ({3.2*sin(32)},{-3.2*cos(32)});
+  % fil
+  \draw[thick] (O)--(S);
+  % verticale
+  \draw[dashed] (O)--(E);
+  % angle
+  \draw (0,-0.8) arc[start angle=270,end angle={270+32},radius=0.8];
+  \node at (0.35,-0.85){$\theta$};
+  % arc trajectoire
+  \draw[dashed] (S) arc[start angle={-90+32},end angle=-90,radius=3.2];
+  % points
+  \fill (O) circle (1.2pt);
+  \fill (S) circle (1.6pt) node[right]{$S$};
+  \node[below] at (E){$E$};
+\end{tikzpicture}
+\end{minipage}
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Établir l'expression de l'énergie mécanique $E_m$ du système « Solide-Terre » en fonction de $m$, $l$, $g$, $\theta$ et $\dot{\theta}$ ($g$ étant l'intensité de la pesanteur).
+    \item Montrer que cette énergie est constante.
+  \end{enumerate}
+  \item Les oscillations sont de faibles amplitudes.
+  \begin{enumerate}[label=\alph*.]
+    \item En utilisant les résultats de la question 1., montrer que l'équation différentielle du mouvement a pour expression $\ddot{\theta} + \dfrac{g}{l}\theta = 0$.
+    \item Calculer la période propre $T_0$.
+    \item Établir l'expression $\theta = f(t)$ de l'abscisse angulaire en fonction du temps sachant que $\theta_m = 6^\circ$.
+  \end{enumerate}
+\end{enumerate}
+\noindent On donne : $l = 60$ cm ; $g = 9{,}8$ m/s$^2$ ; $1^\circ = 1{,}744\cdot10^{-2}$ rad.
+
+\exo{2}{(Ondes progressives)}
+L'extrémité $S$ d'une corde élastique vibrante tendue horizontalement est animée d'un mouvement transversal sinusoïdal de fréquence $N = 50$ Hz et d'amplitude $a = 5$ mm. Des ondes se propagent le long de cette corde à la célérité $v = 10$ m/s. À l'instant $t = 0$, $S$ commence à vibrer à partir de sa position d'équilibre en allant dans le sens des élongations positives.
+
+\begin{enumerate}
+  \item Écrire l'équation horaire $y_S(t)$ du mouvement du point $S$.
+  \item On considère le point $M$ de la corde situé à $0{,}25$ m de $S$.
+  \begin{enumerate}[label=\alph*.]
+    \item À quel instant $M$ commence-t-il à vibrer ?
+    \item Écrire l'équation horaire $y_M(t)$ du mouvement de $M$.
+    \item Quelles sont les vitesses de $M$ aux instants $t_1 = 1{,}25\cdot10^{-2}$ s ; $t_2 = 4{,}5\cdot10^{-2}$ s.
+  \end{enumerate}
+  \item Représenter sur un même système d'axes les graphes des fonctions $y_S(t)$ et $y_M(t)$ des mouvements de $S$ et $M$.
+\end{enumerate}
+
+\exo{3}{(Courant alternatif)}
+Un circuit électrique comprend en série :
+\begin{itemize}
+  \item Un résistor de résistance $R = 20$ $\Omega$
+  \item Une bobine d'inductance $L$ et de résistance négligeable
+  \item Un condensateur de capacité $C$
+\end{itemize}
+
+\begin{enumerate}
+  \item On applique aux bornes de ce circuit une tension sinusoïdale de valeur efficace $U$ et de fréquence $N_1 = 50$ Hz ; les résultats sont les suivants :
+  \begin{itemize}
+    \item Intensité efficace du courant dans le circuit $I_1 = 1{,}5$ A
+    \item Impédance de la bobine $Z_L = 30$ $\Omega$
+    \item Impédance du condensateur $Z_C = 40$ $\Omega$
+  \end{itemize}
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer :
+    \begin{enumerate}[label=a\textsubscript{\arabic*}.]
+      \item la valeur efficace $U$ de la tension aux bornes du circuit ;
+      \item l'inductance $L$ de la bobine ;
+      \item la capacité $C$ du condensateur.
+    \end{enumerate}
+    \item Montrer que le circuit est capacitif.
+  \end{enumerate}
+  \item On applique maintenant aux bornes du circuit une nouvelle tension sinusoïdale de fréquence $N_2 = 100$ Hz et de même valeur efficace $U$ que la tension précédente.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer l'intensité efficace $I_2$ du courant dans le circuit.
+    \item Le circuit reste-t-il capacitif ? Justifier.
+  \end{enumerate}
+\end{enumerate}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\exo{1}{(Spectre de l'atome d'hydrogène)}
+Les niveaux d'énergie de l'atome d'hydrogène sont donnés par l'expression :
+\[ E_n = -\frac{13{,}6}{n^2}\ (\text{eV}) \quad \text{où } n \text{ est un entier supérieur ou égal à } 1. \]
+
+\begin{enumerate}
+  \item Calculer les énergies correspondant à $n = 1$ ; $n = 2$ ; $n = 3$.
+  \item Comment nomme-t-on le premier niveau ?
+  \item \begin{enumerate}[label=\alph*.]
+    \item Dans quel état l'atome d'hydrogène se trouve-t-il lorsque $n$ tend vers l'infini ?
+    \item Quelle est alors son énergie ?
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer la fréquence des radiations lorsque :
+    \begin{enumerate}[label=a\textsubscript{\arabic*}.]
+      \item l'atome passe du niveau $E_2$ au niveau $E_1$ ;
+      \item l'atome passe du niveau $E_3$ au niveau $E_1$.
+    \end{enumerate}
+    \item Calculer les longueurs d'onde correspondant à ces fréquences.
+    \item À quel domaine spectral appartiennent ces radiations ?
+  \end{enumerate}
+  \item Calculer la longueur d'onde la plus courte que l'on peut trouver dans le spectre de l'atome d'hydrogène.
+\end{enumerate}
+\noindent $h = 6{,}62\cdot10^{-34}$ J$\cdot$s ; $c = 3\cdot10^8$ m/s ; $1$ eV $= 1{,}6\cdot10^{-19}$ J.
+
+\exo{2}{(Solution aqueuse ionique)}
+Une solution d'acide éthanoïque ($\ch{CH_3COOH}$) de concentration molaire $C_A = 10^{-2}$ mol/L a un pH égal à $3{,}4$.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Écrire l'équation de dissociation ionique de l'acide éthanoïque dans l'eau.
+    \item Recenser les différentes espèces chimiques présentes dans la solution.
+    \item Déterminer leurs concentrations molaires.
+  \end{enumerate}
+  \item Déterminer :
+  \begin{enumerate}[label=\alph*.]
+    \item le coefficient de dissociation ionique de l'acide ;
+    \item le pKa du couple acide-base $\ch{CH_3COOH/CH_3COO^-}$.
+  \end{enumerate}
+  \item Le pKa du couple acide-base $\ch{HCOOH/HCOO^-}$ est égal à $3{,}8$.
+  \begin{enumerate}[label=\alph*.]
+    \item Comparer les forces acides $\ch{HCOOH}$ et $\ch{CH_3COOH}$.
+    \item Justifier.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

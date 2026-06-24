@@ -1,0 +1,164 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+\usepackage{array}
+
+\newcommand{\note}[1]{\par\smallskip{\itshape\small #1}\par\smallskip}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2019 -- Physique-Chimie -- Série C}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Appariement.} Relie un élément-question de la colonne A à un élément-réponse de la colonne B. Exemple : $7 = e$.
+
+\begin{center}\renewcommand{\arraystretch}{2}
+\begin{tabular}{|p{0.42\linewidth}|p{0.42\linewidth}|}
+\hline
+\textbf{Colonne A} & \textbf{Colonne B} \\
+\hline
+1. Constante d'acidité & a) $R_H = \dfrac{E_0}{hc}$ \\
+\hline
+2. Constante radioactive & b) $\dfrac{[\ch{D}]^\delta [\ch{C}]^\gamma}{[\ch{A}]^\alpha [\ch{B}]^\beta}$ \\
+\hline
+3. Constante d'équilibre & c) $\dfrac{[\ch{H_3O^+}][\text{base}]}{[\text{acide}]}$ \\
+\hline
+4. Constante de Rydberg & d) $\dfrac{\ln 2}{T}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent\textbf{2. Schéma à compléter.} Complète le schéma de l'équation suivante :
+\[ \ch{(C_2H_5)_2NH + H_2O} \rightleftharpoons \cdots\ ^+ \quad \cdots \]
+
+\medskip
+\noindent\textbf{3. Questions à choix multiples.} Choisis la bonne réponse parmi les propositions suivantes. Exemple : 3.3 = a.3.
+\begin{enumerate}[label=3.\arabic*)]
+  \item Le rendement d'estérification d'un alcool secondaire, pour un mélange équimolaire est :
+  \begin{enumerate}[label=a.\arabic*)]
+    \item 5 \%
+    \item 67 \%
+    \item 60 \%
+  \end{enumerate}
+  \item La plus grande longueur d'onde émise par l'atome d'hydrogène appartient à la série de :
+  \begin{enumerate}[label=b.\arabic*)]
+    \item Paschen
+    \item Balmer
+    \item Lyman
+  \end{enumerate}
+\end{enumerate}
+
+\partie{B : application des connaissances}
+On considère une solution aqueuse d'acide monochloroéthanoïque ($\ch{CH_2ClCOOH}$) de concentration molaire $C_A = 5\cdot10^{-2}$ mol$\cdot$L$^{-1}$ et de pH $= 2{,}1$.
+
+\begin{enumerate}
+  \item Montre que l'acide monochloroéthanoïque est un acide faible.
+  \item Écris l'équation de la dissociation de cet acide dans l'eau.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calcule les concentrations de toutes les espèces chimiques présentes dans la solution.
+    \item Calcule le pKa du couple $\ch{CH_2ClCOOH/CH_2ClCOO^-}$.
+  \end{enumerate}
+  \item Quel volume $V_B$ d'une solution d'hydroxyde de sodium ($\ch{NaOH}$) de concentration $C_B = 0{,}1$ mol$\cdot$L$^{-1}$ doit-on ajouter à un volume $V_A = 20$ mL de la solution d'acide monochloroéthanoïque pour obtenir une solution dont le pH est égal au pKa ?
+\end{enumerate}
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Questions à alternative vrai ou faux.} Réponds par vrai ou faux aux affirmations suivantes. Exemple : e = vrai.
+\begin{enumerate}[label=\alph*.]
+  \item Dans un pendule conique, l'angle d'écartement $\theta$ du fil par rapport à l'axe vertical est lié à sa vitesse angulaire $\omega$ par la relation $\dfrac{1}{\cos\theta} = \dfrac{l\omega^2}{g}$.
+  \item L'effet photoélectrique se produit lorsque la longueur d'onde seuil $\lambda_0$ du métal est supérieure à la longueur d'onde $\lambda$ de la lumière incidente.
+  \item L'accélération d'un point matériel animé d'un mouvement circulaire uniforme n'est pas nulle.
+  \item À la résonance, l'impédance $Z$ du circuit atteint sa valeur maximale.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{2. Question à réponse construite.} Définis un ébranlement transversal.
+
+\partie{B : application des connaissances}
+\note{Attention ! Pour cet exercice, la valeur de la longueur d'onde n'a pas été donnée (certainement par oubli). Pour les questions 1), 2) et 3), il s'agira donc pour le candidat de déterminer les expressions demandées en fonction de la longueur d'onde que nous noterons $\lambda$.}
+
+Un milieu élastique est parcouru par des ondes progressives transversales sinusoïdales. On a tracé le diagramme du mouvement de la source $O$ (courbe 1) et la sinusoïde des espaces à l'instant $t_1$ (courbe 2).
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.85]
+  % Courbe 1 : y vs t
+  \begin{scope}
+    \draw[->] (-0.3,0)--(4.6,0) node[right]{$t$(s)};
+    \draw[->] (0,-1.3)--(0,1.4) node[above]{$y$(mm)};
+    \draw[dashed] (0,0.9)--(4.4,0.9); \draw[dashed] (0,-0.9)--(4.4,-0.9);
+    \node[left] at (0,0.9){\small$0{,}2$}; \node[left] at (0,-0.9){\small$-0{,}2$};
+    \draw[thick] plot[domain=0:4,samples=120] (\x,{0.9*sin(deg(pi*\x))});
+    \node[below] at (1,-0.15){\small$10^{-3}$};
+    \node at (2.2,-1.55){\underline{Courbe 1}};
+  \end{scope}
+  % Courbe 2 : y vs x
+  \begin{scope}[shift={(6.3,0)}]
+    \draw[->] (-0.3,0)--(4.6,0) node[right]{$x$(cm)};
+    \draw[->] (0,-1.3)--(0,1.4) node[above]{$y$(mm)};
+    \draw[dashed] (0,0.9)--(4.4,0.9); \draw[dashed] (0,-0.9)--(4.4,-0.9);
+    \node[left] at (0,0.9){\small$0{,}2$}; \node[left] at (0,-0.9){\small$-0{,}2$};
+    \draw[thick] plot[domain=0:4,samples=120] (\x,{0.9*sin(deg(pi*\x))});
+    \node at (2.2,-1.55){\underline{Courbe 2}};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item Détermine la vitesse de propagation des ondes.
+  \item Écris l'équation horaire du mouvement de la source $O$.
+  \item Écris l'équation du mouvement d'un point $M$ situé à $12{,}5$ cm du point $O$, puis compare le mouvement de $M$ à celui de $O$.
+  \item Détermine l'instant $t_1$.
+\end{enumerate}
+
+\partie{C : résolution d'un problème}
+On se propose de déterminer l'intensité de la vitesse $\vec{v}$ en un point $B$ pour un solide supposé ponctuel, de masse $m = 60$ kg, glissant sur une portion de piste $ABC$. $AB$ représente une portion circulaire de rayon $r$, de centre $O$ tel que $\theta = (\vv{OA}, \vv{OB}) = \dfrac{\pi}{4}$ rad. $BC$ est une partie rectiligne de longueur $2r$. Le long du trajet $ABC$, le solide est soumis à des forces de frottement qui se réduisent à une force unique d'intensité constante $f$ de même direction que la vitesse $\vec{v}$, mais de sens contraire. Le solide quitte $A$ sans vitesse initiale.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \def\r{2.5}
+  \coordinate (O) at (0,0);
+  \coordinate (B) at (0,-\r);
+  \coordinate (A) at ({\r*sin(45)},{-\r*cos(45)});
+  \coordinate (C) at (-4.2,-\r);
+  % arc AB
+  \draw[thick] (A) arc[start angle={90-45},end angle=-90,radius=\r];
+  % segment BC avec fleche
+  \draw[thick,->] (B)--(C);
+  % rayons
+  \draw[dashed] (O)--(A);
+  \draw[dashed] (O)--(B);
+  % angle
+  \draw (0,-0.7) arc[start angle=270,end angle={270+45},radius=0.7];
+  \node at (0.45,-0.65){$\theta$};
+  % right angle
+  \draw (0.22,0)--(0.22,-0.22)--(0,-0.22);
+  \node[right] at (0.15,-1.2){$r$};
+  % points
+  \fill (O) circle (1pt) node[above]{$O$};
+  \fill (A) circle (1.6pt) node[right]{$A$};
+  \fill (B) circle (1.6pt) node[below]{$B$};
+  \node[below] at (C){$C$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item Exprime :
+  \begin{enumerate}[label=\alph*.]
+    \item sa vitesse en $B$ en fonction de $f$, $r$, $m$, $g$ et $\theta$.
+    \item sa vitesse en $C$ en fonction de $f$, $r$, $m$, $g$ et $\theta$.
+  \end{enumerate}
+  \item Le solide arrive en $C$ avec une vitesse nulle. Détermine :
+  \begin{enumerate}[label=\alph*.]
+    \item l'expression littérale de $f$.
+    \item la valeur numérique de $f$ pour $g = 10$ m$\cdot$s$^{-2}$.
+  \end{enumerate}
+  \item Calcule l'intensité $v_B$ de la vitesse du solide au point $B$ pour $r = 5$ m.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,141 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2017 -- Physique-Chimie -- Série C}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{Question à réponse courte.} Donne les caractéristiques d'une réaction d'estérification.
+
+\medskip
+\noindent\textbf{Texte à trous.} Recopie et complète la phrase suivante par quatre des cinq mots ci-après : \textit{niveau ; absorption ; émission ; hydrogène ; supérieure}.
+
+\textit{Lorsque l'électron de l'atome d'$\cdots\cdots$ passe d'un $\cdots\cdots$ d'énergie inférieure à un niveau d'énergie $\cdots\cdots$, il y a $\cdots\cdots$ de photons.}
+
+\medskip
+\noindent\textbf{Appariement.} Associe un élément-question de la colonne A à un élément-réponse correspondant de la colonne B. Exemple : $A_5 = B_6$.
+
+\begin{center}\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.42\linewidth}|p{0.42\linewidth}|}
+\hline
+\textbf{Colonne A} & \textbf{Colonne B} \\
+\hline
+$A_1$ : acide carboxylique & $B_1$ : $\ch{CH_3COOCH_3}$ \\
+\hline
+$A_2$ : base forte & $B_2$ : $\ch{NH_3}$ \\
+\hline
+$A_3$ : ester & $B_3$ : $\ch{NaOH}$ \\
+\hline
+$A_4$ : base faible & $B_4$ : $\ch{C_6H_5COOH}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\partie{B : application des connaissances}
+La glande thyroïde produit des hormones essentielles à différentes fonctions de l'organisme à partir de l'iode alimentaire. Pour vérifier la forme ou le fonctionnement de cette glande, on procède à une scintigraphie thyroïdienne en utilisant les isotopes 131 ($\ch{^{131}_{53}I}$) ou 123 ($\ch{^{123}_{53}I}$) de l'iode. Pour cette scintigraphie, un patient ingère une masse $m_0 = 10^{-6}$ g de l'isotope $\ch{^{131}_{53}I}$.
+
+\begin{enumerate}
+  \item Calcule le nombre $N_0$ de noyaux radioactifs initialement présents dans la dose ingérée.
+  \item L'isotope $\ch{^{131}_{53}I}$ est radioactif $\beta^-$. Écris l'équation de la désintégration.
+  \item La demi-vie ou période de l'isotope $\ch{^{131}_{53}I}$ vaut $T = 8{,}0$ jours.
+  \begin{enumerate}[label=\alph*.]
+    \item Établis l'activité $A$ à la date $t$ en fonction de $T$, $A_0$ et $t$.
+    \item Calcule l'activité $A_0$ de l'échantillon $\ch{^{131}_{53}I}$ à l'instant initial.
+    \item Calcule l'activité $A$ à l'instant où l'examen est pratiqué, c'est-à-dire 5 heures après l'ingestion de l'iode radioactif $\ch{^{131}_{53}I}$.
+  \end{enumerate}
+\end{enumerate}
+\noindent On donne : $N_A = 6{,}02\cdot10^{23}$ mol$^{-1}$ ; $M(\ch{^{131}_{53}I}) = 131$ g/mol. Extrait du tableau périodique : $\ch{_{51}Sb}$ ; $\ch{_{52}Te}$ ; $\ch{_{53}I}$ ; $\ch{_{54}Xe}$ ; $\ch{_{55}Cs}$.
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Questions à choix multiples.} Choisis la bonne réponse parmi les propositions suivantes :
+\begin{enumerate}[label=\alph*.]
+  \item La période d'un pendule simple dépend :
+  \begin{enumerate}[label=a\textsubscript{\arabic*}]
+    \item : de la masse du pendule
+    \item : de la longueur du pendule
+    \item : de la tension du fil
+  \end{enumerate}
+  \item Dans un circuit électrique à la résonance, l'intensité efficace du courant est :
+  \begin{enumerate}[label=b\textsubscript{\arabic*}]
+    \item : minimale
+    \item : nulle
+    \item : maximale
+  \end{enumerate}
+\end{enumerate}
+
+\medskip
+\noindent\textbf{2. Questions à alternative vrai ou faux.} Réponds par vrai ou faux aux affirmations suivantes. Exemple : 2.e = vrai.
+\begin{enumerate}[label=2.\alph*.]
+  \item La cinématique étudie les mouvements des corps en tenant compte des forces qui les produisent.
+  \item Un ébranlement transversal se propage parallèlement à sa direction.
+  \item Un système en mouvement de chute libre n'est soumis qu'à son poids.
+  \item La dualité explique l'aspect corpusculaire et l'aspect ondulatoire de la lumière.
+\end{enumerate}
+
+\partie{B : application des connaissances}
+Un corps $A$ de masse $M = 1$ kg peut glisser sur un plan incliné dont la ligne de plus grande pente fait un angle de $\alpha = 30^\circ$ avec le plan horizontal. Les forces de frottement qui agissent sur le corps $A$ sont équivalentes à une force unique $\vec{f}$ parallèle au déplacement et de sens contraire, d'intensité égale au dixième du poids ($f = \tfrac{1}{10}P$). Le corps $A$ est relié à un fil enroulé sur un cylindre et fixé à celui-ci. Ce cylindre de rayon $r = 6$ cm est mobile sans frottement autour d'un axe horizontal $O$ passant par son axe de symétrie et a un moment d'inertie $J = 9\cdot10^{-4}$ kg$\cdot$m$^2$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \def\ang{30}
+  \coordinate (C) at (0,0);
+  \coordinate (T) at ({6*cos(\ang)},{6*sin(\ang)});
+  % base
+  \draw (0,0)--(6.4,0);
+  % incline
+  \draw[thick] (C)--(T);
+  % cylindre au sommet
+  \draw[thick] (T) circle (0.32);
+  \fill (T) circle (1pt) node[above]{$O$};
+  % bloc sur l'incline
+  \begin{scope}[shift={({2.6*cos(\ang)},{2.6*sin(\ang)})},rotate=\ang]
+    \draw (0,0) rectangle (1,0.75);
+  \end{scope}
+  % angle
+  \draw (1,0) arc[start angle=0,end angle=\ang,radius=1];
+  \node at (1.45,0.32){$\alpha = 30^\circ$};
+  \node[below left] at (C){$C$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item On lâche le corps.
+  \begin{enumerate}[label=\alph*.]
+    \item Donne l'expression de l'accélération du centre de gravité de $A$.
+    \item Déduis la nature du mouvement de $A$.
+  \end{enumerate}
+  \item Calcule la tension $T$ du fil.
+  \item Après un parcours de 2 m sur le plan incliné, le fil reliant $A$ au cylindre est coupé.
+  \begin{enumerate}[label=\alph*.]
+    \item Calcule la vitesse du corps $A$ à l'issue du parcours de 2 m.
+    \item Calcule la nouvelle valeur $a'$ de l'accélération du corps $A$.
+  \end{enumerate}
+\end{enumerate}
+\noindent On donne : $g = 9{,}8$ m/s$^2$.
+
+\partie{C : résolution d'un problème}
+On veut déterminer le rendement d'une cellule photoélectrique au césium. Pour cela, on dispose d'une cellule photoélectrique qui reçoit un rayonnement lumineux monochromatique de longueur d'onde $\lambda = 0{,}4$ µm. La longueur d'onde seuil vaut $\lambda_0 = 0{,}66$ µm.
+
+\begin{enumerate}
+  \item Calcule, en joules, le travail d'extraction $W_0$ d'un électron de la cathode.
+  \item Calcule, en joules, l'énergie d'un photon lumineux $W$ qui arrive sur la cathode.
+  \item Calcule l'énergie cinétique maximale d'un électron émis par la cathode. Déduis sa vitesse.
+  \item Le courant photoélectrique a une intensité de saturation égale à $2{,}4\times10^{-9}$ A.
+  \begin{enumerate}[label=4.\arabic*.]
+    \item Combien faut-il de photons par seconde pour engendrer ce courant ? La puissance de rayonnement qui tombe sur la cathode est égale à $7{,}4\times10^{-7}$ W.
+    \item Quel est le rendement quantique de la cellule, c'est-à-dire le rapport entre le nombre de photons qui provoquent l'émission d'électrons et le nombre de photons incidents ?
+  \end{enumerate}
+\end{enumerate}
+\noindent On donne : $c = 3\times10^8$ m$\cdot$s$^{-1}$ ; $h = 6{,}62\times10^{-34}$ J$\cdot$s ; $e = 1{,}6\times10^{-19}$ C ; $m_e = 9\times10^{-31}$ kg.
+
+\end{document}
