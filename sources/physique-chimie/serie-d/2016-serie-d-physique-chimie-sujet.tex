@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2016 -- Physique-Chimie -- Série D}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Texte à trous.} Complète la phrase ci-après par les mots suivants : \textit{neutrons, l'atome, nucléons, protons}.
+
+\textit{Le noyau $\cdots\cdots$ est constitué des $\cdots\cdots$ et des $\cdots\cdots$ appelés $\cdots\cdots$}
+
+\medskip
+\noindent\textbf{2. Appariement.} Relie un élément-question de la colonne A à un élément-réponse de la colonne B. Exemple : $A_7 = b_8$.
+
+\begin{center}\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|p{0.4\linewidth}|p{0.5\linewidth}|}
+\hline
+\textbf{Colonne A} & \textbf{Colonne B} \\
+\hline
+$a_1$ : solution basique & $b_1$ : contient plus d'ions hydronium que d'ions hydroxyde \\
+\hline
+$a_2$ : solution acide & $b_2$ : isotopes \\
+\hline
+$a_3$ : le produit ionique de l'eau & $b_3$ : contient plus d'ions hydroxyde que d'ions hydronium \\
+\hline
+$a_4$ : nucléides de même $Z$ mais de $A$ différents & $b_4$ : aqueuse diluée \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent\textbf{3. Question à réponse construite.} La radioactivité $\gamma$ accompagne généralement les radioactivités $\alpha$ et $\beta$. Explique l'émission du rayonnement $\gamma$.
+
+\partie{B : application des connaissances}
+On a préparé une solution d'acide méthanoïque ($\ch{HCOOH}$) de concentration inconnue $C_0$. Le pH de cette solution est égal à $2{,}7$.
+
+\begin{enumerate}
+  \item Écris l'équation-bilan de la réaction de l'acide méthanoïque avec l'eau.
+  \item Fais l'inventaire de toutes les espèces chimiques présentes dans la solution.
+  \item Sachant que le pKa du couple acide-base associé à l'acide méthanoïque est $3{,}8$, calcule les concentrations molaires de toutes les espèces chimiques.
+  \item Déduis la concentration molaire $C_0$ de la solution d'acide méthanoïque.
+\end{enumerate}
+\noindent On donne $K_e = 10^{-14}$.
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Question à réponse courte.} Définis une onde transversale.
+
+\medskip
+\noindent\textbf{2. Réarrangement.} Ordonne la phrase suivante qui est écrite en désordre.
+
+\textit{Un oscillateur / est une fonction sinusoïdale du temps / est / dont / un oscillateur / harmonique / l'équation horaire du mouvement.}
+
+\medskip
+\noindent\textbf{3. Questions à alternative vrai ou faux.} Réponds par vrai ou faux aux affirmations suivantes :
+\begin{enumerate}[label=\alph*.]
+  \item Pour des oscillations de faible amplitude, un pendule pesant est un oscillateur harmonique de translation.
+  \item La longueur d'onde est la distance parcourue par une onde en une période.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{4. Schéma à compléter.} Dans le repère ci-dessous, représente les vecteurs de Fresnel $\vv{OA_1}$ et $\vv{OA_2}$ associés respectivement aux fonctions sinusoïdales : $y_1 = 2\sin\!\left(100\pi t + \dfrac{\pi}{2}\right)$ (cm) et $y_2 = 3\sin(50\pi t + \pi)$ (cm).
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \draw[->] (-2.6,0)--(2.6,0) node[right]{$x$(cm)};
+  \draw[->] (0,-2.6)--(0,2.6) node[above]{$y$(cm)};
+  \node[above left] at (-2.6,0){$x'$};
+  \node[below right] at (0,-2.6){$y'$};
+  \draw[->] (0,0)--(0.7,0) node[below]{$\vi$};
+  \draw[->] (0,0)--(0,0.7) node[left]{$\vj$};
+  \node[below left] at (0,0){$o$};
+\end{tikzpicture}
+\end{center}
+
+\partie{B : application des connaissances}
+Une corde de longueur $L = 1{,}2$ m et de masse $m = 40$ g soutient à son extrémité $C$ un solide de masse $M$. La partie horizontale de longueur $l = AB = 0{,}9$ m est le siège d'un phénomène d'ondes stationnaires. Un vibreur impose à l'extrémité $A$ un mouvement sinusoïdal transversal de fréquence $N = 50$ Hz. L'extrémité $C$ de la corde porte un solide de masse $M$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  % vibreur
+  \draw[pattern=north east lines] (-0.9,-0.12) rectangle (0,0.12);
+  \node[left] at (-0.9,0){vibreur};
+  \node[above] at (0.4,0.1){$A$};
+  % corde horizontale
+  \draw (0,0)--(5.5,0);
+  % poulie
+  \draw (6,0) circle (0.5);
+  \fill (6,0) circle (1pt);
+  \node[above] at (6,0.55){$B$};
+  % corde verticale vers C
+  \draw (6.5,0)--(6.5,-2.3);
+  % masse
+  \draw[fill=gray!30] (6.32,-2.6) rectangle (6.68,-2.3);
+  \node[right] at (6.55,-2.1){$C$};
+  \node[right] at (6.7,-2.45){$(M)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item On observe 6 fuseaux sur la partie $AB$ de la corde. Calcule :
+  \begin{enumerate}[label=\alph*.]
+    \item La longueur d'onde de la vibration.
+    \item La célérité de propagation.
+  \end{enumerate}
+  \item Détermine la valeur de la masse $M$.
+\end{enumerate}
+\noindent On donne $g = 10$ m/s$^2$.
+
+\partie{C : résolution d'un problème}
+On se propose de déterminer la vitesse d'un électron à la sortie des plaques d'un condensateur où règne un champ électrostatique uniforme $\vec{E}$. Pour cela, on considère un faisceau homocinétique d'électrons qui pénètre au point $O$ avec une vitesse initiale $V_0 = 10^7$ m/s, dans le champ électrostatique uniforme $\vec{E}$ compris entre deux plaques métalliques parallèles et horizontales $A$ et $B$ distantes de $d = 15$ cm.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \draw[->] (0,-0.2)--(0,2) node[above]{$y$};
+  \draw[->] (0,0)--(6.4,0) node[right]{$x$};
+  \draw[thick] (0.3,1)--(4.3,1) node[right]{$A$};
+  \draw[thick] (0.3,-1)--(4.3,-1) node[right]{$B$};
+  \node[below left] at (0,0){$o$};
+  \draw[->,thick] (0,0)--(1.2,0) node[below]{$\vec{v_0}$};
+  \draw[->] (0,0)--(0.6,0); \draw[->] (0,0)--(0,0.6) node[left]{$\vj$}; \node[below] at (0.7,0){$\vi$};
+  \fill (4,0.55) circle (1.5pt) node[above right]{$S$};
+  \draw[dashed] (0,0)--(4,0.55);
+  \draw[<->,dashed] (-0.3,-1)--(-0.3,1) node[midway,left]{$d$};
+  \draw[<->,dashed] (0.3,-1.4)--(4.3,-1.4) node[midway,below]{$l$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item On établit entre ces plaques, de longueur $l = 20$ cm, une différence de potentiel $V_A - V_B = U_{AB} = +150$ V.
+  \begin{enumerate}[label=\alph*.]
+    \item Donne le signe des plaques $A$ et $B$ puis représente le vecteur champ $\vec{E}$ entre les plaques.
+    \item Calcule l'intensité du vecteur champ $\vec{E}$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Établis les équations horaires du mouvement de l'électron dans le repère $(O,\vi,\vj)$.
+    \item Détermine l'équation cartésienne de la trajectoire.
+  \end{enumerate}
+  \item Trouve les composantes du vecteur vitesse $\vec{v_S}$ à la sortie $S$ du champ.
+  \item Déduis alors la norme du vecteur vitesse $\vec{v_S}$.
+\end{enumerate}
+\noindent Données : $q = e = -1{,}6\cdot10^{-19}$ C ; $m = 9{,}1\cdot10^{-31}$ kg.
+
+\end{document}

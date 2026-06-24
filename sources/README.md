@@ -13,7 +13,8 @@ sources/
 │  ├─ serie-c/        # sujets série C (2009–2020) + style-sujet.tex
 │  └─ serie-d/        # sujets série D (2010–2021) + style-sujet.tex
 └─ physique-chimie/
-   └─ serie-c/        # sujets série C (2010–2020) + style-pc.tex
+   ├─ serie-c/        # sujets série C (2010–2020) + style-pc.tex
+   └─ serie-d/        # sujets série D (2010–2020) + style-pc.tex
 ```
 
 Chaque sujet suit la convention de nommage du site :

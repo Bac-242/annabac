@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2013 -- Physique-Chimie -- Série D}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\exo{1}{(Spectre de l'atome d'hydrogène)}
+Les niveaux d'énergie quantifiés de l'atome d'hydrogène sont donnés par :
+\[ E_n = -\frac{13{,}6}{n^2}\ (\text{eV}) \quad n \text{ étant un nombre entier supérieur ou égal à } 1. \]
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer les énergies des niveaux correspondant à $n = 1$ ; $n = 2$ ; $n = 3$ ; $n = 4$ ; $n = 5$ et $n = \infty$.
+    \item Représenter dans le diagramme d'énergie les cinq premiers niveaux d'énergie ainsi que le niveau correspondant à l'atome ionisé.
+  \end{enumerate}
+  \item Le spectre de l'atome d'hydrogène contient les radiations de fréquences $N_a = 6{,}16\cdot10^{14}$ Hz et $N_b = 6{,}91\cdot10^{14}$ Hz. Sachant que ces deux radiations aboutissent au niveau $n = 2$, déterminer les numéros $a$ et $b$ des niveaux initiaux.
+\end{enumerate}
+\noindent On donne : $h = 6{,}62\cdot10^{-34}$ J$\cdot$s ; $1$ eV $= 1{,}6\cdot10^{-19}$ J.
+
+\exo{2}{(Réaction acide-base)}
+On dissout une quantité de soude de masse $m = 4{,}0$ g dans un volume $V_1 = 500$ mL de solution d'acide chlorhydrique de concentration molaire volumique $C_1 = 10^{-1}$ mol/L.
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Écrire les équations des réactions.
+    \item Déterminer, en moles, la quantité d'ions hydroxyde apportés par la soude et la quantité d'ions hydronium présents dans la solution d'acide chlorhydrique avant le mélange.
+  \end{enumerate}
+  \item Le mélange obtenu est-il acide ou basique ?
+  \item Calculer les concentrations des ions présents dans le mélange. En déduire le pH.
+  \item Quel volume de solution d'acide chlorhydrique de concentration $C_1$ faut-il ajouter au mélange précédent pour obtenir une solution neutre ?
+\end{enumerate}
+\noindent On donne : $K_e(\text{eau}) = 10^{-14}$ à $25\,^\circ$C ; masses atomiques en g/mol : Na : 23 ; O : 16 ; H : 1.
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\exo{1}{(Oscillations mécaniques)}
+\begin{minipage}{0.68\linewidth}
+Une tige homogène $OA$ de longueur $L = 1$ m, de masse $m = 100$ g, peut osciller sans frottement autour d'un axe horizontal $(\Delta)$ passant par son extrémité supérieure $O$. On fixe à l'autre extrémité $A$ de la tige une masse $m_A = \dfrac{3m}{2}$.
+
+Le pendule ainsi constitué est écarté de sa position d'équilibre d'un angle $\theta_0 = 0{,}15$ rad, puis il est abandonné sans vitesse initiale.
+\end{minipage}\hfill
+\begin{minipage}{0.28\linewidth}
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \draw[thick] (0,0)--(0,-3.2);
+  \node[above] at (0,0){$O$};
+  \node[right] at (0.05,-0.05){$(\Delta)$};
+  \draw (-0.12,-0.12)--(0.12,0.12); \draw (-0.12,0.12)--(0.12,-0.12);
+  \fill (0,-3.2) circle (2pt) node[below]{$A$};
+\end{tikzpicture}
+\end{minipage}
+
+\begin{enumerate}
+  \item Soit $G$ le centre d'inertie du système ainsi constitué.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que la position du centre d'inertie $G$ est telle que $OG = \dfrac{4L}{5}$.
+    \item Calculer le moment d'inertie $J_\Delta$ du système par rapport à $(\Delta)$.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item En utilisant la méthode énergétique, déterminer la nature du mouvement de ce pendule pour des oscillations de faible amplitude.
+    \item Écrire l'équation horaire du mouvement de ce pendule en prenant pour origine des temps l'instant où on l'abandonne.
+  \end{enumerate}
+\end{enumerate}
+
+\exo{2}{(Onde progressive)}
+Une lame vibrante est munie d'une pointe dont l'extrémité frappe la surface d'une nappe d'eau en un point $S$. La pointe a un mouvement rectiligne sinusoïdal de fréquence $N = 50$ Hz et d'amplitude $a = 3$ mm.
+
+\begin{enumerate}
+  \item Établir l'équation horaire du mouvement de $S$, sachant qu'à $t = 0$, la source $S$ est à son élongation maximale positive.
+  \item La nappe d'eau est le siège d'une onde progressive sinusoïdale transversale de longueur d'onde $\lambda = 2$ cm.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer la célérité des ondes.
+    \item Établir l'équation horaire $Y_M(t)$ du mouvement d'un point $M$ situé à la distance $x = 8{,}5$ cm de $S$.
+    \item Comparer les mouvements de $S$ et de $M$.
+    \item Représenter dans un même système d'axes les courbes $Y_S(t)$ et $Y_M(t)$.
+  \end{enumerate}
+\end{enumerate}
+
+\exo{3}{(Effet photoélectrique)}
+On éclaire une cellule photoélectrique au césium successivement avec deux radiations lumineuses de longueur d'onde $\lambda_1 = 410$ nm et $\lambda_2 = 740$ nm. On rappelle que $1$ nm $= 10^{-9}$ m.
+
+\begin{enumerate}
+  \item La longueur d'onde seuil photoélectrique du césium est $\lambda_0 = 660$ nm.
+  \begin{enumerate}[label=\alph*.]
+    \item Donner la définition de la longueur d'onde seuil.
+    \item Parmi les deux radiations, préciser celle qui provoque l'émission d'électrons.
+  \end{enumerate}
+  \item Pour la radiation qui provoque l'émission d'électrons, calculer en électron-volts l'énergie cinétique maximale d'un électron émis par la cathode.
+  \item On établit entre l'anode et la cathode une tension variable $U_{AC}$ et on note l'intensité du courant pour chaque valeur de $U_{AC}$. On donne la caractéristique $I = f(U_{AC})$.
+
+  \begin{center}
+  \begin{tikzpicture}[>=Stealth,scale=1]
+    \draw[->] (-2,0)--(6,0) node[right]{$U_{AC}$ (V)};
+    \draw[->] (0,-0.3)--(0,2.4) node[above]{$i(\mu$A$)$};
+    \draw[dashed] (-1.15,1.7)--(5.6,1.7);
+    \node[left] at (0,1.7){$1{,}2$};
+    \draw (-1.15,0.05)--(-1.15,-0.05) node[below]{$-1{,}15$};
+    \node[below right] at (0,0){$0$};
+    \draw[thick] plot[smooth,tension=0.7] coordinates {(-1.15,0)(-0.7,0.12)(-0.2,0.55)(0.3,1.25)(0.9,1.6)(1.8,1.7)(5.4,1.7)};
+  \end{tikzpicture}
+  \end{center}
+
+  \begin{enumerate}[label=\alph*.]
+    \item Que signifient les nombres $-1{,}15$ V et $1{,}2$ µA ?
+    \item Calculer la tension $U_{AC}$ pour laquelle les électrons arrivent à l'anode à la vitesse $V_A = 2\,000$ km/s.
+    \item Lorsqu'on a obtenu le courant de saturation, déterminer le nombre d'électrons émis par la cathode en 16 s.
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}

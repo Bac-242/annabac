@@ -1,0 +1,127 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2010 -- Physique-Chimie -- Série D}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\exo{1}{}
+On rappelle que les niveaux d'énergie quantifiés de l'atome d'hydrogène sont donnés par la relation :
+\[ E_n = -\frac{E_0}{n^2} \quad \text{avec } E_0 = 13{,}6 \text{ eV et } n \text{ étant un entier positif.} \]
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer, en joules, l'énergie qu'il faut fournir à un atome d'hydrogène pour permettre son passage de l'état fondamental au premier état excité.
+    \item Que se passe-t-il si l'atome d'hydrogène dans son état fondamental reçoit :
+    \begin{itemize}
+      \item un photon d'énergie $W = 1{,}83\cdot10^{-18}$ J ?
+      \item un électron d'énergie cinétique $E_c = 1{,}83\cdot10^{-18}$ J ?
+    \end{itemize}
+  \end{enumerate}
+  \item Définir et calculer l'énergie d'ionisation de l'atome d'hydrogène.
+  \item On considère la série de Lyman.
+  \begin{enumerate}[label=\alph*.]
+    \item Qu'appelle-t-on série de raies ?
+    \item L'analyse spectroscopique permet de déceler la radiation de fréquence $\nu = 3{,}8\cdot10^{15}$ Hz. À quelle transition correspond-elle ?
+  \end{enumerate}
+\end{enumerate}
+\noindent On donne : $h = 6{,}62\cdot10^{-34}$ J$\cdot$s ; $c = 3\cdot10^8$ m$\cdot$s$^{-1}$ ; $1$ eV $= 1{,}6\cdot10^{-19}$ J.
+
+\exo{2}{}
+On dose une eau de Javel à usage domestique. Pour cela, on fait réagir 20 mL de cette eau de Javel diluée contenant des ions hypochlorite ($\ch{ClO^-}$) dans un excès d'ions iodures $\ch{I^-}$. On acidifie le milieu.
+
+\begin{enumerate}
+  \item Sachant que les couples redox en présence sont : $\ch{ClO^-/Cl^-}$ et $\ch{I_2/I^-}$, écrire l'équation bilan de la réaction redox.
+  \item On dose les molécules de diiode $\ch{I_2}$ formées par une solution de thiosulfate ($\ch{S_2O_3^{2-}}$) de concentration molaire $0{,}100$ mol$\cdot$L$^{-1}$. L'équivalence est atteinte pour $15{,}2$ mL de solution de thiosulfate versés.
+  \begin{enumerate}[label=\alph*.]
+    \item Écrire l'équation bilan de la réaction de dosage. On donne le couple redox $(\ch{S_4O_6^{2-}/S_2O_3^{2-}})$.
+    \item Calculer la concentration molaire de l'eau de Javel en ions $\ch{ClO^-}$.
+  \end{enumerate}
+\end{enumerate}
+\noindent N.B : les molécules de diiode ($\ch{I_2}$) sont à l'état liquide à la température de l'expérience.
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\exo{1}{}
+Un proton animé d'une vitesse $\vec{V_0}$ entre dans un champ électrostatique uniforme $\vec{E}$ créé entre deux plaques $A$ et $B$, par un point $O$ situé à égale distance des plaques. La différence de potentiel entre les plaques est $U = 400$ V. On néglige le poids du proton.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  % axes
+  \draw[->] (0,-0.2)--(0,2) node[above]{$y$};
+  \draw[->] (0,0)--(8.4,0) node[right]{$x$};
+  % plaques
+  \draw[thick] (0.3,1)--(4.3,1) node[right]{$A$};
+  \draw[thick] (0.3,-1)--(4.3,-1) node[right]{$B$};
+  % O et V0
+  \node[below left] at (0,0){$O$};
+  \draw[->,thick] (0,0)--(1.2,0) node[above]{$\vec{V_0}$};
+  % champ E
+  \draw[->] (2.6,0.4)--(2.6,-0.4) node[right]{$\vec{E}$};
+  % ecran
+  \draw[thick] (8,-1.6)--(8,1.6);
+  % d
+  \draw[<->,dashed] (-0.3,-1)--(-0.3,1) node[midway,left]{$d$};
+  % L
+  \draw[<->,dashed] (0.3,-1.45)--(4.3,-1.45) node[midway,below]{$L$};
+  % D
+  \draw[<->,dashed] (2.6,-0.55)--(8,-0.55) node[midway,below]{$D$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item Sur un schéma clair :
+  \begin{enumerate}[label=\alph*.]
+    \item Indiquer les signes des plaques. Justifier.
+    \item Représenter la force électrostatique $\vec{F}$ qui s'exerce sur le proton dans le champ électrostatique.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Établir les équations horaires du mouvement du proton dans le repère $(O, x, y)$.
+    \item En déduire l'équation de la trajectoire du proton à l'intérieur des plaques.
+  \end{enumerate}
+  \item Le proton sort du champ par le point $S$ d'ordonnée $y_S = -0{,}96$ mm.
+  \begin{enumerate}[label=\alph*.]
+    \item Déterminer $V_0$.
+    \item Quelle est la nature du mouvement à l'extérieur des plaques ?
+  \end{enumerate}
+  \item On place un écran vertical à une distance $D = 30$ cm du milieu des plaques. Déterminer les coordonnées du point d'impact $M$ du proton sur l'écran.
+\end{enumerate}
+\noindent On donne : $d = 20$ cm ; $L = 10$ cm ; masse du proton : $m_p = 1{,}67\cdot10^{-27}$ kg ; charge du proton : $q_p = +e$ ; $e = 1{,}6\cdot10^{-19}$ C.
+
+\exo{2}{}
+\begin{minipage}{0.66\linewidth}
+Un pendule simple est constitué d'un fil inextensible de masse négligeable et de longueur $l$ et d'un solide ponctuel de masse $m = 100$ g. L'extrémité libre du fil est fixée à un point $O$ d'un support.
+
+Le pendule effectue des oscillations de faible amplitude, de période $T = 2$ s autour de l'axe horizontal $(\Delta)$ passant par le point $O$.
+\end{minipage}\hfill
+\begin{minipage}{0.3\linewidth}
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \draw[thick] (0,0)--(0,-3.2);
+  \node[above] at (0,0){$O$};
+  \node[right] at (0.05,-0.05){$(\Delta)$};
+  \draw (-0.12,-0.12)--(0.12,0.12); \draw (-0.12,0.12)--(0.12,-0.12);
+  \fill (0,-3.2) circle (2pt) node[below]{$A$};
+\end{tikzpicture}
+\end{minipage}
+
+\begin{enumerate}
+  \item Calculer :
+  \begin{enumerate}[label=\alph*.]
+    \item La longueur du fil.
+    \item L'incertitude absolue sur la mesure de la longueur sachant que $g = 9{,}80 \pm 0{,}01$ m/s$^2$ et que la période a été mesurée à $0{,}02$ s près.
+  \end{enumerate}
+  \item On écarte le pendule de sa position d'équilibre d'un angle de $60^\circ$ et on l'abandonne sans vitesse initiale. Déterminer :
+  \begin{enumerate}[label=\alph*.]
+    \item En appliquant le théorème de l'énergie cinétique, la vitesse linéaire du solide à son passage par la position $\theta = 45^\circ$.
+    \item La tension du fil à cette position.
+  \end{enumerate}
+  \item Calculer l'énergie cinétique du solide lorsqu'il passe par la position verticale.
+\end{enumerate}
+\noindent N.B : pour les questions 2 et 3, on prendra $g = 9{,}8$ m$\cdot$s$^{-2}$.
+
+\end{document}

@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2012 -- Physique-Chimie -- Série D}
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\exo{1}{(Dynamique)}
+Partant du repos, un ouvrier pousse un chariot de masse $m = 60$ kg sur une distance $AB$. L'ouvrier exerce pour cela une force $\vec{F}$ horizontale supposée constante le long du parcours $AB$. Ensuite, sous l'effet de l'énergie cinétique acquise en $B$, le chariot se déplace sur un plan incliné d'angle $\alpha$ par rapport à l'horizontale comme l'indique la figure ci-dessous. L'intensité des forces de frottement le long de tout le trajet $ABC$ est constante et égale à $\dfrac{P}{20}$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \def\ang{25}
+  % sol horizontal
+  \draw (-0.3,0)--(6.5,0);
+  % incline
+  \coordinate (B) at (5,0);
+  \coordinate (C) at ({5+3.2*cos(\ang)},{3.2*sin(\ang)});
+  \draw[thick] (B)--(C);
+  % chariot
+  \draw (0.5,0.12) rectangle (2.3,0.78);
+  \fill (1,0.12) circle (0.18); \fill[white] (1,0.12) circle (0.1);
+  \fill (1.8,0.12) circle (0.18); \fill[white] (1.8,0.12) circle (0.1);
+  \draw (1,0.12) circle (0.18); \draw (1.8,0.12) circle (0.18);
+  % F
+  \draw[->,thick] (2.5,0.45)--(3.5,0.45) node[above]{$\vec{F}$};
+  % angle
+  \draw (5.9,0) arc[start angle=0,end angle=\ang,radius=0.9];
+  \node at (6.25,0.22){$\alpha$};
+  % points
+  \node[below] at (0,0){$A$};
+  \node[below] at (5,0){$B$};
+  \fill (C) circle (1.5pt) node[above]{$C$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item En appliquant le théorème de l'énergie cinétique :
+  \begin{enumerate}[label=\alph*.]
+    \item Exprimer la vitesse $V_B$ du chariot au point $B$ en fonction de $F$, $m$, $l$ et $g$.
+    \item Exprimer la vitesse $V_0$ du chariot au point $C$ en fonction de $V_B$, $g$, $BC$ et $\alpha$, puis en fonction de $F$, $m$, $g$, $l$, $BC$ et $\alpha$.
+  \end{enumerate}
+  \item Déterminer la valeur de la force $F$ exercée par l'ouvrier pour que le chariot atteigne le point $C$ avec une vitesse nulle.
+\end{enumerate}
+\noindent On donne $AB = l = 30$ m ; $BC = 6$ m ; $\alpha = 25^\circ$ ; $g = 10$ m/s$^2$.
+
+\exo{2}{(Propagation)}
+\begin{enumerate}
+  \item Un point matériel $A$ est animé d'un mouvement sinusoïdal rectiligne vertical, de fréquence $50$ Hz et d'amplitude $a = 3$ mm.
+  \begin{enumerate}[label=\alph*.]
+    \item En prenant pour origine des temps l'instant où le point $A$ passe par sa position d'équilibre en allant dans le sens positif des élongations, donner l'expression de son élongation $y_A$ en fonction du temps.
+    \item À quel instant l'élongation est-elle égale à $1{,}5$ mm ? Le point $A$ se déplaçant dans le sens des élongations positives.
+  \end{enumerate}
+  \item Ce point matériel est à l'extrémité d'un vibreur, lié à une corde tendue, de masse linéique $\mu = 2{,}5\cdot10^{-3}$ kg/m et de longueur $l$. Des vibrations transversales se propagent le long de la corde avec une vitesse $v = 20$ m/s.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer l'intensité de la tension de la corde.
+    \item Quelle est la longueur d'onde des vibrations ?
+  \end{enumerate}
+\end{enumerate}
+
+\exo{3}{(Courant alternatif)}
+On considère trois dipôles $D_1$, $D_2$ et $D_3$ tels que :
+\begin{itemize}
+  \item $D_1$ est un conducteur ohmique de résistance $R$ ;
+  \item $D_2$ est une bobine de résistance $r$ et d'inductance $L$ ;
+  \item $D_3$ est un condensateur de capacité $C$.
+\end{itemize}
+Pour chaque dipôle, on réalise les expériences suivantes :
+
+\underline{Expérience 1 :} on applique une tension continue $U_C = 9$ V et on mesure l'intensité $I_C$ qui traverse le dipôle.
+
+\underline{Expérience 2 :} on applique une tension alternative sinusoïdale de valeur efficace $U_e = 12$ V et de fréquence $f = 50$ Hz, puis on mesure l'intensité efficace $I_e$ correspondante. On obtient les résultats suivants :
+
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Dipôle & $I_C$(A) & $I_e$(A) & $U_C/I_C$ & $U_e/I_e$ \\
+\hline
+$D_1$ & 1,875 & 2,5 & & \\
+\hline
+$D_2$ & 3,6 & 3,2 & & \\
+\hline
+$D_3$ & 0,0 & $5\cdot10^{-3}$ & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Compléter le tableau de données ci-dessus.
+  \item Déterminer $R$, $r$, $L$ et $C$.
+  \item On associe les trois éléments en série. Un générateur basse fréquence maintient une tension sinusoïdale de fréquence réglable aux bornes de l'association. On maintient la tension efficace constante et on fait varier la fréquence. Pour quelle valeur de la fréquence l'intensité efficace atteint-elle sa valeur maximale ?
+\end{enumerate}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\exo{1}{(Spectre de l'atome d'hydrogène)}
+Les niveaux énergétiques de l'atome d'hydrogène sont donnés par la formule :
+\[ E_n = -\frac{E_0}{n^2} \quad \text{avec } E_0 = 13{,}6 \text{ eV.} \]
+
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Calculer les énergies correspondant à $n = 1$, $n = 2$, $n = 3$, $n = \infty$.
+    \item Représenter le diagramme des énergies de l'atome. Échelle : 1 cm $\longrightarrow$ 1 eV.
+  \end{enumerate}
+  \item L'analyse du spectre d'émission de l'atome d'hydrogène révèle la présence de la radiation de longueur d'onde $\lambda = 656$ nm dans la série de Balmer.
+  \begin{enumerate}[label=\alph*.]
+    \item Montrer que les longueurs d'onde des radiations émises dans la série de Balmer vérifient la relation : $\dfrac{1}{\lambda} = R_H\left(\dfrac{1}{4} - \dfrac{1}{n^2}\right)$.
+    \item Déterminer $n$ pour la radiation de longueur d'onde $\lambda = 656$ nm.
+  \end{enumerate}
+  \item Un photon d'énergie 7 eV arrive sur un atome d'hydrogène. Que se passe-t-il :
+  \begin{enumerate}[label=\alph*.]
+    \item Si l'atome est dans l'état fondamental ?
+    \item Si l'atome est dans l'état excité ($n = 2$) ?
+  \end{enumerate}
+\end{enumerate}
+\noindent On donne : $h = 6{,}62\cdot10^{-34}$ J$\cdot$s ; $1$ nm $= 10^{-9}$ m ; $c = 3\cdot10^8$ m$\cdot$s$^{-1}$ ; $1$ eV $= 1{,}6\cdot10^{-19}$ J.
+
+\exo{2}{(Oxydoréduction)}
+\begin{enumerate}
+  \item \begin{enumerate}[label=\alph*.]
+    \item Écrire les demi-équations d'oxydoréduction des couples : $\ch{I_2/I^-}$ et $\ch{S_4O_6^{2-}/S_2O_3^{2-}}$.
+    \item En déduire l'équation bilan ionique de la réaction entre le diiode ($\ch{I_2}$) et l'ion thiosulfate ($\ch{S_2O_3^{2-}}$).
+  \end{enumerate}
+  \item On dose un volume $V_0 = 50$ mL d'une solution de diiode ($\ch{I_2}$) par une solution de thiosulfate ($\ch{S_2O_3^{2-}}$) de concentration $C_r = 0{,}1$ mol/L. L'équivalence est atteinte pour un volume ajouté $V_r = 25{,}5$ mL.
+  \begin{enumerate}[label=\alph*.]
+    \item Calculer la concentration $C_0$ de la solution de diiode ($\ch{I_2}$).
+    \item Quelle est la masse de cristaux de thiosulfate de sodium $\ch{Na_2S_2O_3}$ dissoute dans un litre si les cristaux utilisés contiennent 5 \% d'impureté ?
+  \end{enumerate}
+\end{enumerate}
+\noindent On donne les masses molaires atomiques en g/mol : S : 32 ; Na : 23 ; O : 16.
+
+\end{document}

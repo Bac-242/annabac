@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2020 -- Physique-Chimie -- Série D}
+
+% ============================ CHIMIE ============================
+\matiere{CHIMIE}{8 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Texte à trous.} Recopie et complète la phrase suivante avec quatre des six mots suivants : \textit{ionisation, noyau, constituants, fournir, liaison, isotopes}.
+
+\textit{L'énergie de $\cdots\cdots$ est l'énergie qu'il faut $\cdots\cdots$ à un $\cdots\cdots$ stable au repos pour séparer ses $\cdots\cdots$}
+
+\medskip
+\noindent\textbf{2. Questions à choix multiples.} Choisis la bonne réponse parmi les affirmations suivantes. Exemple : $e = e_1$.
+\begin{enumerate}[label=\alph*.]
+  \item Pour une solution aqueuse d'acide faible de concentration $C_A$ :
+  \begin{enumerate}[label=a.\arabic*.]
+    \item $[\ch{H_3O^+}] < C_A$
+    \item $[\ch{H_3O^+}] > C_A$
+    \item $[\ch{H_3O^+}] = C_A$
+  \end{enumerate}
+  \item La saponification d'un ester est une réaction :
+  \begin{enumerate}[label=b.\arabic*.]
+    \item limitée
+    \item totale
+    \item rapide
+  \end{enumerate}
+  \item La réaction d'oxydoréduction est une :
+  \begin{enumerate}[label=c.\arabic*.]
+    \item réaction de transfert d'électrons mettant en jeu deux couples oxydant/réducteur
+    \item réaction de transfert de protons
+    \item réaction qui ne concerne que les noyaux des atomes
+  \end{enumerate}
+  \item La densité d'un gaz par rapport à l'air est donnée par :
+  \begin{enumerate}[label=d.\arabic*.]
+    \item $29M$
+    \item $\dfrac{29}{M}$
+    \item $\dfrac{M}{29}$
+  \end{enumerate}
+\end{enumerate}
+
+\medskip
+\noindent\textbf{3. Schéma à compléter.} Recopie et complète l'équation de la réaction acido-basique suivante :
+\[ \ch{(CH_3)_3N} + \cdots \rightleftharpoons \ch{OH^-} + \cdots \]
+
+\partie{B : application des connaissances}
+On dispose d'un minerai de fer de masse 80 g. En vue de déterminer la teneur en fer de ce minerai, on fait réagir celui-ci avec la solution aqueuse d'acide chlorhydrique $(\ch{H_3O^+} + \ch{Cl^-})$. On observe un dégagement de 19,2 L de gaz mesurés dans les conditions normales de température et de pression (C.N.T.P).
+
+\begin{enumerate}
+  \item Écris les demi-équations ainsi que l'équation bilan de la réaction d'oxydo-réduction ayant lieu.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déterminer la masse de fer ayant réagi.
+    \item Déduis-en la teneur en fer de ce minerai.
+  \end{enumerate}
+\end{enumerate}
+\noindent Données : $M(\ch{Fe}) = 56$ g/mol ; $E^0(\ch{Fe^{2+}/Fe}) = -0{,}41$ V ; $E^0(\ch{H_3O^+/H_2}) = 0{,}00$ V ; $V_m = 22{,}4$ L/mol.
+
+% ============================ PHYSIQUE ============================
+\matiere{PHYSIQUE}{12 points}
+
+\partie{A : vérification des connaissances}
+
+\noindent\textbf{1. Question à réponse courte.} Définis la trajectoire d'un mobile.
+
+\medskip
+\noindent\textbf{2. Schéma à compléter.}
+\begin{minipage}{0.6\linewidth}
+Une bille de masse $m$ glisse sans frottement à l'intérieur d'une piste ayant la forme d'un arc de cercle. Reproduis et complète le schéma ci-contre en représentant les forces appliquées sur la bille $B$.
+\end{minipage}\hfill
+\begin{minipage}{0.36\linewidth}
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \draw[dashed] (0,2.6)--(2.6,2.6)--(2.6,0);
+  \draw[thick] (0,2.6) arc[start angle=180,end angle=270,radius=2.6];
+  \coordinate (B) at ({2.6+2.6*cos(217)},{2.6+2.6*sin(217)});
+  \fill (B) circle (1.8pt) node[right]{$B$};
+\end{tikzpicture}
+\end{minipage}
+
+\medskip
+\noindent\textbf{3. Questions à alternative vrai ou faux.} Réponds par vrai ou faux aux affirmations suivantes. Exemple : 3.a = vrai (cette réponse n'est pas à reproduire).
+\begin{enumerate}[label=\alph*.]
+  \item Un système animé d'un mouvement rectiligne uniforme a une vitesse constante.
+  \item La période d'un pendule de torsion est $T = 2\pi\sqrt{\dfrac{C}{J}}$.
+  \item Deux mouvements sont en phase lorsque le déphasage $\Delta\varphi = 2k\pi$.
+  \item Au cours d'un mouvement circulaire uniforme, le vecteur accélération a deux composantes non nulles.
+  \item L'équation différentielle caractéristique d'un système animé d'un mouvement de rotation sinusoïdal est $\ddot{x} + \omega^2 x = 0$.
+\end{enumerate}
+
+\partie{B : application des connaissances}
+Une lame vibrante provoque à l'extrémité $A$ d'une corde élastique de longueur $l = 3$ m et de masse $m = 90$ g, un mouvement vibratoire sinusoïdal transversal qui se propage le long de la corde. La corde est tendue horizontalement par une force d'intensité $F = 0{,}75$ N. On néglige l'amortissement et la réflexion des ondes aux extrémités de la corde. La courbe ci-dessous représente la vibration de l'élongation $y_A$ du point $A$ en fonction du temps.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \draw[very thin,gray!35] (0,-1.8) grid[xstep=0.5,ystep=0.45] (9.2,1.8);
+  \draw[->] (0,0)--(9.4,0) node[right]{$t$(s)};
+  \draw[->] (0,-2)--(0,2) node[above]{$y$(mm)};
+  \draw[dashed] (0,1.5)--(9,1.5); \draw[dashed] (0,-1.5)--(9,-1.5);
+  \node[left] at (0,1.5){$5$}; \node[left] at (0,-1.5){$-5$};
+  \draw[thick] plot[domain=0:9,samples=160] (\x,{1.5*sin(deg(pi*\x/2))});
+  \foreach \k/\lab in {2/0{,}01,4/0{,}02,6/0{,}03,8/0{,}04}{ \draw (\k,0.05)--(\k,-0.05) node[below]{$\lab$}; }
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+  \item Calcule la célérité de propagation des ondes le long de la corde.
+  \item \begin{enumerate}[label=\alph*.]
+    \item Déduis de cette courbe les valeurs de la période $T$ et de la fréquence $N$ du mouvement de $A$.
+    \item Calcule la longueur d'onde.
+    \item Écris l'équation horaire du mouvement de $A$.
+  \end{enumerate}
+\end{enumerate}
+
+\partie{C : résolution d'un problème}
+\begin{minipage}{0.58\linewidth}
+Un jardinier souhaite arroser des fleurs situées à 11 m du dispositif d'arrosage sur le sol horizontal. Le jet d'eau envoyé par le dispositif a une vitesse initiale $\vec{v_0}$ de module 12 m$\cdot$s$^{-1}$ et inclinée d'un angle $\alpha = 25^\circ$ avec l'horizontale. On étudie le mouvement de chute libre d'une des gouttes d'eau constituant le jet et on néglige l'action de l'air sur la goutte. On prendra $g = 10$ m$\cdot$s$^{-2}$.
+\end{minipage}\hfill
+\begin{minipage}{0.4\linewidth}
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1]
+  \draw[->] (-0.2,0)--(5.3,0) node[right]{$x$};
+  \draw[->] (0,-0.2)--(0,2.2) node[above]{$y$};
+  \draw[thick] plot[domain=0:5,samples=80] (\x,{0.24*\x*(5-\x)});
+  % v0
+  \draw[->,thick] (0,0)--({0.9*cos(25)},{0.9*sin(25)});
+  \node at (0.55,0.18){$\alpha$};
+  \draw (0.55,0) arc[start angle=0,end angle=25,radius=0.55];
+  % D
+  \draw[<->] (0,-0.35)--(5,-0.35) node[midway,below]{$D$};
+\end{tikzpicture}
+\end{minipage}
+
+\begin{enumerate}
+  \item Établis les équations horaires du mouvement de la goutte d'eau.
+  \item Déduis son équation de la trajectoire dans le système d'axes $(Ox, Oy)$.
+  \item Calcule la portée $D$ de cette goutte d'eau.
+  \item Peux-tu affirmer que les fleurs sont arrosées ? Justifie ta réponse.
+\end{enumerate}
+\noindent \underline{Aide} : $\sin 50^\circ = 0{,}766$.
+
+\end{document}
