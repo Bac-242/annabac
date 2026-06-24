@@ -20,7 +20,7 @@ export default defineConfig({
         description:
           'Sujets et corrigés du baccalauréat congolais, gratuits et accessibles hors-ligne.',
         lang: 'fr',
-        theme_color: '#15803d',
+        theme_color: '#f6f8fb',
         background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
@@ -34,13 +34,26 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Mise en cache pour consultation hors-ligne (pages + PDF visités)
+        // Tout le HTML/CSS/JS est précaché : le site se parcourt entièrement
+        // hors-ligne. Les PDF sont mis en cache au fil des consultations.
         globPatterns: ['**/*.{html,js,css,svg,woff2}'],
+        // Désactive le repli de navigation par défaut (sinon une NavigationRoute
+        // sert une page précachée sans tenter le réseau, masquant la logique
+        // ci-dessous et renvoyant un faux « hors-ligne » même en ligne).
+        navigateFallback: null,
         runtimeCaching: [
           {
-            urlPattern: ({ request }) => request.destination === 'document',
+            // Navigations : réseau d'abord (contenu frais), repli sur le cache,
+            // et en dernier recours la page « hors-ligne » précachée. Comme on
+            // tente le réseau, une URL inexistante renvoie bien le vrai 404
+            // quand on est en ligne — la page hors-ligne n'apparaît que si le
+            // réseau échoue réellement.
+            urlPattern: ({ request }) => request.mode === 'navigate',
             handler: 'NetworkFirst',
-            options: { cacheName: 'pages' },
+            options: {
+              cacheName: 'pages',
+              precacheFallback: { fallbackURL: '/offline' },
+            },
           },
           {
             urlPattern: ({ url }) => url.pathname.endsWith('.pdf'),

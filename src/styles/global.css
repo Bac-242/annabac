@@ -75,6 +75,36 @@ h4 {
   @apply -translate-y-0.5 shadow-[0_8px_30px_rgba(0,0,0,0.06)];
 }
 
+/* Squelettes de chargement (effet « shimmer ») */
+.skeleton {
+  background-color: var(--color-line);
+  background-image: linear-gradient(
+    90deg,
+    var(--color-line) 25%,
+    #eef1f6 37%,
+    var(--color-line) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.5rem;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* Version imprimable : masquer l'habillage */
 @media print {
   .no-print {

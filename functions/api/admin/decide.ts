@@ -1,5 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
-import { type Env, json, baseNom } from '../../_lib/util';
+import { type Env, json, baseNom, erreurServeur } from '../../_lib/util';
 import { adminEmail } from '../../_lib/access';
 import { commitFiles, getFileText, type FichierACommiter } from '../../_lib/github';
 
@@ -46,7 +46,7 @@ function construireMd(d: Ligne, sujetPdf: string | null, corrigePdf: string | nu
 }
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  const email = adminEmail(request);
+  const email = await adminEmail(request, env);
   if (!email) return json({ error: 'Non autorisé' }, 403);
 
   const body = (await request.json().catch(() => null)) as
@@ -56,63 +56,85 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ error: 'Requête invalide' }, 400);
   }
 
-  const ligne = (await env.DB.prepare(
-    `SELECT id, annee, serie, matiere, session, sujet_key, corrige_key, status
-       FROM submissions WHERE id = ?`
-  )
-    .bind(body.id)
-    .first()) as Ligne | null;
-  if (!ligne) return json({ error: 'Soumission introuvable' }, 404);
-  if (ligne.status !== 'pending') return json({ error: 'Déjà traitée' }, 409);
-
-  const finir = async (status: 'approved' | 'rejected') => {
-    await env.DB.prepare(
-      `UPDATE submissions SET status = ?, decided_at = ?, decided_by = ?, note = ? WHERE id = ?`
+  try {
+    const ligne = (await env.DB.prepare(
+      `SELECT id, annee, serie, matiere, session, sujet_key, corrige_key, status
+         FROM submissions WHERE id = ?`
     )
-      .bind(status, new Date().toISOString(), email, body.note ?? null, ligne.id)
+      .bind(body.id)
+      .first()) as Ligne | null;
+    if (!ligne) return json({ error: 'Soumission introuvable' }, 404);
+    if (ligne.status !== 'pending') return json({ error: 'Déjà traitée' }, 409);
+
+    const finir = async (status: 'approved' | 'rejected') => {
+      await env.DB.prepare(
+        `UPDATE submissions SET status = ?, decided_at = ?, decided_by = ?, note = ? WHERE id = ?`
+      )
+        .bind(status, new Date().toISOString(), email, body.note ?? null, ligne.id)
+        .run();
+      // Nettoyage des fichiers en attente
+      if (ligne.sujet_key) await env.BUCKET.delete(ligne.sujet_key);
+      if (ligne.corrige_key) await env.BUCKET.delete(ligne.corrige_key);
+    };
+
+    if (body.action === 'reject') {
+      await finir('rejected');
+      return json({ success: true, status: 'rejected' });
+    }
+
+    // --- Validation : publier dans le dépôt via un commit Git ---
+    if (!env.GITHUB_TOKEN) return json({ error: 'GITHUB_TOKEN non configuré' }, 500);
+
+    // Verrou atomique : on ne publie que si la ligne était encore « pending ».
+    // Évite un double commit en cas de double-clic ou de requêtes concurrentes.
+    const verrou = await env.DB.prepare(
+      `UPDATE submissions SET status = 'processing' WHERE id = ? AND status = 'pending'`
+    )
+      .bind(ligne.id)
       .run();
-    // Nettoyage des fichiers en attente
-    if (ligne.sujet_key) await env.BUCKET.delete(ligne.sujet_key);
-    if (ligne.corrige_key) await env.BUCKET.delete(ligne.corrige_key);
-  };
+    if (!verrou.meta.changes) return json({ error: 'Déjà traitée' }, 409);
 
-  if (body.action === 'reject') {
-    await finir('rejected');
-    return json({ success: true, status: 'rejected' });
+    try {
+      const base = baseNom(ligne);
+      const mdPath = `src/content/sujets/${base}.md`;
+      const existant = await getFileText(env, mdPath); // fiche déjà présente ?
+
+      const fichiers: FichierACommiter[] = [];
+      let sujetPdf = champ(existant, 'sujetPdf');
+      let corrigePdf = champ(existant, 'corrigePdf');
+
+      if (ligne.sujet_key) {
+        const obj = await env.BUCKET.get(ligne.sujet_key);
+        if (!obj) throw new Error('PDF sujet introuvable dans R2');
+        sujetPdf = `/pdfs/${base}-sujet.pdf`;
+        fichiers.push({ path: `public${sujetPdf}`, contentBase64: bytesToBase64(await obj.arrayBuffer()) });
+      }
+      if (ligne.corrige_key) {
+        const obj = await env.BUCKET.get(ligne.corrige_key);
+        if (!obj) throw new Error('PDF corrigé introuvable dans R2');
+        corrigePdf = `/pdfs/${base}-corrige.pdf`;
+        fichiers.push({ path: `public${corrigePdf}`, contentBase64: bytesToBase64(await obj.arrayBuffer()) });
+      }
+
+      fichiers.push({ path: mdPath, contentText: construireMd(ligne, sujetPdf, corrigePdf) });
+
+      // Le message de commit (historique public) ne contient pas l'e-mail de
+      // l'admin ; la traçabilité reste dans la colonne `decided_by` (privée).
+      const sha = await commitFiles(env, fichiers, `Publier ${base}`);
+
+      await finir('approved');
+      return json({ success: true, status: 'approved', commit: sha });
+    } catch (e) {
+      // La publication a échoué : on relâche le verrou pour permettre un retry.
+      await env.DB.prepare(
+        `UPDATE submissions SET status = 'pending' WHERE id = ? AND status = 'processing'`
+      )
+        .bind(ligne.id)
+        .run()
+        .catch(() => {});
+      return erreurServeur('admin/decide', e);
+    }
+  } catch (e) {
+    return erreurServeur('admin/decide', e);
   }
-
-  // --- Validation : publier dans le dépôt via un commit Git ---
-  if (!env.GITHUB_TOKEN) return json({ error: 'GITHUB_TOKEN non configuré' }, 500);
-
-  const base = baseNom(ligne);
-  const mdPath = `src/content/sujets/${base}.md`;
-  const existant = await getFileText(env, mdPath); // fiche déjà présente ?
-
-  const fichiers: FichierACommiter[] = [];
-  let sujetPdf = champ(existant, 'sujetPdf');
-  let corrigePdf = champ(existant, 'corrigePdf');
-
-  if (ligne.sujet_key) {
-    const obj = await env.BUCKET.get(ligne.sujet_key);
-    if (!obj) return json({ error: 'PDF sujet introuvable' }, 500);
-    sujetPdf = `/pdfs/${base}-sujet.pdf`;
-    fichiers.push({ path: `public${sujetPdf}`, contentBase64: bytesToBase64(await obj.arrayBuffer()) });
-  }
-  if (ligne.corrige_key) {
-    const obj = await env.BUCKET.get(ligne.corrige_key);
-    if (!obj) return json({ error: 'PDF corrigé introuvable' }, 500);
-    corrigePdf = `/pdfs/${base}-corrige.pdf`;
-    fichiers.push({ path: `public${corrigePdf}`, contentBase64: bytesToBase64(await obj.arrayBuffer()) });
-  }
-
-  fichiers.push({ path: mdPath, contentText: construireMd(ligne, sujetPdf, corrigePdf) });
-
-  const sha = await commitFiles(
-    env,
-    fichiers,
-    `Publier ${base} (modération par ${email})`
-  );
-
-  await finir('approved');
-  return json({ success: true, status: 'approved', commit: sha });
 };

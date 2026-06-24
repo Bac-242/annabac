@@ -48,6 +48,7 @@ Dans le dashboard Pages → **Variables d'environnement** (build & production) :
 
 - `PUBLIC_TURNSTILE_SITEKEY` = clé *site* Turnstile (injectée dans le formulaire au build)
 - `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_BRANCH` (déjà dans `wrangler.toml`)
+- `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD` = vérification du jeton Access (voir étape 4)
 
 ## 4. Protéger l'espace admin (Cloudflare Access)
 
@@ -56,15 +57,26 @@ Zero Trust → **Access** → Applications → *Add a self-hosted application* :
 - **Domaine** : `<votre-domaine>` chemins `/admin*` **et** `/api/admin/*`
 - **Politique** : *Allow* limité à votre e-mail (ou un groupe d'admins)
 
-Access injecte alors l'en-tête `Cf-Access-Authenticated-User-Email`, que les
-fonctions admin vérifient en plus.
+Access injecte alors l'en-tête `Cf-Access-Authenticated-User-Email`. **Mais cet
+en-tête seul est falsifiable** si la route n'est pas couverte par Access : les
+fonctions admin vérifient donc **cryptographiquement** le jeton signé
+`Cf-Access-Jwt-Assertion` (signature, expiration, audience). Renseignez pour cela
+deux variables (non secrètes) dans `wrangler.toml` / le dashboard Pages :
+
+- `ACCESS_TEAM_DOMAIN` : votre domaine d'équipe Zero Trust, p. ex.
+  `monequipe.cloudflareaccess.com`.
+- `ACCESS_AUD` : le tag **Application Audience (AUD)** de l'application Access
+  (onglet *Overview* de l'application).
+
+Si ces variables manquent, l'accès admin est **refusé** (fail-closed).
 
 ## 5. Turnstile
 
 Cloudflare → **Turnstile** → créez un widget pour votre domaine. Reportez la clé
 *site* dans `PUBLIC_TURNSTILE_SITEKEY` et la clé *secrète* via le secret
-`TURNSTILE_SECRET`. Laissés vides, le widget est masqué et la vérification
-ignorée (utile en local).
+`TURNSTILE_SECRET`. **Sans `TURNSTILE_SECRET`, l'API `/api/submit` refuse les
+envois** (fail-closed) : en local, utilisez la clé secrète de test Turnstile
+`1x0000000000000000000000000000000AA` (validation toujours réussie).
 
 ## Flux de bout en bout
 
@@ -86,13 +98,30 @@ Créez un fichier `.dev.vars` (non versionné) pour les secrets locaux :
 
 ```
 GITHUB_TOKEN=...
-TURNSTILE_SECRET=
+# Clé secrète de test Turnstile (toujours validée) : indispensable car la
+# vérification est désormais fail-closed.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+# Vérification du jeton Access (sinon l'API admin renvoie 403 en local, ce qui
+# est normal — Access ne s'exécute pas en local).
+ACCESS_TEAM_DOMAIN=monequipe.cloudflareaccess.com
+ACCESS_AUD=<aud-de-application-access>
 ```
 
 ## Sécurité, coûts et identité du projet
 
 Le projet est public et open source. Quelques précautions, surtout tant que
 tout repose sur des comptes personnels (GitHub, Cloudflare, carte bancaire).
+
+### Garde-fous déjà en place côté code
+
+- **Admin** : vérification cryptographique du jeton `Cf-Access-Jwt-Assertion`
+  (et non du seul en-tête e-mail, falsifiable) — voir `functions/_lib/access.ts`.
+  Fail-closed si `ACCESS_TEAM_DOMAIN` / `ACCESS_AUD` manquent.
+- **Soumissions** : Turnstile fail-closed, `matière` validée contre une liste,
+  contenu vérifié comme PDF (`%PDF-`), quotas anti-abus, IP seulement hachée.
+- **Erreurs** : journalisées côté serveur (`console.error`, visibles via
+  `wrangler tail`) et renvoyées au client sous forme générique, sans fuite
+  d'information interne. Les écritures R2/D1 sont nettoyées en cas d'échec.
 
 ### Jeton GitHub (limiter la casse en cas de fuite)
 

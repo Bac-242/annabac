@@ -1,0 +1,24 @@
+---
+interface Props {
+  nombre?: number;
+  class?: string;
+}
+
+const { nombre = 3, class: cls = '' } = Astro.props;
+const cartes = Array.from({ length: nombre });
+---
+
+<div class:list={['grid gap-4', cls]} aria-hidden="true">
+  {cartes.map(() => (
+    <div class="card p-5">
+      <div class="flex items-center justify-between gap-3">
+        <span class="skeleton h-5 w-32"></span>
+        <span class="skeleton h-4 w-16"></span>
+      </div>
+      <div class="mt-4 flex gap-2">
+        <span class="skeleton h-6 w-20 rounded-full"></span>
+        <span class="skeleton h-6 w-20 rounded-full"></span>
+      </div>
+    </div>
+  ))}
+</div>

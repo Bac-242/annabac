@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Squelette from '../../components/Squelette.astro';
+import EtatVide from '../../components/EtatVide.astro';
 // Page protégée par Cloudflare Access (politique sur /admin* et /api/admin/*).
 ---
 
@@ -9,13 +11,43 @@ import Layout from '../../layouts/Layout.astro';
     Soumissions en attente de validation. Vérifiez chaque PDF avant publication.
   </p>
 
-  <div id="etat" class="mt-6 text-sm text-[color:var(--color-muted)]">Chargement…</div>
+  <p id="compte" role="status" aria-live="polite" class="mt-6 text-sm text-[color:var(--color-muted)]" hidden></p>
+
+  <div id="squelette" class="mt-6">
+    <Squelette nombre={3} />
+  </div>
+
   <div id="liste" class="mt-4 grid gap-4"></div>
+
+  <div id="vide" hidden class="mt-6">
+    <EtatVide
+      icon="inbox"
+      titre="Aucune soumission en attente"
+      description="Les nouveaux envois des contributeurs apparaîtront ici."
+    />
+  </div>
+
+  <div id="erreur" hidden class="mt-6">
+    <EtatVide ton="erreur" icon="alert" titre="Impossible de charger les soumissions">
+      <p id="erreur-msg" class="-mt-1 text-sm text-[color:var(--color-muted)]"></p>
+      <button
+        id="reessayer"
+        type="button"
+        class="btn border border-[color:var(--color-line)] text-[color:var(--color-ink)]"
+      >
+        Réessayer
+      </button>
+    </EtatVide>
+  </div>
 </Layout>
 
 <script>
   const liste = document.getElementById('liste')!;
-  const etat = document.getElementById('etat')!;
+  const compte = document.getElementById('compte')!;
+  const squelette = document.getElementById('squelette')!;
+  const vide = document.getElementById('vide')!;
+  const erreur = document.getElementById('erreur')!;
+  const erreurMsg = document.getElementById('erreur-msg')!;
 
   type Submission = {
     id: string;
@@ -57,19 +89,43 @@ import Layout from '../../layouts/Layout.astro';
       </div>`;
   }
 
+  function afficherErreur(message: string) {
+    squelette.hidden = true;
+    liste.innerHTML = '';
+    compte.hidden = true;
+    vide.hidden = true;
+    erreurMsg.textContent = message;
+    erreur.hidden = false;
+  }
+
   async function charger() {
+    squelette.hidden = false;
+    erreur.hidden = true;
+    vide.hidden = true;
+    compte.hidden = true;
+    liste.innerHTML = '';
     try {
       const res = await fetch('/api/admin/list');
-      if (res.status === 403) { etat.textContent = 'Accès refusé.'; return; }
+      if (res.status === 403) {
+        afficherErreur('Accès refusé. Reconnectez-vous via Cloudflare Access.');
+        return;
+      }
       const data = await res.json();
       const subs: Submission[] = data.submissions ?? [];
-      if (subs.length === 0) { etat.textContent = 'Aucune soumission en attente.'; return; }
-      etat.textContent = `${subs.length} soumission(s) en attente.`;
+      squelette.hidden = true;
+      if (subs.length === 0) {
+        vide.hidden = false;
+        return;
+      }
+      compte.textContent = `${subs.length} soumission${subs.length > 1 ? 's' : ''} en attente.`;
+      compte.hidden = false;
       liste.innerHTML = subs.map(carte).join('');
     } catch {
-      etat.textContent = 'Erreur de chargement.';
+      afficherErreur('Vérifiez votre connexion, puis réessayez.');
     }
   }
+
+  document.getElementById('reessayer')?.addEventListener('click', charger);
 
   liste.addEventListener('click', async (e) => {
     const btn = (e.target as HTMLElement).closest('button[data-action]') as HTMLButtonElement | null;

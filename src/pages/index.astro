@@ -7,7 +7,7 @@ import { toutesLesAnnees, tousLesSujets, statutSujet } from '../lib/data';
 const annees = await toutesLesAnnees();
 // On n'affiche que les années récentes en accès rapide ; la liste complète
 // (qui grandit chaque session) reste accessible via /annees.
-const NB_ANNEES_ACCUEIL = 8;
+const NB_ANNEES_ACCUEIL = 5;
 const anneesRecentes = annees.slice(0, NB_ANNEES_ACCUEIL);
 const aPlusDAnnees = annees.length > anneesRecentes.length;
 const sujets = await tousLesSujets();

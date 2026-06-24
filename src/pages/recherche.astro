@@ -10,15 +10,35 @@ import Fil from '../components/Fil.astro';
     Trouvez un sujet par matière, année, chapitre ou mot-clé.
   </p>
 
+  <!-- Squelette affiché tant que Pagefind n'est pas monté (réseau lent). -->
+  <div id="recherche-skeleton" class="mt-8" aria-hidden="true">
+    <div class="skeleton h-11 w-full rounded-full"></div>
+    <div class="mt-6 grid gap-3">
+      <div class="skeleton h-16 w-full"></div>
+      <div class="skeleton h-16 w-full"></div>
+      <div class="skeleton h-16 w-full"></div>
+    </div>
+  </div>
+
   <div id="recherche" class="mt-8"></div>
+
+  <p class="mt-8 text-sm text-[color:var(--color-muted)]">
+    Vous ne trouvez pas ? Parcourez par
+    <a href="/series" class="text-[color:var(--color-accent)] hover:underline">série</a>,
+    <a href="/annees" class="text-[color:var(--color-accent)] hover:underline">année</a> ou
+    <a href="/matieres" class="text-[color:var(--color-accent)] hover:underline">matière</a>,
+    ou <a href="/contribuer" class="text-[color:var(--color-accent)] hover:underline">proposez le document</a>.
+  </p>
 
   <!-- Pagefind est généré au build ; absent en mode dev. is:inline évite que
        Astro tente de bundler ces fichiers (qui n'existent pas encore). -->
   <link is:inline href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-  <script is:inline src="/pagefind/pagefind-ui.js" onerror="window.__pagefindAbsent=true"></script>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
   <script is:inline>
     window.addEventListener('DOMContentLoaded', () => {
       const el = document.getElementById('recherche');
+      const skeleton = document.getElementById('recherche-skeleton');
+      if (skeleton) skeleton.remove();
       if (window.PagefindUI) {
         new window.PagefindUI({
           element: '#recherche',

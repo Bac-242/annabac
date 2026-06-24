@@ -1,9 +1,49 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Fil from '../../components/Fil.astro';
-import { toutesLesAnnees } from '../../lib/data';
+import Icone from '../../components/Icone.astro';
+import EtatVide from '../../components/EtatVide.astro';
+import { tousLesSujets, statutSujet, styleSerie } from '../../lib/data';
 
-const annees = await toutesLesAnnees();
+const sujets = await tousLesSujets();
+const disponibles = sujets.filter((s) => statutSujet(s.data) !== 'a-venir');
+
+// Regroupe les sujets disponibles par année, avec le détail par série.
+const parAnnee = new Map<
+  number,
+  { annee: number; nombre: number; series: Map<string, number> }
+>();
+for (const s of disponibles) {
+  const y = s.data.annee;
+  let e = parAnnee.get(y);
+  if (!e) {
+    e = { annee: y, nombre: 0, series: new Map() };
+    parAnnee.set(y, e);
+  }
+  e.nombre += 1;
+  e.series.set(s.data.serie, (e.series.get(s.data.serie) ?? 0) + 1);
+}
+
+const annees = [...parAnnee.values()]
+  .sort((a, b) => b.annee - a.annee)
+  .map((e) => ({
+    annee: e.annee,
+    nombre: e.nombre,
+    series: [...e.series.entries()]
+      .map(([code, n]) => ({ code, n }))
+      .sort((a, b) => a.code.localeCompare(b.code)),
+  }));
+
+const seriesDispo = [...new Set(disponibles.map((s) => s.data.serie))].sort(
+  (a, b) => a.localeCompare(b, 'fr')
+);
+
+const totalSujets = disponibles.length;
+const anneeMin = annees.length ? annees[annees.length - 1].annee : null;
+const anneeMax = annees.length ? annees[0].annee : null;
+
+const champClass =
+  'rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-2 text-sm text-[color:var(--color-ink)] outline-none focus:border-[color:var(--color-teal)]';
 ---
 
 <Layout titre="Années" description="Parcourir les annales du baccalauréat congolais par année.">
@@ -13,12 +53,175 @@ const annees = await toutesLesAnnees();
     Tous les sujets d'une session, toutes séries confondues.
   </p>
 
-  <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-    {annees.map((a) => (
-      <a href={`/annees/${a.annee}`} class="card card-hover flex items-baseline justify-between p-6">
-        <span class="text-2xl font-semibold tracking-tight text-[color:var(--color-ink)]">{a.annee}</span>
-        <span class="text-[13px] text-[color:var(--color-muted)]">{a.nombre}</span>
-      </a>
-    ))}
+  {annees.length > 0 && (
+    <div class="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-[color:var(--color-muted)]">
+      <Icone nom="calendar" taille={16} />
+      <span><strong class="font-semibold text-[color:var(--color-ink)]">{annees.length}</strong> sessions</span>
+      <span aria-hidden="true">·</span>
+      <span><strong class="font-semibold text-[color:var(--color-ink)]">{totalSujets}</strong> sujets</span>
+      {anneeMin !== null && anneeMax !== null && (
+        <>
+          <span aria-hidden="true">·</span>
+          <span>de {anneeMin} à {anneeMax}</span>
+        </>
+      )}
+    </div>
+  )}
+
+  <div data-annees>
+    <div class="no-print mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
+      <label class="flex flex-1 flex-col gap-1.5 sm:min-w-[16rem]">
+        <span class="text-[13px] font-medium text-[color:var(--color-muted)]">Rechercher</span>
+        <span class="relative flex items-center">
+          <span class="pointer-events-none absolute left-3.5 text-[color:var(--color-muted)]">
+            <Icone nom="search" taille={16} />
+          </span>
+          <input
+            data-recherche
+            type="search"
+            inputmode="numeric"
+            enterkeyhint="search"
+            placeholder="Une année, ex. 2018"
+            aria-label="Rechercher une année"
+            class={`${champClass} w-full pl-9`}
+          />
+        </span>
+      </label>
+
+      {seriesDispo.length > 1 && (
+        <label class="flex flex-col gap-1.5">
+          <span class="text-[13px] font-medium text-[color:var(--color-muted)]">Série</span>
+          <select data-filtre-serie class={champClass}>
+            <option value="">Toutes les séries</option>
+            {seriesDispo.map((s) => <option value={s}>Série {s}</option>)}
+          </select>
+        </label>
+      )}
+
+      <label class="flex flex-col gap-1.5">
+        <span class="text-[13px] font-medium text-[color:var(--color-muted)]">Trier par</span>
+        <select data-tri class={champClass}>
+          <option value="recent">Plus récentes</option>
+          <option value="ancien">Plus anciennes</option>
+          <option value="volume">Nombre de sujets</option>
+        </select>
+      </label>
+    </div>
+
+    <p class="mt-4 text-[13px] text-[color:var(--color-muted)]" aria-live="polite">
+      <span data-compteur>{annees.length}</span>
+      <span data-compteur-label>{annees.length > 1 ? 'sessions' : 'session'}</span>
+    </p>
+
+    <div data-vide hidden class="mt-2">
+      <EtatVide
+        icon="search"
+        titre="Aucune année ne correspond"
+        description="Modifiez votre recherche ou réinitialisez le filtre par série."
+      />
+    </div>
+
+    <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" data-liste>
+      {annees.map((a) => (
+        <a
+          data-carte
+          data-annee={a.annee}
+          data-nombre={a.nombre}
+          data-series={a.series.map((s) => s.code).join(' ')}
+          href={`/annees/${a.annee}`}
+          class="card card-hover group flex flex-col gap-4 p-5"
+          aria-label={`Baccalauréat ${a.annee} — ${a.nombre} sujet(s)`}
+        >
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="text-3xl font-semibold tracking-tight text-[color:var(--color-ink)]">{a.annee}</span>
+            <span class="inline-flex items-center gap-1 text-[13px] font-medium text-[color:var(--color-muted)] transition group-hover:text-[color:var(--color-teal)]">
+              {a.nombre} sujet{a.nombre > 1 ? 's' : ''}
+              <Icone nom="arrow-right" taille={14} />
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            {a.series.map((s) => {
+              const st = styleSerie(s.code);
+              return (
+                <span
+                  class="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
+                  style={`background:${st.bg};color:${st.fg}`}
+                >
+                  Série {s.code}
+                  <span class="opacity-70">{s.n}</span>
+                </span>
+              );
+            })}
+          </div>
+        </a>
+      ))}
+    </div>
   </div>
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-annees]').forEach((bloc) => {
+    const grille = bloc.querySelector<HTMLElement>('[data-liste]');
+    const recherche = bloc.querySelector<HTMLInputElement>('[data-recherche]');
+    const filtreSerie = bloc.querySelector<HTMLSelectElement>('[data-filtre-serie]');
+    const tri = bloc.querySelector<HTMLSelectElement>('[data-tri]');
+    const compteur = bloc.querySelector<HTMLElement>('[data-compteur]');
+    const compteurLabel = bloc.querySelector<HTMLElement>('[data-compteur-label]');
+    const vide = bloc.querySelector<HTMLElement>('[data-vide]');
+    if (!grille) return;
+
+    const cartes = Array.from(grille.querySelectorAll<HTMLElement>('[data-carte]'));
+
+    // Restaure l'état (recherche / série / tri) depuis l'URL au chargement.
+    const params = new URLSearchParams(window.location.search);
+    if (recherche && params.has('q')) recherche.value = params.get('q') ?? '';
+    if (filtreSerie && params.has('serie')) filtreSerie.value = params.get('serie') ?? '';
+    if (tri && params.has('tri')) tri.value = params.get('tri') ?? 'recent';
+
+    function synchroniserUrl(q: string, serie: string, mode: string) {
+      const p = new URLSearchParams(window.location.search);
+      q ? p.set('q', q) : p.delete('q');
+      serie ? p.set('serie', serie) : p.delete('serie');
+      mode && mode !== 'recent' ? p.set('tri', mode) : p.delete('tri');
+      const requete = p.toString();
+      const url = window.location.pathname + (requete ? `?${requete}` : '');
+      window.history.replaceState(null, '', url);
+    }
+
+    function appliquer() {
+      const q = (recherche?.value ?? '').trim();
+      const serie = filtreSerie?.value ?? '';
+
+      let visibles = 0;
+      for (const carte of cartes) {
+        const okAnnee = !q || (carte.dataset.annee ?? '').includes(q);
+        const okSerie =
+          !serie || (carte.dataset.series ?? '').split(' ').includes(serie);
+        const visible = okAnnee && okSerie;
+        carte.hidden = !visible;
+        if (visible) visibles++;
+      }
+
+      const mode = tri?.value ?? 'recent';
+      const ordonnees = [...cartes].sort((a, b) => {
+        const aA = Number(a.dataset.annee), bA = Number(b.dataset.annee);
+        const aN = Number(a.dataset.nombre), bN = Number(b.dataset.nombre);
+        if (mode === 'ancien') return aA - bA;
+        if (mode === 'volume') return bN - aN || bA - aA;
+        return bA - aA;
+      });
+      for (const carte of ordonnees) grille!.appendChild(carte);
+
+      if (compteur) compteur.textContent = String(visibles);
+      if (compteurLabel) compteurLabel.textContent = visibles > 1 ? 'sessions' : 'session';
+      if (vide) vide.hidden = visibles > 0;
+
+      synchroniserUrl(q, serie, mode);
+    }
+
+    recherche?.addEventListener('input', appliquer);
+    filtreSerie?.addEventListener('change', appliquer);
+    tri?.addEventListener('change', appliquer);
+    appliquer();
+  });
+</script>

@@ -1,0 +1,44 @@
+---
+import Icone from './Icone.astro';
+
+interface Props {
+  icon?: string;
+  titre: string;
+  description?: string;
+  cta?: { href: string; label: string };
+  ton?: 'neutre' | 'erreur' | 'succes';
+  class?: string;
+}
+
+const {
+  icon = 'inbox',
+  titre,
+  description,
+  cta,
+  ton = 'neutre',
+  class: cls = '',
+} = Astro.props;
+
+const tonIcone =
+  ton === 'erreur'
+    ? 'bg-rose-50 text-rose-500'
+    : ton === 'succes'
+      ? 'bg-emerald-50 text-emerald-600'
+      : 'bg-[color:var(--color-canvas)] text-[color:var(--color-muted)]';
+---
+
+<div class:list={['card flex flex-col items-center gap-4 px-6 py-12 text-center', cls]}>
+  <span class:list={['flex h-12 w-12 items-center justify-center rounded-2xl', tonIcone]}>
+    <Icone nom={icon} taille={24} />
+  </span>
+  <div class="space-y-1">
+    <p class="font-medium tracking-tight text-[color:var(--color-ink)]">{titre}</p>
+    {description && (
+      <p class="mx-auto max-w-sm text-sm text-[color:var(--color-muted)]">{description}</p>
+    )}
+  </div>
+  {cta && (
+    <a href={cta.href} class="btn btn-primary mt-1">{cta.label}</a>
+  )}
+  <slot />
+</div>

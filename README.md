@@ -17,7 +17,8 @@ consultation hors-ligne.
   image de partage générée (`public/og.png`).
 - **Cloudflare** (Pages Functions + R2 + D1) : API de soumission et file de
   modération, **Turnstile** (anti-spam), **Web Analytics** (sans cookie).
-  Voir [DEPLOY.md](DEPLOY.md).
+  L'espace admin est protégé par **Cloudflare Access** avec vérification
+  cryptographique du jeton (JWT). Voir [DEPLOY.md](DEPLOY.md).
 - **Pagefind** : moteur de recherche statique (présent mais désactivé pour
   l'instant côté interface).
 

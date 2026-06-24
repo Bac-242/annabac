@@ -23,6 +23,11 @@ bucket_name = "annabac-soumissions"
 GITHUB_OWNER = "Bac-242"
 GITHUB_REPO = "annabac"
 GITHUB_BRANCH = "main"
+# Vérification cryptographique du jeton Cloudflare Access (espace admin).
+# ACCESS_TEAM_DOMAIN : votre domaine d'équipe Zero Trust, ex. "monequipe.cloudflareaccess.com"
+# ACCESS_AUD         : tag « Application Audience (AUD) » de l'application Access /admin
+ACCESS_TEAM_DOMAIN = ""
+ACCESS_AUD = ""
 
 # Secrets (NE PAS mettre ici) — à définir via :
 #   wrangler pages secret put GITHUB_TOKEN

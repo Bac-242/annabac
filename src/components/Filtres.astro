@@ -2,6 +2,7 @@
 import type { Sujet } from '../lib/data';
 import { statutSujet } from '../lib/data';
 import SujetCarte from './SujetCarte.astro';
+import EtatVide from './EtatVide.astro';
 
 interface Props {
   sujets: Sujet[];
@@ -69,9 +70,13 @@ const selectClass =
     </label>
   </div>
 
-  <p data-vide class="hidden rounded-2xl bg-[color:var(--color-surface)] p-5 text-sm text-[color:var(--color-muted)]">
-    Aucun sujet ne correspond à ces filtres.
-  </p>
+  <div data-vide class="hidden">
+    <EtatVide
+      icon="search"
+      titre="Aucun sujet ne correspond"
+      description="Essayez d'élargir vos filtres pour voir plus de résultats."
+    />
+  </div>
 
   <div class="grid gap-4 sm:grid-cols-2" data-liste>
     {sujets.map((sujet) => (
