@@ -1,8 +1,11 @@
 ---
 import '../styles/global.css';
 import pkg from '../../package.json';
+import Icone from '../components/Icone.astro';
 
 const version = pkg.version;
+// Adresse de contact du projet (utilisée par la modale « Contactez-nous »).
+const contact = 'contact.bac242@gmail.com';
 
 interface Props {
   titre: string;
@@ -160,17 +163,102 @@ const estActif = (href: string) =>
       <slot />
     </main>
 
-    <footer class="no-print mt-10 border-t border-[color:var(--color-line)]">
+    <footer
+      class="no-print sticky bottom-0 z-10 mt-10 border-t border-[color:var(--color-line)] bg-[color:var(--color-canvas)]/85 backdrop-blur-xl"
+    >
       <div
-        class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-7 text-center text-xs text-[color:var(--color-muted)]"
+        class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-4 text-center text-xs text-[color:var(--color-muted)]"
       >
         <span>Bac 242</span>
         <span aria-hidden="true" class="opacity-50">·</span>
         <span>v{version}</span>
         <span aria-hidden="true" class="opacity-50">·</span>
+        <a href="/contributeurs" class="transition hover:text-[color:var(--color-ink)]">Contributeurs</a>
+        <span aria-hidden="true" class="opacity-50">·</span>
         <a href="/a-propos" class="transition hover:text-[color:var(--color-ink)]">À propos</a>
+        <span aria-hidden="true" class="opacity-50">·</span>
+        <button
+          type="button"
+          id="contact-ouvrir"
+          class="font-medium text-[color:var(--color-accent)] transition hover:underline"
+        >
+          Contactez-nous
+        </button>
       </div>
     </footer>
+
+    <!-- Modale de contact : construit un lien mailto, n'enregistre rien. -->
+    <dialog
+      id="contact-modal"
+      data-email={contact}
+      class="m-auto w-[min(30rem,calc(100vw-2rem))] rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-canvas)] p-0 text-[color:var(--color-ink)] backdrop:bg-black/40"
+    >
+      <form id="contact-form" class="flex flex-col gap-4 p-6">
+        <div class="flex items-start justify-between gap-4">
+          <h2 class="text-lg font-medium tracking-tight text-[color:var(--color-navy)]">Nous contacter</h2>
+          <button
+            type="button"
+            id="contact-fermer"
+            aria-label="Fermer"
+            class="-mr-1 -mt-1 flex h-8 w-8 items-center justify-center rounded-full text-[color:var(--color-muted)] hover:bg-[color:var(--color-line)]/50 hover:text-[color:var(--color-ink)]"
+          >
+            <Icone nom="close" taille={18} />
+          </button>
+        </div>
+        <p class="text-sm text-[color:var(--color-muted)]">
+          Votre message ouvrira votre application de messagerie, pré-rempli. Rien
+          n'est enregistré sur le site.
+        </p>
+        <label class="flex flex-col gap-1.5 text-sm">
+          <span class="font-medium">Votre nom <span class="text-[color:var(--color-muted)]">(optionnel)</span></span>
+          <input name="nom" maxlength="80" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2" />
+        </label>
+        <label class="flex flex-col gap-1.5 text-sm">
+          <span class="font-medium">Objet</span>
+          <input name="objet" required maxlength="120" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2" />
+        </label>
+        <label class="flex flex-col gap-1.5 text-sm">
+          <span class="font-medium">Message</span>
+          <textarea name="message" required rows="4" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2"></textarea>
+        </label>
+        <div class="flex justify-end gap-3">
+          <button type="button" id="contact-annuler" class="btn border border-[color:var(--color-line)] text-[color:var(--color-ink)]">
+            Annuler
+          </button>
+          <button type="submit" class="btn btn-primary">Ouvrir ma messagerie</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script>
+      const ouvrir = document.getElementById('contact-ouvrir');
+      const modal = document.getElementById('contact-modal') as HTMLDialogElement | null;
+      const fermerContact = document.getElementById('contact-fermer');
+      const annuler = document.getElementById('contact-annuler');
+      const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+
+      ouvrir?.addEventListener('click', () => modal?.showModal());
+      fermerContact?.addEventListener('click', () => modal?.close());
+      annuler?.addEventListener('click', () => modal?.close());
+      // Clic sur l'arrière-plan : fermer.
+      modal?.addEventListener('click', (e) => {
+        if (e.target === modal) modal.close();
+      });
+
+      contactForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(contactForm);
+        const email = modal?.dataset.email ?? '';
+        const nom = String(fd.get('nom') ?? '').trim();
+        const objet = String(fd.get('objet') ?? '').trim();
+        const message = String(fd.get('message') ?? '').trim();
+        const corps = (nom ? `De : ${nom}\n\n` : '') + message;
+        const url = `mailto:${email}?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(corps)}`;
+        window.location.href = url;
+        modal?.close();
+        contactForm.reset();
+      });
+    </script>
 
     {beacon && (
       <script

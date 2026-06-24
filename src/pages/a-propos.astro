@@ -29,7 +29,7 @@ const titreSection =
     <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">À propos</h1>
     <p class="mt-4 text-lg leading-relaxed text-[color:var(--color-muted)]">
       Bac 242 est une bibliothèque en ligne d'annales du baccalauréat congolais
-      — sujets et corrigés — pensée comme un bien commun de l'éducation.
+      (sujets et corrigés) pensée comme un bien commun de l'éducation.
     </p>
     <div class="mt-5 flex flex-wrap gap-2.5">
       {valeurs.map((v) => (
@@ -58,7 +58,7 @@ const titreSection =
     </p>
     <p>
       Le code est ouvert : <a href={depot} class={lien}>voir le dépôt sur GitHub</a>.
-      Le projet n'en est qu'à ses débuts —
+      Le projet n'en est qu'à ses débuts,
       <a href="/contribuer" class={lien}>contribuez</a> pour l'aider à grandir.
     </p>
   </div>
@@ -86,6 +86,13 @@ const titreSection =
         disposition à des fins pédagogiques et non commerciales : merci de ne pas
         les réutiliser sans l'accord des ayants droit et de conserver
         l'attribution affichée.
+      </p>
+      <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+        Lors de chaque envoi, le contributeur déclare l'origine du document
+        (sujet officiel, corrigé personnel, corrigé d'un tiers avec autorisation)
+        et confirme avoir le droit de le partager à ces conditions. L'origine et
+        l'auteur, lorsqu'ils sont renseignés, sont affichés en attribution sur la
+        fiche du document.
       </p>
     </section>
 
@@ -116,11 +123,21 @@ const titreSection =
         sans cookie.
       </p>
       <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-        Lors d'une contribution, vous pouvez fournir une adresse e-mail
-        facultative. Elle sert uniquement à vous recontacter au sujet de votre
-        envoi et n'est ni publiée, ni revendue, ni utilisée à des fins de
-        prospection. Les fichiers soumis sont stockés temporairement le temps de
-        la modération.
+        Lors d'une contribution, vous pouvez indiquer un <strong>crédit</strong>
+        (pseudonyme ou nom) : c'est une information publique, affichée sur la
+        fiche pour vous attribuer le partage. Vous pouvez aussi rester anonyme.
+      </p>
+      <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+        Le formulaire de contribution <strong>ne collecte aucune adresse e-mail
+        ni autre donnée de contact</strong>. Une empreinte technique de votre
+        adresse IP est conservée le temps de la modération pour limiter les abus,
+        puis effacée dès que l'envoi est traité (publié ou rejeté) ; les fichiers
+        en attente sont stockés temporairement, le temps de la modération.
+      </p>
+      <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+        Le bouton « Contactez-nous » se contente d'ouvrir votre propre
+        application de messagerie avec un message pré-rempli : aucune information
+        n'est enregistrée par le site à cette occasion.
       </p>
       <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
         Pour toute demande d'accès ou de suppression de vos données, écrivez à

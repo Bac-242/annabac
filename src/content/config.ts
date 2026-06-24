@@ -30,6 +30,7 @@ const sujets = defineCollection({
     sujetPdf: z.string().optional(), // chemin public vers le PDF du sujet
     corrigePdf: z.string().optional(), // chemin public vers le PDF du corrigé
     source: z.string().optional(), // attribution (auteur / origine des documents)
+    credit: z.string().optional(), // crédit public du contributeur (pseudonyme)
   }),
 });
 

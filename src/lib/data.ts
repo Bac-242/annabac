@@ -197,3 +197,23 @@ export async function sujetsParMatiere(slugMatiere: string): Promise<Sujet[]> {
   const sujets = await tousLesSujets();
   return sujets.filter((s) => slugify(s.data.matiere) === slugMatiere);
 }
+
+/**
+ * Crédits publics des contributeurs : à la manière de l'historique de
+ * Wikipédia, on liste les pseudonymes ayant partagé des documents, avec le
+ * nombre de fiches concernées. Triés par nombre décroissant puis alphabétique.
+ */
+export async function contributeurs(): Promise<
+  { credit: string; nombre: number }[]
+> {
+  const sujets = await tousLesSujets();
+  const compte = new Map<string, number>();
+  for (const s of sujets) {
+    const credit = s.data.credit?.trim();
+    if (!credit) continue;
+    compte.set(credit, (compte.get(credit) ?? 0) + 1);
+  }
+  return [...compte.entries()]
+    .map(([credit, nombre]) => ({ credit, nombre }))
+    .sort((a, b) => b.nombre - a.nombre || a.credit.localeCompare(b.credit, 'fr'));
+}

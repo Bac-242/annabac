@@ -11,6 +11,8 @@ interface Ligne {
   session: string;
   sujet_key: string | null;
   corrige_key: string | null;
+  credit: string | null;
+  source: string | null;
   status: string;
 }
 
@@ -31,7 +33,18 @@ function champ(md: string | null, cle: string): string | null {
   return m ? m[1].trim() : null;
 }
 
-function construireMd(d: Ligne, sujetPdf: string | null, corrigePdf: string | null): string {
+/** Échappe une valeur pour une chaîne YAML entre guillemets doubles. */
+function yaml(v: string): string {
+  return v.replace(/[\r\n]+/g, ' ').replace(/\\/g, '\\\\').replace(/"/g, '\\"').trim();
+}
+
+function construireMd(
+  d: Ligne,
+  sujetPdf: string | null,
+  corrigePdf: string | null,
+  source: string | null,
+  credit: string | null
+): string {
   const lignes = [
     '---',
     `annee: ${d.annee}`,
@@ -41,6 +54,8 @@ function construireMd(d: Ligne, sujetPdf: string | null, corrigePdf: string | nu
   ];
   if (sujetPdf) lignes.push(`sujetPdf: "${sujetPdf}"`);
   if (corrigePdf) lignes.push(`corrigePdf: "${corrigePdf}"`);
+  if (source) lignes.push(`source: "${yaml(source)}"`);
+  if (credit) lignes.push(`credit: "${yaml(credit)}"`);
   lignes.push('---', '');
   return lignes.join('\n');
 }
@@ -58,7 +73,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   try {
     const ligne = (await env.DB.prepare(
-      `SELECT id, annee, serie, matiere, session, sujet_key, corrige_key, status
+      `SELECT id, annee, serie, matiere, session, sujet_key, corrige_key, credit, source, status
          FROM submissions WHERE id = ?`
     )
       .bind(body.id)
@@ -67,8 +82,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     if (ligne.status !== 'pending') return json({ error: 'Déjà traitée' }, 409);
 
     const finir = async (status: 'approved' | 'rejected') => {
+      // Minimisation RGPD : une fois la décision prise, l'e-mail privé et
+      // l'IP hachée n'ont plus d'utilité (recontact / anti-abus) : on les efface.
       await env.DB.prepare(
-        `UPDATE submissions SET status = ?, decided_at = ?, decided_by = ?, note = ? WHERE id = ?`
+        `UPDATE submissions
+            SET status = ?, decided_at = ?, decided_by = ?, note = ?,
+                contributor = NULL, ip_hash = NULL
+          WHERE id = ?`
       )
         .bind(status, new Date().toISOString(), email, body.note ?? null, ligne.id)
         .run();
@@ -102,6 +122,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       const fichiers: FichierACommiter[] = [];
       let sujetPdf = champ(existant, 'sujetPdf');
       let corrigePdf = champ(existant, 'corrigePdf');
+      // On conserve l'attribution déjà présente si la nouvelle soumission
+      // (ex. ajout d'un corrigé à un sujet existant) n'en fournit pas.
+      const source = ligne.source ?? champ(existant, 'source');
+      const credit = ligne.credit ?? champ(existant, 'credit');
 
       if (ligne.sujet_key) {
         const obj = await env.BUCKET.get(ligne.sujet_key);
@@ -116,11 +140,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         fichiers.push({ path: `public${corrigePdf}`, contentBase64: bytesToBase64(await obj.arrayBuffer()) });
       }
 
-      fichiers.push({ path: mdPath, contentText: construireMd(ligne, sujetPdf, corrigePdf) });
+      fichiers.push({ path: mdPath, contentText: construireMd(ligne, sujetPdf, corrigePdf, source, credit) });
 
-      // Le message de commit (historique public) ne contient pas l'e-mail de
-      // l'admin ; la traçabilité reste dans la colonne `decided_by` (privée).
-      const sha = await commitFiles(env, fichiers, `Publier ${base}`);
+      // Le message de commit (historique public) crédite le contributeur quand
+      // il a fourni un pseudonyme, mais ne contient jamais l'e-mail de l'admin ;
+      // la traçabilité de la décision reste dans la colonne `decided_by` (privée).
+      const messageCommit = credit ? `Publier ${base} (contribution de ${yaml(credit)})` : `Publier ${base}`;
+      const sha = await commitFiles(env, fichiers, messageCommit);
 
       await finir('approved');
       return json({ success: true, status: 'approved', commit: sha });

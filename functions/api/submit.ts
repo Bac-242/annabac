@@ -4,6 +4,16 @@ import { type Env, json, uuid, erreurServeur, MATIERES_ACCEPTEES } from '../_lib
 const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
 const SERIES = ['A', 'C', 'D'];
 const SESSIONS = ['Normale', 'Remplacement', 'Spéciale'];
+const TYPES = ['sujet', 'corrige'];
+
+// Un sujet est par nature un document officiel : son origine est fixée côté
+// serveur, sans demander au contributeur. Un corrigé, lui, déclare son origine.
+const SUJET_ORIGINE = "Sujet officiel d'examen";
+const ORIGINES_CORRIGE = [
+  'Corrigé rédigé par moi-même',
+  "Corrigé d'un tiers (avec autorisation)",
+  'Autre',
+];
 
 // Garde-fous anti-abus (protègent le stockage R2 et la file de modération).
 const MAX_PENDING_GLOBAL = 300; // nb max de soumissions en attente, tous contributeurs confondus
@@ -72,7 +82,21 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const serie = String(form.get('Serie') ?? '');
   const matiere = String(form.get('Matiere') ?? '').trim();
   const session = String(form.get('Session') ?? 'Normale');
-  const contributor = String(form.get('Email du contributeur') ?? '').trim() || null;
+  const type = String(form.get('Type') ?? '').trim();
+  // Crédit public (pseudonyme) et déclaration de droits.
+  const credit = String(form.get('Credit') ?? '').trim().slice(0, 80) || null;
+  const declaration = String(form.get('Declaration') ?? '').trim();
+
+  // Origine et attribution dépendent du type de document.
+  let origine: string;
+  let source: string | null;
+  if (type === 'sujet') {
+    origine = SUJET_ORIGINE;
+    source = null;
+  } else {
+    origine = String(form.get('Origine') ?? '').trim();
+    source = String(form.get('Source') ?? '').trim().slice(0, 200) || null;
+  }
 
   if (!annee || annee < 1980 || annee > 2100) return json({ success: false, message: 'Année invalide.' }, 400);
   if (!SERIES.includes(serie)) return json({ success: false, message: 'Série invalide.' }, 400);
@@ -80,17 +104,21 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ success: false, message: 'Matière invalide.' }, 400);
   }
   if (!SESSIONS.includes(session)) return json({ success: false, message: 'Session invalide.' }, 400);
-
-  const sujet = form.get('Sujet') as File | null;
-  const corrige = form.get('Corrige') as File | null;
-  const aSujet = sujet && sujet.size > 0;
-  const aCorrige = corrige && corrige.size > 0;
-  if (!aSujet && !aCorrige) return json({ success: false, message: 'Joignez au moins un PDF.' }, 400);
-
-  for (const f of [sujet, corrige]) {
-    const v = pdfValide(f);
-    if (!v.ok) return json({ success: false, message: v.raison }, 400);
+  if (!TYPES.includes(type)) return json({ success: false, message: 'Type de document invalide.' }, 400);
+  if (type === 'corrige') {
+    if (!ORIGINES_CORRIGE.includes(origine)) {
+      return json({ success: false, message: 'Origine du corrigé invalide.' }, 400);
+    }
+    if (!source) return json({ success: false, message: "Indiquez la source / l'auteur du corrigé." }, 400);
   }
+  if (declaration !== 'oui') {
+    return json({ success: false, message: 'Vous devez confirmer la déclaration de droits.' }, 400);
+  }
+
+  const fichier = form.get('Fichier') as File | null;
+  if (!fichier || fichier.size === 0) return json({ success: false, message: 'Joignez un PDF.' }, 400);
+  const v = pdfValide(fichier);
+  if (!v.ok) return json({ success: false, message: v.raison }, 400);
 
   const id = uuid();
   let sujetKey: string | null = null;
@@ -124,42 +152,27 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     }
 
     // Lecture + contrôle du contenu (en-tête PDF) avant tout stockage.
-    let sujetBuf: ArrayBuffer | null = null;
-    let corrigeBuf: ArrayBuffer | null = null;
-    if (aSujet) {
-      sujetBuf = await sujet!.arrayBuffer();
-      if (!estEnTetePdf(sujetBuf)) {
-        return json({ success: false, message: 'Le sujet n\u2019est pas un PDF valide.' }, 400);
-      }
-    }
-    if (aCorrige) {
-      corrigeBuf = await corrige!.arrayBuffer();
-      if (!estEnTetePdf(corrigeBuf)) {
-        return json({ success: false, message: 'Le corrigé n\u2019est pas un PDF valide.' }, 400);
-      }
+    const buf = await fichier.arrayBuffer();
+    if (!estEnTetePdf(buf)) {
+      return json({ success: false, message: "Le fichier n\u2019est pas un PDF valide." }, 400);
     }
 
-    // Stockage R2 (dossier "pending")
-    if (sujetBuf) {
+    // Stockage R2 (dossier "pending") selon le type de document.
+    if (type === 'sujet') {
       sujetKey = `pending/${id}/sujet.pdf`;
-      await env.BUCKET.put(sujetKey, sujetBuf, {
-        httpMetadata: { contentType: 'application/pdf' },
-      });
-    }
-    if (corrigeBuf) {
+      await env.BUCKET.put(sujetKey, buf, { httpMetadata: { contentType: 'application/pdf' } });
+    } else {
       corrigeKey = `pending/${id}/corrige.pdf`;
-      await env.BUCKET.put(corrigeKey, corrigeBuf, {
-        httpMetadata: { contentType: 'application/pdf' },
-      });
+      await env.BUCKET.put(corrigeKey, buf, { httpMetadata: { contentType: 'application/pdf' } });
     }
 
-    // File de modération
+    // File de modération (aucune donnée de contact n'est collectée ici).
     await env.DB.prepare(
       `INSERT INTO submissions
-         (id, created_at, annee, serie, matiere, session, sujet_key, corrige_key, contributor, ip_hash, status)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')`
+         (id, created_at, annee, serie, matiere, session, sujet_key, corrige_key, credit, origine, source, ip_hash, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')`
     )
-      .bind(id, new Date().toISOString(), annee, serie, matiere, session, sujetKey, corrigeKey, contributor, ipHash)
+      .bind(id, new Date().toISOString(), annee, serie, matiere, session, sujetKey, corrigeKey, credit, origine, source, ipHash)
       .run();
 
     return json({ success: true, id });

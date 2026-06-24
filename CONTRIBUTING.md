@@ -7,12 +7,22 @@ Merci de votre aide ! Il y a deux façons de contribuer.
 Le plus simple : utilisez le **formulaire de soumission** sur la page
 [`/contribuer`](/contribuer).
 
-1. Renseignez l'année, la série, la matière et la session.
-2. Joignez le **PDF du sujet et/ou du corrigé** (PDF uniquement, 5 Mo max par fichier).
-3. Envoyez. Le document est mis en **file de modération** (R2 + D1).
-4. Après **vérification** par un mainteneur depuis `/admin`, il est publié sur le site.
+1. Glissez-déposez (ou sélectionnez) **un seul PDF** (5 Mo max).
+2. Indiquez s'il s'agit d'un **sujet** ou d'un **corrigé**.
+3. Renseignez l'année, la série, la matière et la session.
+4. Pour un **corrigé** : précisez son **origine** et sa **source / auteur**
+   (obligatoire). Un corrigé ne peut être envoyé que si le **sujet correspondant
+   est déjà publié**. Pour un **sujet**, rien de plus : son origine officielle est
+   implicite.
+5. Au choix, un **crédit** (pseudonyme affiché publiquement ; laissez vide pour
+   rester anonyme).
+6. Confirmez la **déclaration de droits** (obligatoire), puis envoyez. Le
+   document est mis en **file de modération** (R2 + D1).
+7. Après **vérification** par un mainteneur depuis `/admin`, il est publié sur le site.
 
-Aucun compte ni connaissance de Git n'est nécessaire.
+Aucun compte, aucune adresse e-mail ni connaissance de Git ne sont nécessaires.
+À la publication, le crédit (s'il est fourni) apparaît sur la fiche et dans
+l'historique Git public.
 
 ## 2. Publier un document validé (mainteneurs)
 
@@ -36,11 +46,13 @@ Pour ajouter un document **à la main** dans la bibliothèque :
    session: "Normale"     # Normale | Remplacement | Spéciale
    sujetPdf: "/pdfs/2022-serie-c-mathematiques-sujet.pdf"     # optionnel
    corrigePdf: "/pdfs/2022-serie-c-mathematiques-corrige.pdf" # optionnel
+   source: "Examen officiel du Ministère"                     # optionnel (attribution)
+   credit: "Pseudonyme du contributeur"                       # optionnel (crédit public)
    ---
    ```
 
-   Les deux champs PDF sont optionnels : une fiche peut n'avoir que le sujet,
-   que le corrigé, ou les deux.
+   Les champs PDF sont optionnels (une fiche peut n'avoir que le sujet, que le
+   corrigé, ou les deux). `source` et `credit` sont également optionnels.
 3. Vérifiez en local puis redéployez.
 
 ## Chaîne de soumission / modération

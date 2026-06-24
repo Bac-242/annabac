@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Fil from '../components/Fil.astro';
 import EtatVide from '../components/EtatVide.astro';
+import Icone from '../components/Icone.astro';
 import {
   toutesLesSeries,
   tousLesSujets,
@@ -13,22 +14,24 @@ const series = await toutesLesSeries();
 const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
 const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
 
-// Combinaisons (année·série·matière·session) pour lesquelles un sujet existe
-// déjà : un corrigé seul n'est autorisé que si l'une d'elles correspond.
+// Combinaisons (année·série·matière·session) déjà couvertes : un corrigé ne
+// peut être envoyé que si un sujet existe déjà pour la même clé.
 const sujets = await tousLesSujets();
 const clesExistantes = {
   sujet: sujets.filter((s) => s.data.sujetPdf).map((s) => cleSujet(s.data)),
   corrige: sujets.filter((s) => s.data.corrigePdf).map((s) => cleSujet(s.data)),
 };
+
+const champ =
+  'rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2';
 ---
 
 <Layout titre="Contribuer" description="Soumettre un sujet ou un corrigé du baccalauréat congolais.">
   <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Contribuer' }]} />
   <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Soumettre un document</h1>
   <p class="mt-2 max-w-2xl text-[color:var(--color-muted)]">
-    Aidez à enrichir la bibliothèque en envoyant un sujet et/ou son corrigé au
-    format PDF. Chaque document est vérifié par l'équipe avant d'être publié sur
-    le site.
+    Aidez à enrichir la bibliothèque en envoyant un sujet ou un corrigé au format
+    PDF. Chaque document est vérifié par l'équipe avant d'être publié.
   </p>
 
   <form
@@ -36,21 +39,70 @@ const clesExistantes = {
     action="/api/submit"
     method="POST"
     enctype="multipart/form-data"
-    class="mt-8 grid max-w-2xl gap-5"
+    class="mt-8 grid max-w-2xl gap-6"
   >
     <!-- Anti-spam (honeypot) : doit rester vide -->
     <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
 
+    <!-- 1. Le fichier (un seul, glisser-déposer ou sélection) -->
+    <div class="flex flex-col gap-1.5 text-sm">
+      <span class="font-medium">Le document</span>
+      <label
+        id="dropzone"
+        for="fichier-input"
+        class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-6 py-10 text-center text-[color:var(--color-muted)] transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-ink)]"
+      >
+        <Icone nom="upload" taille={28} />
+        <span class="text-sm text-[color:var(--color-ink)]">
+          <span class="font-medium text-[color:var(--color-accent)]">Choisir un fichier</span>
+          ou le glisser-déposer ici
+        </span>
+        <span class="text-xs">PDF uniquement, 5 Mo maximum.</span>
+        <input id="fichier-input" type="file" name="Fichier" accept="application/pdf,.pdf" class="sr-only" />
+      </label>
+      <div
+        id="fichier-info"
+        hidden
+        class="flex items-center justify-between gap-3 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-2.5"
+      >
+        <span class="flex min-w-0 items-center gap-2 text-sm">
+          <Icone nom="file" taille={18} />
+          <span class="truncate" data-nom></span>
+        </span>
+        <button type="button" id="fichier-retirer" class="shrink-0 text-xs font-medium text-rose-600 hover:underline">
+          Retirer
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Type de document -->
+    <fieldset class="flex flex-col gap-2 text-sm">
+      <legend class="font-medium">De quoi s'agit-il ?</legend>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)]">
+          <input type="radio" name="Type" value="sujet" required class="sr-only" />
+          <span class="font-medium">Un sujet</span>
+          <span class="text-xs text-[color:var(--color-muted)]">L'énoncé de l'épreuve</span>
+        </label>
+        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)]">
+          <input type="radio" name="Type" value="corrige" class="sr-only" />
+          <span class="font-medium">Un corrigé</span>
+          <span class="text-xs text-[color:var(--color-muted)]">La correction d'un sujet existant</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- 3. Métadonnées -->
     <div class="grid gap-5 sm:grid-cols-2">
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium">Année</span>
-        <select name="Annee" required class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+        <select name="Annee" required class={champ}>
           {annees.map((a) => <option value={a}>{a}</option>)}
         </select>
       </label>
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium">Série</span>
-        <select name="Serie" required class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+        <select name="Serie" required class={champ}>
           {series.map((s) => (
             <option value={s.data.code}>{s.data.code} — {s.data.intitule}</option>
           ))}
@@ -58,14 +110,14 @@ const clesExistantes = {
       </label>
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium">Matière</span>
-        <select name="Matiere" required class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+        <select name="Matiere" required class={champ}>
           <option value="" disabled selected>Choisir une matière…</option>
           {MATIERES_COURANTES.map((m) => <option value={m}>{m}</option>)}
         </select>
       </label>
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium">Session</span>
-        <select name="Session" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+        <select name="Session" class={champ}>
           <option>Normale</option>
           <option>Remplacement</option>
           <option>Spéciale</option>
@@ -73,32 +125,43 @@ const clesExistantes = {
       </label>
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-2">
+    <!-- 4. Origine du document (corrigé uniquement) -->
+    <div id="champs-corrige" hidden class="grid gap-5">
       <label class="flex flex-col gap-1.5 text-sm">
-        <span class="font-medium">PDF du sujet</span>
-        <input type="file" name="Sujet" accept="application/pdf,.pdf" class="text-sm file:mr-3 file:rounded-full file:border-0 file:bg-[color:var(--color-canvas)] file:px-4 file:py-2 file:text-sm" />
+        <span class="font-medium">Origine du corrigé</span>
+        <select name="Origine" disabled class={champ}>
+          <option value="" disabled selected>Choisir l'origine…</option>
+          <option value="Corrigé rédigé par moi-même">Corrigé que j'ai rédigé moi-même</option>
+          <option value="Corrigé d'un tiers (avec autorisation)">Corrigé d'un tiers, partagé avec son autorisation</option>
+          <option value="Autre">Autre</option>
+        </select>
       </label>
       <label class="flex flex-col gap-1.5 text-sm">
-        <span class="font-medium">PDF du corrigé <span class="text-[color:var(--color-muted)]">(optionnel)</span></span>
-        <input type="file" name="Corrige" accept="application/pdf,.pdf" class="text-sm file:mr-3 file:rounded-full file:border-0 file:bg-[color:var(--color-canvas)] file:px-4 file:py-2 file:text-sm" />
+        <span class="font-medium">Source / auteur du corrigé</span>
+        <input type="text" name="Source" maxlength="200" disabled placeholder="Nom de l'auteur ou origine du corrigé" class={champ} />
+        <span class="text-xs text-[color:var(--color-muted)]">
+          Affichée publiquement sur la fiche comme attribution du corrigé.
+        </span>
       </label>
     </div>
-    <p class="-mt-2 text-xs text-[color:var(--color-muted)]">
-      Au moins un fichier est requis. Un corrigé ne peut être envoyé que si le
-      sujet existe déjà ou est joint ci-dessus. PDF uniquement, 5 Mo maximum par fichier.
-    </p>
 
+    <!-- 5. Crédit (les deux types) -->
     <label class="flex flex-col gap-1.5 text-sm">
-      <span class="font-medium">Votre e-mail <span class="text-[color:var(--color-muted)]">(optionnel, pour vous recontacter)</span></span>
-      <input
-        type="email"
-        name="Email du contributeur"
-        placeholder="vous@exemple.com"
-        class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2"
-      />
+      <span class="font-medium">Votre crédit <span class="text-[color:var(--color-muted)]">(optionnel, public)</span></span>
+      <input type="text" name="Credit" maxlength="80" placeholder="Pseudonyme ou nom affiché" class={champ} />
       <span class="text-xs text-[color:var(--color-muted)]">
-        Sert uniquement à vous recontacter au sujet de cet envoi. Jamais publié
-        ni revendu. <a href="/a-propos#donnees" class="underline hover:text-[color:var(--color-ink)]">En savoir plus</a>.
+        Nom ou pseudonyme affiché publiquement pour vous créditer. Laissez vide
+        pour rester anonyme.
+      </span>
+    </label>
+
+    <!-- 6. Déclaration de droits -->
+    <label class="flex items-start gap-2.5 text-sm">
+      <input type="checkbox" name="Declaration" value="oui" required class="mt-1 shrink-0" />
+      <span id="declaration-texte">
+        Je déclare avoir le droit de partager ce document pour un usage
+        pédagogique non commercial, et j'accepte qu'il soit retiré sur simple
+        demande d'un ayant droit.
       </span>
     </label>
 
@@ -138,7 +201,7 @@ const clesExistantes = {
       Que deviennent les documents ?
     </h2>
     <ol class="mt-3 list-decimal space-y-1.5 pl-5 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      <li>Vous envoyez le(s) PDF via le formulaire ci-dessus.</li>
+      <li>Vous envoyez le PDF via le formulaire ci-dessus.</li>
       <li>L'équipe reçoit la soumission et vérifie la qualité et l'exactitude.</li>
       <li>Une fois validé, le document est publié sur le site, gratuitement et pour tous.</li>
     </ol>
@@ -151,14 +214,26 @@ const clesExistantes = {
   const form = document.getElementById('form-soumission') as HTMLFormElement | null;
   const etat = document.getElementById('etat');
   const succes = document.getElementById('succes');
-  const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
+  const MAX = 5 * 1024 * 1024; // 5 Mo
 
-  // Bouton désactivé tant qu'aucun PDF n'est joint.
-  const sujetInput = form?.elements.namedItem('Sujet') as HTMLInputElement | null;
-  const corrigeInput = form?.elements.namedItem('Corrige') as HTMLInputElement | null;
+  const fichierInput = document.getElementById('fichier-input') as HTMLInputElement | null;
+  const dropzone = document.getElementById('dropzone');
+  const fichierInfo = document.getElementById('fichier-info');
+  const fichierNom = fichierInfo?.querySelector('[data-nom]') as HTMLElement | null;
+  const fichierRetirer = document.getElementById('fichier-retirer');
+  const champsCorrige = document.getElementById('champs-corrige');
+  const origineSelect = form?.elements.namedItem('Origine') as HTMLSelectElement | null;
+  const sourceInput = form?.elements.namedItem('Source') as HTMLInputElement | null;
+  const declarationTexte = document.getElementById('declaration-texte');
+
   const bouton = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
   const spinner = bouton?.querySelector('[data-spinner]') as HTMLElement | null;
   const labelBouton = bouton?.querySelector('[data-label]') as HTMLElement | null;
+
+  const TEXTE_DEFAUT =
+    "Je déclare avoir le droit de partager ce document pour un usage pédagogique non commercial, et j'accepte qu'il soit retiré sur simple demande d'un ayant droit.";
+  const TEXTE_SUJET =
+    "Je déclare que ce document est un sujet officiel d'examen, partagé à des fins pédagogiques, et j'accepte qu'il soit retiré sur simple demande d'un ayant droit.";
 
   function chargement(actif: boolean) {
     if (spinner) spinner.hidden = !actif;
@@ -166,16 +241,81 @@ const clesExistantes = {
     if (bouton) bouton.disabled = actif;
   }
 
-  const aFichier = (input: HTMLInputElement | null) =>
-    !!(input && input.files && input.files.length > 0);
-  function majEtatBouton() {
-    if (bouton) bouton.disabled = !(aFichier(sujetInput) || aFichier(corrigeInput));
+  function formaterTaille(o: number): string {
+    const ko = o / 1024;
+    return ko < 1024 ? `${Math.round(ko)} Ko` : `${(ko / 1024).toFixed(1)} Mo`;
   }
-  sujetInput?.addEventListener('change', majEtatBouton);
-  corrigeInput?.addEventListener('change', majEtatBouton);
+
+  function afficherFichier() {
+    const f = fichierInput?.files?.[0];
+    if (f && fichierInfo && fichierNom) {
+      fichierNom.textContent = `${f.name} · ${formaterTaille(f.size)}`;
+      fichierInfo.hidden = false;
+    } else if (fichierInfo) {
+      fichierInfo.hidden = true;
+    }
+    majEtatBouton();
+  }
+
+  function majEtatBouton() {
+    if (bouton) bouton.disabled = !(fichierInput?.files && fichierInput.files.length > 0);
+  }
+
+  // Glisser-déposer.
+  function setFichier(files: FileList) {
+    if (!fichierInput || files.length === 0) return;
+    const dt = new DataTransfer();
+    dt.items.add(files[0]); // un seul fichier
+    fichierInput.files = dt.files;
+    afficherFichier();
+  }
+  ['dragenter', 'dragover'].forEach((evt) =>
+    dropzone?.addEventListener(evt, (e) => {
+      e.preventDefault();
+      dropzone.classList.add('border-[color:var(--color-accent)]', 'text-[color:var(--color-ink)]');
+    })
+  );
+  ['dragleave', 'drop'].forEach((evt) =>
+    dropzone?.addEventListener(evt, (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('border-[color:var(--color-accent)]', 'text-[color:var(--color-ink)]');
+    })
+  );
+  dropzone?.addEventListener('drop', (e) => {
+    const dragEvent = e as DragEvent;
+    if (dragEvent.dataTransfer?.files?.length) setFichier(dragEvent.dataTransfer.files);
+  });
+  fichierInput?.addEventListener('change', afficherFichier);
+  fichierRetirer?.addEventListener('click', () => {
+    if (fichierInput) fichierInput.value = '';
+    afficherFichier();
+  });
+
+  // Champs dépendant du type (sujet / corrigé).
+  function appliquerType() {
+    const type = (form?.elements.namedItem('Type') as RadioNodeList | null)?.value ?? '';
+    const estCorrige = type === 'corrige';
+    if (champsCorrige) champsCorrige.hidden = !estCorrige;
+    // On (dés)active pour ne soumettre/valider les champs corrigé que si pertinent.
+    if (origineSelect) {
+      origineSelect.disabled = !estCorrige;
+      origineSelect.required = estCorrige;
+    }
+    if (sourceInput) {
+      sourceInput.disabled = !estCorrige;
+      sourceInput.required = estCorrige;
+    }
+    if (declarationTexte) {
+      declarationTexte.textContent = type === 'sujet' ? TEXTE_SUJET : type === 'corrige' ? TEXTE_DEFAUT : TEXTE_DEFAUT;
+    }
+  }
+  form?.querySelectorAll('input[name="Type"]').forEach((r) =>
+    r.addEventListener('change', appliquerType)
+  );
+  appliquerType();
   majEtatBouton();
 
-  // Combinaisons année·série·matière·session ayant déjà un sujet / un corrigé.
+  // Combinaisons existantes.
   let clesSujet = new Set<string>();
   let clesCorrige = new Set<string>();
   try {
@@ -198,7 +338,7 @@ const clesExistantes = {
   }
 
   function validerPdf(f: File | null): string | null {
-    if (!f || f.size === 0) return null;
+    if (!f || f.size === 0) return 'Joignez un PDF.';
     const estPdf = f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf');
     if (!estPdf) return `« ${f.name} » n'est pas un PDF.`;
     if (f.size > MAX) return `« ${f.name} » dépasse 5 Mo.`;
@@ -208,57 +348,65 @@ const clesExistantes = {
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fd = new FormData(form);
-    const sujet = fd.get('Sujet') as File | null;
-    const corrige = fd.get('Corrige') as File | null;
+    const fichier = fichierInput?.files?.[0] ?? null;
+    const type = String(fd.get('Type') ?? '');
 
-    const aSujet = sujet && sujet.size > 0;
-    const aCorrige = corrige && corrige.size > 0;
-    if (!aSujet && !aCorrige) {
-      message('Joignez au moins un PDF (sujet ou corrigé).', 'err');
+    const erreurFichier = validerPdf(fichier);
+    if (erreurFichier) {
+      message(erreurFichier, 'err');
       return;
     }
-    for (const erreur of [validerPdf(sujet), validerPdf(corrige)]) {
-      if (erreur) {
-        message(erreur, 'err');
-        return;
-      }
+    if (type !== 'sujet' && type !== 'corrige') {
+      message('Indiquez s\u2019il s\u2019agit d\u2019un sujet ou d\u2019un corrigé.', 'err');
+      return;
     }
 
-    // Règles liées à l'existant pour la combinaison année·série·matière·session.
+    // Clé année·série·matière·session pour les contrôles d'existence.
     const cle = `${fd.get('Annee')}|${fd.get('Serie')}|${fd.get('Matiere')}|${fd.get('Session')}`;
     const sujetExiste = clesSujet.has(cle);
     const corrigeExiste = clesCorrige.has(cle);
 
-    // Un corrigé nécessite un sujet : déjà publié, ou joint dans le même envoi.
-    if (aCorrige && !aSujet && !sujetExiste) {
-      message(
-        "Aucun sujet n'existe encore pour cette année/série/matière/session : joignez aussi le PDF du sujet.",
-        'err'
-      );
-      return;
+    if (type === 'corrige') {
+      // Un corrigé nécessite un sujet déjà publié (on ne peut plus joindre le sujet dans le même envoi).
+      if (!sujetExiste) {
+        message(
+          "Aucun sujet n'existe encore pour cette année/série/matière/session : envoyez d'abord le sujet.",
+          'err'
+        );
+        return;
+      }
+      if (!String(fd.get('Origine') ?? '')) {
+        message("Indiquez l'origine du corrigé.", 'err');
+        return;
+      }
+      if (!String(fd.get('Source') ?? '').trim()) {
+        message("Indiquez la source / l'auteur du corrigé.", 'err');
+        return;
+      }
+      if (
+        corrigeExiste &&
+        !confirm(
+          'Un corrigé existe déjà pour cette année/série/matière/session.\n\nVoulez-vous quand même en proposer un autre ?'
+        )
+      ) {
+        return;
+      }
+    } else {
+      // Sujet déjà publié : on autorise un nouvel envoi, mais on confirme d'abord.
+      if (
+        sujetExiste &&
+        !confirm(
+          "Un sujet existe déjà pour cette année/série/matière/session.\n\nVoulez-vous quand même en proposer un autre ? L'équipe décidera lequel conserver."
+        )
+      ) {
+        return;
+      }
     }
 
-    // Document déjà publié : on autorise un nouvel envoi, mais on confirme d'abord.
-    if (
-      aSujet &&
-      sujetExiste &&
-      !confirm(
-        "Un sujet existe déjà pour cette année/série/matière/session.\n\nVoulez-vous quand même en proposer un autre ? L'équipe décidera lequel conserver."
-      )
-    ) {
+    if (!fd.get('Declaration')) {
+      message('Vous devez confirmer la déclaration de droits pour continuer.', 'err');
       return;
     }
-    if (
-      aCorrige &&
-      corrigeExiste &&
-      !confirm(
-        'Un corrigé existe déjà pour cette année/série/matière/session.\n\nVoulez-vous quand même en proposer un autre ?'
-      )
-    ) {
-      return;
-    }
-    if (!aSujet) fd.delete('Sujet');
-    if (!aCorrige) fd.delete('Corrige');
 
     chargement(true);
     message('', 'info');
@@ -267,7 +415,8 @@ const clesExistantes = {
       const data = await res.json();
       if (data.success) {
         form.reset();
-        // Panneau de confirmation à la place du formulaire.
+        afficherFichier();
+        appliquerType();
         form.hidden = true;
         if (succes) {
           succes.hidden = false;
@@ -285,13 +434,13 @@ const clesExistantes = {
     }
   });
 
-  // « Envoyer un autre document » : on réaffiche le formulaire vierge.
   document.getElementById('autre')?.addEventListener('click', () => {
     if (succes) succes.hidden = true;
     if (form) form.hidden = false;
     message('', 'info');
     chargement(false);
-    majEtatBouton();
+    afficherFichier();
+    appliquerType();
     form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 </script>

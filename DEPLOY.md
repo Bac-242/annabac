@@ -26,6 +26,9 @@ wrangler r2 bucket create annabac-soumissions
 wrangler d1 execute annabac --remote --file=schema.sql
 ```
 
+Pour faire **évoluer** une base déjà en service (ajout de colonnes, etc.), voir
+la section [Migrations de la base D1](#migrations-de-la-base-d1).
+
 ## 2. Projet Pages
 
 Connectez le dépôt `Bac-242/annabac` à Cloudflare Pages (Git) :
@@ -80,12 +83,18 @@ envois** (fail-closed) : en local, utilisez la clé secrète de test Turnstile
 
 ## Flux de bout en bout
 
-1. Un visiteur envoie un PDF via `/contribuer` → `POST /api/submit`.
-2. Le PDF va dans R2 (`pending/<id>/…`), une ligne `pending` est créée en D1.
-3. Vous ouvrez `/admin` (derrière Access), vérifiez le PDF, puis **Valider**.
+1. Un visiteur envoie **un PDF** via `/contribuer` (sujet ou corrigé) → `POST /api/submit`.
+   Aucune donnée de contact n'est collectée ; le crédit (pseudonyme) et la source
+   éventuels sont publics.
+2. Le PDF va dans R2 (`pending/<id>/…`), une ligne `pending` est créée en D1
+   (avec `credit`, `origine`, `source`).
+3. Vous ouvrez `/admin` (derrière Access), vérifiez le PDF et l'origine déclarée,
+   puis **Valider**.
 4. `/api/admin/decide` commite le PDF (`public/pdfs/…`) + la fiche
-   (`src/content/sujets/…`) dans le dépôt → Pages reconstruit → document en ligne (~1 min).
+   (`src/content/sujets/…`, avec `source`/`credit`) dans le dépôt → Pages
+   reconstruit → document en ligne (~1 min).
 5. **Rejeter** marque la soumission et supprime le PDF en attente.
+6. Dans les deux cas, l'empreinte IP est **purgée** à la décision (minimisation RGPD).
 
 ## Développement local des fonctions (optionnel)
 
@@ -107,6 +116,75 @@ ACCESS_TEAM_DOMAIN=monequipe.cloudflareaccess.com
 ACCESS_AUD=<aud-de-application-access>
 ```
 
+## Migrations de la base D1
+
+`schema.sql` est **idempotent** (`CREATE TABLE IF NOT EXISTS`) : il crée la base
+de zéro mais **ne modifie pas** une table déjà existante. Pour faire évoluer une
+base **déjà en service** (ex. l'ajout des colonnes de contribution `credit`,
+`origine`, `source`), on applique des `ALTER TABLE` à la main. SQLite/D1 ajoute
+les colonnes avec la valeur `NULL` pour les lignes existantes : c'est sûr et non
+destructif.
+
+### 1. (Recommandé) Sauvegarder avant toute migration
+
+Export complet de la base distante (schéma + données). L'export ne fait que
+**lire** la base, sans risque.
+
+```bash
+# bash / macOS / Linux (nom de fichier daté)
+wrangler d1 export annabac --remote --output=backup-annabac-$(date +%Y%m%d).sql
+```
+
+```powershell
+# PowerShell (Windows) : la syntaxe de date diffère
+wrangler d1 export annabac --remote --output=backup-annabac-$(Get-Date -Format yyyyMMdd).sql
+```
+
+Au besoin, un simple nom fixe convient aussi : `--output=backup-annabac.sql`.
+
+### 2. Vérifier les colonnes déjà présentes
+
+```bash
+wrangler d1 execute annabac --remote --command "PRAGMA table_info(submissions);"
+```
+
+### 3. Appliquer la migration « contribution façon Wikipédia »
+
+Ces trois colonnes sont nécessaires au nouveau formulaire (crédit public, origine
+déclarée, attribution). Lancez-les **une seule fois** ; relancer un `ALTER` déjà
+appliqué renvoie une erreur « duplicate column », sans danger pour les données.
+
+```bash
+wrangler d1 execute annabac --remote --command "ALTER TABLE submissions ADD COLUMN credit TEXT;"
+wrangler d1 execute annabac --remote --command "ALTER TABLE submissions ADD COLUMN origine TEXT;"
+wrangler d1 execute annabac --remote --command "ALTER TABLE submissions ADD COLUMN source TEXT;"
+```
+
+> La colonne historique `contributor` (ancien e-mail facultatif) **n'est plus
+> utilisée** : le code ne l'écrit plus et `decide.ts` la remet à `NULL` à chaque
+> décision. On peut la laisser telle quelle (SQLite ne facilite pas la suppression
+> de colonne) — elle restera vide.
+
+### 4. Vérifier le résultat
+
+```bash
+wrangler d1 execute annabac --remote --command "PRAGMA table_info(submissions);"
+# → la table doit lister credit, origine, source
+```
+
+### 5. Tester en local d'abord (conseillé)
+
+Rejouez exactement les mêmes commandes **sans** `--remote` pour valider sur la
+base locale de `wrangler pages dev` avant de toucher à la production :
+
+```bash
+wrangler d1 execute annabac --command "ALTER TABLE submissions ADD COLUMN credit TEXT;"
+# …idem pour origine et source…
+```
+
+Pour une base **neuve**, rien de tout cela : `wrangler d1 execute annabac --remote --file=schema.sql`
+crée directement la table à jour.
+
 ## Sécurité, coûts et identité du projet
 
 Le projet est public et open source. Quelques précautions, surtout tant que
@@ -118,7 +196,8 @@ tout repose sur des comptes personnels (GitHub, Cloudflare, carte bancaire).
   (et non du seul en-tête e-mail, falsifiable) — voir `functions/_lib/access.ts`.
   Fail-closed si `ACCESS_TEAM_DOMAIN` / `ACCESS_AUD` manquent.
 - **Soumissions** : Turnstile fail-closed, `matière` validée contre une liste,
-  contenu vérifié comme PDF (`%PDF-`), quotas anti-abus, IP seulement hachée.
+  contenu vérifié comme PDF (`%PDF-`), quotas anti-abus, **aucun e-mail collecté**,
+  IP seulement hachée et **purgée à la décision**.
 - **Erreurs** : journalisées côté serveur (`console.error`, visibles via
   `wrangler tail`) et renvoyées au client sous forme générique, sans fuite
   d'information interne. Les écritures R2/D1 sont nettoyées en cas d'échec.

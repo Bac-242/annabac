@@ -11,7 +11,8 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
 
     const { results } = await env.DB.prepare(
       `SELECT id, created_at, annee, serie, matiere, session,
-              sujet_key, corrige_key, contributor, status, decided_at, decided_by, note
+              sujet_key, corrige_key, contributor, credit, origine, source,
+              status, decided_at, decided_by, note
          FROM submissions
         WHERE status = ?
         ORDER BY created_at DESC

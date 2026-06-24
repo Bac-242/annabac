@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Fil from '../components/Fil.astro';
+import EtatVide from '../components/EtatVide.astro';
+import { contributeurs } from '../lib/data';
+
+const liste = await contributeurs();
+const total = liste.reduce((n, c) => n + c.nombre, 0);
+---
+
+<Layout
+  titre="Contributeurs"
+  description="Les personnes qui ont partagé des documents sur Bac 242, créditées publiquement."
+>
+  <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Contributeurs' }]} />
+
+  <header class="max-w-2xl">
+    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Contributeurs</h1>
+    <p class="mt-4 text-[15px] leading-relaxed text-[color:var(--color-muted)]">
+      Bac 242 est construit par sa communauté. Voici les crédits déclarés par les
+      personnes qui ont partagé des documents. L'historique complet des
+      publications est aussi visible dans le
+      <a
+        href="https://github.com/Bac-242/annabac/commits/main"
+        class="font-medium text-[color:var(--color-accent)] underline-offset-2 hover:underline"
+      >dépôt GitHub</a>.
+    </p>
+  </header>
+
+  {liste.length > 0 ? (
+    <>
+      <p class="mt-8 text-sm text-[color:var(--color-muted)]">
+        {liste.length} contributeur{liste.length > 1 ? 's' : ''} crédité{liste.length > 1 ? 's' : ''}
+        · {total} document{total > 1 ? 's' : ''}.
+      </p>
+      <ul class="mt-4 grid max-w-2xl gap-2.5">
+        {liste.map((c) => (
+          <li class="card flex items-center justify-between gap-4 px-5 py-3.5">
+            <span class="font-medium">{c.credit}</span>
+            <span class="text-sm text-[color:var(--color-muted)]">
+              {c.nombre} document{c.nombre > 1 ? 's' : ''}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </>
+  ) : (
+    <div class="mt-10 max-w-2xl">
+      <EtatVide
+        icon="inbox"
+        titre="Aucun crédit pour l'instant"
+        description="Les contributeurs qui choisissent d'être crédités apparaîtront ici."
+      >
+        <a href="/contribuer" class="btn btn-primary">Contribuer</a>
+      </EtatVide>
+    </div>
+  )}
+
+  <p class="mt-10 max-w-2xl text-sm text-[color:var(--color-muted)]">
+    Le crédit est facultatif et déclaratif : on peut contribuer de façon anonyme,
+    ou choisir un pseudonyme. <a href="/contribuer" class="font-medium text-[color:var(--color-accent)] underline-offset-2 hover:underline">Partager un document</a>.
+  </p>
+</Layout>

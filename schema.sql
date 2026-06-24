@@ -11,8 +11,11 @@ CREATE TABLE IF NOT EXISTS submissions (
   session       TEXT NOT NULL,
   sujet_key     TEXT,                       -- clé R2 du PDF sujet (ou NULL)
   corrige_key   TEXT,                       -- clé R2 du PDF corrigé (ou NULL)
-  contributor   TEXT,                       -- e-mail du contributeur (optionnel)
-  ip_hash       TEXT,                       -- IP hachée (SHA-256) pour anti-abus, jamais en clair
+  contributor   TEXT,                       -- e-mail du contributeur (privé, optionnel, purgé à la décision)
+  credit        TEXT,                       -- crédit public (pseudonyme) affiché en attribution
+  origine       TEXT,                       -- origine déclarée (sujet officiel / corrigé perso / tiers / autre)
+  source        TEXT,                       -- attribution publique du document (auteur / origine)
+  ip_hash       TEXT,                       -- IP hachée (SHA-256) pour anti-abus, purgée à la décision
   status        TEXT NOT NULL DEFAULT 'pending', -- pending | approved | rejected
   decided_at    TEXT,
   decided_by    TEXT,                       -- e-mail de l'admin ayant décidé
@@ -26,5 +29,12 @@ CREATE INDEX IF NOT EXISTS idx_submissions_status
 CREATE INDEX IF NOT EXISTS idx_submissions_ip
   ON submissions (ip_hash, created_at);
 
--- Migration d'une base existante (colonne ajoutée après coup) :
+-- Migration d'une base existante (colonnes ajoutées après coup) :
 --   ALTER TABLE submissions ADD COLUMN ip_hash TEXT;
+--   ALTER TABLE submissions ADD COLUMN credit TEXT;
+--   ALTER TABLE submissions ADD COLUMN origine TEXT;
+--   ALTER TABLE submissions ADD COLUMN source TEXT;
+
+-- Minimisation des données (RGPD) : l'e-mail privé et l'IP hachée ne servent
+-- qu'avant la décision (recontact, anti-abus). Ils sont effacés au moment de
+-- l'approbation ou du rejet (voir functions/api/admin/decide.ts).

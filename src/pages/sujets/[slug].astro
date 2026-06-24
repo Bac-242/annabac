@@ -150,9 +150,10 @@ const jsonLd = {
     </p>
   )}
 
-  {data.source && (
-    <footer class="mt-10 border-t border-[color:var(--color-line)] pt-4 text-xs text-[color:var(--color-muted)]">
-      Source : {data.source}
+  {(data.source || data.credit) && (
+    <footer class="mt-10 space-y-1 border-t border-[color:var(--color-line)] pt-4 text-xs text-[color:var(--color-muted)]">
+      {data.source && <p>Source : {data.source}</p>}
+      {data.credit && <p>Contribution de {data.credit}</p>}
     </footer>
   )}
 </Layout>

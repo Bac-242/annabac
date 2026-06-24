@@ -27,10 +27,26 @@ consultation hors-ligne.
 Une fiche par sujet : **métadonnées** (année, série, matière, session) + un
 **PDF du sujet** et/ou un **PDF du corrigé**.
 
-Les visiteurs **soumettent** des PDF via `/contribuer` ; ils sont mis en file
-d'attente (R2 + D1). Un mainteneur les **valide** depuis `/admin` (protégé par
+Les visiteurs **soumettent un PDF** via `/contribuer` (un seul fichier par envoi,
+en précisant s'il s'agit d'un sujet ou d'un corrigé) ; il est mis en file
+d'attente (R2 + D1). Un mainteneur le **valide** depuis `/admin` (protégé par
 Cloudflare Access) ; la validation **commite** le document dans le dépôt, ce qui
 reconstruit le site. Le contenu reste donc versionné dans git.
+
+### Contribution et attribution (esprit Wikipédia)
+
+Le formulaire **ne collecte aucune donnée de contact** (pas d'e-mail). À la place,
+à la manière de Wikipédia :
+
+- le contributeur peut indiquer un **crédit** public (pseudonyme, ou rester
+  anonyme), affiché sur la fiche et inscrit dans l'historique git ;
+- chaque envoi déclare l'**origine** du document (sujet officiel, corrigé
+  personnel, corrigé d'un tiers avec autorisation) et confirme une **déclaration
+  de droits** ; un corrigé porte une **source / auteur** publiée en attribution ;
+- la page [`/contributeurs`](/contributeurs) liste les crédits.
+
+Pour toute question, le bouton **« Contactez-nous »** (pied de page) ouvre la
+messagerie de l'utilisateur via un lien `mailto`, sans rien enregistrer.
 
 ## Démarrage
 
@@ -50,7 +66,7 @@ src/
   content/sujets/*.md     # fiches : métadonnées + chemins des PDF
   components/             # SujetCarte, Filtres, Icone, BadgeStatut, Fil…
   layouts/Layout.astro    # gabarit + SEO/Open Graph + PWA
-  pages/                  # accueil, /series, /annees, /matieres, /sujets, /contribuer, /a-propos, 404
+  pages/                  # accueil, /series, /annees, /matieres, /sujets, /contribuer, /contributeurs, /a-propos, 404
   pages/admin/            # modération (protégé par Cloudflare Access)
   lib/data.ts             # helpers (tri, regroupements, statut, couleurs/icônes)
 functions/                # Pages Functions : /api/submit, /api/admin/* (+ _lib)
