@@ -4,8 +4,6 @@ import pkg from '../../package.json';
 import Icone from '../components/Icone.astro';
 
 const version = pkg.version;
-// Adresse de contact du projet (utilisée par la modale « Contactez-nous »).
-const contact = 'contact.bac242@gmail.com';
 
 interface Props {
   titre: string;
@@ -285,7 +283,6 @@ const estActif = (href: string) =>
     <!-- Modale de contact : construit un lien mailto, n'enregistre rien. -->
     <dialog
       id="contact-modal"
-      data-email={contact}
       class="m-auto w-[min(30rem,calc(100vw-2rem))] rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-canvas)] p-0 text-[color:var(--color-ink)] backdrop:bg-black/40"
     >
       <form id="contact-form" class="flex flex-col gap-4 p-6">
@@ -327,6 +324,18 @@ const estActif = (href: string) =>
 
     <script>
       const modal = document.getElementById('contact-modal') as HTMLDialogElement | null;
+
+      // Anti-spam : l'e-mail n'apparaît jamais en clair dans le HTML servi. On
+      // l'assemble côté client et on remplit la modale + les liens [data-mail].
+      // Encodé en base64 pour que l'adresse n'apparaisse jamais en clair dans le
+      // HTML/JS servi (les aspirateurs d'e-mails cherchent « …@… » et « mailto: »).
+      const email = atob('Y29udGFjdC5iYWMyNDJAZ21haWwuY29t');
+      if (modal) modal.dataset.email = email;
+      document.querySelectorAll('[data-mail]').forEach((el) => {
+        if (el instanceof HTMLAnchorElement) el.href = 'mailto:' + email;
+        if ((el as HTMLElement).dataset.mail !== 'href') el.textContent = email;
+      });
+
       const fermerContact = document.getElementById('contact-fermer');
       const annuler = document.getElementById('contact-annuler');
       const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
