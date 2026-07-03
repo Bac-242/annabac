@@ -15,6 +15,14 @@ Comme $\mathrm{PGCD}(2688;3024) = 336$, il existe des couples $(u, v)$ dans $\Z 
 
 \textbf{2.} $2688x + 3024y = -3360 \Longleftrightarrow \dfrac{2688}{336}x + \dfrac{3024}{336}y = -\dfrac{3360}{336} \Longleftrightarrow 8x + 9y = -10$. On en déduit que $(E)$ et $(E_1)$ sont équivalentes.
 
+\begin{methode}
+Devant $ax + by = c$ avec de grands coefficients : calculer
+$d = \mathrm{pgcd}(a, b)$. Si $d$ ne divise pas $c$, aucune solution
+entière ; s'il divise $c$, diviser toute l'équation par $d$ pour se
+ramener à des coefficients premiers entre eux — les calculs de Bézout
+et de Gauss deviennent bien plus légers.
+\end{methode}
+
 \textbf{3. a.}
 \begin{align*}
 8x + 9y = -10 &\Longleftrightarrow 8x + 10 = 9(-y),\ y \in \Z \\
@@ -56,6 +64,14 @@ Comme 9 est premier avec 8, d'après Gauss, 9 divise $x - 1$. Il existe donc $k 
 \end{center}
 
 \textbf{2.} $g = S_{(AB)} \circ S_{(BD)}$ est la rotation de centre $B$ et d'angle $2 \times \big((BD),(BA)\big) = \dfrac{2\pi}{3}\ [2\pi]$.
+
+\begin{rappel}
+Composée de deux réflexions : si les axes sont sécants en $\Omega$,
+$S_{\Delta_2} \circ S_{\Delta_1}$ est la rotation de centre $\Omega$ et
+d'angle \emph{double} de l'angle $(\Delta_1, \Delta_2)$ ; si les axes
+sont parallèles, c'est une translation de vecteur double du vecteur
+joignant $\Delta_1$ à $\Delta_2$. L'ordre de composition compte.
+\end{rappel}
 
 \textbf{3.} Comme $g$ est la composée d'une symétrie axiale et d'une rotation dont le centre n'appartient pas à l'axe, alors $g$ est une symétrie glissée.
 
@@ -103,6 +119,13 @@ La solution particulière $f$ vérifie $f\!\left(\tfrac{\pi}{2}\right) = e^{-\fr
 $f$ est la fonction définie sur $\R$ par $f(x) = e^{-x}\sin x$.
 
 \textbf{2. a.} $F$ est une primitive de $f$ si $\forall x \in \R$, $F'(x) = f(x)$. On en déduit que $(-A + B)\cos x + (-A - B)\sin x = \sin x$. Par identification, $-A + B = 0$ et $-A - B = 1$. D'où $A = B = -\dfrac{1}{2}$. $F$ est définie par $F(x) = -\dfrac{e^{-x}(\cos x + \sin x)}{2}$.
+
+\begin{methode}
+Primitive de $e^{ax}\cos(bx)$ ou $e^{ax}\sin(bx)$ : chercher $F$ sous
+la même forme, $F(x) = e^{ax}(A\cos bx + B\sin bx)$, dériver, puis
+identifier les coefficients de $\cos$ et de $\sin$. C'est plus rapide
+que deux intégrations par parties successives.
+\end{methode}
 
 \textbf{b.} $\displaystyle\int_{n\pi}^{(n+1)\pi} f(x)\,dx = \left[-\frac{e^{-x}(\cos x + \sin x)}{2}\right]_{n\pi}^{(n+1)\pi} = \frac{e^{-\pi} + 1}{2}(-e^{-\pi})^n$.
 

@@ -58,6 +58,14 @@ Comme 226 est premier avec 109, d'après Gauss, 226 divise $x - 141$. Il existe 
 
 \textbf{b.} Comme $f(B) = B$ et $f(A) = C$, alors $\theta = (\vv{BA}, \vv{BC}) \equiv -\dfrac{\pi}{2}\ [2\pi]$.
 
+\begin{methode}
+Identifier une rotation donnée par deux points et leurs images
+($M \mapsto M'$, $N \mapsto N'$) : le centre est l'intersection des
+médiatrices de $[MM']$ et $[NN']$ (il est équidistant de chaque point
+et de son image) ; l'angle se lit ensuite sur un couple
+$(\vv{\Omega M}, \vv{\Omega M'})$.
+\end{methode}
+
 \textbf{c.} $S_{(BA)} \circ S_{(BO)}$ est la rotation de centre $B$ et d'angle $2 \times \big((BO),(BA)\big) \equiv \dfrac{\pi}{2}\ [2\pi]$. D'où $S_{(BA)} \circ S_{(BO)}$ est la réciproque de $f$.
 
 \textbf{3. a.} Comme $g$ est la composée d'une symétrie axiale et d'une rotation dont le centre n'appartient pas à l'axe, alors $g$ est une symétrie glissée.
@@ -94,10 +102,27 @@ Comme $B$, $C$, $S$ sont alignés, alors $\vv{SC} - 2\vv{SB} = \vv{0}$ ou $\vv{S
 \[ M \in (H) \Longleftrightarrow \frac{MC}{MH} = 2 \Longleftrightarrow MC^2 = 4MH^2 \Longleftrightarrow (1 - x)^2 + y^2 = 4x^2. \]
 D'où l'équation cartésienne de $(H)$ : $3x^2 + 2x - y^2 - 1 = 0$.
 
+\begin{methode}
+Équation cartésienne d'une conique définie par foyer, directrice et
+excentricité : traduire $\frac{MF}{MH} = e$ en $MF^2 = e^2\,MH^2$
+(élever au carré évite les racines), puis exprimer les deux distances
+avec les coordonnées dans le repère imposé. Bien identifier au préalable
+les coordonnées du foyer et le projeté $H$ sur la directrice.
+\end{methode}
+
 % ====================== EXERCICE 3 ======================
 \exo{3}{}
 
 \textbf{1.} L'équation caractéristique associée à $y'' + 3y' + 2y = 0$ est $r^2 + 3r + 2 = 0$. Elle admet deux racines $r_1 = -2$ et $r_2 = -1$. La solution générale est $y(x) = c_1 e^{-2x} + c_2 e^{-x}$.
+
+\begin{rappel}
+Équation $y'' + ay' + by = 0$ : tout se lit sur l'équation
+caractéristique $r^2 + ar + b = 0$. Deux racines réelles distinctes
+$r_1, r_2$ : $y = c_1 e^{r_1 x} + c_2 e^{r_2 x}$ ; racine double $r$ :
+$y = (c_1 + c_2 x)e^{rx}$ ; racines complexes $\alpha \pm i\beta$ :
+$y = e^{\alpha x}(c_1\cos\beta x + c_2\sin\beta x)$. Les conditions
+initiales fixent ensuite $c_1$ et $c_2$.
+\end{rappel}
 
 \textbf{2.} $h$ est de la forme $h(x) = c_1 e^{-2x} + c_2 e^{-x}$ :
 \[ \begin{cases} h(0) = 1 \\ h'(0) = 0 \end{cases} \Longleftrightarrow \begin{cases} c_1 + c_2 = 1 \\ -2c_1 - c_2 = 0 \end{cases} \Longleftrightarrow \begin{cases} c_1 = -1 \\ c_2 = 2 \end{cases} \]

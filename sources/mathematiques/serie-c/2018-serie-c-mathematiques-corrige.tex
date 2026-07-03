@@ -13,6 +13,14 @@
 \[ (S) : \begin{cases} x \equiv 2\ [36] \\ x \equiv 3\ [25] \end{cases} \Longleftrightarrow \begin{cases} x = 2 + 36a,\ a \in \Z \\ x = 3 + 25b,\ b \in \Z \end{cases} \Longleftrightarrow 2 + 36a = 3 + 25b \Longleftrightarrow (E) : 36a - 25b = 1. \]
 On en déduit que le système $(S)$ et l'équation $(E)$ sont équivalents.
 
+\begin{methode}
+Système de congruences simultanées $x \equiv r_1\ [n_1]$ et
+$x \equiv r_2\ [n_2]$ : écrire $x = r_1 + n_1 a = r_2 + n_2 b$, ce qui
+ramène à une équation diophantienne en $(a, b)$. Une fois $a$ décrit,
+les solutions forment une classe modulo $n_1 n_2$ (ici $900 = 36
+\times 25$, car 36 et 25 sont premiers entre eux).
+\end{methode}
+
 \textbf{2.} $36 \times (-9) - 25 \times (-13) = -324 + 325 = 1$. Donc $(-9;-13)$ est solution de $(E) : 36a - 25b = 1$.
 
 \textbf{3.}
@@ -111,6 +119,14 @@ $g$ & $-1$ & $\nearrow$ & $+\infty$ \\
 
 \textbf{3. a.} $g\!\left(\tfrac{1}{2}\right) \approx -0{,}17$ et $g(1) \approx 1{,}71$. La fonction $g$ est continue et strictement croissante sur $\left]\tfrac{1}{2}\,;1\right[$. De plus $g\!\left(\tfrac{1}{2}\right) \cdot g(1) < 0$. D'après le théorème des valeurs intermédiaires, il existe un unique réel $\alpha \in \left]\tfrac{1}{2}\,;1\right[$ tel que $g(\alpha) = 0$.
 
+\begin{rappel}
+Corollaire du théorème des valeurs intermédiaires : si $g$ est continue
+et \emph{strictement monotone} sur $[a\,;b]$ et si $g(a)$ et $g(b)$
+sont de signes contraires, l'équation $g(x) = 0$ admet une solution
+\emph{unique} dans $]a\,;b[$. La stricte monotonie est ce qui garantit
+l'unicité.
+\end{rappel}
+
 \textbf{b.} $g$ est strictement croissante sur $]0\,;+\infty[$ et $g(\alpha) = 0$. On en déduit que : $\forall x \in ]0\,;\alpha[$, $g(x) < 0$ ; $\forall x \in ]\alpha\,;+\infty[$, $g(x) > 0$.
 
 \partieT{B}
@@ -134,6 +150,16 @@ $f$ & $+\infty$ & $\searrow$ & $f(\alpha)$ & $\nearrow$ & $+\infty$ \\
 \textbf{b.} $f$ est continue sur $]0\,;+\infty[$, strictement décroissante sur $]0\,;\alpha[$ puis croissante sur $]\alpha\,;+\infty[$. Donc $f$ admet un minimum en $\alpha$. $\alpha$ vérifie $f'(\alpha) = \dfrac{\alpha e^\alpha - 1}{\alpha} = 0$, donc $e^\alpha = \dfrac{1}{\alpha}$ et $\alpha = \dfrac{1}{e^\alpha}$. En remplaçant dans $f(\alpha) = e^\alpha - \ln\alpha$ :
 \[ f(\alpha) = \frac{1}{\alpha} - \ln\frac{1}{e^\alpha} = \frac{1}{\alpha} + \alpha. \]
 Donc le minimum est $f(\alpha) = \alpha + \dfrac{1}{\alpha}$.
+
+\begin{methode}
+Schéma de la fonction auxiliaire : quand le signe de $f'$ n'est pas
+lisible directement, l'énoncé fait étudier une fonction $g$ telle que
+$f'$ soit du signe de $g$ ; la racine $\alpha$ de $g$ (localisée par le
+TVI) donne l'abscisse de l'extremum. La relation $g(\alpha) = 0$ (ici
+$e^\alpha = \frac{1}{\alpha}$) sert ensuite à \emph{simplifier}
+l'expression de $f(\alpha)$ — ne pas chercher de valeur exacte de
+$\alpha$, elle n'existe pas.
+\end{methode}
 
 \textbf{7.} \begin{center}
 \begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]

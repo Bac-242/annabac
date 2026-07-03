@@ -63,6 +63,14 @@ En remplaçant $x$ par $-8 + 35k$ dans $(E)$, on obtient $y = 11 - 48k$. L'ensem
 
 \textbf{b.} $\dfrac{AF}{AB} = \dfrac{c}{a}$ représente l'excentricité de l'hyperbole $(\Gamma)$. Dans le triangle $ABF$ rectangle en $B$ : $\cos(\widehat{FAB}) = \cos(30^\circ) = \dfrac{AB}{AF}$. D'où $\dfrac{AF}{AB} = \dfrac{1}{\cos 30^\circ} = \dfrac{2\sqrt{3}}{3}$.
 
+\begin{rappel}
+Excentricité $e = \frac{c}{a}$ d'une conique à centre : $e > 1$ pour une
+hyperbole, $0 < e < 1$ pour une ellipse. Définition par foyer et
+directrice : $M$ appartient à la conique si et seulement si
+$\frac{MF}{MH} = e$, où $H$ est le projeté orthogonal de $M$ sur la
+directrice — c'est cette caractérisation qui sert à la question 8.
+\end{rappel}
+
 \textbf{7.} Soit $K$ le point d'intersection de la perpendiculaire à $(AH)$ passant par $H$ et de la parallèle à $(AC)$ passant par $G$. $\cos(\widehat{HGK}) = \cos(30^\circ) = \dfrac{GH}{GK}$, d'où $GK = \dfrac{2\sqrt{3}}{3}GH$. Le point $I$ est donc le point d'intersection du cercle de centre $G$ de rayon $GK$ et de la demi-droite $[GH)$.
 
 \textbf{8.} Comme $J \in (\Gamma)$, alors $\dfrac{JF}{JP} = \dfrac{2\sqrt{3}}{3}$ où $P$ est le projeté orthogonal de $J$ sur la directrice $(BC)$. Or $JP = GH$ et d'après 7., $\dfrac{2\sqrt{3}}{3}GH = GI$. On en déduit que $JF = \dfrac{2\sqrt{3}}{3}JP = \dfrac{2\sqrt{3}}{3}GH = GI$. $J$ est donc le point d'intersection de la droite $(d)$ et du cercle de centre $F$ de rayon $GI$.
@@ -91,6 +99,13 @@ On en déduit que $h_{(\Omega,\frac{1}{4})}(A) = G'$, soit $\vv{\Omega G'} = \df
 \exo{3}{}
 
 \textbf{1. a.} La fonction $f : I \mapsto \R$ est continue et $1 \in I$. Alors la fonction $x \mapsto F(x) = \displaystyle\int_1^x f(t)\,dt$ est dérivable sur $I$ et $\forall x \in I$, $F'(x) = f(x)$.
+
+\begin{rappel}
+Théorème fondamental : si $f$ est continue sur $I$ et $a \in I$, alors
+$F : x \mapsto \int_a^x f(t)\,dt$ est \emph{la} primitive de $f$ qui
+s'annule en $a$. On étudie donc les variations de $F$ en lisant
+directement le signe de $f$, sans chercher d'expression explicite.
+\end{rappel}
 
 \textbf{b.}
 \begin{center}\renewcommand{\arraystretch}{1.4}
@@ -155,6 +170,13 @@ $F$ & $F(0)$ & $\searrow$ & $0$ & $\nearrow$ & $+\infty$ \\
 \underline{Montrons que $f(n) \le u_n \le f(n+1)$ pour $n \in \N^*$.} $F$ est continue et dérivable sur $[n, n+1]$, et $F'(n) \le F'(x) \le F'(n+1)$ pour tout $x \in [n;n+1]$ car $F' = f$ est croissante. D'après le théorème de l'inégalité des accroissements finis, en prenant $x = n$ et $y = n+1$ :
 \[ f(n)\big((n+1) - n\big) \le F(n+1) - F(n) \le f(n+1)\big((n+1) - n\big). \]
 D'où $f(n) \le u_n \le f(n+1)$.
+
+\begin{methode}
+Encadrer $\int_n^{n+1} f(t)\,dt$ quand $f$ est monotone sur $[n\,;n+1]$ :
+l'intégrale est comprise entre $f(n) \times 1$ et $f(n+1) \times 1$
+(aires des rectangles inscrit et circonscrit). C'est la méthode des
+rectangles, à la base de la comparaison entre suites et intégrales.
+\end{methode}
 
 % ====================== EXERCICE 4 ======================
 \exo{4}{}

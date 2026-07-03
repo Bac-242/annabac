@@ -51,6 +51,13 @@
 
 \textbf{b.} Sur $]0;1[$, $f(x) - g(x) = \dfrac{\ln x}{x} < 0$ : $(\mathcal{C})$ est en dessous de $(\mathcal{C}')$. Sur $]1;+\infty[$, $\dfrac{\ln x}{x} > 0$ : $(\mathcal{C})$ est au-dessus de $(\mathcal{C}')$.
 
+\begin{methode}
+Position relative de deux courbes : étudier le \emph{signe} de la
+différence $f(x) - g(x)$. Là où elle est positive, $(\mathcal{C})$ est
+au-dessus ; là où elle s'annule, les courbes se coupent. Ce signe
+resservira pour orienter le calcul d'aire entre les courbes.
+\end{methode}
+
 \textbf{2. a.} $\lim\limits_{x\to 0^+} f(x) = -\infty$ ; $\lim\limits_{x\to+\infty} f(x) = 0$.
 
 \textbf{b.} $\forall x \in \R_+^*$, $f'(x) = \dfrac{\frac{1}{x}\cdot x - \ln x}{x^2} - \dfrac{1}{x^2} = -\dfrac{\ln x}{x^2}$, du signe de $-\ln x$ (s'annule en $x = 1$).
@@ -76,12 +83,25 @@
 \partieT{III}
 \textbf{1.} $\forall x \in \R_+^*$, $h'(x) = \dfrac{1}{2}\cdot 2\cdot\dfrac{1}{x}\cdot\ln x = \dfrac{\ln x}{x} = k(x)$ : $h$ est une primitive de $k$ sur $\R_+^*$.
 
+\begin{methode}
+Quand l'énoncé propose une primitive candidate, ne pas l'intégrer :
+il suffit de \emph{dériver} la fonction proposée et de vérifier qu'on
+retrouve l'intégrande. C'est toujours plus rapide et sans risque.
+\end{methode}
+
 \textbf{2.} $\displaystyle\int_1^e (f(x) - g(x))\,dx = \int_1^e h'(x)\,dx = [h(x)]_1^e = \dfrac{1}{2}\ \text{u.a} = 2\ \text{cm}^2$.
 
 \exo{4}{}
 \textbf{1.} $E(X) = 0\cdot\tfrac{1}{8} + 1\cdot\tfrac{3}{8} + a\cdot\tfrac{3}{8} + 3b = \dfrac{3}{8}(1 + a + 8b)$.
 
 \textbf{2. a.} $E(X) = \dfrac{3}{2} \Leftrightarrow a + 8b = 3$. Comme $\tfrac{1}{8} + \tfrac{3}{8} + \tfrac{3}{8} + b = 1$, on a $b = \dfrac{1}{8}$, puis $a = 2$.
+
+\begin{methode}
+Loi de probabilité à paramètres : ne pas oublier l'équation « cachée »
+$\sum p_i = 1$, toujours disponible en plus des contraintes de l'énoncé
+(ici la valeur de $E(X)$). Deux inconnues, deux équations : le système
+se résout.
+\end{methode}
 
 \textbf{b.} $\mathrm{Var}(X) = 0^2\cdot\tfrac{1}{8} + 1^2\cdot\tfrac{3}{8} + 2^2\cdot\tfrac{3}{8} + 3^2\cdot\tfrac{1}{8} - \left(\tfrac{3}{2}\right)^2 = \dfrac{3}{4}$ ; $\sigma(X) = \sqrt{\mathrm{Var}(X)} = 0{,}86$.
 

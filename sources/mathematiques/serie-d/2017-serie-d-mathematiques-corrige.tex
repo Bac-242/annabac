@@ -35,12 +35,26 @@
 \textbf{b.} Par identification des parties réelle et imaginaire :
 \[ \begin{cases} x' = \dfrac{1}{2}x - \dfrac{\sqrt{3}}{2}y + \dfrac{1}{2} \\[1ex] y' = \dfrac{\sqrt{3}}{2}x + \dfrac{1}{2}y - \dfrac{\sqrt{3}}{2} \end{cases} \]
 
+\begin{methode}
+Rotation de centre $A$ et d'angle $\theta$ : partir systématiquement de
+$z' - z_A = e^{i\theta}(z - z_A)$. Pour l'expression analytique, poser
+$z = x + iy$, $z' = x' + iy'$, développer, puis identifier parties
+réelle et imaginaire.
+\end{methode}
+
 \exo{2}{}
 \textbf{1.} Matrice de $f$ dans $(\vi,\vj)$ : $\begin{pmatrix} \frac{a}{5} & \frac{4}{5} \\[2pt] \frac{4}{5} & -\frac{3}{5} \end{pmatrix}$.
 
 \textbf{2.} Expression analytique : $\begin{cases} x' = \frac{a}{5}x + \frac{4}{5}y \\[2pt] y' = \frac{4}{5}x - \frac{3}{5}y \end{cases}$
 
 \textbf{3.} $f$ est une symétrie vectorielle ssi $f\circ f(\vi) = \vi$ et $f\circ f(\vj) = \vj$. On calcule $f\circ f(\vj) = \left(\dfrac{4a}{25} - \dfrac{12}{25}, 1\right)$ ; $f\circ f(\vj) = \vj \Leftrightarrow \dfrac{4a}{25} - \dfrac{12}{25} = 0 \Leftrightarrow a = 3$. Pour $a = 3$, on vérifie aussi $f\circ f(\vi) = \vi$. Donc $f$ est une symétrie vectorielle ssi $a = 3$.
+
+\begin{methode}
+Déterminer un paramètre pour qu'un endomorphisme soit une symétrie
+(resp. une projection) : traduire $f \circ f = \mathrm{id}$ (resp.
+$f \circ f = f$) sur les vecteurs de la base — il suffit de le vérifier
+sur $\vi$ et $\vj$ — et résoudre l'équation obtenue en $a$.
+\end{methode}
 
 \textbf{4. a.} Pour $a = 3$ : \underline{Base} $f(\vec{u}) = \vec{u} \Leftrightarrow x - 2y = 0$ ; \underline{Direction} $f(\vec{u}) = -\vec{u} \Leftrightarrow 2x + y = 0$.
 
@@ -101,6 +115,14 @@
 \hline $x_i$ & 2 & 3 & 4 & 5 & 6 \\\hline $P_i$ & $\frac{1}{6}$ & $\frac{1}{24}$ & $\frac{1}{12}$ & $\frac{1}{24}$ & $\frac{2}{3}$ \\\hline
 \end{tabular}
 \end{center}
+
+\begin{methode}
+Retrouver une loi à partir des probabilités \emph{cumulées} :
+$p(X = x_i) = p(X \le x_i) - p(X \le x_{i-1})$ — chaque probabilité est
+la différence de deux cumulées consécutives. Contrôle : la somme des
+$P_i$ doit valoir 1 (ici $\frac{1}{6} + \frac{1}{24} + \frac{1}{12} +
+\frac{1}{24} + \frac{2}{3} = 1$).
+\end{methode}
 
 \textbf{3.} $E(X) = \displaystyle\sum_{i=1}^5 x_i P_i = 2\cdot\tfrac{1}{6} + 3\cdot\tfrac{1}{24} + 4\cdot\tfrac{1}{12} + 5\cdot\tfrac{1}{24} + 6\cdot\tfrac{2}{3} = 5$.
 

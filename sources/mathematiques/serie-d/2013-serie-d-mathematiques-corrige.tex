@@ -28,6 +28,14 @@ Ainsi $a = \dfrac{37/361}{208/361} = \dfrac{37}{208}$ et $b = -\dfrac{1}{19} - \
 \[ Z^3 = -8 \Longleftrightarrow r^3 e^{i3\theta} = 8\,e^{i\pi} \Longleftrightarrow \begin{cases} r = 2 \\ \theta_k = \dfrac{\pi}{3} + \dfrac{2k\pi}{3},\ k \in \Z \end{cases} \]
 D'où $z_0 = 2e^{i\frac{\pi}{3}} = 1 + i\sqrt{3}$ ; \quad $z_1 = 2e^{i\pi} = -2$ ; \quad $z_2 = 2e^{i\frac{5\pi}{3}} = 1 - i\sqrt{3}$.
 
+\begin{methode}
+Équation $Z^n = a$ : passer en forme exponentielle. De
+$r^n e^{in\theta} = |a|e^{i\arg a}$ on tire $r = \sqrt[n]{|a|}$ et
+$\theta_k = \frac{\arg a}{n} + \frac{2k\pi}{n}$ pour
+$k = 0, 1, \ldots, n-1$ : les $n$ solutions ont le même module et leurs
+images forment un polygone régulier inscrit dans le cercle de rayon $r$.
+\end{methode}
+
 \textbf{2. a.} $U = \dfrac{Z_C - Z_A}{Z_B - Z_A} = \dfrac{-2i\sqrt{3}}{-3 - i\sqrt{3}} = \dfrac{1}{2} + i\dfrac{\sqrt{3}}{2}$. D'où $|U| = 1$ et $\arg(U) = \dfrac{\pi}{3}\ [2\pi]$.
 
 \textbf{b.} Comme $|U| = 1$, alors $AC = AB$. De plus $(\vv{AB}, \vv{AC}) \equiv \arg(U) \equiv \dfrac{\pi}{3}\ [2\pi]$. Le triangle $ABC$ est isocèle en $A$ avec un angle de $\dfrac{\pi}{3}$ : c'est un triangle équilatéral.
@@ -37,6 +45,14 @@ D'où $z_0 = 2e^{i\frac{\pi}{3}} = 1 + i\sqrt{3}$ ; \quad $z_1 = 2e^{i\pi} = -2$
 et $b = Z_C - aZ_A = 1 - i\sqrt{3} - \left(-\tfrac{1}{2} - i\tfrac{\sqrt{3}}{2}\right)(1 + i\sqrt{3}) = 0$. D'où $Z' = \left(-\dfrac{1}{2} - i\dfrac{\sqrt{3}}{2}\right)Z$.
 
 \textbf{b.} $Z' = e^{i\frac{4\pi}{3}}Z$ : $S$ est la rotation de centre $O$ (affixe 0) et d'angle $\dfrac{4\pi}{3}$.
+
+\begin{rappel}
+Lecture de $z' = az + b$ ($a \ne 0$) : si $|a| = 1$ et $a \ne 1$, c'est
+une rotation d'angle $\arg a$ ; si $a$ est réel ($\ne 0, 1$), une
+homothétie de rapport $a$ ; sinon une similitude directe de rapport
+$|a|$ et d'angle $\arg a$. Le centre est le point fixe, solution de
+$z = az + b$.
+\end{rappel}
 
 \prob{}
 \partieT{A}
@@ -90,5 +106,13 @@ et $b = Z_C - aZ_A = 1 - i\sqrt{3} - \left(-\tfrac{1}{2} - i\tfrac{\sqrt{3}}{2}\
 
 \textbf{8.} $\mathcal{A}(\mathcal{D}) = \displaystyle\int_{3/2}^{e}\big(f(x) - (2-x)\big)\,dx = \int_{3/2}^{e}\dfrac{\ln x}{x}\,dx$. Par parties (ou en reconnaissant la dérivée de $\tfrac{1}{2}(\ln x)^2$) :
 \[ \mathcal{A}(\mathcal{D}) = \left[\frac{(\ln x)^2}{2}\right]_{3/2}^{e} = \frac{1 - \left(\ln\frac{3}{2}\right)^2}{2}\ \text{u.a} = 2\left[1 - \left(\ln\tfrac{3}{2}\right)^2\right]\ \text{cm}^2. \]
+
+\begin{methode}
+Avant toute intégration par parties, chercher une forme
+$u'u^n$ : ici $\frac{\ln x}{x} = \frac{1}{x} \times \ln x = u'u$ avec
+$u = \ln x$, de primitive $\frac{u^2}{2} = \frac{(\ln x)^2}{2}$.
+Reconnaître ces formes ($u'u^n$, $\frac{u'}{u}$, $u'e^u$) fait gagner
+un temps précieux.
+\end{methode}
 
 \end{document}

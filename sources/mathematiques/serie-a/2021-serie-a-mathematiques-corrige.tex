@@ -10,6 +10,14 @@
 \begin{questions}
   \item $a = \dfrac{9}{10}$ et $b = \dfrac{18}{25}$ sont déjà irréductibles (seul diviseur commun : 1). $c = \dfrac{4}{30} = \dfrac{2\times 2}{2\times 15} = \dfrac{2}{15}$.
   \item $\mathrm{PPCM}(10, 25, 15)$ : en décomposant, $10 = 2\times 5$, $25 = 5^2$, $15 = 3\times 5$. Le PPCM est le produit des facteurs premiers, chacun avec son plus grand exposant : $2\times 5^2\times 3 = 150$.
+
+\begin{rappel}
+PPCM par décomposition en facteurs premiers : prendre \emph{tous} les
+facteurs qui apparaissent, chacun avec son \emph{plus grand} exposant.
+(Pour le PGCD : seulement les facteurs communs, avec le plus petit
+exposant.) Le PPCM sert de dénominateur commun minimal pour additionner
+des fractions.
+\end{rappel}
   \item \begin{sousq}
     \item Réduction au dénominateur 150 : $\dfrac{9}{10} = \dfrac{135}{150}$ ($\times 15$) ; $\dfrac{18}{25} = \dfrac{108}{150}$ ($\times 6$) ; $\dfrac{2}{15} = \dfrac{20}{150}$ ($\times 10$).
     \item $S = \dfrac{9}{10} - \dfrac{18}{25} + \dfrac{4}{30} = \dfrac{135}{150} - \dfrac{108}{150} + \dfrac{20}{150} = \dfrac{135 - 108 + 20}{150} = \dfrac{47}{150}$.
@@ -24,6 +32,14 @@
     \item $P(x) = 0 \Leftrightarrow 2x + 1 = 0$ ou $x^2 + x - 6 = 0$, soit $x = -\dfrac{1}{2}$, $x = -3$ ou $x = 2$. $S = \left\{-3\,;-\dfrac{1}{2}\,;2\right\}$.
   \end{sousq}
   \item En posant $x = \ln t$, $(E) : 2(\ln t)^3 + 3(\ln t)^2 - 11\ln t - 6 = 0$ devient $2x^3 + 3x^2 - 11x - 6 = 0$, de solutions $\{-3\,;-\tfrac{1}{2}\,;2\}$. D'où $\ln t_1 = -3$, $\ln t_2 = -\tfrac{1}{2}$, $\ln t_3 = 2$, soit $t \in \left\{e^{-3}\,;e^{-\frac{1}{2}}\,;e^{2}\right\}$.
+
+\begin{methode}
+Les questions s'enchaînent : le polynôme développé puis résolu aux
+questions précédentes est exactement celui qui apparaît en posant
+$x = \ln t$. Après résolution en $x$, revenir à $t$ avec
+$\ln t = x_0 \Leftrightarrow t = e^{x_0}$ — toutes les valeurs
+conviennent ici, car l'exponentielle est toujours définie.
+\end{methode}
 \end{questions}
 
 \exo{2}{}
@@ -32,6 +48,13 @@
     \item $\R^* = ]-\infty;0[\,\cup\,]0;+\infty[$.
     \item $\dfrac{x-1}{x} = \dfrac{x}{x} + \dfrac{-1}{x} = 1 + \dfrac{-1}{x}$, donc $a = -1$.
     \item $\lim\limits_{x\to-\infty} g(x) = \lim\limits_{x\to-\infty}\dfrac{x}{x} = 1$ : asymptote horizontale $y = 1$ en $-\infty$. $\lim\limits_{x\to 0^-} g = \lim\limits_{x\to 0^-}\dfrac{-1}{x} = +\infty$ et $\lim\limits_{x\to 0^+} g = -\infty$ : asymptote verticale $x = 0$.
+
+\begin{methode}
+Écrire une fonction homographique sous la forme $c + \frac{a}{x - x_0}$
+(ici $g(x) = 1 - \frac{1}{x}$) fait apparaître directement ses deux
+asymptotes : $y = c$ à l'infini et $x = x_0$ à la verticale. Les
+limites s'en déduisent sans calcul supplémentaire.
+\end{methode}
   \end{sousq}
   \item \begin{sousq}
     \item $\forall x \in \R^*$, $g'(x) = \dfrac{x - (x-1)}{x^2} = \dfrac{1}{x^2}$.
