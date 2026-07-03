@@ -21,6 +21,14 @@ $p$ & $\dfrac{C_2^2 C_3^0}{C_5^2} = \dfrac{1}{10}$ & $\dfrac{C_2^1 C_3^1}{C_5^2}
 \end{tabular}
 \end{center}
 
+\begin{methode}
+Tirage \emph{simultané} de $p$ objets parmi $n$ : les issues sont des
+combinaisons, non ordonnées — l'univers compte $C_n^p$ cas. Pour
+$p(X = k)$, multiplier les combinaisons de chaque catégorie (ici
+$C_2^i \times C_3^j$ boules de chaque couleur) et diviser par $C_5^2$.
+Contrôle : la somme des probabilités doit valoir 1.
+\end{methode}
+
 \textbf{2.} $E(X) = \displaystyle\sum_{i=1}^{3} x_i p_i = -1 \times \dfrac{1}{10} + 0 \times \dfrac{6}{10} + 1 \times \dfrac{3}{10} = \dfrac{2}{10}$.
 
 \textbf{3. a.} La fonction de répartition de la variable aléatoire $X$ est :
@@ -91,6 +99,15 @@ $-2i = 2 \times (-i) = 2\left(\cos\left(-\tfrac{\pi}{2}\right) + i\sin\left(-\tf
 \[ (\vv{AB}, \vv{AC}) \equiv \arg\left(\frac{z_C - z_A}{z_B - z_A}\right) \equiv \arg\left(\frac{-\sqrt{3} - 3i}{-2\sqrt{3}}\right) \equiv \arg\left(\frac{1}{2} + \frac{\sqrt{3}}{2}i\right) \equiv \frac{\pi}{3}\ [2\pi]. \]
 \[ (\vv{CA}, \vv{CB}) \equiv \arg\left(\frac{z_B - z_C}{z_A - z_C}\right) \equiv \arg\left(\frac{-\sqrt{3} + 3i}{\sqrt{3} + 3i}\right) \equiv \arg\left(\frac{1}{2} + \frac{\sqrt{3}}{2}i\right) \equiv \frac{\pi}{3}\ [2\pi]. \]
 La somme des angles d'un triangle étant égale à $180^\circ$, on en déduit $(\vv{BC}, \vv{BA}) \equiv \dfrac{\pi}{3}\ [2\pi]$.
+
+\begin{rappel}
+Interprétation géométrique du quotient : pour trois points distincts
+d'affixes $a$, $b$, $c$,
+$\big(\vv{AB}, \vv{AC}\big) \equiv \arg\frac{c - a}{b - a}\ [2\pi]$ et
+$\frac{AC}{AB} = \left|\frac{c - a}{b - a}\right|$. C'est l'outil
+central pour prouver alignements, orthogonalités et natures de
+triangles avec les complexes.
+\end{rappel}
 
 \textbf{c.} Le triangle $ABC$ est équilatéral.
 
@@ -182,6 +199,15 @@ D'où $\mathscr{A}(\alpha) = \Big[-(\alpha+3)e^{-\alpha} - \alpha + 3\Big]$ cm$^
 
 \partieT{C}
 \textbf{1.} $h$ est une fonction continue, strictement croissante sur $]-\infty\,;-1]$. Donc $h$ réalise une bijection de $]-\infty\,;-1]$ sur $]\lim\limits_{x\to-\infty} h(x)\,;h(-1)] = ]-\infty\,;3]$. $J$ est l'intervalle $]-\infty\,;3]$.
+
+\begin{rappel}
+Théorème de la bijection : une fonction continue et strictement
+monotone sur un intervalle $I$ réalise une bijection de $I$ sur
+l'intervalle image $f(I)$ (bornes données par les limites ou valeurs
+aux extrémités). Sa réciproque $h^{-1}$ a le même sens de variation, et
+sa courbe est la symétrique de celle de $h$ par rapport à la droite
+$y = x$.
+\end{rappel}
 
 \textbf{2.} Comme $h$ et $h^{-1}$ ont le même sens de variation, on en déduit le tableau de variation de $h^{-1}$ :
 \begin{center}\renewcommand{\arraystretch}{1.4}

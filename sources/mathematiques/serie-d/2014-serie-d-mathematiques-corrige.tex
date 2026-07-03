@@ -18,6 +18,13 @@ D'où $z_0 = 1$ ; \quad $z_1 = e^{i\frac{2\pi}{3}} = -\dfrac{1}{2} + i\dfrac{\sq
 
 \textbf{4. a.} Si $z$ est solution de $(E)$, alors $z^3 = 1$, donc $(2z)^3 = 8$ : $2z$ est solution de $(E')$. Les solutions de $(E')$ sont les doubles de celles de $(E)$ : $z'_0 = 2$ ; $z'_1 = -1 + i\sqrt{3}$ ; $z'_2 = -1 - i\sqrt{3}$.
 
+\begin{methode}
+Réutiliser une équation déjà résolue : pour résoudre $Z^3 = 8$, poser
+$Z = 2z$ ramène à $z^3 = 1$, dont les solutions sont connues. De façon
+générale, $Z^n = a$ se déduit des racines $n$-ièmes de l'unité en les
+multipliant par une solution particulière.
+\end{methode}
+
 \textbf{b.} Comme $z_1'^3 = z_2'^3 = 8$, alors $\left(\dfrac{z'_1}{z'_2}\right)^3 = \dfrac{8}{8} = 1$ : $\dfrac{z'_1}{z'_2}$ est solution de $(E)$.
 
 \exo{2}{}
@@ -29,6 +36,14 @@ D'où $z_0 = 1$ ; \quad $z_1 = e^{i\frac{2\pi}{3}} = -\dfrac{1}{2} + i\dfrac{\sq
 \textbf{3. a.} Un sous-ensemble $\mathscr{E}$ de $\R^3$ est un sous-espace vectoriel si : (i) $\mathscr{E} \ne \emptyset$ ; (ii) $\forall \vec{u}, \vec{v} \in \mathscr{E}$, $\vec{u} + \vec{v} \in \mathscr{E}$ ; (iii) $\forall \vec{u} \in \mathscr{E}$, $\forall \lambda \in \R$, $\lambda\vec{u} \in \mathscr{E}$.
 
 \textbf{b.} (i) $(0,0,0) \in \mathscr{H}$ car $0 - 0 + 0 = 0$, donc $\mathscr{H} \ne \emptyset$. (ii) Si $\vec{u}(x,y,z)$ et $\vec{v}(x',y',z') \in \mathscr{H}$ : $(x+x') - (y+y') + (z+z') = (x-y+z) + (x'-y'+z') = 0$, donc $\vec{u}+\vec{v} \in \mathscr{H}$. (iii) $\lambda x - \lambda y + \lambda z = \lambda(x-y+z) = 0$, donc $\lambda\vec{u} \in \mathscr{H}$.
+
+\begin{methode}
+Sous-espace vectoriel : toujours vérifier les trois points dans cet
+ordre — le vecteur nul appartient à l'ensemble (donc il est non vide),
+stabilité par somme, stabilité par multiplication par un réel. Si le
+vecteur nul n'y est pas, inutile d'aller plus loin : ce n'est pas un
+sous-espace.
+\end{methode}
 
 \textbf{4.} $(x,y,z)$ appartient au noyau de $f$ ssi $f(x,y,z) = \vec{0}$ :
 \[ \begin{cases} y + z = 0 \\ x + y + z = 0 \\ x = 0 \end{cases} \Longleftrightarrow \begin{cases} z = -y \\ x = 0 \end{cases} \]
@@ -66,6 +81,14 @@ Un vecteur du noyau s'écrit $(0, y, -y) = y(0, 1, -1)$. Le noyau est la droite 
 \textbf{b.} \underline{$(u_n)$ croissante :} $u_0 = 0 \le u_1 = \tfrac{1}{2}$. Si $u_n \le u_{n+1}$, comme $h$ est croissante, $h(u_n) \le h(u_{n+1})$, soit $u_{n+1} \le u_{n+2}$. Donc $(u_n)$ est croissante.
 
 \textbf{c.} $(u_n)$ est croissante et majorée par 1, donc convergente.
+
+\begin{methode}
+Suite définie par $u_{n+1} = h(u_n)$ avec $h$ \emph{croissante} sur un
+intervalle stable : la suite est monotone, dans le sens donné par la
+comparaison de $u_0$ et $u_1$ (ici $u_0 \le u_1$ donc croissante, par
+récurrence). Croissante et majorée, elle converge — et sa limite est
+un point fixe de $h$.
+\end{methode}
 
 \underline{$\lim u_n = \alpha$ :} (i) Pour $x \in [0;1]$ : $e^x \ge 1$, $(e^x+1)^2 \ge 4$, et $e^x \le e$, d'où $0 < h'(x) = \dfrac{e^x}{(e^x+1)^2} \le \dfrac{e}{4}$. (ii) Par l'inégalité des accroissements finis, $|h(x) - h(y)| \le \dfrac{e}{4}|x - y|$ sur $[0;1]$ ; comme $h(\alpha) = \alpha$ et $u_n, \alpha \in [0;1]$, $|u_{n+1} - \alpha| \le \dfrac{e}{4}|u_n - \alpha|$. (iii) Par récurrence, $|u_n - \alpha| \le \left(\dfrac{e}{4}\right)^n|u_0 - \alpha|$. Comme $\dfrac{e}{4} < 1$, par encadrement $\lim\limits_{n\to+\infty}|u_n - \alpha| = 0$, donc $\lim\limits_{n\to+\infty} u_n = \alpha$.
 

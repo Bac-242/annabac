@@ -31,6 +31,13 @@ V(Y) &= \frac{1}{5}\sum_{i=1}^5 y_i^2 - \overline{Y}^2 = \frac{1}{5}\big((-10)^2
 \end{align*}
 D'où $a = \dfrac{14{,}8}{60{,}8} = 0{,}243$ et $b = 1 - 0{,}243 \times (-2) = 1{,}486$. L'équation de la droite de régression linéaire de $X$ en $Y$ est $X = 0{,}243\,Y + 1{,}486$.
 
+\begin{piege}
+Bien lire le sens de la régression : la droite de $X$ \emph{en} $Y$
+s'écrit $X = aY + b$ avec $a = \frac{\mathrm{Cov}(X,Y)}{V(Y)}$ — on
+divise par la variance de la variable \emph{explicative} $Y$. Ce n'est
+pas la même droite que celle de $Y$ en $X$ (qui divise par $V(X)$).
+\end{piege}
+
 \textbf{c.} Le coefficient de corrélation linéaire entre $X$ et $Y$ est $\rho_{X,Y} = \dfrac{\mathrm{Cov}(X, Y)}{\sqrt{V(X)}\sqrt{V(Y)}}$.
 \[ V(X) = \frac{1}{5}\sum_{i=1}^5 x_i^2 - \overline{X}^2 = \frac{1}{5}\big((-2)^2 + 0^2 + 1^2 + 2^2 + 4^2\big) - 1^2 = 4. \]
 D'où $\rho_{X,Y} = \dfrac{14{,}8}{\sqrt{4}\sqrt{60{,}8}} = 0{,}949$.
@@ -68,6 +75,14 @@ En additionnant (1) et (2), $x^2 = 8 - 4\sqrt{3} = (\sqrt{2} - \sqrt{6})^2$, d'o
 
 \textbf{3.} De l'égalité $-\sqrt{2} + \sqrt{6} + i(\sqrt{2} + \sqrt{6}) = 4\left(\cos\tfrac{5\pi}{12} + i\sin\tfrac{5\pi}{12}\right)$, on déduit :
 \[ \cos\tfrac{5\pi}{12} = \frac{-\sqrt{2} + \sqrt{6}}{4} = \frac{\sqrt{6} - \sqrt{2}}{4} \quad \text{et} \quad \sin\tfrac{5\pi}{12} = \frac{\sqrt{2} + \sqrt{6}}{4}. \]
+
+\begin{methode}
+Valeurs exactes de $\cos\theta$ et $\sin\theta$ pour un angle
+inhabituel : résoudre la même équation $z^2 = \Delta$ de deux façons —
+forme \emph{exponentielle} (qui donne l'angle) et forme
+\emph{algébrique} (qui donne $x + iy$ en radicaux) — puis identifier
+les deux écritures d'une même racine.
+\end{methode}
 
 % ================= PROBLÈME =================
 \prob{}
@@ -149,5 +164,13 @@ $h(x)$ & $+\infty$ & $\searrow$ & $-1$ & $\nearrow$ & $-1 + e$ & $\searrow$ & $0
 \textbf{c.} $\mathscr{A} = \displaystyle\int_{-1}^0 \big[f(x) - h(x)\big]\,dx = 2\int_{-1}^0 (1 + x)e^{-x}\,dx$. Si l'on choisit $\begin{cases} u(x) = 1 + x \\ v'(x) = e^{-x} \end{cases}$ alors $\begin{cases} u'(x) = 1 \\ v(x) = -e^{-x} \end{cases}$. Il vient, en intégrant par parties :
 \[ \mathscr{A} = 2\int_{-1}^0 (1 + x)e^{-x}\,dx = -2\Big[(1 + x)e^{-x}\Big]_{-1}^0 + 2\int_{-1}^0 e^{-x}\,dx. \]
 D'où $\mathscr{A} = 2(-2 + e)$ u.a $= 8(-2 + e)$ cm$^2$.
+
+\begin{methode}
+Aire entre deux courbes : $\mathscr{A} = \int_a^b [f(x) - h(x)]\,dx$
+sur un intervalle où $f \ge h$ (sinon, découper aux points
+d'intersection). Le résultat est en unités d'aire : convertir ensuite
+avec 1 u.a $=$ (unité en abscisse) $\times$ (unité en ordonnée), ici
+$2 \times 2 = 4$ cm$^2$.
+\end{methode}
 
 \end{document}

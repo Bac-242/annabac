@@ -26,6 +26,16 @@ Le vecteur $\vv{u}$ de $\ker f$ se décompose en $\vv{u}(x, y, z) = (z, -z, z) =
 \[ \begin{cases} -x + y + 2z = x' \\ x + 2y + z = y' \\ x + y = z' \end{cases} \Longleftrightarrow \begin{cases} -x + y + 2z = x' \\ 3y + 3z = x' + y' \\ 2y + z = x' + z' \end{cases} \Longleftrightarrow \begin{cases} x = z - x' \\ 3y + 3z = x' + y' \\ x' - 2y' + 3z' = 0 \end{cases} \]
 Les coordonnées $(x', y', z')$ de $\operatorname{Im} f$ vérifient $x' - 2y' + 3z' = 0$. D'où $(x', y', z') = y'(2, 1, 0) + z'(-3, 0, 1)$. $\operatorname{Im} f$ est le plan vectoriel engendré par $\{(2, 1, 0), (-3, 0, 1)\}$, d'équation $x - 2y + 3z = 0$.
 
+\begin{methode}
+Noyau et image d'un endomorphisme : pour $\ker f$, résoudre
+$f(\vv{u}) = \vv{0}$ et exprimer les solutions avec un paramètre
+(droite ou plan vectoriel) ; pour $\operatorname{Im} f$, écrire
+$f(\vv{u}) = \vv{u}'$ et \emph{éliminer} $x, y, z$ du système : la
+relation restante entre $x', y', z'$ est l'équation de l'image. Quand
+$\det f \ne 0$, inutile : $f$ est bijectif, $\ker f = \{\vv{0}\}$ et
+$\operatorname{Im} f = \R^3$.
+\end{methode}
+
 \textbf{4.} $\vv{u} \in \ker f \Longleftrightarrow f(\vv{u}(\alpha, \beta)) = \vv{0} \Longleftrightarrow \begin{cases} -1 + \alpha + 2\beta = 0 \\ 1 + 2\alpha + \beta = 0 \\ 1 + \alpha = 0 \end{cases} \Longleftrightarrow \begin{cases} \alpha + 2\beta = 1 \\ 2\alpha + \beta = -1 \\ \alpha = -1 \end{cases}$. En remplaçant $\alpha$ par $-1$ dans l'une des deux premières équations, on obtient $\beta = 1$. Donc $\vv{u} \in \ker f$ si $\alpha = -1$ et $\beta = 1$.
 
 % ================= EXERCICE 2 =================
@@ -64,6 +74,14 @@ En additionnant (1) et (2), $x = 1$ ou $x = -1$ ; de même $y = 5$ ou $y = -5$. 
 
 \partieT{A}
 \textbf{1.} $a + \dfrac{b}{1 + t} = \dfrac{at + a + b}{1 + t}$. On cherche $a$ tel que $\dfrac{1 - t}{1 + t} = \dfrac{a + b + at}{1 + t}$. Par identification, $a + b = 1$ et $a = -1$. D'où $a = -1$ et $b = 2$.
+
+\begin{methode}
+Pour intégrer une fraction rationnelle du type
+$\frac{ct + d}{t + e}$ : la mettre d'abord sous la forme
+$a + \frac{b}{t + e}$ (identification, comme ici), car chaque morceau
+a une primitive connue — $at$ et $b\ln|t + e|$. L'énoncé guide presque
+toujours cette décomposition en première question.
+\end{methode}
 
 \textbf{2.} $\displaystyle\int_0^x \frac{1 - t}{1 + t}\,dt = \int_0^x \left(-1 + \frac{2}{1 + t}\right)dt = \Big[-t + 2\ln(1 + t)\Big]_0^x = -x + 2\ln(1 + x) = -x + \ln(1 + x)^2$.
 
@@ -111,6 +129,15 @@ $f(x)$ & $+\infty$ & $\searrow$ & $-\infty \;\|\; -\infty$ & $\nearrow$ & $-1 + 
   \item De même $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = -1$ et $\lim\limits_{x\to+\infty}[f(x) - (-x)] = +\infty$ : direction asymptotique $y = -x$ en $+\infty$.
   \item $\lim\limits_{x\to-1^-} f(x) = -\infty$ ; $\lim\limits_{x\to-1^+} f(x) = -\infty$. La courbe $(\mathscr{C})$ admet une asymptote verticale d'équation $x = -1$.
 \end{itemize}
+
+\begin{methode}
+Étude d'une branche infinie en $\pm\infty$ : calculer
+$\lim \frac{f(x)}{x} = a$. Si $a$ est infini : branche parabolique de
+direction $(Oy)$ ; si $a = 0$ : direction $(Ox)$ ; si $a$ est fini non
+nul, étudier $\lim [f(x) - ax] = b$ : finie, c'est l'asymptote
+$y = ax + b$ ; infinie, c'est une branche parabolique de direction la
+droite $y = ax$ (cas rencontré ici).
+\end{methode}
 
 \textbf{7.} \underline{Tangente en $x = -2$ :} $y = f'(-2)(x + 2) + f(-2)$. D'où $y = -3x - 4$.
 

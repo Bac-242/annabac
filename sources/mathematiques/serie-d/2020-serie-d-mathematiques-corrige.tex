@@ -44,6 +44,13 @@
 
 \textbf{2.} $h$ décroît de $]-\infty;2]$ sur $[0;+\infty[$ et croît de $[2;+\infty[$ sur $[0;1[$. Donc $h(x) \ge 0$ pour tout $x \in \R$.
 
+\begin{methode}
+Montrer qu'une fonction est positive sans résoudre d'inéquation :
+dresser son tableau de variation et constater que son \emph{minimum}
+vaut 0 (ici $h(2) = 0$). C'est l'argument type pour établir le signe
+d'une dérivée compliquée, comme $f' = h$ à la partie B.
+\end{methode}
+
 \partieT{B}
 \textbf{1.} $\lim\limits_{x\to+\infty} f(x) = \lim\limits_{x\to+\infty} x\cdot\underbrace{(1 + e^{2-x})}_{\to 1} = +\infty$.
 
@@ -59,6 +66,13 @@
 \textbf{3. a.} $f$ est continue strictement croissante sur $\R$ : elle admet une bijection réciproque $f^{-1}$ définie sur $\R$.
 
 \textbf{b.} $f$ et $f^{-1}$ ont même sens de variation. $f$ a une tangente horizontale en $x = 2$, donc $f^{-1}$ a une tangente verticale en $f(2) = 4$ : $f^{-1}$ n'est pas dérivable en 4.
+
+\begin{rappel}
+Bijection réciproque : la courbe de $f^{-1}$ est la symétrique de celle
+de $f$ par rapport à la droite $y = x$. La symétrie échange tangentes
+horizontales et verticales : $f^{-1}$ n'est donc pas dérivable aux
+points images des tangentes horizontales de $f$.
+\end{rappel}
 \begin{center}\renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c|ccc|}
 \hline $x$ & $-\infty$ & $4$ & $+\infty$ \\\hline $(f^{-1})'(x)$ & $+$ & $\|$ & $+$ \\\hline $f^{-1}$ & $-\infty$ & $2$ & $+\infty$ \\\hline
@@ -93,5 +107,12 @@
 \textbf{2.} $p(C) = 1 - p(A \cap B) = 1 - 0{,}855 = 0{,}145$.
 
 \textbf{3.} $p(A \cup B) = p(A) + p(B) - p(A \cap B) = 0{,}9 + 0{,}95 - 0{,}855 = 0{,}995$.
+
+\begin{rappel}
+$p(A \cap B) = p(A) \times p(B)$ ne vaut que pour des événements
+\emph{indépendants} (hypothèse à repérer dans l'énoncé : appareils
+fonctionnant indépendamment, tirages avec remise…). En revanche,
+$p(A \cup B) = p(A) + p(B) - p(A \cap B)$ est toujours vraie.
+\end{rappel}
 
 \end{document}

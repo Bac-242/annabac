@@ -19,6 +19,14 @@ D'où les racines $\alpha_1 = 3 + i\sqrt{3}$ et $\alpha_2 = -3 - i\sqrt{3}$.
 \[ Z_2 = \frac{1 + 3i\sqrt{3} - 3 - i\sqrt{3}}{4} = -\frac{1}{2} + i\frac{\sqrt{3}}{2},\quad Z_3 = \frac{1 + 3i\sqrt{3} + 3 + i\sqrt{3}}{4} = 1 + i\sqrt{3}. \]
 Les solutions de $(E)$ sont $Z_1 = -\dfrac{1}{2}$, $Z_2 = -\dfrac{1}{2} + i\dfrac{\sqrt{3}}{2}$, $Z_3 = 1 + i\sqrt{3}$.
 
+\begin{methode}
+Équation de degré 3 : vérifier la racine fournie par l'énoncé,
+factoriser par identification des coefficients, puis résoudre le
+trinôme restant. Remarquer que le discriminant $\Delta' = u$ retombe
+sur la question 1 : dans un exercice de bac, les questions
+préliminaires resservent presque toujours plus loin.
+\end{methode}
+
 \textbf{3. a.} Soit $Z' = aZ + b$ l'expression de $S$.
 \[ \begin{cases} S(A) = B \\ S(B) = C \end{cases} \Rightarrow a = \frac{Z_C - Z_B}{Z_B - Z_A} = \frac{\frac{3}{2} + i\frac{\sqrt{3}}{2}}{i\frac{\sqrt{3}}{2}} = 1 - i\sqrt{3},\quad b = Z_B - aZ_A = 0. \]
 D'où $Z' = (1 - i\sqrt{3})Z$.
@@ -39,6 +47,14 @@ D'où $Z' = (1 - i\sqrt{3})Z$.
 \textbf{d.} $f$ est un endomorphisme vérifiant $f \circ f = f$ : c'est une projection vectorielle, de base l'ensemble des vecteurs invariants et de direction son noyau.
 
 \textbf{e.} \underline{Base :} $f(\vec{u}) = \vec{u} \Leftrightarrow 3x - 2y = x$ et $3x - 2y = y$, soit $x - y = 0$ : droite engendrée par $(1, 1)$. \underline{Direction :} $f(\vec{u}) = \vec{0} \Leftrightarrow 3x - 2y = 0$ : droite engendrée par $(2, 3)$.
+
+\begin{rappel}
+Un endomorphisme $f$ vérifiant $f \circ f = f$ est une \emph{projection
+vectorielle}. Sa base est l'ensemble des vecteurs invariants
+($f(\vec{u}) = \vec{u}$) et sa direction est son noyau
+($f(\vec{u}) = \vec{0}$) : tout vecteur se projette sur la base,
+parallèlement à la direction.
+\end{rappel}
 
 \exo{3}{}
 \textbf{1.} $\dfrac{1}{x\ln x}$ existe $\Leftrightarrow x > 0$ et $x \ne 1$. Donc $E_f = ]0;1[\,\cup\,]1;+\infty[$.
@@ -86,6 +102,13 @@ $f$ & $\|-\infty$ & $\nearrow$ & $-e$ & $\searrow$ & $-\infty\ \|\ +\infty$ & $\
 
 \textbf{b.} $\dfrac{1/x}{\ln x}$ est de la forme $\dfrac{u'(x)}{u(x)}$ avec $u(x) = \ln x$, donc
 \[ I = \int_e^3 \frac{1}{x\ln x}\,dx = \big[\ln(\ln x)\big]_e^3 = \ln(\ln 3) - \ln(\ln e) = \ln\ln 3. \]
+
+\begin{rappel}
+Forme $\frac{u'}{u}$ : une primitive est $\ln|u|$. C'est pourquoi
+l'énoncé fait d'abord écrire $\frac{1}{x\ln x}$ sous la forme
+$\frac{1/x}{\ln x}$ — apprendre à provoquer soi-même cette écriture
+quand un $\ln$ apparaît au dénominateur.
+\end{rappel}
 
 \textbf{c.} $\mathcal{A} = \ln(\ln 3)\ \text{u.a} = 4\ln(\ln 3)\ \text{cm}^2$.
 

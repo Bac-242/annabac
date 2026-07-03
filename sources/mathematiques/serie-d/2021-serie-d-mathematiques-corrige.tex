@@ -20,6 +20,13 @@
 \[ \begin{cases} S(A) = A \\ S(C) = I \end{cases} \Leftrightarrow \begin{cases} 2ia + b = 2i \\ a(\sqrt{3} - i) + b = -i \end{cases} \Rightarrow a = \frac{3}{4} - i\frac{\sqrt{3}}{4},\quad b = -\frac{\sqrt{3}}{2} + i\frac{1}{2}. \]
 D'où $z' = \left(\dfrac{3}{4} - i\dfrac{\sqrt{3}}{4}\right)z - \dfrac{\sqrt{3}}{2} + i\dfrac{1}{2}$.
 
+\begin{methode}
+Similitude directe déterminée par deux points et leurs images : poser
+$z' = az + b$, écrire l'équation pour chaque couple point--image, puis
+\emph{soustraire} les deux équations pour isoler $a$ ; $b$ s'en déduit.
+Le rapport est $|a|$ et l'angle $\arg a$.
+\end{methode}
+
 \textbf{b.} $|a| = \dfrac{\sqrt{3}}{2}$ et $a = \dfrac{\sqrt{3}}{2}\left(\dfrac{\sqrt{3}}{2} - i\dfrac{1}{2}\right) = \dfrac{\sqrt{3}}{2}e^{-i\frac{\pi}{6}}$ : $S$ est la similitude d'angle $-\dfrac{\pi}{6}$ et de rapport $k = \dfrac{\sqrt{3}}{2}$.
 
 \begin{center}
@@ -52,6 +59,14 @@ D'où $z' = \left(\dfrac{3}{4} - i\dfrac{\sqrt{3}}{4}\right)z - \dfrac{\sqrt{3}}
 
 \textbf{c.} $f\circ f = f$ : $f$ est une projection vectorielle, de base l'ensemble des vecteurs invariants et de direction le noyau de $f$.
 
+\begin{methode}
+Distinguer projection et symétrie : calculer $f \circ f$ sur les
+vecteurs de base. $f \circ f = f$ donne une projection,
+$f \circ f = \mathrm{id}$ une symétrie. Le déterminant aide aussi : une
+symétrie est toujours bijective, alors qu'une projection (autre que
+l'identité) a un déterminant nul — comme ici.
+\end{methode}
+
 \textbf{d.} \underline{Base :} $f(\vec{u}) = \vec{u} \Leftrightarrow 5x + 2y = 0$ : droite engendrée par $(-2, 5)$. \underline{Direction :} $f(\vec{u}) = \vec{0} \Leftrightarrow 5x + y = 0$ : droite engendrée par $(-1, 5)$.
 
 \exo{3}{}
@@ -70,6 +85,14 @@ D'où $z' = \left(\dfrac{3}{4} - i\dfrac{\sqrt{3}}{4}\right)z - \dfrac{\sqrt{3}}
 \end{center}
 
 \textbf{5.} En posant $x = \dfrac{1}{u^2}$ : $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = \lim\limits_{u\to 0^+} 4(u\ln u)^2 = 0$ (car $\lim_{u\to 0^+} u\ln u = 0$).
+
+\begin{rappel}
+Croissances comparées du logarithme : $\lim_{x\to+\infty}
+\frac{(\ln x)^n}{x} = 0$ pour tout $n$, et $\lim_{u\to 0^+} u\ln u = 0$
+— toute puissance l'emporte sur le logarithme. Un changement de
+variable bien choisi (ici $x = 1/u^2$) ramène souvent à ces limites de
+référence.
+\end{rappel}
 
 \textbf{6.} $(\mathcal{C}) : y = (\ln x)^2$ et $(\mathcal{C}') : y = -(\ln x)^2$ (symétrique par rapport à $(Ox)$).
 \begin{center}

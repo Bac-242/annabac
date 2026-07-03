@@ -32,10 +32,24 @@
 \textbf{5.} $z_A, z_B, z_C$ annulent $(z - z_A)(z - z_B)(z - z_C) = (z - 2i)(z + 4)(z + 2 - 2i)$ :
 \[ = z^3 + (6 - 4i)z^2 + (4 - 20i)z - 16 - 16i. \]
 
+\begin{methode}
+Construire un polynôme admettant des racines données $z_A, z_B, z_C$ :
+former le produit $(z - z_A)(z - z_B)(z - z_C)$ puis développer — de
+préférence deux facteurs à la fois, en simplifiant à chaque étape.
+\end{methode}
+
 \exo{2}{}
 \textbf{1.} De $f(\vj) = 3\vi - 2\vj$ on tire $\vi = \tfrac{1}{3}f(\vj) + \tfrac{2}{3}\vj$, d'où (car $f$ est linéaire) $f(\vi) = \tfrac{1}{3}f^2(\vj) + \tfrac{2}{3}f(\vj) = \tfrac{1}{3}\vj + \tfrac{2}{3}(3\vi - 2\vj) = 2\vi - \vj$. Puis $f\circ f(\vi) = 2f(\vi) - f(\vj) = 2(2\vi - \vj) - (3\vi - 2\vj) = \vi$.
 
 \textbf{2.} $(\vi, \vj)$ est une base et $f\circ f(\vi) = \vi$, $f\circ f(\vj) = \vj$ : $f$ est une symétrie vectorielle.
+
+\begin{rappel}
+Caractérisations utiles : $f \circ f = f$ définit une projection,
+$f \circ f = \mathrm{id}$ définit une symétrie vectorielle (involution,
+donc bijective et $f^{-1} = f$). Pour une symétrie : base $=$ vecteurs
+invariants ($f(\vec{u}) = \vec{u}$), direction $=$ vecteurs changés en
+leur opposé ($f(\vec{u}) = -\vec{u}$).
+\end{rappel}
 
 \textbf{3. a.} Un automorphisme est un endomorphisme bijectif.
 
@@ -91,6 +105,13 @@ On note $(x_i, n_{i\bullet})$ et $(y_j, n_{\bullet j})$ les distributions margin
 \end{center}
 
 \textbf{2.} $\overline{X} = \dfrac{-m + 2n + 11}{m + n + 10}$ et $\overline{Y} = \dfrac{m + 2n + 9}{m + n + 10}$. Les conditions $\overline{X} = 1$ et $\overline{Y} = 1$ donnent $n = 1$ et $m = 1$.
+
+\begin{methode}
+Effectifs inconnus dans un tableau statistique : exprimer les moyennes
+(ou autres indicateurs imposés) en fonction des paramètres — sans
+oublier que l'effectif total $N$ en dépend aussi — puis résoudre le
+système donné par les contraintes de l'énoncé.
+\end{methode}
 
 \textbf{3. a.} $Y = aX + b$ avec $a = \dfrac{\mathrm{Cov}(X,Y)}{V(X)} = \dfrac{-1/12}{1/2} = -\dfrac{1}{6}$ et $b = \overline{Y} - a\overline{X} = 1 - \left(-\tfrac{1}{6}\right) = \dfrac{7}{6}$. D'où $Y = -\dfrac{1}{6}X + \dfrac{7}{6}$.
 
