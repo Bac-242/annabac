@@ -31,6 +31,14 @@
   \item \begin{sousq}
     \item $3x^2 - 2x - 1 = 0$ : discriminant réduit $\Delta' = (-1)^2 - 3\times(-1) = 4 > 0$. Solutions $x_1 = \dfrac{1-2}{3} = -\dfrac{1}{3}$ et $x_2 = \dfrac{1+2}{3} = 1$.
     \item En posant $X = e^x$, $(E') : 3e^{2x} - 2e^x - 1 = 3X^2 - 2X - 1 = 0$, d'où $X = -\dfrac{1}{3}$ (impossible, car $e^x > 0$) ou $X = 1$, soit $e^x = 1 \Leftrightarrow x = 0$. D'où $S' = \{0\}$.
+
+\begin{methode}
+Changement d'inconnue : une équation en $e^x$ (ou un système en
+$\ln x$) se ramène à une équation classique en posant $X = e^x$ (ou
+$X = \ln x$). Résoudre en $X$, puis \emph{revenir à} $x$ en écartant
+les valeurs impossibles — ici $X = -\frac{1}{3}$ est rejetée car
+$e^x > 0$.
+\end{methode}
   \end{sousq}
   \item \begin{sousq}
     \item De $x - 2y = -1$ : $x = 2y - 1$. Dans la 2\textsuperscript{e} équation : $7y - 2 = -2$, d'où $y = 0$ puis $x = -1$. Solution : $\{(-1\,;0)\}$.
@@ -47,6 +55,14 @@
   \item $\lim\limits_{x\to+\infty} g(x) = \lim\limits_{x\to+\infty}\dfrac{-2x}{2x} = -1$. En $-\dfrac{3}{2}$ : $-2x+2 \to 5$ et $2x+3 \to 0$, donc $\lim\limits_{x\to-3/2^-} g = -\infty$ (car $2x+3 < 0$) et $\lim\limits_{x\to-3/2^+} g = +\infty$ (car $2x+3 > 0$).
   \item \begin{sousq}
     \item $\forall x \ne -\dfrac{3}{2}$, $g'(x) = \dfrac{-2(2x+3) - 2(-2x+2)}{(2x+3)^2} = \dfrac{-10}{(2x+3)^2}$.
+
+\begin{rappel}
+Dérivée d'un quotient : $\left(\dfrac{u}{v}\right)' =
+\dfrac{u'v - uv'}{v^2}$. Pour une fonction homographique
+$\frac{ax+b}{cx+d}$, le résultat est toujours du type
+$\frac{\text{constante}}{(cx+d)^2}$ : son signe est constant, la
+fonction est monotone sur chaque intervalle de définition.
+\end{rappel}
     \item $(2x+3)^2 > 0$, donc $g'(x) < 0$ sur $\R\setminus\left\{-\dfrac{3}{2}\right\}$.
   \end{sousq}
   \item Tableau de variation :
@@ -98,6 +114,14 @@
   \end{sousq}
   \item \begin{sousq}
     \item $y = ax + b$ passant par $G_1$, $G_2$ : $\begin{cases} 4{,}36 = 5{,}7a + b \\ 5{,}48 = 6{,}74a + b \end{cases}$. En soustrayant : $a = \dfrac{1{,}12}{1{,}04} = 1{,}077$ ; $b = 4{,}36 - 1{,}077\times 5{,}7 = -1{,}778$. D'où $y = 1{,}077x - 1{,}778$.
+
+\begin{methode}
+Ajustement par la méthode de Mayer : \textbf{1)} ordonner la série
+selon $x$ ; \textbf{2)} la couper en deux moitiés et calculer les
+points moyens $G_1$ et $G_2$ de chacune ; \textbf{3)} la droite
+d'ajustement est $(G_1 G_2)$ — son équation s'obtient en résolvant le
+petit système, ou par $a = \frac{y_{G_2} - y_{G_1}}{x_{G_2} - x_{G_1}}$.
+\end{methode}
     \item Pour $y = 4{,}4$ : $4{,}4 = 1{,}077x - 1{,}778$, soit $x = \dfrac{6{,}178}{1{,}077} = 5{,}74$. Pour un lancer à 4,4 m du bras gauche, le lancer du bras droit est estimé à 5,74 m.
   \end{sousq}
 \end{questions}
