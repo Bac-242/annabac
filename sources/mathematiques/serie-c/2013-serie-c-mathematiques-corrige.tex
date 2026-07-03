@@ -23,6 +23,14 @@ En additionnant (1) et (2), $x = -\dfrac{1}{2}$ ou $x = \dfrac{1}{2}$ ; de même
 
 \textbf{4.} En remarquant que $(z + 1)\left(z^2 - \left(\tfrac{3}{2} + \tfrac{1}{2}i\right)z + 1\right) = z^3 - \left(\tfrac{1}{2} + \tfrac{1}{2}i\right)z^2 - \left(\tfrac{1}{2} + \tfrac{1}{2}i\right)z + 1$, on en déduit que les solutions de $(E)$ sont : $\left\{-1,\ 1 + i,\ \dfrac{1}{2} - \dfrac{1}{2}i\right\}$.
 
+\begin{methode}
+Équation de degré 3 : repérer une racine évidente $z_0$ (souvent
+suggérée par l'énoncé, comme $-1$ ici), factoriser par $(z - z_0)$ en
+identifiant les coefficients du facteur de degré 2, puis résoudre
+l'équation du second degré restante (discriminant, éventuellement
+complexe).
+\end{methode}
+
 % ====================== EXERCICE 2 ======================
 \exo{2}{}
 
@@ -64,6 +72,14 @@ D'où le point moyen $G\left(-\dfrac{17}{14}\,;\dfrac{2}{7}\right)$.
 
 \textbf{5.} Le coefficient de corrélation linéaire entre $X$ et $Y$ est :
 \[ \rho_{X,Y} = \frac{\mathrm{Cov}(X, Y)}{\sqrt{V(X)}\sqrt{V(Y)}} = 0{,}068. \]
+
+\begin{rappel}
+Le coefficient de corrélation linéaire vérifie toujours
+$-1 \le \rho_{X,Y} \le 1$. Un ajustement affine n'est pertinent que si
+$|\rho|$ est proche de 1 (en pratique $|\rho| \gtrsim 0{,}87$) ; ici
+$\rho \approx 0{,}07$ : il n'y a pas de corrélation linéaire entre $X$
+et $Y$.
+\end{rappel}
 
 % ====================== PROBLÈME ======================
 \prob{}
@@ -128,6 +144,13 @@ $f$ & $0$ & $\nearrow$ & $+\infty$ \\
 \textbf{11.} $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to+\infty}\left(\dfrac{2}{\sqrt{x}} + \dfrac{\ln(x+1)}{x}\right) = 0$. La courbe $(C)$ admet une branche parabolique de direction $\vv{JB}$.
 
 \textbf{12.} Voir figure.
+
+\begin{rappel}
+Parabole de foyer $F$ et de directrice $(D)$ : dans le repère d'origine
+le sommet (milieu entre foyer et directrice), l'équation réduite est
+$y^2 = 2px$, où $p$ est la distance du foyer à la directrice. Le sommet
+est le seul point de la parabole situé sur l'axe focal.
+\end{rappel}
 
 \textbf{13.} $p$ étant la distance du foyer à la directrice, on a $p = AB = 2$. L'équation cartésienne de $(P_1)$ est alors $y^2 = 2px = 4x$. On en déduit que $(P_1)$ est la réunion de deux courbes symétriques par rapport à $(JB)$ : $y_1(x) = 2\sqrt{x}$ et $y_2(x) = -2\sqrt{x}$. D'où l'aire de la portion :
 \[ \int_0^1 (f(x) - y_1(x))\,dx = \int_0^1 \big(2\sqrt{x} + \ln(x+1) - 2\sqrt{x}\big)\,dx = \big[(x+1)\ln(x+1) - x\big]_0^1 = 2\ln 2 - 1. \]

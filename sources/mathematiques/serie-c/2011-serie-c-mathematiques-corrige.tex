@@ -19,6 +19,13 @@ En posant $u(x) = x$, $v'(x) = \cos(2x)$, donc $u'(x) = 1$, $v(x) = \dfrac{1}{2}
 \[ \begin{cases} A + B = \dfrac{\pi^2}{8} & (1) \\[1ex] A - B = -\dfrac{1}{2} & (2) \end{cases} \]
 En additionnant (1) et (2), on en déduit $A = \dfrac{\pi^2}{16} - \dfrac{1}{4}$. En soustrayant, on en déduit $B = \dfrac{\pi^2}{16} + \dfrac{1}{4}$.
 
+\begin{methode}
+Deux intégrales liées par $\cos^2 x$ et $\sin^2 x$ : plutôt que de les
+calculer séparément, former $A + B$ (avec $\cos^2 x + \sin^2 x = 1$) et
+$A - B$ (avec $\cos^2 x - \sin^2 x = \cos 2x$), puis résoudre le petit
+système obtenu.
+\end{methode}
+
 % ====================== EXERCICE 2 ======================
 \exo{2}{}
 
@@ -45,6 +52,15 @@ En additionnant (1) et (2), on en déduit $A = \dfrac{\pi^2}{16} - \dfrac{1}{4}$
 \[ V(x) = \frac{1}{5}\sum_{i=1}^5 x_i^2 - \overline{x}^2 = \frac{1^2 + 2^2 + 3^2 + 4^2 + 5^2}{5} - 3^2 = 2 \]
 \[ a = \frac{-28{,}56}{2} = -14{,}28 \;;\quad b = 57{,}2 - (-14{,}28) \times 3 = 100{,}04. \]
 D'où l'équation de la droite de régression linéaire : $y = -14{,}28\,x + 100{,}04$.
+
+\begin{rappel}
+Droite de régression de $y$ en $x$ (méthode des moindres carrés) :
+$y = ax + b$ avec $a = \frac{\mathrm{Cov}(x,y)}{V(x)}$ et
+$b = \overline{y} - a\,\overline{x}$ — elle passe toujours par le point
+moyen $(\overline{x}, \overline{y})$. Formules de calcul rapides :
+$\mathrm{Cov}(x,y) = \frac{1}{n}\sum x_i y_i - \overline{x}\,\overline{y}$
+et $V(x) = \frac{1}{n}\sum x_i^2 - \overline{x}^2$.
+\end{rappel}
 
 \textbf{3.} Pour $x = 6$, $y = -14{,}28 \times 6 + 100{,}04 = 14{,}36$ (milliers de francs). Le bénéfice au 6\textsuperscript{e} mois est estimé à 14\,360 francs CFA.
 
@@ -96,6 +112,14 @@ Donc les triangles $ABC$ et $EAK$ sont isométriques (un angle de même mesure c
 \underline{Construction de $\Omega_2$.} $R_2(A) = G$ et $R_2(C) = A$. $\Omega_2$ est le point d'intersection des médiatrices de $[AG]$ et $[CA]$, c'est-à-dire le centre du carré $ACFG$.
 
 \textbf{4. a.} $f = R_1 \circ R_2$ est la composée de deux rotations de centres distincts dont la somme des angles $\dfrac{\pi}{2} + \dfrac{3\pi}{2} \equiv 0\ [2\pi]$. C'est donc une translation.
+
+\begin{rappel}
+Composée de deux rotations d'angles $\theta_1$ et $\theta_2$ : c'est une
+rotation d'angle $\theta_1 + \theta_2$ si
+$\theta_1 + \theta_2 \not\equiv 0\ [2\pi]$, et une \emph{translation}
+sinon. Pour identifier le vecteur (ou le centre), calculer l'image d'un
+point bien choisi, comme ici $f(C)$.
+\end{rappel}
 
 \textbf{b.} $f(C) = R_1 \circ R_2(C) = R_1(A) = E$. $\vv{CE}$ est le vecteur de translation de $f$.
 

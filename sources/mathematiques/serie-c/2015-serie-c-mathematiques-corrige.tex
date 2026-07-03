@@ -24,6 +24,14 @@ Les équations $(E)$ et $(E')$ sont équivalentes.
 \end{align*}
 On en déduit que $21 \times (-4) = 1 + 17 \times (-5)$, par conséquent $21 \times (-4) \equiv 1\ [17]$. Donc l'inverse de 21 modulo 17 est $-4$.
 
+\begin{rappel}
+Inverse modulaire : $a$ admet un inverse modulo $n$ si et seulement si
+$\mathrm{pgcd}(a, n) = 1$. On le trouve par l'identité de Bézout :
+de $au + nv = 1$ on tire $au \equiv 1\ [n]$, donc $u$ est l'inverse
+de $a$. Il permet de « diviser » dans une congruence :
+$ax \equiv b\ [n] \Leftrightarrow x \equiv ub\ [n]$.
+\end{rappel}
+
 \textbf{b.} Comme $21 \times (-4) \equiv 1\ [17]$, on en déduit $21 \times (-16) \equiv 4\ [17]$. Donc $-16$ est une solution particulière de $(E')$. Soit $x$ une solution de $(E')$ :
 \[ \begin{cases} 21x \equiv 4\ [17] \\ 21 \times (-16) \equiv 4\ [17] \end{cases} \Longleftrightarrow 21x \equiv 21 \times (-16)\ [17] \Longleftrightarrow 21(x + 16) \equiv 0\ [17] \Longleftrightarrow 17 \mid 21(x + 16). \]
 Comme 17 est premier avec 21, d'après Gauss, 17 divise $x + 16$. Il existe donc $k \in \Z$ tel que $x + 16 = 17k$. D'où $x = -16 + 17k = 1 + 17(k - 1) = 1 + 17k'$. Les solutions de $(E')$ sont $\{1 + 17k\,;k \in \Z\}$.
@@ -110,6 +118,16 @@ Comme $A$, $B$, $S$ sont alignés, alors $2\vv{SB} + \vv{SA} = \vv{0}$ ou $2\vv{
 
 \textbf{c.} $\forall n \in \N$, $0 \le |u_n - \alpha| \le \left(\dfrac{1}{2}\right)^n$. Par passage à la limite, $\lim\limits_{n\to+\infty}|u_n - \alpha| = 0$, donc $\lim\limits_{n\to+\infty} u_n = \alpha$.
 
+\begin{methode}
+Canevas du point fixe, très fréquent au bac : \textbf{1)} montrer par
+récurrence que $u_n$ reste dans un intervalle stable $I$ ;
+\textbf{2)} majorer $|g'|$ par $k < 1$ sur $I$ et appliquer l'inégalité
+des accroissements finis : $|u_{n+1} - \alpha| \le k\,|u_n - \alpha|$ ;
+\textbf{3)} en déduire par récurrence $|u_n - \alpha| \le k^n\,|u_0 - \alpha|$
+et conclure ($k^n \to 0$). La même majoration fournit le rang $n_0$
+garantissant une précision donnée.
+\end{methode}
+
 \textbf{5. a.} On cherche $n_0 \in \N$ tel que $\left(\dfrac{1}{2}\right)^{n_0} \le 10^{-1}$. Par croissance du logarithme, $n_0\ln\dfrac{1}{2} \le -\ln 10$, d'où $n_0 \ge \dfrac{\ln 10}{\ln 2} \approx 3{,}32$. On peut prendre $n_0 = 4$.
 
 \textbf{b.} $u_1 = g(u_0) \approx 1{,}6487$ ; $u_2 \approx 1{,}834$ ; $u_3 \approx 1{,}725$ ; $u_4 \approx 1{,}7855$. $u_4 \approx 1{,}786$ est une valeur approchée de $\alpha$.
@@ -138,6 +156,15 @@ Comme $A$, $B$, $S$ sont alignés, alors $2\vv{SB} + \vv{SA} = \vv{0}$ ou $2\vv{
 \textbf{2.} $p(M \cap T) = 0{,}03 \times 0{,}95 = 0{,}0285$. \quad $p(\overline{M} \cap \overline{T}) = 0{,}97 \times 0{,}99 = 0{,}9603$.
 
 \textbf{3.} $p(T) = 0{,}03 \times 0{,}95 + 0{,}97 \times 0{,}01 = 0{,}0382$. \quad $p(\overline{T}) = 1 - p(T) = 0{,}9618$.
+
+\begin{rappel}
+Probabilités totales : si $\{M, \overline{M}\}$ partitionne l'univers,
+alors $p(T) = p(M)\,p(T/M) + p(\overline{M})\,p(T/\overline{M})$ — sur
+l'arbre, on additionne les chemins qui mènent à $T$. La question
+suivante « renverse » le conditionnement :
+$p(\overline{M}/T) = \frac{p(\overline{M} \cap T)}{p(T)}$
+(formule de Bayes).
+\end{rappel}
 
 \textbf{4. a.} $p(\overline{M}/T) = \dfrac{p(\overline{M} \cap T)}{p(T)} = \dfrac{0{,}97 \times 0{,}01}{0{,}0382} \approx 0{,}2539$.
 

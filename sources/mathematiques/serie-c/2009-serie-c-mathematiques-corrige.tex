@@ -23,6 +23,15 @@ Donc $8(-10) - 27(-3) = 1$, puis $8 \times 110 - 27 \times 33 = -11$. $(110, 33)
 
 \underline{Ensemble des solutions :} $8\alpha - 27\beta = 8 \times 110 - 27 \times 33 \Leftrightarrow 8(\alpha - 110) = 27(\beta - 33)$. Comme 8 est premier avec 27, d'après Gauss 8 divise $\beta - 33$ : $\beta = 33 + 8k$, $\alpha = 110 + 27k$. L'ensemble est $\{(110 + 27k\,;33 + 8k)\,;k \in \Z\}$.
 
+\begin{methode}
+Équation diophantienne $a\alpha + b\beta = c$ : \textbf{1)} algorithme
+d'Euclide pour calculer $\mathrm{pgcd}(a,b)$, puis remontée des égalités
+(identité de Bézout) pour obtenir une solution particulière ;
+\textbf{2)} soustraire membre à membre l'équation et sa solution
+particulière ; \textbf{3)} conclure avec le théorème de Gauss pour
+décrire toutes les solutions.
+\end{methode}
+
 \textbf{b.} En remplaçant dans $4\alpha + 9\beta = 17$, on trouve $k = -4$.
 
 \textbf{c.} $\begin{cases} U_2 = 17 \\ U_3 = -11 \end{cases} \Leftrightarrow \begin{cases} 4\alpha + 9\beta = 17 \\ 8\alpha - 27\beta = -11 \end{cases}$. Avec $k = -4$ : $\alpha = 2$, $\beta = 1$. D'où $U_n = 2\cdot 2^n + (-3)^n$.
@@ -35,6 +44,12 @@ Donc $8(-10) - 27(-3) = 1$, puis $8 \times 110 - 27 \times 33 = -11$. $(110, 33)
   \item $n = 4k+2$ : $U_{4k+2} \equiv 2\ [5]$ ; \quad $n = 4k+3$ : $U_{4k+3} \equiv 4\ [5]$.
 \end{itemize}
 
+\begin{methode}
+Reste d'une suite modulo $m$ : repérer une puissance qui « boucle »
+(ici $2^4 \equiv 1\ [5]$), puis discuter suivant le reste de $n$ dans
+la division par la période (ici $n = 4k$, $4k+1$, $4k+2$ ou $4k+3$).
+\end{methode}
+
 \textbf{3. a.} $W_n = 2\cdot 2^n + (-3)^n = U_n$, donc $W_n \equiv 3\cdot 2^n\ [5]$.
 \begin{align*}
 S_n \equiv 3(2^0 + \cdots + 2^n) \equiv 3\cdot\frac{1 - 2^{n+1}}{1 - 2} \equiv -3(1 - 2^{n+1}) \equiv 2 - 4\cdot 2^n\ [5]
@@ -46,6 +61,14 @@ S_n \equiv 3(2^0 + \cdots + 2^n) \equiv 3\cdot\frac{1 - 2^{n+1}}{1 - 2} \equiv -
 
 \textbf{1.} Discriminant $\Delta = -2 + 2\sqrt{3}\,i$. On cherche $u = x + iy$ avec $u^2 = \Delta$ : $x^2 - y^2 = -2$, $xy = \sqrt{3}$, $x^2 + y^2 = 4$. D'où $x = \pm1$, $y = \pm\sqrt{3}$ (mêmes signes), $\Delta = (1 + i\sqrt{3})^2$. Solutions :
 \[ z' = \frac{\sqrt{3} - 1}{2}(-1 + i), \qquad z'' = \frac{\sqrt{3} + 1}{2}(-1 - i) \]
+
+\begin{methode}
+Racines carrées d'un nombre complexe $\Delta = a + ib$ : poser
+$u = x + iy$ et résoudre le système formé par $x^2 - y^2 = a$ (parties
+réelles), $2xy = b$ (parties imaginaires) et $x^2 + y^2 = |\Delta|$
+(égalité des modules) ; le signe de $b$ impose les signes relatifs de
+$x$ et $y$.
+\end{methode}
 
 \textbf{2.} $z' = \dfrac{\sqrt{6} - \sqrt{2}}{2}\left(\cos\tfrac{3\pi}{4} + i\sin\tfrac{3\pi}{4}\right)$ ; \quad $z'' = \dfrac{\sqrt{6} + \sqrt{2}}{2}\left(\cos\left(-\tfrac{3\pi}{4}\right) + i\sin\left(-\tfrac{3\pi}{4}\right)\right)$.
 

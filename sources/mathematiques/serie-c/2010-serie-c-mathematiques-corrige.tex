@@ -68,6 +68,14 @@ M \in \Gamma &\Longleftrightarrow (\vv{MA}, \vv{MC}) \equiv (\vv{P_0 A}, \vv{P_0
 \end{align*}
 D'où $\Gamma$ est l'arc de cercle $\overset{\frown}{AP_0C}$.
 
+\begin{rappel}
+Arc capable : l'ensemble des points $M$ du plan tels que
+$(\vv{MA}, \vv{MC}) \equiv \theta\ [2\pi]$ (avec $\theta \not\equiv 0\ [\pi]$)
+est un arc de cercle d'extrémités $A$ et $C$ (privé de ces extrémités).
+Tous les points de l'arc « voient » le segment $[AC]$ sous le même angle
+orienté.
+\end{rappel}
+
 \textbf{2. a.} $(\vv{EA}, \vv{EC}) \equiv \dfrac{\pi}{3}\ [2\pi]$ car $E$ est un point de $(\Gamma)$. De plus, $(\vv{AC}, \vv{AE}) \equiv \dfrac{\pi}{3}\ [2\pi]$ car $\big((AC),(D)\big) \equiv \dfrac{\pi}{3}\ [\pi]$ et $E \in (D)$. On en déduit que le triangle $EAC$ admet deux angles de mesure $\dfrac{\pi}{3}$. C'est par conséquent un triangle équilatéral.
 
 \textbf{b.} Comme $EA = EC$ et $\vv{EA} \ne \vv{EC}$, alors il existe une rotation $r$ d'angle $(\vv{EA}, \vv{EC}) \equiv \dfrac{\pi}{3}\ [2\pi]$, de centre $E$, qui transforme $A$ en $C$.
@@ -98,6 +106,16 @@ $g$ est la fonction définie sur $\R$ par : $g(x) = 2\sin(\pi x)$.
 \textbf{b.} \underline{Continuité en 0.} $\lim\limits_{x\to 0^-} f(x) = f(0) = 2\sin 0 = 0$ et $\lim\limits_{x\to 0^+} f(x) = \lim\limits_{x\to 0^+}\left(\tfrac{1}{2}x^2 - x^2\ln x\right) = 0$. Comme $\lim\limits_{x\to 0^-} f(x) = \lim\limits_{x\to 0^+} f(x) = f(0)$, alors $f$ est continue en 0.
 
 \underline{Dérivabilité en 0.} $\lim\limits_{x\to 0^-}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^-}\dfrac{2\sin\pi x}{x} = 2\pi\lim\limits_{u\to 0^-}\dfrac{\sin u}{u} = 2\pi$ (en posant $u = \pi x$). $\lim\limits_{x\to 0^+}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^+}\left(\tfrac{1}{2}x - x\ln x\right) = 0$. Comme les deux limites diffèrent, $f$ n'est pas dérivable en 0.
+
+\begin{methode}
+Fonction définie par morceaux, étude au point de raccord $x_0$ :
+\textbf{1)} continuité — comparer $\lim_{x\to x_0^-} f(x)$,
+$\lim_{x\to x_0^+} f(x)$ et $f(x_0)$ ; \textbf{2)} dérivabilité —
+étudier le taux d'accroissement $\frac{f(x)-f(x_0)}{x-x_0}$ de chaque
+côté : des limites finies mais différentes donnent un point anguleux
+(deux demi-tangentes). Limite classique utilisée ici :
+$\lim_{u\to 0}\frac{\sin u}{u} = 1$.
+\end{methode}
 
 \textbf{c.} $\forall x \in [-4\,;-2]$, $2\sin\pi(x+2) = 2\sin(\pi x + 2\pi) = 2\sin\pi x$. La fonction $x \mapsto 2\sin\pi x$, définie sur $[-4\,;0]$, est périodique de période 2. On peut restreindre son étude à $[-2\,;0]$, puis reporter le tracé sur $[-4\,;-2]$ par la translation de vecteur $-2\vi$. D'où l'étude de $f$ peut être réduite à l'intervalle $I = [-2\,;+\infty[$.
 
@@ -149,6 +167,14 @@ $f$ & $0$ & $\nearrow$ & $2$ & $\searrow$ & $-2$ & $\nearrow\ 0$ & $\nearrow$ & 
 \underline{Intégrons par parties $\displaystyle\int_1^{\sqrt{e}} x^2\ln x\,dx$.} En posant $u(x) = \ln x$, $v'(x) = x^2$, donc $u'(x) = \dfrac{1}{x}$, $v(x) = \dfrac{x^3}{3}$ :
 \[ \int_1^{\sqrt{e}} x^2\ln x\,dx = \left[\frac{x^3}{3}\ln x\right]_1^{\sqrt{e}} - \frac{1}{3}\int_1^{\sqrt{e}} x^2\,dx. \]
 D'où $A_0 = \left[\dfrac{5x^3}{18} - \dfrac{x^3}{3}\ln x\right]_1^{\sqrt{e}} = \dfrac{2e\sqrt{e} - 5}{18}$ u.a $= \dfrac{4e\sqrt{e} - 10}{9}$ cm$^2$.
+
+\begin{methode}
+Intégration par parties de $\int x^n\ln x\,dx$ : toujours poser
+$u(x) = \ln x$ (la dérivation le transforme en $\frac{1}{x}$, plus
+simple) et $v'(x) = x^n$. Penser aussi à convertir les unités d'aire :
+1 u.a $=$ (unité en abscisse) $\times$ (unité en ordonnée), ici
+$2 \times 2 = 4$ cm$^2$.
+\end{methode}
 
 \textbf{6.} Voir figure.
 

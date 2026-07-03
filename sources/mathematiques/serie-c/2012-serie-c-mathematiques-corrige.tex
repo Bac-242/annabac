@@ -20,6 +20,15 @@ Le terme de degré 0 du second membre est $4d$ : $4d = -16$, d'où $d = -4$. Le 
 
 L'équation $Z^2 - \sqrt{2}\,Z - 4 = 0$, de discriminant $\Delta = (-\sqrt{2})^2 - 4(-4) = 18$, admet deux racines $z_2 = 2\sqrt{2}$ et $z_3 = -\sqrt{2}$. Donc les solutions sont : $z_0 = 2i$, $z_1 = -2i$, $z_2 = 2\sqrt{2}$ et $z_3 = -\sqrt{2}$.
 
+\begin{methode}
+Solutions imaginaires pures d'une équation polynomiale : injecter
+$z = ib$ ($b$ réel), séparer partie réelle et partie imaginaire (un
+complexe est nul si et seulement si les deux sont nulles), résoudre le
+système en $b$. Chaque paire $\pm ib$ trouvée fournit le facteur
+$(Z^2 + b^2)$ ; le facteur restant s'obtient par identification des
+coefficients.
+\end{methode}
+
 \textbf{2. a.} \begin{center}
 \begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\footnotesize}]
   \draw[->] (-2.6,0)--(3.6,0) node[right]{$\vec{u}$};
@@ -60,11 +69,25 @@ La fonction $x \mapsto x^n(x-1)e^{-\frac{x^2}{2}}$ est continue sur $[0\,;1]$ et
 
 \underline{Convergence.} La suite $(I_n)$ est décroissante (d'après 4.) et minorée par 0 (d'après 2.). Donc elle converge vers une limite $l$.
 
+\begin{rappel}
+Théorème de la limite monotone : toute suite décroissante et minorée
+(ou croissante et majorée) converge. Il garantit l'\emph{existence} de
+la limite sans donner sa valeur — celle-ci s'obtient ensuite, par
+exemple par encadrement (question suivante).
+\end{rappel}
+
 \textbf{5.} Soit $n \in \N^*$. $\forall x \in [0\,;1]$, $-\dfrac{x^2}{2} \le 0$. Par croissance de l'exponentielle, $0 < e^{-\frac{x^2}{2}} \le 1$. On en déduit $0 \le x^n e^{-\frac{x^2}{2}} \le x^n$. Par passage à l'intégrale :
 \[ 0 \le \int_0^1 x^n e^{-\frac{x^2}{2}}\,dx \le \int_0^1 x^n\,dx = \left[\frac{x^{n+1}}{n+1}\right]_0^1 = \frac{1}{n+1}. \]
 D'où $0 \le I_n \le \dfrac{1}{n+1}$ pour tout $n \in \N^*$.
 
 \underline{Calcul de $l$.} Par passage à la limite, $0 \le \lim\limits_{n\to+\infty} I_n \le \lim\limits_{n\to+\infty}\dfrac{1}{n+1} = 0$. On en déduit que $l = 0$.
+
+\begin{methode}
+Limite d'une suite d'intégrales : encadrer l'intégrande sur l'intervalle
+(ici $0 \le e^{-x^2/2} \le 1$ donc $0 \le x^n e^{-x^2/2} \le x^n$),
+intégrer l'encadrement (l'intégrale conserve les inégalités), puis
+conclure avec le théorème des gendarmes.
+\end{methode}
 
 % ====================== PROBLÈME ======================
 \prob{}
