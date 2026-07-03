@@ -36,16 +36,23 @@ styles incluent à leur tour **`sources/commun.tex`** (via
 
 ## Style des documents
 
-Le style reste volontairement **sobre : noir et blanc uniquement**, filets
-fins, pas d'aplats ni de couleurs — les élèves impriment et photocopient, et
-les fichiers doivent rester légers.
+Le style reste volontairement **sobre** : filets fins, jamais d'aplats — les
+élèves impriment et photocopient, et les fichiers doivent rester légers. La
+mise en page est légèrement **aérée** (interligne, espace entre les réponses,
+air autour des équations) : ces réglages vivent dans `commun.tex`.
 
-- **Sujets** : reproductions de documents officiels — mise en page neutre,
-  titre via `\entetesujet{...}`, aucun habillage au-delà du pied de page de
-  provenance.
+- **Sujets** : reproductions de documents officiels — **noir et blanc
+  strict**, mise en page neutre, titre via `\entetesujet{...}`, aucun
+  habillage au-delà du pied de page de provenance.
 - **Corrigés** : œuvres originales de la communauté — titre via
-  `\entetecorrige{2020}{C}{Mathématiques}` et encadrés pédagogiques
-  autorisés.
+  `\entetecorrige{2020}{C}{Mathématiques}`, encadrés pédagogiques, et
+  **couleur fonctionnelle autorisée** avec trois garde-fous :
+  1. aucune information portée par la couleur seule (toujours étiqueter les
+     flèches, courbes, zones — une photocopie N&B doit rester 100 % lisible) ;
+  2. jamais de fonds colorés (coût d'encre, photocopie) ;
+  3. couleurs sombres qui dégradent bien en gris — la structure (entête,
+     titres d'exercices, encadrés) utilise le bleu nuit du site, défini dans
+     `commun.tex` (`\color{bacnuit}`).
 
 ## Encadrés pédagogiques (corrigés uniquement)
 

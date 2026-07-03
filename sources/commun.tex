@@ -3,8 +3,13 @@
 %  Inclus depuis chaque dossier serie : \input{../../commun}
 %  (la compilation se fait toujours depuis le dossier de la serie).
 %
-%  Style sobre conserve : noir et blanc uniquement, filets fins,
-%  pas d'aplats ni de couleurs — lisible en photocopie.
+%  Style sobre : filets fins, jamais d'aplats. La couleur est autorisee
+%  dans les corriges quand elle est *fonctionnelle* (structure, figures),
+%  avec trois garde-fous (voir sources/README.md) :
+%   1. aucune information portee par la couleur seule ;
+%   2. jamais de fonds colores ;
+%   3. couleurs sombres qui degradent bien en photocopie N&B.
+%  Les sujets restent en noir et blanc strict.
 % ======================================================================
 
 % --- Compression maximale des PDF ------------------------------------
@@ -12,6 +17,26 @@
 \pdfcompresslevel=9
 \pdfobjcompresslevel=3
 \pdfminorversion=5
+
+% --- Couleur structurelle ---------------------------------------------
+% xcolor est charge ici car les styles des sujets maths n'ont pas TikZ.
+% « bacnuit » = le bleu nuit du site (photocopie presque comme du noir).
+\usepackage{xcolor}
+\definecolor{bacnuit}{RGB}{20,36,92}
+
+% --- Aeration ----------------------------------------------------------
+% Interligne legerement augmente et un peu d'air entre les paragraphes :
+% chaque reponse d'un corrige forme un bloc identifiable a l'oeil.
+\linespread{1.07}
+\setlength{\parskip}{2.5pt plus 1pt}
+% Plus d'air autour des equations centrees (regle a l'ouverture du
+% document, car le choix de la taille de police reecrit ces longueurs).
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{9pt plus 2pt minus 2pt}%
+  \setlength{\belowdisplayskip}{9pt plus 2pt minus 2pt}%
+  \setlength{\abovedisplayshortskip}{5pt plus 2pt}%
+  \setlength{\belowdisplayshortskip}{6pt plus 2pt}%
+}
 
 % --- Adresse publique du site ---------------------------------------
 % Point unique a mettre a jour si le domaine change (puis recompiler
@@ -32,14 +57,14 @@
 % Les sujets, reproductions de documents officiels, gardent \entetesujet.
 \newcommand{\entetecorrige}[3]{%
   \begin{center}
-    {\scshape Baccalaur\'eat --- S\'erie #2}\\[0.35em]
+    {\scshape\color{bacnuit} Baccalaur\'eat --- S\'erie #2}\\[0.35em]
     {\Large\bfseries #3 --- Session #1}\\[0.4em]
     {\itshape Corrig\'e d\'etaill\'e}
   \end{center}
   \vspace{0.2em}
-  \hrule height 0.8pt
+  {\color{bacnuit}\hrule height 0.8pt}
   \vspace{1.5pt}
-  \hrule height 0.4pt
+  {\color{bacnuit}\hrule height 0.4pt}
   \vspace{1.2em}}
 
 % --- Encadres pedagogiques (corriges) --------------------------------
@@ -52,13 +77,13 @@
 %   \begin{piege}   ... \end{piege}     -> « Piège classique »
 \usepackage{framed}
 \newenvironment{pedagobarre}{%
-  \def\FrameCommand{{\vrule width 1pt}\hspace{0.9em}}%
+  \def\FrameCommand{{\color{bacnuit}\vrule width 1pt}\hspace{0.9em}}%
   \MakeFramed{\advance\hsize-\width\FrameRestore}}%
  {\endMakeFramed}
 \newenvironment{blocpedago}[1]{%
   \par\medskip
   \begin{pedagobarre}\small
-  \noindent{\bfseries\scshape #1.}\hspace{0.5em}\ignorespaces
+  \noindent{\bfseries\scshape\color{bacnuit} #1.}\hspace{0.5em}\ignorespaces
 }{%
   \end{pedagobarre}\medskip}
 \newenvironment{methode}{\begin{blocpedago}{M\'ethode}}{\end{blocpedago}}
