@@ -54,6 +54,14 @@ $\ch{(C_2H_5)_2NH + H_2O \rightleftharpoons (C_2H_5)_2NH_2^+ + OH^-}$. L'atome d
 
 \question{1.} $-\log C_0 = -\log(5\cdot10^{-2}) = 1{,}30$. Comme $\text{pH} > -\log C_0$, l'acide monochloroéthanoïque est un \textbf{acide faible}.
 
+\begin{methode}
+Reconnaître la force d'un acide à partir du pH : calculer
+$-\log C_0$. Si $\text{pH} = -\log C_0$, l'acide est totalement
+dissocié : acide \emph{fort}. Si $\text{pH} > -\log C_0$, la
+dissociation est partielle : acide \emph{faible}. (Raisonnement
+symétrique pour une base avec $14 + \log C_0$.)
+\end{methode}
+
 \question{2.} $\ch{CH_2ClCOOH + H_2O \rightleftharpoons CH_2ClCOO^- + H_3O^+}$.
 
 \question{3. a.} Autoprotolyse (acide faible, dissociation limitée) :
@@ -106,6 +114,14 @@ Un ébranlement est \emph{transversal} lorsque la perturbation du milieu élasti
 \partie{B : application des connaissances}
 
 \question{1.} Courbe 1 ($y$--$t$) : période $T = 2\cdot10^{-3}$ s. Courbe 2 ($y$--$x$) : longueur d'onde $\lambda$. D'où $v = \dfrac{\lambda}{T} = \dfrac{\lambda}{2\cdot10^{-3}} = 500\lambda\ (\text{m}\cdot\text{s}^{-1})$.
+
+\begin{piege}
+Deux sinusoïdes qui se ressemblent, deux grandeurs différentes : la
+courbe $y(t)$ (élongation d'un point au cours du temps) donne la
+\emph{période} $T$, la courbe $y(x)$ (photo de la corde à un instant)
+donne la \emph{longueur d'onde} $\lambda$. Vérifier l'axe des
+abscisses avant toute lecture.
+\end{piege}
 \begin{center}
 \begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\scriptsize}]
   \begin{scope}
@@ -158,6 +174,15 @@ Un ébranlement est \emph{transversal} lorsque la perturbation du milieu élasti
 
 \question{1. a.} Référentiel terrestre galiléen, système = solide de masse $m$. TEC entre $A$ et $B$ : $\frac{1}{2}mv_B^2 - \frac{1}{2}mv_A^2 = W_{\vv{P}} + W_{\vv{R}}$. La réaction normale ne travaille pas ($\vv{R_N} \perp \vv{dl}$), $W_{\vv{f}} = -f\cdot\widehat{AB}$. Avec $v_A = 0$, $\widehat{AB} = r\theta$, $OI = r\cos\theta$ et $h = r(1-\cos\theta)$ :
 \[ \frac{1}{2}mv_B^2 = mgr(1-\cos\theta) - f r\theta \;\Rightarrow\; v_B = \sqrt{2r\left[g(1-\cos\theta) - \frac{f}{m}\theta\right]}. \]
+
+\begin{methode}
+Théorème de l'énergie cinétique sur une piste courbe :
+$\Delta E_c = \sum W$. La réaction normale ne travaille jamais
+(perpendiculaire au déplacement) ; le frottement travaille sur la
+\emph{longueur du chemin} ($r\theta$ pour un arc, pas la corde) ; le
+poids sur la \emph{dénivellation} $h = r(1 - \cos\theta)$, lue par
+projection sur la verticale.
+\end{methode}
 
 \textbf{b.} Entre $B$ et $C$ (horizontal, $W_{\vv{P}} = 0$) : $\frac{1}{2}mv_C^2 - \frac{1}{2}mv_B^2 = -f\cdot BC = -2fr$, d'où
 \[ v_C = \sqrt{2r\left[g(1-\cos\theta) - \frac{f}{m}(\theta + 2)\right]}. \]
