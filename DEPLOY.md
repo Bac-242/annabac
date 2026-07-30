@@ -87,6 +87,40 @@ wrangler pages dev dist   # sert dist/ comme le fera Pages (en-têtes compris)
 C'est le seul moyen de tester les en-têtes de `public/_headers` : ils ne
 s'appliquent pas sous `astro dev`.
 
+## Sauvegarde des documents
+
+Le dépôt git est déjà une sauvegarde (chaque `git clone` en est une copie
+complète), mais il repose sur un seul compte GitHub. Pour une copie
+indépendante, sur un Drive ou un disque externe :
+
+```bash
+npm run sauvegarde
+```
+
+Le script [scripts/export-sauvegarde.mjs](scripts/export-sauvegarde.mjs) crée
+`export/Bac242-sauvegarde-<date>/`, ignoré par git :
+
+- `pdfs/<matiere>/serie-<x>/` — tous les PDF, noms identiques au dépôt, rangés
+  selon la même arborescence que `sources/`
+- `sources-latex/` — les fichiers `.tex` des documents rédigés, de loin le plus
+  difficile à reconstituer en cas de perte
+- `fiches/` — les métadonnées Markdown, sans lesquelles les PDF perdent leur
+  contexte (année, série, matière, session)
+- `INVENTAIRE.csv` — la liste complète, ouvrable dans Google Sheets
+- `LISEZ-MOI.txt` — la procédure de restauration
+
+Déposez ensuite le dossier sur le Drive du projet. Le dossier de destination
+doit rester **privé** : les sujets appartiennent à leurs ayants droit et les
+corrigés à leurs auteurs, la diffusion publique passe par le site.
+
+Pour automatiser l'envoi, [rclone](https://rclone.org) sait synchroniser vers
+Google Drive (`rclone config` ouvre une autorisation OAuth dans le navigateur,
+à faire une fois avec le compte du projet) :
+
+```bash
+rclone sync export/ drive-bac242:Sauvegardes/Bac242 --progress
+```
+
 ## Sécurité, coûts et identité du projet
 
 Le projet est public et open source. Quelques précautions, surtout tant que

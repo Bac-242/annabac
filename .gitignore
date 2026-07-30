@@ -1,5 +1,7 @@
 # build output
 dist/
+# sauvegardes générées par scripts/export-sauvegarde.mjs (copies des PDF)
+export/
 # generated types
 .astro/
 # dependencies

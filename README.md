@@ -83,6 +83,7 @@ src/
   styles/global.css       # design tokens (clair/sombre) + utilitaires
   **/*.test.ts            # tests unitaires (Vitest), co-localisés avec le code
 scripts/make-og-image.mjs # génère l'image de partage Open Graph
+scripts/export-sauvegarde.mjs # prépare une sauvegarde (PDF + sources + inventaire)
 test/stubs/               # stubs pour les tests (ex. astro:content)
 shared/matieres.json      # taxonomie des matières par série
 public/                   # favicon, icône PWA, og.png, PDF des sujets, _headers (CSP)
