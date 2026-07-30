@@ -56,16 +56,14 @@ const orgJsonLd = {
 // Navigation principale, dérivée du registre des ressources. Tant qu'il n'y a
 // qu'une catégorie (les annales), ses axes sont exposés à plat ; à partir de
 // deux catégories, remplacer par un menu par catégorie (cf. ressources.ts).
-const liens = [
-  ...CATEGORIES.flatMap((c) => c.axes.map((a) => ({ href: a.href, label: a.label }))),
-  { href: '/contribuer', label: 'Contribuer' },
-];
-// Liens secondaires (à propos du projet), regroupés dans un sous-menu « Le projet ».
-// Pas d'entrée « Contactez-nous » : le contact vit sur /contribuer, déjà présent
-// dans la navigation principale — une seule route vers l'adresse du projet.
+const liens = CATEGORIES.flatMap((c) =>
+  c.axes.map((a) => ({ href: a.href, label: a.label }))
+);
+// Liens secondaires, regroupés dans un sous-menu « Le projet ». La navigation
+// principale ne sert qu'à parcourir les annales. /contribuer porte aussi le
+// contact du projet : c'est la seule page où l'adresse s'affiche.
 const liensProjet = [
-  { href: '/manques', label: 'Ce qui nous manque' },
-  { href: '/contributeurs', label: 'Contributeurs' },
+  { href: '/contribuer', label: 'Contribuer' },
   { href: '/a-propos', label: 'À propos' },
 ];
 const chemin = Astro.url.pathname;

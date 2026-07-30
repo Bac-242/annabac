@@ -4,17 +4,14 @@ Merci de votre aide ! Il y a deux façons de contribuer.
 
 ## 1. Envoyer un sujet ou un corrigé (sans connaissances techniques)
 
-Le plus simple : **écrivez-nous** en joignant le document (PDF de préférence ;
-une photo lisible convient aussi). L'adresse est `contact.bac242 (chez) gmail
-(point) com` — écrite ainsi ici pour éviter les aspirateurs d'adresses. La page
-[`/contribuer`](/contribuer) l'affiche en clair et ouvre votre messagerie avec
-un message pré-rempli.
+**Écrivez-nous** en joignant le document. L'adresse est `contact.bac242 (chez)
+gmail (point) com`, écrite ainsi pour éviter les aspirateurs d'adresses. La page
+[`/contribuer`](/contribuer) l'affiche en clair et indique ce qui manque
+aujourd'hui à la bibliothèque.
 
 > **Une photo suffit.** Le format d'arrivée n'a aucune importance : scan, photo
 > prise au téléphone, PDF, document Word. Chaque document reçu est ensuite
-> **réécrit** au format du projet (voir [sources/README.md](sources/README.md))
-> avant publication. La page [`/manques`](/manques) liste précisément les
-> épreuves qui font défaut.
+> **réécrit** au format du projet, voir [sources/README.md](sources/README.md).
 
 Précisez si possible dans votre message :
 
@@ -26,11 +23,11 @@ Précisez si possible dans votre message :
 6. Pour un **corrigé** : son **auteur ou son origine** (affiché en attribution
    sur la fiche).
 7. Au choix, un **crédit** : le nom ou pseudonyme sous lequel vous souhaitez
-   apparaître — ou rien du tout, pour rester anonyme.
+   apparaître. Sans indication, vous restez anonyme.
 
 Aucun compte ni connaissance de Git n'est nécessaire. Après vérification, le
-document est publié : le crédit (s'il est fourni) apparaît sur la fiche, sur la
-page [`/contributeurs`](/contributeurs) et dans l'historique Git public.
+document est publié. Le crédit, s'il est fourni, apparaît sur la fiche et dans
+l'historique Git public.
 
 ## 2. Publier un document (mainteneurs)
 

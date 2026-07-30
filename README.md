@@ -37,28 +37,25 @@ consultation hors-ligne.
 Une fiche par sujet : **métadonnées** (année, série, matière, session) + un
 **PDF du sujet** et/ou un **PDF du corrigé**.
 
-Les visiteurs **envoient leurs documents par e-mail** (page `/contribuer`), dans
-le format qu'ils ont sous la main — photo, scan, PDF. Un mainteneur vérifie le
-document puis le **réécrit au format du projet** (sources LaTeX de `sources/`) :
-rien n'est publié tel quel. Le PDF produit est commité dans `public/pdfs/` et la
-fiche Markdown dans `src/content/sujets/`. Cloudflare Pages reconstruit le site,
-et tout le contenu reste versionné dans git.
+Les visiteurs **envoient leurs documents par e-mail**, dans le format qu'ils ont
+sous la main. Un mainteneur vérifie le document puis le **réécrit au format du
+projet** (sources LaTeX de `sources/`). Rien n'est publié tel quel. Le PDF
+produit est commité dans `public/pdfs/` et la fiche Markdown dans
+`src/content/sujets/`. Cloudflare Pages reconstruit le site, et tout le contenu
+reste versionné dans git.
 
-La page [`/manques`](/manques) croise la taxonomie avec le contenu réel pour
-afficher précisément les épreuves encore absentes — c'est le support des
-demandes adressées aux enseignants et aux établissements.
-
-Le site n'expose **aucun formulaire** et n'enregistre **aucune donnée**. Le
-contact tient en **un seul point** : la page `/contribuer`, seul endroit où
-l'adresse s'affiche (assemblée côté client depuis une chaîne base64, pour
-échapper aux aspirateurs d'adresses). Partout ailleurs, de simples liens
-`mailto`.
+La page **`/contribuer`** porte tout le parcours. Elle croise la taxonomie avec
+le contenu réel pour afficher les épreuves absentes, explique quoi envoyer, et
+constitue le **seul point de contact** du site : c'est le seul endroit où
+l'adresse s'affiche, assemblée côté client depuis une chaîne base64 pour
+échapper aux aspirateurs. Partout ailleurs, de simples liens `mailto`. Le site
+n'expose aucun formulaire et n'enregistre aucune donnée.
 
 ### Attribution
 
 - Un contributeur peut demander un **crédit** public (nom ou pseudonyme), ou
-  rester anonyme ; le crédit est affiché sur la fiche et inscrit dans
-  l'historique git. La page [`/contributeurs`](/contributeurs) les liste.
+  rester anonyme. Le crédit est affiché sur la fiche et inscrit dans
+  l'historique git.
 - Un corrigé porte une **source / auteur** publiée en attribution sur la fiche.
 
 ## Démarrage
@@ -84,7 +81,7 @@ src/
   content/sujets/*.md     # fiches : métadonnées + chemins des PDF
   components/             # SujetCarte, Filtres, Icone, BadgeStatut, Fil, BasculeTheme…
   layouts/Layout.astro    # gabarit + SEO/Open Graph + PWA + anti-FOUC du thème
-  pages/                  # accueil, /series, /annees, /matieres, /sujets, /recherche, /contribuer, /contributeurs, /a-propos, 404
+  pages/                  # accueil, /series, /annees, /matieres, /sujets, /recherche, /contribuer, /a-propos, 404
   lib/data.ts             # helpers annales (tri, regroupements, statut, pastilles/icônes)
   lib/ressources.ts       # registre des catégories de ressources (nav/accueil en dérivent)
   styles/global.css       # design tokens (clair/sombre) + utilitaires

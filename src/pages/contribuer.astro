@@ -2,141 +2,162 @@
 import Layout from '../layouts/Layout.astro';
 import Fil from '../components/Fil.astro';
 import Icone from '../components/Icone.astro';
+import { manques, styleMatiere } from '../lib/data';
 
 const depot = 'https://github.com/Bac-242/annabac';
+
+const m = await manques();
+const couverts = m.complets + m.sansCorrige;
+
+// Sujets publiés dont le corrigé manque : la lacune la plus simple à combler.
+const sansCorrige = m.cases
+  .filter((c) => c.etat === 'sans-corrige')
+  .sort((a, b) => b.annee - a.annee || a.matiere.localeCompare(b.matiere, 'fr'));
+
+const etapes = [
+  'Nous vérifions le document.',
+  'Nous le réécrivons au format du site.',
+  'Il est publié, gratuit pour tous.',
+];
 
 const lien =
   'font-medium text-[color:var(--color-brand)] underline-offset-2 hover:underline';
 const titreSection =
   'text-lg font-medium tracking-tight text-[color:var(--color-brand)]';
-
-// Ce qu'il est utile de préciser dans le message : évite un aller-retour.
-const aPreciser = [
-  { label: 'Année', exemple: '2019' },
-  { label: 'Série', exemple: 'A, C ou D' },
-  { label: 'Matière', exemple: 'Mathématiques, Physique-Chimie…' },
-  { label: 'Session', exemple: 'Normale, Remplacement ou Spéciale' },
-  { label: 'Sujet ou corrigé', exemple: "l'énoncé, ou sa correction" },
-];
-
-const etapes = [
-  "Vous envoyez ce que vous avez, dans le format qui vous arrange.",
-  "Nous vérifions l'exactitude et l'origine du document.",
-  'Nous le réécrivons entièrement au format du site, pour qu\'il soit net, homogène et lisible même photocopié.',
-  'Il est publié, gratuitement et pour tous.',
-];
 ---
 
 <Layout
   titre="Contribuer"
-  description="Envoyer un sujet ou un corrigé du baccalauréat congolais par e-mail, pour enrichir la bibliothèque Bac 242."
+  description="Ce qui manque à la bibliothèque Bac 242, et comment envoyer un sujet ou un corrigé du baccalauréat congolais."
 >
   <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Contribuer' }]} />
 
   <header class="max-w-2xl">
     <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Contribuer</h1>
     <p class="mt-4 text-lg leading-relaxed text-[color:var(--color-muted)]">
-      Bac 242 grandit grâce aux documents que vous partagez. Il n'y a ni compte à
-      créer ni formulaire à remplir : écrivez-nous, c'est tout.
-    </p>
-    <p class="mt-4 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Vous ne savez pas ce qui serait utile ? La page
-      <a href="/manques" class={lien}>Ce qui nous manque</a> liste précisément
-      les épreuves encore absentes de la bibliothèque.
+      Bac 242 s'enrichit des documents que vous nous envoyez. Un e-mail suffit.
     </p>
   </header>
 
-  <!-- Point de contact unique du site -->
-  <section class="card mt-8 max-w-2xl px-6 py-6 sm:px-8 sm:py-7">
-    <h2 class={titreSection}>Envoyez-nous votre document</h2>
+  <!-- Ce qui manque -->
+  <section class="mt-10 max-w-2xl">
+    <h2 class={titreSection}>Ce qui manque</h2>
     <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Joignez le sujet ou le corrigé à un e-mail adressé à :
+      La bibliothèque couvre <strong>{couverts} épreuves sur {m.total}</strong>.
     </p>
-    <p class="mt-3 text-lg font-medium break-all">
+
+    {m.matieresVides.length > 0 && (
+      <>
+        <p class="mt-6 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+          Ces matières n'ont encore aucun document.
+        </p>
+        <ul class="mt-3 flex flex-wrap gap-2.5">
+          {m.matieresVides.map((mat) => (
+            <li
+              class:list={[
+                'flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13px] font-medium',
+                styleMatiere(mat).classe,
+              ]}
+            >
+              <Icone nom={styleMatiere(mat).icon} taille={15} />
+              {mat}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {m.anneesVides.length > 0 && (
+      <>
+        <p class="mt-6 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+          Ces sessions manquent entièrement.
+        </p>
+        <ul class="mt-3 flex flex-wrap gap-2.5">
+          {m.anneesVides.map((a) => (
+            <li class="pastille-ambre rounded-full px-3.5 py-1.5 text-[13px] font-medium">
+              {a}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {sansCorrige.length > 0 && (
+      <>
+        <p class="mt-6 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+          {sansCorrige.length} sujets attendent leur corrigé.
+        </p>
+        <ul class="mt-3 grid gap-2 sm:grid-cols-2">
+          {sansCorrige.map((c) => (
+            <li>
+              <a
+                href={`/sujets/${c.slug}`}
+                class="card card-hover flex items-center justify-between gap-3 px-4 py-2.5 text-sm"
+              >
+                <span>{c.annee} · Série {c.serie} · {c.matiere}</span>
+                <Icone nom="arrow-right" taille={16} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </section>
+
+  <!-- Envoyer -->
+  <section class="card mt-12 max-w-2xl px-6 py-6 sm:px-8 sm:py-7">
+    <h2 class={titreSection}>Envoyer un document</h2>
+    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      Écrivez-nous à :
+    </p>
+    <p class="mt-2 text-lg font-medium break-all">
       <a data-mail class={lien}>écrivez-nous</a>
     </p>
     <noscript>
-      <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-muted)]">
+      <p class="mt-2 text-[15px] leading-relaxed text-[color:var(--color-muted)]">
         contact.bac242 (chez) gmail (point) com
       </p>
     </noscript>
-    <div class="mt-5 flex flex-wrap items-center gap-4">
+    <div class="mt-5">
       <a data-mail="href" class="btn btn-primary">
         <Icone nom="mail" taille={18} />
         <span class="ml-2">Écrire au projet</span>
       </a>
-      <span class="text-sm text-[color:var(--color-muted)]">
-        Ouvre votre application de messagerie. Rien n'est enregistré par le site.
-      </span>
     </div>
-  </section>
-
-  <!-- Le format n'a pas d'importance -->
-  <section class="mt-12 max-w-2xl">
-    <h2 class={titreSection}>Le format n'a aucune importance</h2>
-    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Une photo prise au téléphone suffit. Un scan, un PDF, un document Word, une
-      page manuscrite : envoyez ce que vous avez, même imparfait, même de
-      travers. La seule chose qui compte est que ce soit <strong>lisible</strong>.
+    <p class="mt-5 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      Envoyez ce que vous avez : photo, scan, PDF. Il suffit que ce soit lisible.
     </p>
     <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Chaque document reçu est ensuite <strong>entièrement réécrit</strong> au
-      format du site. C'est ce travail qui garantit une bibliothèque homogène,
-      nette à l'impression et lisible en photocopie — vous n'avez donc aucune
-      mise en forme à faire.
+      Indiquez si possible l'année, la série, la matière et la session, et s'il
+      s'agit du sujet ou du corrigé. Pour un corrigé, précisez son auteur.
     </p>
   </section>
 
-  <!-- Ce qu'il faut préciser -->
+  <!-- Ensuite -->
   <section class="mt-12 max-w-2xl">
-    <h2 class={titreSection}>À préciser dans votre message</h2>
-    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Pour que le document soit classé au bon endroit, indiquez si possible :
-    </p>
-    <ul class="mt-4 grid gap-2.5">
-      {aPreciser.map((c) => (
-        <li class="card flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-5 py-3">
-          <span class="font-medium">{c.label}</span>
-          <span class="text-sm text-[color:var(--color-muted)]">{c.exemple}</span>
-        </li>
-      ))}
-    </ul>
-    <p class="mt-4 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Pour un <strong>corrigé</strong>, précisez aussi son <strong>auteur ou son
-      origine</strong> : cette attribution est affichée sur la fiche du document.
-      Si vous souhaitez être crédité, dites-nous sous quel nom ou pseudonyme —
-      vous pouvez tout aussi bien rester anonyme. Les crédits sont visibles sur
-      la page <a href="/contributeurs" class={lien}>Contributeurs</a>.
-    </p>
-  </section>
-
-  <!-- Parcours du document -->
-  <section class="mt-12 max-w-2xl">
-    <h2 class={titreSection}>Que deviennent les documents ?</h2>
+    <h2 class={titreSection}>Ensuite</h2>
     <ol class="mt-3 list-decimal space-y-1.5 pl-5 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
       {etapes.map((e) => <li>{e}</li>)}
     </ol>
     <p class="mt-4 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      En nous envoyant un document, vous confirmez avoir le droit de le partager
-      pour un usage pédagogique non commercial. Nos engagements — gratuité,
-      attribution, retrait sur simple demande d'un ayant droit — sont détaillés
-      sur la page <a href="/a-propos" class={lien}>À propos</a>.
+      Vous n'avez aucune mise en forme à faire. Dites-nous sous quel nom vous
+      créditer, ou restez anonyme. Vous devez avoir le droit de partager ce que
+      vous envoyez, pour un usage pédagogique non commercial. Nos engagements
+      figurent sur la page <a href="/a-propos" class={lien}>À propos</a>.
     </p>
   </section>
 
-  <!-- Enseignants et établissements -->
+  <!-- Enseignants -->
   <section class="mt-12 max-w-2xl">
     <h2 class={titreSection}>Enseignants et établissements</h2>
     <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      La difficulté principale du projet n'est ni technique ni financière : c'est
-      de <strong>retrouver les sujets</strong>. Ils ne sont pratiquement pas
-      disponibles en ligne, et les archives se perdent d'une année sur l'autre.
+      Retrouver les sujets est la vraie difficulté du projet. Ils sont presque
+      introuvables en ligne et les archives se perdent d'une année sur l'autre.
     </p>
     <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Si vous êtes professeur, correcteur, censeur ou proviseur, vous détenez
-      peut-être sans le savoir des documents introuvables ailleurs : sujets des
-      sessions passées, corrigés de référence, archives d'établissement. Une
-      seule épreuve retrouvée profite à toutes les promotions suivantes.
+      Si vous enseignez, corrigez ou dirigez un établissement, vous détenez
+      peut-être des documents qu'on ne trouve nulle part ailleurs. Une épreuve
+      retrouvée sert toutes les promotions suivantes.
     </p>
   </section>
 
@@ -144,14 +165,10 @@ const etapes = [
   <section class="mt-12 max-w-2xl">
     <h2 class={titreSection}>Autres façons d'aider</h2>
     <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      La même adresse accueille toutes les remarques : une erreur repérée dans un
-      corrigé, un document illisible, une suggestion, une question.
-    </p>
-    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      Si vous êtes à l'aise avec Git, le site est open source : vous pouvez
+      La même adresse reçoit les erreurs repérées dans un corrigé et les
+      suggestions. Le site est open source : vous pouvez
       <a href={`${depot}/issues`} class={lien}>ouvrir une issue</a> ou proposer
-      directement une modification sur le
-      <a href={depot} class={lien}>dépôt GitHub</a>.
+      une modification sur le <a href={depot} class={lien}>dépôt GitHub</a>.
     </p>
   </section>
 </Layout>
