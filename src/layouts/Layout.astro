@@ -61,7 +61,10 @@ const liens = [
   { href: '/contribuer', label: 'Contribuer' },
 ];
 // Liens secondaires (à propos du projet), regroupés dans un sous-menu « Le projet ».
+// Pas d'entrée « Contactez-nous » : le contact vit sur /contribuer, déjà présent
+// dans la navigation principale — une seule route vers l'adresse du projet.
 const liensProjet = [
+  { href: '/manques', label: 'Ce qui nous manque' },
   { href: '/contributeurs', label: 'Contributeurs' },
   { href: '/a-propos', label: 'À propos' },
 ];
@@ -190,12 +193,6 @@ const estActif = (href: string) =>
                   {l.label}
                 </a>
               ))}
-              <button
-                type="button"
-                class="js-contact block w-full rounded-lg px-3 py-2 text-left font-medium text-[color:var(--color-brand)] transition hover:bg-[color:var(--color-line)]/40"
-              >
-                Contactez-nous
-              </button>
             </div>
           </li>
         </ul>
@@ -269,14 +266,6 @@ const estActif = (href: string) =>
                 </a>
               </li>
             ))}
-            <li>
-              <button
-                type="button"
-                class="js-contact block w-full rounded-lg px-3 py-2.5 text-left font-medium text-[color:var(--color-brand)] transition hover:bg-[color:var(--color-line)]/40"
-              >
-                Contactez-nous
-              </button>
-            </li>
           </ul>
         </div>
       </div>
@@ -346,98 +335,16 @@ const estActif = (href: string) =>
       </div>
     </footer>
 
-    <!-- Modale de contact : construit un lien mailto, n'enregistre rien. -->
-    <dialog
-      id="contact-modal"
-      class="m-auto w-[min(30rem,calc(100vw-2rem))] rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-canvas)] p-0 text-[color:var(--color-ink)] backdrop:bg-black/40"
-    >
-      <form id="contact-form" class="flex flex-col gap-4 p-6">
-        <div class="flex items-start justify-between gap-4">
-          <h2 class="text-lg font-medium tracking-tight text-[color:var(--color-brand)]">Nous contacter</h2>
-          <button
-            type="button"
-            id="contact-fermer"
-            aria-label="Fermer"
-            class="-mr-1 -mt-1 flex h-8 w-8 items-center justify-center rounded-full text-[color:var(--color-muted)] hover:bg-[color:var(--color-line)]/50 hover:text-[color:var(--color-ink)]"
-          >
-            <Icone nom="close" taille={18} />
-          </button>
-        </div>
-        <p class="text-sm text-[color:var(--color-muted)]">
-          Votre message ouvrira votre application de messagerie, pré-rempli. Rien
-          n'est enregistré sur le site.
-        </p>
-        <label class="flex flex-col gap-1.5 text-sm">
-          <span class="font-medium">Votre nom <span class="text-[color:var(--color-muted)]">(optionnel)</span></span>
-          <input name="nom" maxlength="80" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2" />
-        </label>
-        <label class="flex flex-col gap-1.5 text-sm">
-          <span class="font-medium">Objet</span>
-          <input name="objet" required maxlength="120" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2" />
-        </label>
-        <label class="flex flex-col gap-1.5 text-sm">
-          <span class="font-medium">Message</span>
-          <textarea name="message" required rows="4" class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2"></textarea>
-        </label>
-        <div class="flex justify-end gap-3">
-          <button type="button" id="contact-annuler" class="btn border border-[color:var(--color-line)] text-[color:var(--color-ink)]">
-            Annuler
-          </button>
-          <button type="submit" class="btn btn-primary">Ouvrir ma messagerie</button>
-        </div>
-      </form>
-    </dialog>
-
     <script>
-      const modal = document.getElementById('contact-modal') as HTMLDialogElement | null;
-
-      // Anti-spam : l'e-mail n'apparaît jamais en clair dans le HTML servi. On
-      // l'assemble côté client et on remplit la modale + les liens [data-mail].
-      // Encodé en base64 pour que l'adresse n'apparaisse jamais en clair dans le
-      // HTML/JS servi (les aspirateurs d'e-mails cherchent « …@… » et « mailto: »).
+      // Anti-spam : l'adresse n'apparaît jamais en clair dans le HTML servi. On
+      // l'assemble côté client (base64) et on remplit les liens [data-mail] —
+      // les aspirateurs d'e-mails cherchent « …@… » et « mailto: ».
+      //   <a data-mail>        → affiche l'adresse et pointe dessus
+      //   <a data-mail="href"> → garde son libellé, pointe sur l'adresse
       const email = atob('Y29udGFjdC5iYWMyNDJAZ21haWwuY29t');
-      if (modal) modal.dataset.email = email;
       document.querySelectorAll('[data-mail]').forEach((el) => {
         if (el instanceof HTMLAnchorElement) el.href = 'mailto:' + email;
         if ((el as HTMLElement).dataset.mail !== 'href') el.textContent = email;
-      });
-
-      const fermerContact = document.getElementById('contact-fermer');
-      const annuler = document.getElementById('contact-annuler');
-      const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
-
-      // Plusieurs déclencheurs possibles (menu bureau + menu mobile).
-      let dernierDeclencheur: HTMLElement | null = null;
-      document.querySelectorAll('.js-contact').forEach((el) =>
-        el.addEventListener('click', () => {
-          dernierDeclencheur = el as HTMLElement;
-          // Referme les menus de navigation avant d'ouvrir la modale.
-          document.getElementById('menu-mobile')?.setAttribute('hidden', '');
-          document.getElementById('menu-projet')?.setAttribute('hidden', '');
-          modal?.showModal();
-        })
-      );
-      // A11y : à la fermeture, rendre le focus au bouton qui a ouvert la modale.
-      modal?.addEventListener('close', () => dernierDeclencheur?.focus());
-      fermerContact?.addEventListener('click', () => modal?.close());
-      annuler?.addEventListener('click', () => modal?.close());
-      // Clic sur l'arrière-plan : fermer.
-      modal?.addEventListener('click', (e) => {
-        if (e.target === modal) modal.close();
-      });
-
-      contactForm?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const fd = new FormData(contactForm);
-        const email = modal?.dataset.email ?? '';
-        const nom = String(fd.get('nom') ?? '').trim();
-        const objet = String(fd.get('objet') ?? '').trim();
-        const message = String(fd.get('message') ?? '').trim();
-        const corps = (nom ? `De : ${nom}\n\n` : '') + message;
-        const url = `mailto:${email}?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(corps)}`;
-        window.location.href = url;
-        modal?.close();
-        contactForm.reset();
       });
     </script>
 

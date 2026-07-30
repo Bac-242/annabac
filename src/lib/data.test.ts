@@ -7,6 +7,9 @@ import {
   styleSerie,
   libelleStatut,
   CLASSES_PASTILLE,
+  calculerManques,
+  anneesCouvrables,
+  ANNEE_MIN,
 } from './data';
 
 const base = { annee: 2020, serie: 'C', matiere: 'Mathématiques', session: 'Normale' };
@@ -81,5 +84,91 @@ describe('styleSerie', () => {
   it('retombe sur la pastille par défaut pour une série inconnue', () => {
     expect(styleSerie('Z').classe).toBe('pastille-serie-defaut');
     expect(CLASSES_PASTILLE.has(styleSerie('Z').classe)).toBe(true);
+  });
+});
+
+describe('anneesCouvrables', () => {
+  it('va de ANNEE_MIN à l’année demandée, incluse', () => {
+    const a = anneesCouvrables(ANNEE_MIN + 2);
+    expect(a).toEqual([ANNEE_MIN, ANNEE_MIN + 1, ANNEE_MIN + 2]);
+  });
+
+  it('ne renvoie jamais de plage vide, même pour une année antérieure', () => {
+    expect(anneesCouvrables(ANNEE_MIN - 5)).toEqual([ANNEE_MIN]);
+  });
+});
+
+describe('calculerManques', () => {
+  // Taxonomie réduite : 1 série, 2 matières, 2 années → 4 cases possibles.
+  const taxo = { C: ['Mathématiques', 'Philosophie'] };
+  const annees = [2020, 2021];
+
+  it('classe chaque case selon les PDF réellement présents', () => {
+    const m = calculerManques(
+      [
+        { annee: 2020, serie: 'C', matiere: 'Mathématiques', sujetPdf: '/a.pdf', corrigePdf: '/b.pdf' },
+        { annee: 2021, serie: 'C', matiere: 'Mathématiques', sujetPdf: '/c.pdf' },
+      ],
+      annees,
+      taxo
+    );
+    expect(m.total).toBe(4);
+    expect(m.complets).toBe(1);
+    expect(m.sansCorrige).toBe(1);
+    expect(m.absents).toBe(2); // les deux années de Philosophie
+  });
+
+  it('repère les matières entièrement vides', () => {
+    const m = calculerManques(
+      [{ annee: 2020, serie: 'C', matiere: 'Mathématiques', sujetPdf: '/a.pdf' }],
+      annees,
+      taxo
+    );
+    expect(m.matieresVides).toEqual(['Philosophie']);
+  });
+
+  it('repère les années entièrement vides', () => {
+    const m = calculerManques(
+      [{ annee: 2020, serie: 'C', matiere: 'Mathématiques', sujetPdf: '/a.pdf' }],
+      annees,
+      taxo
+    );
+    expect(m.anneesVides).toEqual([2021]);
+  });
+
+  it('ne compte pas comme rempli un sujet dépourvu de PDF', () => {
+    const m = calculerManques(
+      [{ annee: 2020, serie: 'C', matiere: 'Mathématiques' }],
+      annees,
+      taxo
+    );
+    expect(m.absents).toBe(4);
+    expect(m.matieresVides).toContain('Mathématiques');
+  });
+
+  it('reporte le slug de la fiche existante pour permettre le lien', () => {
+    const m = calculerManques(
+      [
+        {
+          annee: 2020,
+          serie: 'C',
+          matiere: 'Mathématiques',
+          sujetPdf: '/a.pdf',
+          slug: '2020-serie-c-mathematiques',
+        },
+      ],
+      annees,
+      taxo
+    );
+    const c = m.cases.find((x) => x.annee === 2020 && x.matiere === 'Mathématiques');
+    expect(c?.slug).toBe('2020-serie-c-mathematiques');
+    expect(m.cases.find((x) => x.etat === 'absent')?.slug).toBeUndefined();
+  });
+
+  it('sans aucun sujet, toutes les cases sont absentes', () => {
+    const m = calculerManques([], annees, taxo);
+    expect(m.absents).toBe(m.total);
+    expect(m.matieresVides).toEqual(['Mathématiques', 'Philosophie']);
+    expect(m.anneesVides).toEqual([2021, 2020]);
   });
 });

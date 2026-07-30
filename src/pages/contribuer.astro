@@ -20,9 +20,10 @@ const aPreciser = [
 ];
 
 const etapes = [
-  "Vous envoyez le document par e-mail, en pièce jointe (PDF de préférence, mais une photo lisible convient aussi).",
-  "L'équipe vérifie la qualité, l'exactitude et l'origine du document.",
-  'Une fois validé, il est publié sur le site, gratuitement et pour tous.',
+  "Vous envoyez ce que vous avez, dans le format qui vous arrange.",
+  "Nous vérifions l'exactitude et l'origine du document.",
+  'Nous le réécrivons entièrement au format du site, pour qu\'il soit net, homogène et lisible même photocopié.',
+  'Il est publié, gratuitement et pour tous.',
 ];
 ---
 
@@ -38,9 +39,14 @@ const etapes = [
       Bac 242 grandit grâce aux documents que vous partagez. Il n'y a ni compte à
       créer ni formulaire à remplir : écrivez-nous, c'est tout.
     </p>
+    <p class="mt-4 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      Vous ne savez pas ce qui serait utile ? La page
+      <a href="/manques" class={lien}>Ce qui nous manque</a> liste précisément
+      les épreuves encore absentes de la bibliothèque.
+    </p>
   </header>
 
-  <!-- Point de contact unique -->
+  <!-- Point de contact unique du site -->
   <section class="card mt-8 max-w-2xl px-6 py-6 sm:px-8 sm:py-7">
     <h2 class={titreSection}>Envoyez-nous votre document</h2>
     <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
@@ -55,14 +61,30 @@ const etapes = [
       </p>
     </noscript>
     <div class="mt-5 flex flex-wrap items-center gap-4">
-      <button type="button" class="js-contact btn btn-primary">
+      <a data-mail="href" class="btn btn-primary">
         <Icone nom="mail" taille={18} />
         <span class="ml-2">Écrire au projet</span>
-      </button>
+      </a>
       <span class="text-sm text-[color:var(--color-muted)]">
         Ouvre votre application de messagerie. Rien n'est enregistré par le site.
       </span>
     </div>
+  </section>
+
+  <!-- Le format n'a pas d'importance -->
+  <section class="mt-12 max-w-2xl">
+    <h2 class={titreSection}>Le format n'a aucune importance</h2>
+    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      Une photo prise au téléphone suffit. Un scan, un PDF, un document Word, une
+      page manuscrite : envoyez ce que vous avez, même imparfait, même de
+      travers. La seule chose qui compte est que ce soit <strong>lisible</strong>.
+    </p>
+    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      Chaque document reçu est ensuite <strong>entièrement réécrit</strong> au
+      format du site. C'est ce travail qui garantit une bibliothèque homogène,
+      nette à l'impression et lisible en photocopie — vous n'avez donc aucune
+      mise en forme à faire.
+    </p>
   </section>
 
   <!-- Ce qu'il faut préciser -->
@@ -86,12 +108,6 @@ const etapes = [
       vous pouvez tout aussi bien rester anonyme. Les crédits sont visibles sur
       la page <a href="/contributeurs" class={lien}>Contributeurs</a>.
     </p>
-    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-      En nous envoyant un document, vous confirmez avoir le droit de le partager
-      pour un usage pédagogique non commercial. Tout document est retiré sur
-      simple demande d'un ayant droit — voir la
-      <a href="/a-propos#retrait" class={lien}>procédure de retrait</a>.
-    </p>
   </section>
 
   <!-- Parcours du document -->
@@ -100,6 +116,28 @@ const etapes = [
     <ol class="mt-3 list-decimal space-y-1.5 pl-5 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
       {etapes.map((e) => <li>{e}</li>)}
     </ol>
+    <p class="mt-4 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      En nous envoyant un document, vous confirmez avoir le droit de le partager
+      pour un usage pédagogique non commercial. Nos engagements — gratuité,
+      attribution, retrait sur simple demande d'un ayant droit — sont détaillés
+      sur la page <a href="/a-propos" class={lien}>À propos</a>.
+    </p>
+  </section>
+
+  <!-- Enseignants et établissements -->
+  <section class="mt-12 max-w-2xl">
+    <h2 class={titreSection}>Enseignants et établissements</h2>
+    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      La difficulté principale du projet n'est ni technique ni financière : c'est
+      de <strong>retrouver les sujets</strong>. Ils ne sont pratiquement pas
+      disponibles en ligne, et les archives se perdent d'une année sur l'autre.
+    </p>
+    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
+      Si vous êtes professeur, correcteur, censeur ou proviseur, vous détenez
+      peut-être sans le savoir des documents introuvables ailleurs : sujets des
+      sessions passées, corrigés de référence, archives d'établissement. Une
+      seule épreuve retrouvée profite à toutes les promotions suivantes.
+    </p>
   </section>
 
   <!-- Autres façons d'aider -->

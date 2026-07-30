@@ -10,6 +10,12 @@ une photo lisible convient aussi). L'adresse est `contact.bac242 (chez) gmail
 [`/contribuer`](/contribuer) l'affiche en clair et ouvre votre messagerie avec
 un message pré-rempli.
 
+> **Une photo suffit.** Le format d'arrivée n'a aucune importance : scan, photo
+> prise au téléphone, PDF, document Word. Chaque document reçu est ensuite
+> **réécrit** au format du projet (voir [sources/README.md](sources/README.md))
+> avant publication. La page [`/manques`](/manques) liste précisément les
+> épreuves qui font défaut.
+
 Précisez si possible dans votre message :
 
 1. L'**année** (ex. 2019).

@@ -37,15 +37,22 @@ consultation hors-ligne.
 Une fiche par sujet : **métadonnées** (année, série, matière, session) + un
 **PDF du sujet** et/ou un **PDF du corrigé**.
 
-Les visiteurs **envoient leurs documents par e-mail** (page `/contribuer`). Un
-mainteneur vérifie le document, puis le **commite** dans le dépôt : le PDF dans
-`public/pdfs/` et la fiche Markdown dans `src/content/sujets/`. Cloudflare Pages
-reconstruit le site. Tout le contenu reste donc versionné dans git.
+Les visiteurs **envoient leurs documents par e-mail** (page `/contribuer`), dans
+le format qu'ils ont sous la main — photo, scan, PDF. Un mainteneur vérifie le
+document puis le **réécrit au format du projet** (sources LaTeX de `sources/`) :
+rien n'est publié tel quel. Le PDF produit est commité dans `public/pdfs/` et la
+fiche Markdown dans `src/content/sujets/`. Cloudflare Pages reconstruit le site,
+et tout le contenu reste versionné dans git.
 
-Le site n'expose **aucun formulaire** et n'enregistre **aucune donnée** : les
-boutons « Contactez-nous » (menu « Le projet ») et « Écrire au projet »
-(`/contribuer`) se contentent d'ouvrir la messagerie de l'utilisateur via un
-lien `mailto`.
+La page [`/manques`](/manques) croise la taxonomie avec le contenu réel pour
+afficher précisément les épreuves encore absentes — c'est le support des
+demandes adressées aux enseignants et aux établissements.
+
+Le site n'expose **aucun formulaire** et n'enregistre **aucune donnée**. Le
+contact tient en **un seul point** : la page `/contribuer`, seul endroit où
+l'adresse s'affiche (assemblée côté client depuis une chaîne base64, pour
+échapper aux aspirateurs d'adresses). Partout ailleurs, de simples liens
+`mailto`.
 
 ### Attribution
 

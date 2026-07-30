@@ -5,6 +5,13 @@ afin que chaque sujet soit **reproductible et modifiable** (esprit open source).
 Les PDF correspondants, eux, vivent dans `public/pdfs/` et sont servis par le
 site.
 
+> **Le format d'arrivée n'engage à rien, le format de publication est unique.**
+> Un contributeur envoie ce qu'il a — scan, photo, PDF, document Word : aucune
+> exigence. Tout est ensuite **réécrit** selon les conventions ci-dessous, pour
+> que la bibliothèque reste homogène, lisible et corrigeable, quelle que soit
+> l'origine. C'est ce travail de réécriture qui fait la valeur du site : rien
+> n'est publié tel quel.
+
 ## Arborescence
 
 ```

@@ -199,6 +199,120 @@ export async function sujetsParMatiere(slugMatiere: string): Promise<Sujet[]> {
   return sujets.filter((s) => slugify(s.data.matiere) === slugMatiere);
 }
 
+// --- Couverture de la bibliothèque -----------------------------------------
+// La taxonomie (shared/matieres.json) décrit l'ensemble des épreuves qui
+// *existent* au baccalauréat ; la collection `sujets` décrit celles qu'on a
+// réellement. L'écart entre les deux est ce qu'il reste à collecter — c'est la
+// matière de la page /manques.
+
+/** Première année couverte par la bibliothèque. */
+export const ANNEE_MIN = 2009;
+
+/** État d'une épreuve possible (série × matière × année). */
+export type EtatCase = 'complet' | 'sans-corrige' | 'absent';
+
+export interface CaseGrille {
+  serie: string;
+  matiere: string;
+  annee: number;
+  etat: EtatCase;
+  /** Slug de la fiche existante, pour lier depuis la grille (si présente). */
+  slug?: string;
+}
+
+export interface Manques {
+  annees: number[];
+  cases: CaseGrille[];
+  total: number;
+  complets: number;
+  sansCorrige: number;
+  absents: number;
+  /** Matières sans le moindre document, toutes séries et années confondues. */
+  matieresVides: string[];
+  /** Années sans le moindre document. */
+  anneesVides: number[];
+}
+
+/** Entrée minimale attendue par `calculerManques` (facilite les tests). */
+export interface SujetConnu {
+  annee: number;
+  serie: string;
+  matiere: string;
+  sujetPdf?: string;
+  corrigePdf?: string;
+  slug?: string;
+}
+
+/**
+ * Croise la taxonomie avec le contenu réel et renvoie l'état de chaque épreuve
+ * possible. Les années sont passées explicitement : la fonction reste pure et
+ * les tests ne dépendent pas de la date du jour.
+ */
+export function calculerManques(
+  sujets: SujetConnu[],
+  annees: number[],
+  matieresParSerie: Record<string, string[]> = MATIERES_PAR_SERIE
+): Manques {
+  const connus = new Map<string, SujetConnu>();
+  for (const s of sujets) connus.set(`${s.serie}|${s.matiere}|${s.annee}`, s);
+
+  const cases: CaseGrille[] = [];
+  for (const [serie, matieres] of Object.entries(matieresParSerie)) {
+    for (const matiere of matieres) {
+      for (const annee of annees) {
+        const trouve = connus.get(`${serie}|${matiere}|${annee}`);
+        const etat: EtatCase = !trouve?.sujetPdf && !trouve?.corrigePdf
+          ? 'absent'
+          : trouve?.sujetPdf && trouve?.corrigePdf
+            ? 'complet'
+            : 'sans-corrige';
+        cases.push({ serie, matiere, annee, etat, slug: trouve?.slug });
+      }
+    }
+  }
+
+  const compte = (e: EtatCase) => cases.filter((c) => c.etat === e).length;
+  const rempli = (c: CaseGrille) => c.etat !== 'absent';
+
+  // Matières vides : présentes dans la taxonomie, absentes du contenu.
+  const matieres = [...new Set(Object.values(matieresParSerie).flat())];
+  const matieresVides = matieres
+    .filter((m) => !cases.some((c) => c.matiere === m && rempli(c)))
+    .sort((a, b) => a.localeCompare(b, 'fr'));
+
+  const anneesVides = annees
+    .filter((a) => !cases.some((c) => c.annee === a && rempli(c)))
+    .sort((a, b) => b - a);
+
+  return {
+    annees,
+    cases,
+    total: cases.length,
+    complets: compte('complet'),
+    sansCorrige: compte('sans-corrige'),
+    absents: compte('absent'),
+    matieresVides,
+    anneesVides,
+  };
+}
+
+/** Années couvrables : de `ANNEE_MIN` à l'année la plus récente attendue. */
+export function anneesCouvrables(anneeMax: number): number[] {
+  const max = Math.max(anneeMax, ANNEE_MIN);
+  return Array.from({ length: max - ANNEE_MIN + 1 }, (_, i) => ANNEE_MIN + i);
+}
+
+/** État de couverture de la bibliothèque, prêt à afficher. */
+export async function manques(
+  anneeMax: number = new Date().getFullYear()
+): Promise<Manques> {
+  const sujets = await tousLesSujets();
+  return calculerManques(
+    sujets.map((s) => ({ ...s.data, slug: s.slug })),
+    anneesCouvrables(anneeMax)
+  );
+}
+
 /**
  * Crédits publics des contributeurs : à la manière de l'historique de
  * Wikipédia, on liste les pseudonymes ayant partagé des documents, avec le

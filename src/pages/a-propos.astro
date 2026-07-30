@@ -103,7 +103,8 @@ const titreSection =
           <a href={`${depot}/issues`} class={lien}>ouvrir une issue</a>.
         </li>
         <li>
-          Par e-mail : <a class={lien} data-mail>écrivez-nous</a>.
+          Par e-mail : <a class={lien} data-mail="href">écrivez-nous</a>
+          (adresse indiquée sur la page <a href="/contribuer" class={lien}>Contribuer</a>).
         </li>
       </ul>
     </section>
@@ -118,8 +119,8 @@ const titreSection =
       <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
         Le site est entièrement statique : <strong>il ne comporte aucun
         formulaire et n'enregistre aucune donnée vous concernant</strong>. Les
-        boutons « Contactez-nous » et « Écrire au projet » se contentent d'ouvrir
-        votre propre application de messagerie avec un message pré-rempli.
+        liens de contact se contentent d'ouvrir votre propre application de
+        messagerie.
       </p>
       <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
         Si vous nous écrivez, votre message et votre adresse e-mail restent dans
@@ -136,11 +137,6 @@ const titreSection =
         Pour toute demande d'accès ou de suppression de vos données,
         <a class={lien} data-mail="href">écrivez-nous</a>.
       </p>
-      <noscript>
-        <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-muted)]">
-          Sans JavaScript : contact.bac242 (chez) gmail (point) com.
-        </p>
-      </noscript>
     </section>
   </div>
 </Layout>
