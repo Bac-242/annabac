@@ -10,9 +10,25 @@ const m = await manques();
 const couverts = m.complets + m.sansCorrige;
 
 // Sujets publiés dont le corrigé manque : la lacune la plus simple à combler.
-const sansCorrige = m.cases
-  .filter((c) => c.etat === 'sans-corrige')
-  .sort((a, b) => b.annee - a.annee || a.matiere.localeCompare(b.matiere, 'fr'));
+// Regroupés par matière et série — une liste à plat serait interminable sur
+// mobile et masquerait la concentration réelle des lacunes.
+const sansCorrige = m.cases.filter((c) => c.etat === 'sans-corrige');
+
+const groupes = [
+  ...sansCorrige
+    .reduce((acc, c) => {
+      const cle = `${c.matiere}|${c.serie}`;
+      (acc.get(cle) ?? acc.set(cle, []).get(cle)!).push(c);
+      return acc;
+    }, new Map<string, typeof sansCorrige>())
+    .values(),
+]
+  .map((cases) => ({
+    matiere: cases[0].matiere,
+    serie: cases[0].serie,
+    annees: cases.sort((a, b) => b.annee - a.annee),
+  }))
+  .sort((a, b) => b.annees.length - a.annees.length);
 
 const etapes = [
   'Nous vérifions le document.',
@@ -87,19 +103,36 @@ const titreSection =
         <p class="mt-6 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
           {sansCorrige.length} sujets attendent leur corrigé.
         </p>
-        <ul class="mt-3 grid gap-2 sm:grid-cols-2">
-          {sansCorrige.map((c) => (
-            <li>
-              <a
-                href={`/sujets/${c.slug}`}
-                class="card card-hover flex items-center justify-between gap-3 px-4 py-2.5 text-sm"
-              >
-                <span>{c.annee} · Série {c.serie} · {c.matiere}</span>
-                <Icone nom="arrow-right" taille={16} />
-              </a>
-            </li>
+        <div class="mt-3 space-y-4">
+          {groupes.map((g) => (
+            <div>
+              <p class="flex items-center gap-2 text-sm font-medium">
+                <span
+                  class:list={[
+                    'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg',
+                    styleMatiere(g.matiere).classe,
+                  ]}
+                >
+                  <Icone nom={styleMatiere(g.matiere).icon} taille={14} />
+                </span>
+                {g.matiere} · Série {g.serie}
+              </p>
+              <ul class="mt-2 flex flex-wrap gap-1.5">
+                {g.annees.map((c) => (
+                  <li>
+                    <a
+                      href={`/sujets/${c.slug}`}
+                      aria-label={`${g.matiere} série ${g.serie} ${c.annee}, corrigé manquant`}
+                      class="block rounded-lg border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2 text-sm tabular-nums transition hover:border-[color:var(--color-brand)] hover:text-[color:var(--color-brand)]"
+                    >
+                      {c.annee}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </>
     )}
   </section>

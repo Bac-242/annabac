@@ -1,11 +1,8 @@
 ---
 import '../styles/global.css';
-import pkg from '../../package.json';
 import Icone from '../components/Icone.astro';
 import BasculeTheme from '../components/BasculeTheme.astro';
 import { CATEGORIES } from '../lib/ressources';
-
-const version = pkg.version;
 
 interface Props {
   titre: string;
@@ -324,14 +321,6 @@ const estActif = (href: string) =>
     >
       <slot />
     </main>
-
-    <footer
-      class="no-print sticky bottom-0 z-10 mt-10 border-t border-[color:var(--color-line)] bg-[color:var(--color-canvas)]/85 backdrop-blur-xl"
-    >
-      <div class="mx-auto max-w-7xl px-5 py-2 text-center text-xs text-[color:var(--color-muted)]">
-        v{version}
-      </div>
-    </footer>
 
     <script>
       // Anti-spam : l'adresse n'apparaît jamais en clair dans le HTML servi. On
