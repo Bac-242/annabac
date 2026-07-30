@@ -12,6 +12,9 @@ npm-debug.log*
 # Cloudflare local secrets / build
 .dev.vars
 .wrangler/
+# Exports de l'ancienne base D1 de modération : contiennent des données
+# personnelles (e-mail de l'admin, empreintes IP). Ne jamais committer.
+backup-annabac*.sql
 # Claude Code workspace
 .claude/
 # macOS

@@ -18,7 +18,6 @@
     "astro": "^5.2.5"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260617.1",
     "@tailwindcss/vite": "^4.0.6",
     "pagefind": "^1.3.0",
     "tailwindcss": "^4.0.6",

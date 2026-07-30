@@ -1,9 +1,9 @@
-# Déploiement — Cloudflare Pages + modération
+# Déploiement — Cloudflare Pages
 
-Le site est statique (Astro → `dist/`) et l'API de soumission/modération tourne
-en **Pages Functions** (dossier `functions/`), avec **R2** (stockage des PDF en
-attente) et **D1** (file de modération). La validation publie le document en
-**commitant dans le dépôt GitHub**, ce qui déclenche un nouveau build.
+Le site est **entièrement statique** (Astro → `dist/`), servi par Cloudflare
+Pages. Il n'y a ni API, ni base de données, ni stockage de fichiers : les
+contributions arrivent **par e-mail** (voir [la page Contribuer](src/pages/contribuer.astro))
+et sont publiées à la main dans le dépôt (voir [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 ## Prérequis
 
@@ -12,80 +12,54 @@ npm i -g wrangler
 wrangler login
 ```
 
-## 1. Créer les ressources
-
-```bash
-# Base de données (file de modération)
-wrangler d1 create annabac
-# → copiez le database_id renvoyé dans wrangler.toml
-
-# Stockage des PDF en attente
-wrangler r2 bucket create annabac-soumissions
-
-# Appliquer le schéma
-wrangler d1 execute annabac --remote --file=schema.sql
-```
-
-Pour faire **évoluer** une base déjà en service (ajout de colonnes, etc.), voir
-la section [Migrations de la base D1](#migrations-de-la-base-d1).
-
-## 2. Projet Pages
+## 1. Projet Pages
 
 Connectez le dépôt `Bac-242/annabac` à Cloudflare Pages (Git) :
 
 - **Build command** : `npm run build`
 - **Build output** : `dist`
-- Le `wrangler.toml` fournit les bindings `DB` (D1) et `BUCKET` (R2).
 
-## 3. Secrets et variables
+Chaque `git push` sur `main` déclenche un build et met le site en ligne.
 
-```bash
-# Jeton GitHub à portée "contents:write" sur le dépôt (publication des fiches)
-wrangler pages secret put GITHUB_TOKEN --project-name annabac
+## 2. Où vivent les PDF ?
 
-# Clé secrète Turnstile (anti-robot)
-wrangler pages secret put TURNSTILE_SECRET --project-name annabac
-```
+**Dans le dépôt git**, et nulle part ailleurs. C'était déjà le cas avant :
+R2 ne stockait que les fichiers *en attente de modération*, jamais les documents
+publiés.
+
+Le circuit est entièrement statique :
+
+1. Le PDF est committé dans `public/pdfs/<annee>-serie-<serie>-<matiere>-{sujet|corrige}.pdf`.
+2. Une fiche `src/content/sujets/*.md` le référence par son chemin public
+   (`sujetPdf: "/pdfs/…"`, `corrigePdf: "/pdfs/…"`).
+3. Au build, Astro recopie `public/` tel quel dans `dist/`.
+4. Cloudflare Pages sert `dist/` depuis son CDN. `public/_headers` met les PDF
+   en cache 7 jours.
+5. La fiche du sujet expose un simple lien `<a href="/pdfs/…" download>`, et le
+   service worker (PWA) garde les PDF consultés en cache pour la lecture
+   hors-ligne (`CacheFirst`, 50 documents max).
+
+Conséquence à surveiller : les PDF pèsent dans l'historique git (≈ 18 Mo pour
+83 fichiers aujourd'hui, dépôt à ≈ 73 Mo). C'est confortable pour l'instant.
+Si la bibliothèque grossit beaucoup, les pistes seraient Git LFS ou un vrai
+bucket R2 public en frontal — pas nécessaire avant plusieurs centaines de
+documents.
+
+## 3. Variables d'environnement (toutes optionnelles)
 
 Dans le dashboard Pages → **Variables d'environnement** (build & production) :
 
-- `PUBLIC_TURNSTILE_SITEKEY` = clé *site* Turnstile (injectée dans le formulaire au build)
-- `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_BRANCH` (déjà dans `wrangler.toml`)
-- `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD` = vérification du jeton Access (voir étape 4)
+- `PUBLIC_CF_BEACON_TOKEN` : Web Analytics Cloudflare (sans cookie)
+- `PUBLIC_GSC_VERIFICATION` : vérification Google Search Console
 
-## 4. Protéger l'espace admin (Cloudflare Access)
+Sans elles, le site fonctionne normalement — simplement sans statistiques ni
+balise de vérification. Il n'y a **aucun secret serveur** à configurer.
 
-Zero Trust → **Access** → Applications → *Add a self-hosted application* :
-
-- **Domaine** : `<votre-domaine>` chemins `/admin*` **et** `/api/admin/*`
-- **Politique** : *Allow* limité à votre e-mail (ou un groupe d'admins)
-
-Access injecte alors l'en-tête `Cf-Access-Authenticated-User-Email`. **Mais cet
-en-tête seul est falsifiable** si la route n'est pas couverte par Access : les
-fonctions admin vérifient donc **cryptographiquement** le jeton signé
-`Cf-Access-Jwt-Assertion` (signature, expiration, audience). Renseignez pour cela
-deux variables (non secrètes) dans `wrangler.toml` / le dashboard Pages :
-
-- `ACCESS_TEAM_DOMAIN` : votre domaine d'équipe Zero Trust, p. ex.
-  `monequipe.cloudflareaccess.com`.
-- `ACCESS_AUD` : le tag **Application Audience (AUD)** de l'application Access
-  (onglet *Overview* de l'application).
-
-Si ces variables manquent, l'accès admin est **refusé** (fail-closed).
-
-## 5. Turnstile
-
-Cloudflare → **Turnstile** → créez un widget pour votre domaine. Reportez la clé
-*site* dans `PUBLIC_TURNSTILE_SITEKEY` et la clé *secrète* via le secret
-`TURNSTILE_SECRET`. **Sans `TURNSTILE_SECRET`, l'API `/api/submit` refuse les
-envois** (fail-closed) : en local, utilisez la clé secrète de test Turnstile
-`1x0000000000000000000000000000000AA` (validation toujours réussie).
-
-## 6. Référencement (Google Search Console / Bing)
+## 4. Référencement (Google Search Console / Bing)
 
 Le site expose déjà : `robots.txt` (avec la directive `Sitemap:`), un sitemap
-(`/sitemap-index.xml`, généré au build, sans `/admin` ni `/offline`), des
-canoniques, Open Graph, et des données structurées (`WebSite`, `Organization`,
+(`/sitemap-index.xml`, généré au build, sans `/offline`), des canoniques,
+Open Graph, et des données structurées (`WebSite`, `Organization`,
 `BreadcrumbList`, `LearningResource`, `CollectionPage`).
 
 1. **Google Search Console** → ajouter une propriété **préfixe d'URL**
@@ -103,114 +77,20 @@ canoniques, Open Graph, et des données structurées (`WebSite`, `Organization`,
 > `Sitemap:` de `public/robots.txt`), redéployer, puis créer une **nouvelle
 > propriété** Search Console pour le nouveau domaine.
 
-## Flux de bout en bout
-
-1. Un visiteur envoie **un PDF** via `/contribuer` (sujet ou corrigé) → `POST /api/submit`.
-   Aucune donnée de contact n'est collectée ; le crédit (pseudonyme) et la source
-   éventuels sont publics.
-2. Le PDF va dans R2 (`pending/<id>/…`), une ligne `pending` est créée en D1
-   (avec `credit`, `origine`, `source`).
-3. Vous ouvrez `/admin` (derrière Access), vérifiez le PDF et l'origine déclarée,
-   puis **Valider**.
-4. `/api/admin/decide` commite le PDF (`public/pdfs/…`) + la fiche
-   (`src/content/sujets/…`, avec `source`/`credit`) dans le dépôt → Pages
-   reconstruit → document en ligne (~1 min).
-5. **Rejeter** marque la soumission et supprime le PDF en attente.
-6. Dans les deux cas, l'empreinte IP est **purgée** à la décision (minimisation RGPD).
-
-## Développement local des fonctions (optionnel)
+## Aperçu local du site déployé
 
 ```bash
 npm run build
-wrangler pages dev dist   # sert dist/ + functions/ avec les bindings
+wrangler pages dev dist   # sert dist/ comme le fera Pages (en-têtes compris)
 ```
 
-Créez un fichier `.dev.vars` (non versionné) pour les secrets locaux :
-
-```
-GITHUB_TOKEN=...
-# Clé secrète de test Turnstile (toujours validée) : indispensable car la
-# vérification est désormais fail-closed.
-TURNSTILE_SECRET=1x0000000000000000000000000000000AA
-# Vérification du jeton Access (sinon l'API admin renvoie 403 en local, ce qui
-# est normal — Access ne s'exécute pas en local).
-ACCESS_TEAM_DOMAIN=monequipe.cloudflareaccess.com
-ACCESS_AUD=<aud-de-application-access>
-```
-
-## Migrations de la base D1
-
-`schema.sql` est **idempotent** (`CREATE TABLE IF NOT EXISTS`) : il crée la base
-de zéro mais **ne modifie pas** une table déjà existante. Pour faire évoluer une
-base **déjà en service** (ex. l'ajout des colonnes de contribution `credit`,
-`origine`, `source`), on applique des `ALTER TABLE` à la main. SQLite/D1 ajoute
-les colonnes avec la valeur `NULL` pour les lignes existantes : c'est sûr et non
-destructif.
-
-### 1. (Recommandé) Sauvegarder avant toute migration
-
-Export complet de la base distante (schéma + données). L'export ne fait que
-**lire** la base, sans risque.
-
-```bash
-# bash / macOS / Linux (nom de fichier daté)
-wrangler d1 export annabac --remote --output=backup-annabac-$(date +%Y%m%d).sql
-```
-
-```powershell
-# PowerShell (Windows) : la syntaxe de date diffère
-wrangler d1 export annabac --remote --output=backup-annabac-$(Get-Date -Format yyyyMMdd).sql
-```
-
-Au besoin, un simple nom fixe convient aussi : `--output=backup-annabac.sql`.
-
-### 2. Vérifier les colonnes déjà présentes
-
-```bash
-wrangler d1 execute annabac --remote --command "PRAGMA table_info(submissions);"
-```
-
-### 3. Appliquer la migration « contribution façon Wikipédia »
-
-Ces trois colonnes sont nécessaires au nouveau formulaire (crédit public, origine
-déclarée, attribution). Lancez-les **une seule fois** ; relancer un `ALTER` déjà
-appliqué renvoie une erreur « duplicate column », sans danger pour les données.
-
-```bash
-wrangler d1 execute annabac --remote --command "ALTER TABLE submissions ADD COLUMN credit TEXT;"
-wrangler d1 execute annabac --remote --command "ALTER TABLE submissions ADD COLUMN origine TEXT;"
-wrangler d1 execute annabac --remote --command "ALTER TABLE submissions ADD COLUMN source TEXT;"
-```
-
-> La colonne historique `contributor` (ancien e-mail facultatif) **n'est plus
-> utilisée** : le code ne l'écrit plus et `decide.ts` la remet à `NULL` à chaque
-> décision. On peut la laisser telle quelle (SQLite ne facilite pas la suppression
-> de colonne) — elle restera vide.
-
-### 4. Vérifier le résultat
-
-```bash
-wrangler d1 execute annabac --remote --command "PRAGMA table_info(submissions);"
-# → la table doit lister credit, origine, source
-```
-
-### 5. Tester en local d'abord (conseillé)
-
-Rejouez exactement les mêmes commandes **sans** `--remote` pour valider sur la
-base locale de `wrangler pages dev` avant de toucher à la production :
-
-```bash
-wrangler d1 execute annabac --command "ALTER TABLE submissions ADD COLUMN credit TEXT;"
-# …idem pour origine et source…
-```
-
-Pour une base **neuve**, rien de tout cela : `wrangler d1 execute annabac --remote --file=schema.sql`
-crée directement la table à jour.
+C'est le seul moyen de tester les en-têtes de `public/_headers` : ils ne
+s'appliquent pas sous `astro dev`.
 
 ## Sécurité, coûts et identité du projet
 
 Le projet est public et open source. Quelques précautions, surtout tant que
-tout repose sur des comptes personnels (GitHub, Cloudflare, carte bancaire).
+tout repose sur des comptes personnels (GitHub, Cloudflare).
 
 ### En-têtes de sécurité (CSP)
 
@@ -228,66 +108,121 @@ cache des PDF et des assets) sont servis par Cloudflare Pages depuis
 - Les `_headers` ne s'appliquent pas sous `astro dev` : tester avec
   `npm run build` puis `wrangler pages dev dist`.
 
-### Garde-fous déjà en place côté code
+### Surface d'attaque
 
-- **Admin** : vérification cryptographique du jeton `Cf-Access-Jwt-Assertion`
-  (et non du seul en-tête e-mail, falsifiable) — voir `functions/_lib/access.ts`.
-  Fail-closed si `ACCESS_TEAM_DOMAIN` / `ACCESS_AUD` manquent.
-- **Soumissions** : Turnstile fail-closed, `matière` validée contre une liste,
-  contenu vérifié comme PDF (`%PDF-`), quotas anti-abus, **aucun e-mail collecté**,
-  IP seulement hachée et **purgée à la décision**.
-- **Erreurs** : journalisées côté serveur (`console.error`, visibles via
-  `wrangler tail`) et renvoyées au client sous forme générique, sans fuite
-  d'information interne. Les écritures R2/D1 sont nettoyées en cas d'échec.
-
-### Jeton GitHub (limiter la casse en cas de fuite)
-
-Le `GITHUB_TOKEN` sert à committer les documents validés. Utilisez un
-**fine-grained personal access token** plutôt qu'un token classique :
-
-- **Repository access** : *Only select repositories* → `Bac-242/annabac` uniquement.
-- **Permissions** : *Repository permissions* → **Contents : Read and write** (rien d'autre).
-- **Expiration** : 90 jours, avec rappel pour le **rotater** (puis
-  `wrangler pages secret put GITHUB_TOKEN`).
-
-Ainsi, même compromis, le jeton ne peut écrire que dans ce dépôt.
+Le site n'expose **aucun point d'entrée en écriture** : pas de formulaire, pas
+d'API, pas d'espace d'administration, pas de secret déployé. L'adresse e-mail de
+contact n'apparaît jamais en clair dans le HTML servi (assemblée côté client
+depuis une chaîne base64, dans `src/layouts/Layout.astro`) afin de limiter les
+aspirateurs d'adresses.
 
 ### Coûts et limites du free tier Cloudflare
 
-L'architecture est conçue pour rester gratuite ; l'**egress est gratuit et
-illimité**, donc pas de facture surprise liée au trafic.
+L'architecture reste gratuite ; l'**egress est gratuit et illimité**, donc pas de
+facture surprise liée au trafic.
 
 | Service | Inclus (plan gratuit) | Au-delà |
 | --- | --- | --- |
-| Workers / Pages Functions | 100 000 requêtes/jour (compte entier) | **Arrêt** (erreur 1027), pas de facturation sur le plan Free |
-| D1 | 5 M lignes lues/j, 100 k écrites/j, 5 Go | **Arrêt** (erreurs), pas de facturation |
-| R2 | 10 Go, 1 M ops écriture, 10 M ops lecture /mois | **Facturé** (≈ 0,015 $/Go-mois) — seul vrai poste facturable |
 | Pages | 500 builds/mois, bande passante illimitée | Arrêt des builds |
+| Web Analytics | illimité | — |
 
-À faire :
-
-- **Rester sur le plan Workers Free** sauf besoin explicite (Workers et D1
-  s'arrêtent au lieu de facturer).
-- Activer les **notifications de facturation / budget** dans le dashboard
-  Cloudflare (alerte au moindre montant).
-- Surveiller le stockage **R2** (10 Go) ; chaque validation/rejet supprime déjà
-  les PDF en attente. Garde-fous anti-abus dans `functions/api/submit.ts`
-  (`MAX_PENDING_GLOBAL`, `MAX_PER_IP_24H`).
-- Optionnel : une règle **WAF Rate Limiting** sur `/api/submit`.
+Activez tout de même les **notifications de facturation / budget** dans le
+dashboard Cloudflare (alerte au moindre montant).
 
 ### Dissocier le projet de l'identité personnelle
 
 Recommandé dès que le projet prend de l'ampleur :
 
-- **Organisation GitHub** dédiée : le dépôt appartient à l'orga `Bac-242`
-  (`GITHUB_OWNER = "Bac-242"`). En cas de nouveau transfert, mettre à jour
-  `GITHUB_OWNER` dans `wrangler.toml` et régénérer le `GITHUB_TOKEN`, puis
-  vérifier la connexion Git du projet Cloudflare Pages.
+- **Organisation GitHub** dédiée : le dépôt appartient à l'orga `Bac-242`.
 - **Adresse e-mail dédiée** au projet (alias) à utiliser partout : contact du
-  site (`src/pages/a-propos.astro`), compte Cloudflare, compte/orga GitHub —
-  afin de ne pas exposer l'e-mail personnel.
+  site, compte Cloudflare, compte/orga GitHub — afin de ne pas exposer l'e-mail
+  personnel.
 - **Page « À propos »** (`/a-propos`) : tenir à jour le contact, les mentions
   légales et la procédure de retrait ; retirer rapidement tout document sur
   demande d'un ayant droit.
 - À terme, envisager une structure (association) pour porter le projet plutôt
   qu'à titre personnel.
+
+## Annexe — Démantèlement de l'ancienne chaîne de modération
+
+Le site a un temps proposé un formulaire de soumission adossé à **R2** (PDF en
+attente), **D1** (file de modération), **Turnstile** (anti-robot) et
+**Cloudflare Access** (espace `/admin`), avec publication automatique via un
+`GITHUB_TOKEN`. Tout cela a été retiré du dépôt ; il reste à supprimer les
+ressources correspondantes côté Cloudflare.
+
+> ⚠️ Ces commandes sont **irréversibles**. Faites l'export D1 d'abord.
+
+### 1. Sauvegarder la file de modération (recommandé)
+
+```bash
+wrangler d1 export annabac --remote --output=backup-annabac.sql
+```
+
+Le fichier obtenu n'est pas à committer (données de modération) : rangez-le
+hors du dépôt.
+
+### 2. Supprimer le bucket R2
+
+Vérifiez d'abord qu'il est vide — chaque décision (publication ou rejet)
+supprimait déjà le PDF en attente, il devrait donc l'être :
+
+```bash
+wrangler r2 bucket info annabac-soumissions
+```
+
+Si `object_count` vaut `0`, supprimez directement :
+
+```bash
+wrangler r2 bucket delete annabac-soumissions
+```
+
+> S'il restait des objets, `wrangler` ne sait pas vider un bucket en masse :
+> `wrangler r2 object delete` ne prend qu'**un seul objet** à la fois, sous la
+> forme `{bucket}/{clé}` et avec `--remote` (sans quoi il vise le stockage
+> local). Passez alors par le dashboard **R2 → annabac-soumissions → Objects**,
+> tout sélectionner puis supprimer.
+
+### 3. Supprimer la base D1
+
+```bash
+wrangler d1 delete annabac
+```
+
+### 4. Supprimer les secrets devenus inutiles
+
+Trois secrets seulement — **gardez `PUBLIC_CF_BEACON_TOKEN` et
+`PUBLIC_GSC_VERIFICATION`**, qui servent toujours (analytics et vérification
+Search Console, injectés au build).
+
+```bash
+wrangler pages secret delete GITHUB_TOKEN --project-name annabac
+```
+
+```bash
+wrangler pages secret delete TURNSTILE_SECRET --project-name annabac
+```
+
+```bash
+wrangler pages secret delete PUBLIC_TURNSTILE_SITEKEY --project-name annabac
+```
+
+Vérifiez le résultat :
+
+```bash
+wrangler pages secret list --project-name annabac
+```
+
+### 5. Dashboard Cloudflare
+
+- **Turnstile** → supprimer le widget du site.
+- **Zero Trust → Access → Applications** → supprimer l'application `/admin*`.
+- **Pages → Settings → Variables d'environnement** → supprimer, s'ils y ont été
+  ajoutés à la main, `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_BRANCH`,
+  `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD`. (Ils venaient de `wrangler.toml`, qui ne
+  les déclare plus : sinon ils disparaissent d'eux-mêmes au prochain déploiement.)
+
+### 6. GitHub
+
+**Developer settings → Personal access tokens** → révoquer le jeton
+fine-grained qui servait à publier les documents validés.

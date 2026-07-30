@@ -23,10 +23,9 @@ consultation hors-ligne.
   par hash), X-Frame-Options, Referrer-Policy, Permissions-Policy.
 - **SEO / partage** : Open Graph + Twitter Card, données structurées schema.org,
   image de partage générée (`public/og.png`).
-- **Cloudflare** (Pages Functions + R2 + D1) : API de soumission et file de
-  modération, **Turnstile** (anti-spam), **Web Analytics** (sans cookie).
-  L'espace admin est protégé par **Cloudflare Access** avec vérification
-  cryptographique du jeton (JWT). Voir [DEPLOY.md](DEPLOY.md).
+- **Cloudflare Pages** : hébergement du site statique et **Web Analytics**
+  (sans cookie). Aucune fonction serveur, aucune base de données, aucun secret
+  déployé. Voir [DEPLOY.md](DEPLOY.md).
 - **Pagefind** : recherche plein texte statique sur `/recherche` (facettes
   série / matière / année), indexée à chaque build, utilisable hors-ligne.
 - **Vitest** : tests unitaires des fonctions pures (helpers de données, nommage
@@ -38,26 +37,22 @@ consultation hors-ligne.
 Une fiche par sujet : **métadonnées** (année, série, matière, session) + un
 **PDF du sujet** et/ou un **PDF du corrigé**.
 
-Les visiteurs **soumettent un PDF** via `/contribuer` (un seul fichier par envoi,
-en précisant s'il s'agit d'un sujet ou d'un corrigé) ; il est mis en file
-d'attente (R2 + D1). Un mainteneur le **valide** depuis `/admin` (protégé par
-Cloudflare Access) ; la validation **commite** le document dans le dépôt, ce qui
-reconstruit le site. Le contenu reste donc versionné dans git.
+Les visiteurs **envoient leurs documents par e-mail** (page `/contribuer`). Un
+mainteneur vérifie le document, puis le **commite** dans le dépôt : le PDF dans
+`public/pdfs/` et la fiche Markdown dans `src/content/sujets/`. Cloudflare Pages
+reconstruit le site. Tout le contenu reste donc versionné dans git.
 
-### Contribution et attribution (esprit Wikipédia)
+Le site n'expose **aucun formulaire** et n'enregistre **aucune donnée** : les
+boutons « Contactez-nous » (menu « Le projet ») et « Écrire au projet »
+(`/contribuer`) se contentent d'ouvrir la messagerie de l'utilisateur via un
+lien `mailto`.
 
-Le formulaire **ne collecte aucune donnée de contact** (pas d'e-mail). À la place,
-à la manière de Wikipédia :
+### Attribution
 
-- le contributeur peut indiquer un **crédit** public (pseudonyme, ou rester
-  anonyme), affiché sur la fiche et inscrit dans l'historique git ;
-- chaque envoi déclare l'**origine** du document (sujet officiel, corrigé
-  personnel, corrigé d'un tiers avec autorisation) et confirme une **déclaration
-  de droits** ; un corrigé porte une **source / auteur** publiée en attribution ;
-- la page [`/contributeurs`](/contributeurs) liste les crédits.
-
-Pour toute question, le bouton **« Contactez-nous »** (menu « Le projet ») ouvre
-la messagerie de l'utilisateur via un lien `mailto`, sans rien enregistrer.
+- Un contributeur peut demander un **crédit** public (nom ou pseudonyme), ou
+  rester anonyme ; le crédit est affiché sur la fiche et inscrit dans
+  l'historique git. La page [`/contributeurs`](/contributeurs) les liste.
+- Un corrigé porte une **source / auteur** publiée en attribution sur la fiche.
 
 ## Démarrage
 
@@ -83,26 +78,24 @@ src/
   components/             # SujetCarte, Filtres, Icone, BadgeStatut, Fil, BasculeTheme…
   layouts/Layout.astro    # gabarit + SEO/Open Graph + PWA + anti-FOUC du thème
   pages/                  # accueil, /series, /annees, /matieres, /sujets, /recherche, /contribuer, /contributeurs, /a-propos, 404
-  pages/admin/            # modération (protégé par Cloudflare Access)
   lib/data.ts             # helpers annales (tri, regroupements, statut, pastilles/icônes)
   lib/ressources.ts       # registre des catégories de ressources (nav/accueil en dérivent)
   styles/global.css       # design tokens (clair/sombre) + utilitaires
   **/*.test.ts            # tests unitaires (Vitest), co-localisés avec le code
-functions/                # Pages Functions : /api/submit, /api/admin/* (+ _lib)
 scripts/make-og-image.mjs # génère l'image de partage Open Graph
 test/stubs/               # stubs pour les tests (ex. astro:content)
+shared/matieres.json      # taxonomie des matières par série
 public/                   # favicon, icône PWA, og.png, PDF des sujets, _headers (CSP)
-wrangler.toml, schema.sql # config Cloudflare (D1/R2) + schéma de modération
+wrangler.toml             # config Cloudflare Pages (site statique)
 vitest.config.ts          # configuration des tests
 ```
 
 ## Tests
 
 Tests unitaires avec **Vitest**, ciblant les fonctions pures (helpers de
-[src/lib/data.ts](src/lib/data.ts) et utilitaires de
-[functions/_lib/util.ts](functions/_lib/util.ts)) : pas de dépendance à Astro ni
-à Cloudflare au runtime. Le module virtuel `astro:content` est remplacé par un
-stub (voir [vitest.config.ts](vitest.config.ts)).
+[src/lib/data.ts](src/lib/data.ts)) : pas de dépendance à Astro au runtime. Le
+module virtuel `astro:content` est remplacé par un stub (voir
+[vitest.config.ts](vitest.config.ts)).
 
 [src/styles/tokens.test.ts](src/styles/tokens.test.ts) vérifie en outre que
 chaque paire fond/texte des deux thèmes (clair et sombre) atteint un contraste
@@ -116,18 +109,19 @@ npm run test:watch # mode interactif
 
 ## Contribuer
 
-Le plus simple : le formulaire `/contribuer` (envoi d'un PDF, sans connaissance
-technique). Détails et ajout manuel dans [CONTRIBUTING.md](CONTRIBUTING.md).
+Le plus simple : envoyer le document **par e-mail** (voir `/contribuer`), sans
+aucune connaissance technique. Détails et ajout manuel dans
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Configuration
 
 Variables publiques (au build) : copier `.env.example` en `.env`.
 
-- `PUBLIC_TURNSTILE_SITEKEY` : widget anti-spam du formulaire (optionnel)
 - `PUBLIC_CF_BEACON_TOKEN` : analytics Cloudflare sans cookie (optionnel)
+- `PUBLIC_GSC_VERIFICATION` : vérification Google Search Console (optionnel)
 
-Sans ces clés, le site fonctionne (sans captcha ni statistiques). Les secrets
-serveur et la mise en place complète sont décrits dans [DEPLOY.md](DEPLOY.md).
+Sans ces clés, le site fonctionne (simplement sans statistiques). La mise en
+place complète est décrite dans [DEPLOY.md](DEPLOY.md).
 
 ## Licence
 

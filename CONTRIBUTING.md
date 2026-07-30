@@ -4,38 +4,36 @@ Merci de votre aide ! Il y a deux façons de contribuer.
 
 ## 1. Envoyer un sujet ou un corrigé (sans connaissances techniques)
 
-Le plus simple : utilisez le **formulaire de soumission** sur la page
-[`/contribuer`](/contribuer).
+Le plus simple : **écrivez-nous** en joignant le document (PDF de préférence ;
+une photo lisible convient aussi). L'adresse est `contact.bac242 (chez) gmail
+(point) com` — écrite ainsi ici pour éviter les aspirateurs d'adresses. La page
+[`/contribuer`](/contribuer) l'affiche en clair et ouvre votre messagerie avec
+un message pré-rempli.
 
-1. Glissez-déposez (ou sélectionnez) **un seul PDF** (5 Mo max).
-2. Indiquez s'il s'agit d'un **sujet** ou d'un **corrigé**.
-3. Renseignez l'année, la série, la matière et la session.
-4. Pour un **corrigé** : précisez son **origine** et sa **source / auteur**
-   (obligatoire). Un corrigé ne peut être envoyé que si le **sujet correspondant
-   est déjà publié**. Pour un **sujet**, rien de plus : son origine officielle est
-   implicite.
-5. Au choix, un **crédit** (pseudonyme affiché publiquement ; laissez vide pour
-   rester anonyme).
-6. Confirmez la **déclaration de droits** (obligatoire), puis envoyez. Le
-   document est mis en **file de modération** (R2 + D1).
-7. Après **vérification** par un mainteneur depuis `/admin`, il est publié sur le site.
+Précisez si possible dans votre message :
 
-Aucun compte, aucune adresse e-mail ni connaissance de Git ne sont nécessaires.
-À la publication, le crédit (s'il est fourni) apparaît sur la fiche et dans
-l'historique Git public.
+1. L'**année** (ex. 2019).
+2. La **série** (A, C ou D).
+3. La **matière** (Mathématiques, Physique-Chimie…).
+4. La **session** (Normale, Remplacement ou Spéciale).
+5. S'il s'agit d'un **sujet** ou d'un **corrigé**.
+6. Pour un **corrigé** : son **auteur ou son origine** (affiché en attribution
+   sur la fiche).
+7. Au choix, un **crédit** : le nom ou pseudonyme sous lequel vous souhaitez
+   apparaître — ou rien du tout, pour rester anonyme.
 
-## 2. Publier un document validé (mainteneurs)
+Aucun compte ni connaissance de Git n'est nécessaire. Après vérification, le
+document est publié : le crédit (s'il est fourni) apparaît sur la fiche, sur la
+page [`/contributeurs`](/contributeurs) et dans l'historique Git public.
 
-> Le plus simple : depuis l'espace **`/admin`** (protégé par Cloudflare Access),
-> cliquez sur **Valider** — le PDF et la fiche sont commités automatiquement
-> dans le dépôt et le site se reconstruit. Voir [DEPLOY.md](DEPLOY.md).
+## 2. Publier un document (mainteneurs)
 
 Pour un document produit en **LaTeX** (sujets retranscrits, corrigés rédigés),
 suivez les conventions de [sources/README.md](sources/README.md) — style sobre
 N&B, entête `\entetecorrige` et encadrés pédagogiques (`methode`, `rappel`,
 `piege`) pour les corrigés.
 
-Pour ajouter un document **à la main** dans la bibliothèque :
+Pour ajouter un document dans la bibliothèque :
 
 1. Déposez le(s) PDF dans `public/pdfs/`, par ex.
    `2022-serie-c-mathematiques-sujet.pdf` et
@@ -58,14 +56,7 @@ Pour ajouter un document **à la main** dans la bibliothèque :
 
    Les champs PDF sont optionnels (une fiche peut n'avoir que le sujet, que le
    corrigé, ou les deux). `source` et `credit` sont également optionnels.
-3. Vérifiez en local puis redéployez.
-
-## Chaîne de soumission / modération
-
-Le formulaire `/contribuer` envoie les PDF à une API (Cloudflare Pages
-Functions) qui les met en file d'attente (R2 + D1). Un mainteneur les valide
-depuis `/admin` ; la validation publie le document en commitant dans le dépôt.
-Mise en place complète : [DEPLOY.md](DEPLOY.md).
+3. Vérifiez en local, committez, poussez : Cloudflare Pages reconstruit le site.
 
 ## Vérifier localement
 
@@ -73,6 +64,7 @@ Mise en place complète : [DEPLOY.md](DEPLOY.md).
 npm install
 npm run dev      # vérifier l'affichage
 npm run build    # vérifier que tout compile (schémas Zod validés)
+npm test         # tests unitaires
 ```
 
 Les métadonnées sont validées par des schémas (`src/content/config.ts`) : une
